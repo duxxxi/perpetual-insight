@@ -88,7 +88,7 @@ function DashboardPage() {
             {/* Header */}
             <header className="mb-10">
               <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
-                Daily Brief · Monday, 15 June
+                MONDAY, 15 JUNE
               </p>
               <h1 className="font-serif text-5xl italic tracking-tight md:text-6xl">
                 Good afternoon, <span className="not-italic">Perpetuity</span>
