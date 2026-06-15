@@ -31,8 +31,19 @@ import {
   Video,
   Mail,
   CircleDot,
+  AlertOctagon,
+  TrendingUp,
+  CheckCircle2,
 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -86,13 +97,16 @@ function DashboardPage() {
         <main className="flex-1 px-8 pt-14 pb-32 lg:pl-32 lg:pr-12 xl:pr-16">
           <div className="mx-auto max-w-6xl animate-fade-in-up">
             {/* Header */}
-            <header className="mb-10">
+            <header className="mb-8">
               <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
                 MONDAY, 15 JUNE
               </p>
-              <h1 className="font-serif text-5xl italic tracking-tight md:text-6xl">
-                Good afternoon, <span className="not-italic">Perpetuity</span>
-              </h1>
+              <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+                <h1 className="font-serif text-5xl italic tracking-tight md:text-6xl">
+                  Good afternoon, <span className="not-italic">Perpetuity</span>
+                </h1>
+                <MorningBriefPill />
+              </div>
               <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-foreground/60 md:text-lg">
                 You have critical payment and deployment issues requiring action today,
                 plus a multi-country trip starting in five days that needs final logistics review.
@@ -100,29 +114,47 @@ function DashboardPage() {
             </header>
 
             {/* Status pills row */}
-            <div className="mb-10 grid grid-cols-2 gap-3 md:grid-cols-4">
-              <StatusPill icon={<span className="size-1.5 rounded-full bg-destructive" />} count="3" label="Urgent" />
-              <StatusPill icon={<span className="font-mono text-[10px] text-accent">↗</span>} count="7" label="Updates" />
-              <StatusPill icon={<span className="font-mono text-[10px] text-foreground/50">≡</span>} count="2" label="Approvals" />
+            <div className="mb-10 flex flex-wrap gap-2">
+              <StatusPill
+                icon={AlertOctagon}
+                gradient="from-rose-500 to-red-600"
+                count="3"
+                label="Urgent"
+                items={[
+                  { title: "Stripe payment failed ($8.00)", sub: "Recurring charge — acct_1ika5ja3kz32dpo1" },
+                  { title: "Railway build failure", sub: "@export-analytica/web — 19:38 UTC" },
+                  { title: "EU timber restrictions — CIS", sub: "3 suppliers affected" },
+                ]}
+              />
+              <StatusPill
+                icon={TrendingUp}
+                gradient="from-emerald-400 to-teal-600"
+                count="7"
+                label="Updates"
+                items={[
+                  { title: "Brent crude −2.94% to $87.33", sub: "Monitor freight surcharges" },
+                  { title: "EUR/USD at 1.1567", sub: "USD invoicing advantage" },
+                  { title: "Gold +3.45% to $4,385", sub: "Hedging window opening" },
+                  { title: "Bybit USDC withdrawal confirmed", sub: "4.89 USDC on-chain" },
+                  { title: "New buyer reply: EuroMach", sub: "Wants Q3 quote on 40t order" },
+                  { title: "Yerevan hotel — pending confirmation", sub: "Reply expected today" },
+                  { title: "REACH compliance check passed", sub: "Automated · 16:30" },
+                ]}
+              />
+              <StatusPill
+                icon={CheckCircle2}
+                gradient="from-violet-400 to-indigo-600"
+                count="2"
+                label="Approvals"
+                items={[
+                  { title: "Draft notice: EU timber restrictions", sub: "Ready for your approval" },
+                  { title: "Q3 pricing update — LATAM", sub: "+4.2% on softwood SKUs" },
+                ]}
+              />
               <TripPill />
             </div>
 
-            {/* Morning Brief — iridescent like Ask Perpetuity */}
-            <div className="relative mb-6 group">
-              <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-50 blur-[2px] transition-opacity group-hover:opacity-80" aria-hidden />
-              <button className="glass-panel-strong relative flex w-full items-center justify-between rounded-3xl p-5 text-left">
-                <div className="flex items-center gap-4">
-                  <div className="ai-iridescent flex size-10 items-center justify-center rounded-2xl ring-1 ring-foreground/5">
-                    <Sparkles className="size-4 text-foreground/80" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Morning Brief</p>
-                    <p className="mt-0.5 font-serif text-lg italic">Generate today's intelligence summary</p>
-                  </div>
-                </div>
-                <ArrowUpRight className="size-4 text-foreground/40 transition-colors group-hover:text-foreground" />
-              </button>
-            </div>
+
 
             {/* Trip card */}
             <div className="glass-panel group mb-10 flex flex-col items-start justify-between gap-4 rounded-3xl p-6 md:flex-row md:items-center">
@@ -387,27 +419,122 @@ function AskPerpetuity() {
 
 /* ---------- Pieces ---------- */
 
-function StatusPill({ icon, count, label }: { icon: React.ReactNode; count: string; label: string }) {
+function StatusPill({
+  icon: Icon,
+  gradient,
+  count,
+  label,
+  items,
+}: {
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  gradient: string;
+  count: string;
+  label: string;
+  items: { title: string; sub: string }[];
+}) {
   return (
-    <button className="glass-panel group flex items-center gap-3 rounded-2xl px-4 py-3 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
-      <div className="flex size-7 items-center justify-center rounded-full bg-foreground/[0.04]">{icon}</div>
-      <span className="font-mono text-sm font-semibold tabular-nums">{count}</span>
-      <span className="text-sm text-foreground/70">{label}</span>
-    </button>
+    <Dialog>
+      <DialogTrigger asChild>
+        <button className="glass-panel group inline-flex items-center gap-2 rounded-full py-1.5 pl-1.5 pr-3.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
+          <span
+            className={`flex size-7 items-center justify-center rounded-full bg-gradient-to-br ${gradient} text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20`}
+          >
+            <Icon className="size-3.5" strokeWidth={2.5} />
+          </span>
+          <span className="font-mono text-[13px] font-semibold tabular-nums">{count}</span>
+          <span className="text-[13px] text-foreground/70">{label}</span>
+        </button>
+      </DialogTrigger>
+      <PillDialogContent title={label} count={count} gradient={gradient} Icon={Icon} items={items} />
+    </Dialog>
   );
 }
 
 function TripPill() {
+  const items = [
+    { title: "Flight W6 4761 · SKP → BRA", sub: "Jun 19 · 04:30 — booked" },
+    { title: "Hotel Yerevan", sub: "Pending confirmation" },
+    { title: "Buyer briefing pack", sub: "Draft ready for review" },
+    { title: "Return flight BRA", sub: "Jun 20 · to be booked" },
+  ];
   return (
-    <button className="glass-panel group flex items-center justify-between gap-3 rounded-2xl px-4 py-3 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
-      <div>
-        <p className="text-sm font-medium leading-tight">Trip to Bratislava</p>
-        <p className="text-[11px] text-foreground/50">5 days</p>
+    <Dialog>
+      <DialogTrigger asChild>
+        <button className="glass-panel group inline-flex items-center gap-2 rounded-full py-1.5 pl-1.5 pr-3.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
+          <span className="flex size-7 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20">
+            <Plane className="size-3.5" strokeWidth={2.5} />
+          </span>
+          <span className="text-[13px] font-medium">Bratislava</span>
+          <span className="text-[11px] text-foreground/50">· 5 days</span>
+        </button>
+      </DialogTrigger>
+      <PillDialogContent title="Trip to Bratislava" count="5d" gradient="from-amber-400 to-orange-600" Icon={Plane} items={items} />
+    </Dialog>
+  );
+}
+
+function PillDialogContent({
+  title,
+  count,
+  gradient,
+  Icon,
+  items,
+}: {
+  title: string;
+  count: string;
+  gradient: string;
+  Icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  items: { title: string; sub: string }[];
+}) {
+  return (
+    <DialogContent className="glass-panel-strong max-w-md rounded-3xl border-foreground/10 bg-background/85 p-0 backdrop-blur-2xl">
+      <DialogHeader className="flex-row items-center gap-3 space-y-0 border-b border-foreground/5 px-5 py-4">
+        <span
+          className={`flex size-9 items-center justify-center rounded-2xl bg-gradient-to-br ${gradient} text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_8px_-2px_rgba(0,0,0,0.3)] ring-1 ring-white/20`}
+        >
+          <Icon className="size-4" strokeWidth={2.5} />
+        </span>
+        <div className="flex-1">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/45">
+            {count} · {title}
+          </p>
+          <DialogTitle className="font-serif text-xl italic">{title}</DialogTitle>
+        </div>
+      </DialogHeader>
+      <div className="max-h-[60vh] overflow-y-auto p-2">
+        {items.map((it, i) => (
+          <button
+            key={i}
+            className="flex w-full items-start gap-3 rounded-2xl p-3 text-left transition-colors hover:bg-foreground/[0.04]"
+          >
+            <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-foreground/30" />
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium leading-snug">{it.title}</p>
+              <p className="mt-0.5 text-xs text-foreground/50">{it.sub}</p>
+            </div>
+            <ArrowUpRight className="mt-1 size-3.5 text-foreground/30" />
+          </button>
+        ))}
       </div>
-      <Plane className="size-4 text-accent" />
+    </DialogContent>
+  );
+}
+
+function MorningBriefPill() {
+  return (
+    <button className="group relative inline-flex shrink-0 items-center gap-2.5 self-start rounded-full md:self-end">
+      <span className="ai-iridescent absolute -inset-px rounded-full opacity-60 blur-[2px] transition-opacity group-hover:opacity-90" aria-hidden />
+      <span className="glass-panel-strong relative inline-flex items-center gap-2.5 rounded-full py-1.5 pl-1.5 pr-4">
+        <span className="ai-iridescent flex size-7 items-center justify-center rounded-full ring-1 ring-foreground/5">
+          <Sparkles className="size-3.5 text-foreground/80" />
+        </span>
+        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Morning Brief</span>
+        <ArrowUpRight className="size-3.5 text-foreground/40 transition-colors group-hover:text-foreground" />
+      </span>
     </button>
   );
 }
+
 
 function TickerRow() {
   return (
