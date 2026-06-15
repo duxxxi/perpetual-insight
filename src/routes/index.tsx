@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
 import {
   Home,
   MessagesSquare,
@@ -17,19 +16,14 @@ import {
   ArrowUp,
   ArrowUpRight,
   Plane,
-  Check,
-  Clock,
-  AlertCircle,
-  Flame,
-  Calendar,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Today — Perpetuity" },
+      { title: "Daily Brief — Perpetuity" },
       { name: "description", content: "Your continuous commercial intelligence for international trade." },
-      { property: "og:title", content: "Today — Perpetuity" },
+      { property: "og:title", content: "Daily Brief — Perpetuity" },
       { property: "og:description", content: "Your continuous commercial intelligence for international trade." },
     ],
   }),
@@ -47,83 +41,7 @@ const ticker = [
   { sym: "ALU", price: "$2,241", chg: "+0.80%", dir: "up" as const },
 ];
 
-type Priority = "urgent" | "high" | "normal";
-type Task = {
-  id: string;
-  title: string;
-  context?: string;
-  tag: string;
-  priority: Priority;
-  due?: string;
-  done: boolean;
-};
-
-const seedTasks: Task[] = [
-  {
-    id: "1",
-    title: "Resolve failed Stripe payment ($8.00 recurring)",
-    context: "Stripe failed twice on acct_1ika5ja3kz32dpo1.",
-    tag: "Payment",
-    priority: "urgent",
-    due: "Today · 17:00",
-    done: false,
-  },
-  {
-    id: "2",
-    title: "Fix export-analytica build failure",
-    context: "Railway pipeline failed at 19:38 UTC on @export-analytica/web.",
-    tag: "Engineering",
-    priority: "urgent",
-    due: "Today",
-    done: false,
-  },
-  {
-    id: "3",
-    title: "Review EU restrictions on timber exports to CIS",
-    context: "Three suppliers in your network likely affected.",
-    tag: "Compliance",
-    priority: "high",
-    due: "Tomorrow",
-    done: false,
-  },
-  {
-    id: "4",
-    title: "Verify Bybit USDC withdrawal (4.89 USDC)",
-    tag: "Treasury",
-    priority: "normal",
-    due: "This week",
-    done: true,
-  },
-];
-
 function DashboardPage() {
-  const [tasks, setTasks] = useState<Task[]>(seedTasks);
-  const [draft, setDraft] = useState("");
-  const [draftDue, setDraftDue] = useState("");
-
-  const addTask = () => {
-    if (!draft.trim()) return;
-    setTasks((t) => [
-      {
-        id: crypto.randomUUID(),
-        title: draft.trim(),
-        tag: "Task",
-        priority: "normal",
-        due: draftDue || undefined,
-        done: false,
-      },
-      ...t,
-    ]);
-    setDraft("");
-    setDraftDue("");
-  };
-
-  const toggle = (id: string) =>
-    setTasks((t) => t.map((x) => (x.id === id ? { ...x, done: !x.done } : x)));
-
-  const open = tasks.filter((t) => !t.done);
-  const done = tasks.filter((t) => t.done);
-
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
       {/* Ambient two-tone wash */}
@@ -132,7 +50,7 @@ function DashboardPage() {
         className="pointer-events-none fixed inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(60rem 40rem at 12% -10%, hsl(25 40% 80% / 0.22), transparent 60%), radial-gradient(50rem 35rem at 100% 110%, hsl(222 50% 20% / 0.08), transparent 60%)",
+            "radial-gradient(60rem 40rem at 12% -10%, hsl(25 40% 80% / 0.25), transparent 60%), radial-gradient(50rem 35rem at 100% 110%, hsl(20 10% 12% / 0.06), transparent 60%)",
         }}
       />
 
@@ -147,31 +65,35 @@ function DashboardPage() {
       </div>
 
       <div className="flex">
+        {/* Floating capsule sidebar */}
         <Sidebar />
 
-        <main className="flex-1 px-8 pt-12 pb-32 lg:pl-32 lg:pr-12 xl:pr-16">
+        {/* Main */}
+        <main className="flex-1 px-8 pt-14 pb-32 lg:pl-32 lg:pr-12 xl:pr-16">
           <div className="mx-auto max-w-6xl animate-fade-in-up">
-            {/* Centered welcome */}
-            <header className="mb-12 flex flex-col items-center text-center">
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-foreground/40">
-                Monday · 15 June
-              </p>
-              <h1 className="font-serif text-3xl italic tracking-tight text-foreground/90 md:text-[2rem]">
-                Good afternoon, Perpetuity
-              </h1>
-              <p className="mt-3 max-w-xl text-pretty text-sm leading-relaxed text-foreground/55 md:text-base">
-                Here's what we have for you today — two urgent items, a trip in five days,
-                and three signals worth a glance.
-              </p>
-              <button className="glass-panel-strong mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-foreground/80 transition-colors hover:text-foreground">
+            {/* Header */}
+            <header className="mb-12 flex items-start justify-between gap-8">
+              <div>
+                <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
+                  Daily Brief · Monday, 15 June
+                </p>
+                <h1 className="font-serif text-5xl italic tracking-tight md:text-6xl">
+                  Good afternoon, <span className="not-italic">Perpetuity</span>
+                </h1>
+                <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-foreground/60 md:text-lg">
+                  You have critical payment and deployment issues requiring action today,
+                  plus a multi-country trip starting in five days that needs final logistics review.
+                </p>
+              </div>
+              <button className="glass-panel hidden shrink-0 items-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-foreground/70 transition-colors hover:text-foreground md:inline-flex">
                 <span className="size-1.5 rounded-full bg-accent" />
-                Morning brief
+                Morning Brief
                 <ArrowUpRight className="size-3.5" />
               </button>
             </header>
 
             {/* Trip card */}
-            <div className="glass-panel mb-10 flex flex-col items-start justify-between gap-4 rounded-3xl p-6 md:flex-row md:items-center">
+            <div className="glass-panel group mb-10 flex flex-col items-start justify-between gap-4 rounded-3xl p-6 md:flex-row md:items-center">
               <div className="flex items-start gap-4">
                 <div className="glass-panel-strong flex size-11 items-center justify-center rounded-2xl">
                   <Plane className="size-4 text-accent" />
@@ -179,15 +101,15 @@ function DashboardPage() {
                 <div>
                   <div className="flex items-center gap-3">
                     <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
-                      In 5 days
+                      Bratislava — 13 days
                     </span>
                     <span className="text-[10px] font-mono text-foreground/30">JUN 19 → 20</span>
                   </div>
-                  <p className="mt-1 font-serif text-lg italic">
-                    Bratislava → Yerevan → Bratislava
+                  <p className="mt-1 font-serif text-xl italic">
+                    Upcoming trip: Bratislava → Yerevan → Bratislava
                   </p>
                   <p className="mt-1 text-xs text-foreground/50">
-                    W6 4761 · Skopje 04:30 → Bratislava · Hotel in Yerevan pending.
+                    W6 4761 · Skopje 04:30 → Bratislava · You have booked flights SKP–BRA.
                   </p>
                 </div>
               </div>
@@ -197,7 +119,7 @@ function DashboardPage() {
               </button>
             </div>
 
-            {/* Ask Perpetuity */}
+            {/* Ask Perpetuity — iridescent prompt */}
             <div className="relative mb-16 group">
               <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-70 blur-[2px]" aria-hidden />
               <div className="glass-panel-strong relative rounded-3xl p-5">
@@ -229,90 +151,31 @@ function DashboardPage() {
 
             {/* Two-column workspace */}
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
-              {/* Active Work — tasks */}
+              {/* Active Work */}
               <section className="lg:col-span-7">
-                <div className="flex items-center justify-between gap-3 px-1">
-                  <SectionLabel>Active Work</SectionLabel>
-                  <span className="text-[10px] font-mono text-foreground/35">
-                    {open.length} open · {done.length} done
-                  </span>
+                <SectionLabel>Active Work</SectionLabel>
+                <div className="mt-5 space-y-4">
+                  <WorkCard
+                    tag="Payment"
+                    title="Resolve failed Stripe payment ($8.00 recurring charge)"
+                    body="Stripe has failed twice to charge $8.00 on account acct_1ika5ja3kz32dpo1."
+                  />
+                  <WorkCard
+                    tag="Engineering"
+                    title="Fix export-analytica build failure (@export-analytica/web service)"
+                    body="Railway deployment pipeline has failed multiple times (last at 19:38 UTC) on the @export-analytica/web service build."
+                  />
+                  <WorkCard
+                    tag="Treasury"
+                    title="Verify Bybit USDC withdrawal (4.89 USDC)"
+                    body="Bybit confirms 4.89 USDC withdrawal sent to blockchain."
+                  />
+                  <WorkCard
+                    tag="Compliance"
+                    title="Review new EU restrictions on timber exports to CIS regions"
+                    body="Three suppliers in your network are likely affected. Draft notice ready for approval."
+                  />
                 </div>
-
-                {/* New task composer */}
-                <div className="glass-panel-strong mt-5 rounded-2xl p-3">
-                  <div className="flex items-center gap-2">
-                    <div className="flex size-7 items-center justify-center rounded-full border border-foreground/15 text-foreground/40">
-                      <Plus className="size-3.5" />
-                    </div>
-                    <input
-                      value={draft}
-                      onChange={(e) => setDraft(e.target.value)}
-                      onKeyDown={(e) => e.key === "Enter" && addTask()}
-                      placeholder="Add a task for your agents…"
-                      className="flex-1 bg-transparent text-sm placeholder:text-foreground/40 focus:outline-none"
-                    />
-                    <div className="flex items-center gap-1.5 rounded-full bg-foreground/5 px-2.5 py-1 text-[11px] text-foreground/60">
-                      <Calendar className="size-3" />
-                      <input
-                        value={draftDue}
-                        onChange={(e) => setDraftDue(e.target.value)}
-                        placeholder="Due"
-                        className="w-16 bg-transparent placeholder:text-foreground/40 focus:outline-none"
-                      />
-                    </div>
-                    <button
-                      onClick={addTask}
-                      className="inline-flex size-7 items-center justify-center rounded-full bg-foreground text-background transition-transform hover:scale-105"
-                    >
-                      <ArrowUp className="size-3.5" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Urgent group */}
-                {open.some((t) => t.priority === "urgent") && (
-                  <GroupHeader icon={<Flame className="size-3" />} label="Urgent" tone="urgent" />
-                )}
-                <div className="mt-3 space-y-2">
-                  {open
-                    .filter((t) => t.priority === "urgent")
-                    .map((t) => (
-                      <TaskRow key={t.id} task={t} onToggle={toggle} />
-                    ))}
-                </div>
-
-                {open.some((t) => t.priority === "high") && (
-                  <GroupHeader icon={<AlertCircle className="size-3" />} label="High priority" tone="high" />
-                )}
-                <div className="mt-3 space-y-2">
-                  {open
-                    .filter((t) => t.priority === "high")
-                    .map((t) => (
-                      <TaskRow key={t.id} task={t} onToggle={toggle} />
-                    ))}
-                </div>
-
-                {open.some((t) => t.priority === "normal") && (
-                  <GroupHeader icon={<Clock className="size-3" />} label="Later" tone="normal" />
-                )}
-                <div className="mt-3 space-y-2">
-                  {open
-                    .filter((t) => t.priority === "normal")
-                    .map((t) => (
-                      <TaskRow key={t.id} task={t} onToggle={toggle} />
-                    ))}
-                </div>
-
-                {done.length > 0 && (
-                  <>
-                    <GroupHeader icon={<Check className="size-3" />} label="Completed" tone="done" />
-                    <div className="mt-3 space-y-2">
-                      {done.map((t) => (
-                        <TaskRow key={t.id} task={t} onToggle={toggle} />
-                      ))}
-                    </div>
-                  </>
-                )}
               </section>
 
               {/* Right rail */}
@@ -322,20 +185,20 @@ function DashboardPage() {
                   <div className="glass-panel mt-5 rounded-3xl p-6">
                     <IntelItem
                       time="09:41"
-                      title="Multi-country trip: Bratislava → Yerevan → Bratislava"
-                      body="Flights booked SKP–BRA. Hotel in Yerevan pending."
+                      title="Upcoming multi-country trip: Bratislava → Yerevan → Bratislava (Jun 19–20)"
+                      body="You have booked flights SKP–BRA. Hotel in Yerevan pending confirmation."
                       hot
                     />
                     <Divider />
                     <IntelItem
                       time="08:22"
-                      title="Brent crude down 2.94% to $87.33"
-                      body="Bunker surcharges typically ease within 10 days — monitor timber & pulp freight."
+                      title="Brent crude down 2.94% to $87.33 — monitor freight costs for timber & pulp exports"
+                      body="Energy price decline typically eases bunker surcharges within 10 days."
                     />
                     <Divider />
                     <IntelItem
                       time="06:05"
-                      title="EUR/USD at 1.1567 — USD invoicing advantage"
+                      title="EUR/USD at 1.1567 — USD invoicing advantage for North American sales"
                       body="Strong USD pricing relative to EUR contracts opened in Q1."
                     />
                   </div>
@@ -345,16 +208,16 @@ function DashboardPage() {
                   <SectionLabel>Suggested</SectionLabel>
                   <div className="mt-5 space-y-3">
                     <SuggestedItem
-                      title="Consolidate duplicate pitch decks in Drive"
-                      body="Two copies of Full Pitch Nostry.pdf. Merge to one master."
+                      title="Clean up duplicate pitch deck versions in Drive (Full Pitch Nostry.pdf)"
+                      body="You have two copies of the full pitch deck in Drive. Consolidate to a single master."
                     />
                     <SuggestedItem
-                      title="Q3 timber & paper outlook"
-                      body="Begin preliminary intel on CIS and LATAM supply-demand shifts."
+                      title="Q3 timber & paper market outlook: monitor CIS and LATAM supply-demand shifts"
+                      body="Your target markets (EU, CIS, SEA, LATAM) are heading into Q3. Begin preliminary intel."
                     />
                     <SuggestedItem
-                      title="Validate influencer list against brand strategy"
-                      body="Clarify whether the 100 INFLUENCERS LIST supports a B2B narrative."
+                      title="Validate influencer list against brand campaign strategy"
+                      body="You have a '100 INFLUENCERS LIST' in Drive. Clarify whether this supports a B2B narrative."
                     />
                   </div>
                 </div>
@@ -364,6 +227,7 @@ function DashboardPage() {
         </main>
       </div>
 
+      {/* Bottom hairline status bar */}
       <footer className="fixed bottom-0 left-0 right-0 z-30 flex items-center justify-between border-t border-foreground/5 bg-background/70 px-8 py-3 text-[10px] font-medium tracking-[0.18em] text-foreground/35 backdrop-blur-xl">
         <div className="flex items-center gap-6">
           <span className="hidden sm:inline">ENCRYPTED · TLS 1.3</span>
@@ -409,15 +273,8 @@ function Sidebar() {
   ];
   return (
     <nav className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
-      <div
-        className="flex flex-col items-center gap-1 rounded-full px-2 py-4 shadow-[0_20px_60px_-20px_rgba(10,20,50,0.6)] ring-1 ring-white/5"
-        style={{
-          background:
-            "linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%)",
-          backdropFilter: "blur(28px) saturate(140%)",
-        }}
-      >
-        <div className="mb-2 flex size-10 items-center justify-center rounded-full bg-white/10 font-serif text-sm italic text-white ring-1 ring-white/15">
+      <div className="glass-panel-strong flex flex-col items-center gap-1 rounded-full px-2 py-4">
+        <div className="mb-2 flex size-10 items-center justify-center rounded-full bg-foreground font-serif text-sm italic text-background">
           P
         </div>
         {items.map((it) => (
@@ -425,18 +282,16 @@ function Sidebar() {
             key={it.label}
             title={it.label}
             className={`group relative flex size-10 items-center justify-center rounded-full transition-colors ${
-              it.active
-                ? "bg-white/10 text-white ring-1 ring-white/15"
-                : "text-white/55 hover:bg-white/5 hover:text-white"
+              it.active ? "bg-foreground/5 text-foreground" : "text-foreground/45 hover:bg-foreground/5 hover:text-foreground"
             }`}
           >
             <it.icon className="size-[18px]" strokeWidth={1.5} />
-            <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-white px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-[var(--navy-deep)] opacity-0 transition-opacity group-hover:opacity-100">
+            <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
               {it.label}
             </span>
           </button>
         ))}
-        <div className="mt-2 flex size-10 items-center justify-center rounded-full text-white/55 hover:text-white">
+        <div className="mt-2 flex size-10 items-center justify-center rounded-full text-foreground/45 hover:text-foreground">
           <Bell className="size-[18px]" strokeWidth={1.5} />
         </div>
       </div>
@@ -446,92 +301,28 @@ function Sidebar() {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/40">
-      {children}
-    </h3>
-  );
-}
-
-function GroupHeader({
-  icon,
-  label,
-  tone,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  tone: "urgent" | "high" | "normal" | "done";
-}) {
-  const toneClass =
-    tone === "urgent"
-      ? "text-rose-700 bg-rose-700/8"
-      : tone === "high"
-      ? "text-accent bg-accent/10"
-      : tone === "done"
-      ? "text-foreground/40 bg-foreground/5"
-      : "text-foreground/55 bg-foreground/5";
-  return (
-    <div className="mt-7 flex items-center gap-3">
-      <span
-        className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] ${toneClass}`}
-      >
-        {icon}
-        {label}
-      </span>
+    <div className="flex items-center gap-3 px-1">
+      <h3 className="text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/40">
+        {children}
+      </h3>
       <div className="h-px flex-1 bg-foreground/5" />
     </div>
   );
 }
 
-function TaskRow({ task, onToggle }: { task: Task; onToggle: (id: string) => void }) {
-  const priorityBar =
-    task.priority === "urgent"
-      ? "bg-rose-700/70"
-      : task.priority === "high"
-      ? "bg-accent/70"
-      : "bg-foreground/15";
-
+function WorkCard({ tag, title, body }: { tag: string; title: string; body: string }) {
   return (
-    <article
-      className={`glass-panel group flex items-start gap-4 rounded-2xl p-4 transition-colors hover:bg-[var(--glass-surface-strong)] ${
-        task.done ? "opacity-55" : ""
-      }`}
-    >
-      <button
-        onClick={() => onToggle(task.id)}
-        className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full border transition-all ${
-          task.done
-            ? "border-transparent bg-foreground text-background"
-            : "border-foreground/25 hover:border-foreground/60"
-        }`}
-        aria-label={task.done ? "Mark incomplete" : "Mark complete"}
-      >
-        {task.done && <Check className="size-3" strokeWidth={3} />}
-      </button>
-
-      <div className={`h-10 w-0.5 shrink-0 rounded-full ${priorityBar}`} />
-
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between gap-3">
-          <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-foreground/45">
-            {task.tag}
-          </span>
-          {task.due && (
-            <span className="inline-flex items-center gap-1 text-[10px] font-mono text-foreground/40">
-              <Clock className="size-3" />
-              {task.due}
-            </span>
-          )}
+    <article className="glass-panel group cursor-pointer rounded-3xl p-5 transition-colors hover:bg-[var(--glass-surface-strong)]">
+      <div className="flex items-start gap-4">
+        <div className="mt-1 h-12 w-0.5 shrink-0 rounded-full bg-accent/50" />
+        <div className="flex-1">
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-accent">{tag}</span>
+            <ArrowUpRight className="size-3.5 text-foreground/30 transition-colors group-hover:text-foreground" />
+          </div>
+          <h4 className="mt-1.5 font-serif text-lg italic leading-snug">{title}</h4>
+          <p className="mt-2 text-xs leading-relaxed text-foreground/55">{body}</p>
         </div>
-        <h4
-          className={`mt-1 text-[15px] font-medium leading-snug ${
-            task.done ? "line-through decoration-foreground/30" : ""
-          }`}
-        >
-          {task.title}
-        </h4>
-        {task.context && !task.done && (
-          <p className="mt-1 text-xs leading-relaxed text-foreground/55">{task.context}</p>
-        )}
       </div>
     </article>
   );

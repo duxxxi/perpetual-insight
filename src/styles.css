@@ -38,33 +38,30 @@
 
 :root {
   --radius: 1rem;
-  /* Two-tone: warm cashmere bone + deep navy, with muted cognac as the only accent */
+  /* Two-tone: warm cashmere bone + deep obsidian graphite, with muted cognac as the only accent */
   --background: hsl(40 20% 94%);
-  --foreground: hsl(222 45% 14%);
+  --foreground: hsl(20 10% 12%);
   --card: hsl(40 20% 97%);
-  --card-foreground: hsl(222 45% 14%);
+  --card-foreground: hsl(20 10% 12%);
   --popover: hsl(40 20% 97%);
-  --popover-foreground: hsl(222 45% 14%);
-  --primary: hsl(222 45% 14%);
+  --popover-foreground: hsl(20 10% 12%);
+  --primary: hsl(20 10% 12%);
   --primary-foreground: hsl(40 20% 96%);
   --secondary: hsl(40 14% 88%);
-  --secondary-foreground: hsl(222 45% 14%);
+  --secondary-foreground: hsl(20 10% 12%);
   --muted: hsl(40 14% 90%);
-  --muted-foreground: hsl(222 15% 38%);
-  --accent: hsl(25 50% 45%);
+  --muted-foreground: hsl(20 8% 38%);
+  --accent: hsl(25 40% 45%);
   --accent-foreground: hsl(40 20% 96%);
   --destructive: hsl(0 55% 45%);
   --destructive-foreground: hsl(40 20% 96%);
-  --border: hsl(222 45% 14% / 0.08);
-  --input: hsl(222 45% 14% / 0.12);
-  --ring: hsl(25 50% 45% / 0.4);
+  --border: hsl(20 10% 12% / 0.08);
+  --input: hsl(20 10% 12% / 0.12);
+  --ring: hsl(25 40% 45% / 0.4);
 
-  --navy: hsl(222 47% 16%);
-  --navy-deep: hsl(222 50% 11%);
-
-  --glass-surface: rgba(255, 255, 255, 0.5);
-  --glass-surface-strong: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(20, 30, 60, 0.08);
+  --glass-surface: rgba(255, 255, 255, 0.45);
+  --glass-surface-strong: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(28, 25, 23, 0.08);
 }
 
 .dark {
