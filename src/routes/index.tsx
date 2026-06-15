@@ -97,13 +97,16 @@ function DashboardPage() {
         <main className="flex-1 px-8 pt-14 pb-32 lg:pl-32 lg:pr-12 xl:pr-16">
           <div className="mx-auto max-w-6xl animate-fade-in-up">
             {/* Header */}
-            <header className="mb-10">
+            <header className="mb-8">
               <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
                 MONDAY, 15 JUNE
               </p>
-              <h1 className="font-serif text-5xl italic tracking-tight md:text-6xl">
-                Good afternoon, <span className="not-italic">Perpetuity</span>
-              </h1>
+              <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+                <h1 className="font-serif text-5xl italic tracking-tight md:text-6xl">
+                  Good afternoon, <span className="not-italic">Perpetuity</span>
+                </h1>
+                <MorningBriefPill />
+              </div>
               <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-foreground/60 md:text-lg">
                 You have critical payment and deployment issues requiring action today,
                 plus a multi-country trip starting in five days that needs final logistics review.
@@ -111,29 +114,47 @@ function DashboardPage() {
             </header>
 
             {/* Status pills row */}
-            <div className="mb-10 grid grid-cols-2 gap-3 md:grid-cols-4">
-              <StatusPill icon={<span className="size-1.5 rounded-full bg-destructive" />} count="3" label="Urgent" />
-              <StatusPill icon={<span className="font-mono text-[10px] text-accent">↗</span>} count="7" label="Updates" />
-              <StatusPill icon={<span className="font-mono text-[10px] text-foreground/50">≡</span>} count="2" label="Approvals" />
+            <div className="mb-10 flex flex-wrap gap-2">
+              <StatusPill
+                icon={AlertOctagon}
+                gradient="from-rose-500 to-red-600"
+                count="3"
+                label="Urgent"
+                items={[
+                  { title: "Stripe payment failed ($8.00)", sub: "Recurring charge — acct_1ika5ja3kz32dpo1" },
+                  { title: "Railway build failure", sub: "@export-analytica/web — 19:38 UTC" },
+                  { title: "EU timber restrictions — CIS", sub: "3 suppliers affected" },
+                ]}
+              />
+              <StatusPill
+                icon={TrendingUp}
+                gradient="from-emerald-400 to-teal-600"
+                count="7"
+                label="Updates"
+                items={[
+                  { title: "Brent crude −2.94% to $87.33", sub: "Monitor freight surcharges" },
+                  { title: "EUR/USD at 1.1567", sub: "USD invoicing advantage" },
+                  { title: "Gold +3.45% to $4,385", sub: "Hedging window opening" },
+                  { title: "Bybit USDC withdrawal confirmed", sub: "4.89 USDC on-chain" },
+                  { title: "New buyer reply: EuroMach", sub: "Wants Q3 quote on 40t order" },
+                  { title: "Yerevan hotel — pending confirmation", sub: "Reply expected today" },
+                  { title: "REACH compliance check passed", sub: "Automated · 16:30" },
+                ]}
+              />
+              <StatusPill
+                icon={CheckCircle2}
+                gradient="from-violet-400 to-indigo-600"
+                count="2"
+                label="Approvals"
+                items={[
+                  { title: "Draft notice: EU timber restrictions", sub: "Ready for your approval" },
+                  { title: "Q3 pricing update — LATAM", sub: "+4.2% on softwood SKUs" },
+                ]}
+              />
               <TripPill />
             </div>
 
-            {/* Morning Brief — iridescent like Ask Perpetuity */}
-            <div className="relative mb-6 group">
-              <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-50 blur-[2px] transition-opacity group-hover:opacity-80" aria-hidden />
-              <button className="glass-panel-strong relative flex w-full items-center justify-between rounded-3xl p-5 text-left">
-                <div className="flex items-center gap-4">
-                  <div className="ai-iridescent flex size-10 items-center justify-center rounded-2xl ring-1 ring-foreground/5">
-                    <Sparkles className="size-4 text-foreground/80" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Morning Brief</p>
-                    <p className="mt-0.5 font-serif text-lg italic">Generate today's intelligence summary</p>
-                  </div>
-                </div>
-                <ArrowUpRight className="size-4 text-foreground/40 transition-colors group-hover:text-foreground" />
-              </button>
-            </div>
+
 
             {/* Trip card */}
             <div className="glass-panel group mb-10 flex flex-col items-start justify-between gap-4 rounded-3xl p-6 md:flex-row md:items-center">
