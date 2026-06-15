@@ -419,27 +419,122 @@ function AskPerpetuity() {
 
 /* ---------- Pieces ---------- */
 
-function StatusPill({ icon, count, label }: { icon: React.ReactNode; count: string; label: string }) {
+function StatusPill({
+  icon: Icon,
+  gradient,
+  count,
+  label,
+  items,
+}: {
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  gradient: string;
+  count: string;
+  label: string;
+  items: { title: string; sub: string }[];
+}) {
   return (
-    <button className="glass-panel group flex items-center gap-3 rounded-2xl px-4 py-3 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
-      <div className="flex size-7 items-center justify-center rounded-full bg-foreground/[0.04]">{icon}</div>
-      <span className="font-mono text-sm font-semibold tabular-nums">{count}</span>
-      <span className="text-sm text-foreground/70">{label}</span>
-    </button>
+    <Dialog>
+      <DialogTrigger asChild>
+        <button className="glass-panel group inline-flex items-center gap-2 rounded-full py-1.5 pl-1.5 pr-3.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
+          <span
+            className={`flex size-7 items-center justify-center rounded-full bg-gradient-to-br ${gradient} text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20`}
+          >
+            <Icon className="size-3.5" strokeWidth={2.5} />
+          </span>
+          <span className="font-mono text-[13px] font-semibold tabular-nums">{count}</span>
+          <span className="text-[13px] text-foreground/70">{label}</span>
+        </button>
+      </DialogTrigger>
+      <PillDialogContent title={label} count={count} gradient={gradient} Icon={Icon} items={items} />
+    </Dialog>
   );
 }
 
 function TripPill() {
+  const items = [
+    { title: "Flight W6 4761 · SKP → BRA", sub: "Jun 19 · 04:30 — booked" },
+    { title: "Hotel Yerevan", sub: "Pending confirmation" },
+    { title: "Buyer briefing pack", sub: "Draft ready for review" },
+    { title: "Return flight BRA", sub: "Jun 20 · to be booked" },
+  ];
   return (
-    <button className="glass-panel group flex items-center justify-between gap-3 rounded-2xl px-4 py-3 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
-      <div>
-        <p className="text-sm font-medium leading-tight">Trip to Bratislava</p>
-        <p className="text-[11px] text-foreground/50">5 days</p>
+    <Dialog>
+      <DialogTrigger asChild>
+        <button className="glass-panel group inline-flex items-center gap-2 rounded-full py-1.5 pl-1.5 pr-3.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
+          <span className="flex size-7 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20">
+            <Plane className="size-3.5" strokeWidth={2.5} />
+          </span>
+          <span className="text-[13px] font-medium">Bratislava</span>
+          <span className="text-[11px] text-foreground/50">· 5 days</span>
+        </button>
+      </DialogTrigger>
+      <PillDialogContent title="Trip to Bratislava" count="5d" gradient="from-amber-400 to-orange-600" Icon={Plane} items={items} />
+    </Dialog>
+  );
+}
+
+function PillDialogContent({
+  title,
+  count,
+  gradient,
+  Icon,
+  items,
+}: {
+  title: string;
+  count: string;
+  gradient: string;
+  Icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  items: { title: string; sub: string }[];
+}) {
+  return (
+    <DialogContent className="glass-panel-strong max-w-md rounded-3xl border-foreground/10 bg-background/85 p-0 backdrop-blur-2xl">
+      <DialogHeader className="flex-row items-center gap-3 space-y-0 border-b border-foreground/5 px-5 py-4">
+        <span
+          className={`flex size-9 items-center justify-center rounded-2xl bg-gradient-to-br ${gradient} text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_8px_-2px_rgba(0,0,0,0.3)] ring-1 ring-white/20`}
+        >
+          <Icon className="size-4" strokeWidth={2.5} />
+        </span>
+        <div className="flex-1">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/45">
+            {count} · {title}
+          </p>
+          <DialogTitle className="font-serif text-xl italic">{title}</DialogTitle>
+        </div>
+      </DialogHeader>
+      <div className="max-h-[60vh] overflow-y-auto p-2">
+        {items.map((it, i) => (
+          <button
+            key={i}
+            className="flex w-full items-start gap-3 rounded-2xl p-3 text-left transition-colors hover:bg-foreground/[0.04]"
+          >
+            <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-foreground/30" />
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium leading-snug">{it.title}</p>
+              <p className="mt-0.5 text-xs text-foreground/50">{it.sub}</p>
+            </div>
+            <ArrowUpRight className="mt-1 size-3.5 text-foreground/30" />
+          </button>
+        ))}
       </div>
-      <Plane className="size-4 text-accent" />
+    </DialogContent>
+  );
+}
+
+function MorningBriefPill() {
+  return (
+    <button className="group relative inline-flex shrink-0 items-center gap-2.5 self-start rounded-full md:self-end">
+      <span className="ai-iridescent absolute -inset-px rounded-full opacity-60 blur-[2px] transition-opacity group-hover:opacity-90" aria-hidden />
+      <span className="glass-panel-strong relative inline-flex items-center gap-2.5 rounded-full py-1.5 pl-1.5 pr-4">
+        <span className="ai-iridescent flex size-7 items-center justify-center rounded-full ring-1 ring-foreground/5">
+          <Sparkles className="size-3.5 text-foreground/80" />
+        </span>
+        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Morning Brief</span>
+        <ArrowUpRight className="size-3.5 text-foreground/40 transition-colors group-hover:text-foreground" />
+      </span>
     </button>
   );
 }
+
 
 function TickerRow() {
   return (
