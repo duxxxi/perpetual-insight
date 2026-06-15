@@ -31,8 +31,19 @@ import {
   Video,
   Mail,
   CircleDot,
+  AlertOctagon,
+  TrendingUp,
+  CheckCircle2,
 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
