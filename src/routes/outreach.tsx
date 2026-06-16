@@ -137,6 +137,9 @@ function OutreachPage() {
             return (
               <li
                 key={c.id}
+                data-detail
+                data-detail-title={c.name}
+                data-detail-body={`${c.channel} · ${c.audience}\nSent ${c.sent} · Opened ${c.opened} (${openRate}%) · Replied ${c.replied}\nStatus: ${c.status}. Open to review the sequence, replies, and Perpetuity's suggested next touches.`}
                 className="grid cursor-pointer grid-cols-[1.6fr_1fr_repeat(3,72px)_90px] items-center gap-4 px-5 py-3.5 transition-colors hover:bg-foreground/[0.03]"
               >
                 <div className="flex items-center gap-3">
