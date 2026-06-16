@@ -138,7 +138,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
               title={it.label}
               className={`group relative flex size-10 items-center justify-center rounded-full transition-colors ${
                 isActive
-                  ? "bg-foreground/10 text-foreground ring-1 ring-foreground/10"
+                  ? "bg-gradient-to-br from-accent/25 to-accent/5 text-accent ring-1 ring-accent/25 shadow-[0_0_18px_-6px_hsl(25_70%_55%/0.45)]"
                   : "text-foreground/45 hover:bg-foreground/5 hover:text-foreground"
               }`}
             >
