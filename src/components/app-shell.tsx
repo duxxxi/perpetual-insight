@@ -163,25 +163,33 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
   );
 }
 
-/* ---------- Ask Perpetuity (new conversation) ---------- */
+/* ---------- Ask Perpetuity (new conversation or task) ---------- */
+import { taskStore } from "@/lib/task-store";
+
 function AskPerpetuityButton() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
+  const [mode, setMode] = useState<"chat" | "task">("chat");
   const navigate = useNavigate();
 
   const submit = (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!value.trim()) return;
+    if (mode === "task") {
+      taskStore.add({ title: value.trim(), tag: "New" });
+    }
     setOpen(false);
     setValue("");
-    navigate({ to: "/threads" });
+    setTimeout(() => {
+      navigate({ to: mode === "task" ? "/assignments" : "/threads" });
+    }, 60);
   };
 
   return (
     <>
       <button
         type="button"
-        title="New conversation"
+        title="New conversation or task"
         onClick={() => setOpen(true)}
         className="group relative mt-1.5 flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-sky-400/30 to-sky-500/10 text-sky-500 ring-1 ring-sky-400/30 shadow-[0_0_18px_-6px_hsl(210_90%_60%/0.55)] transition-all hover:from-sky-400/40 hover:to-sky-500/15 hover:shadow-[0_0_22px_-4px_hsl(210_90%_60%/0.7)] dark:text-sky-300"
       >
@@ -196,15 +204,31 @@ function AskPerpetuityButton() {
           <DialogTitle className="sr-only">Ask Perpetuity</DialogTitle>
           <div className="relative overflow-hidden rounded-2xl">
             <div className="ai-iridescent absolute inset-x-0 top-0 h-px opacity-70" aria-hidden />
-            <div className="flex items-center gap-2 px-5 pt-5">
-              <span className="inline-flex size-7 items-center justify-center rounded-full bg-gradient-to-br from-sky-400/30 to-sky-500/10 text-sky-500 ring-1 ring-sky-400/30 dark:text-sky-300">
-                <Sparkles className="size-3.5" strokeWidth={1.75} />
-              </span>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-foreground/50">
-                Ask Perpetuity
-              </p>
+            <div className="flex items-center justify-between gap-2 px-4 pt-4">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex size-6 items-center justify-center rounded-full bg-gradient-to-br from-sky-400/30 to-sky-500/10 text-sky-500 ring-1 ring-sky-400/30 dark:text-sky-300">
+                  <Sparkles className="size-3" strokeWidth={1.75} />
+                </span>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-foreground/50">
+                  Ask Perpetuity
+                </p>
+              </div>
+              <div className="glass-panel flex items-center gap-0.5 rounded-full p-0.5">
+                {(["chat", "task"] as const).map((m) => (
+                  <button
+                    key={m}
+                    type="button"
+                    onClick={() => setMode(m)}
+                    className={`rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] transition-colors ${
+                      mode === m ? "bg-foreground text-background" : "text-foreground/55 hover:text-foreground"
+                    }`}
+                  >
+                    {m === "chat" ? "Conversation" : "Task"}
+                  </button>
+                ))}
+              </div>
             </div>
-            <form onSubmit={submit} className="px-5 pb-5 pt-3">
+            <form onSubmit={submit} className="px-4 pb-4 pt-2">
               <textarea
                 autoFocus
                 value={value}
@@ -212,21 +236,25 @@ function AskPerpetuityButton() {
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) submit();
                 }}
-                placeholder="Start a conversation, draft a task, or ask anything…"
-                rows={4}
-                className="w-full resize-none bg-transparent font-serif text-xl italic leading-snug tracking-tight text-foreground placeholder:text-foreground/30 focus:outline-none"
+                placeholder={
+                  mode === "task"
+                    ? "Describe the task… (lands in Assignments + Active Work)"
+                    : "Start a conversation, ask anything…"
+                }
+                rows={3}
+                className="w-full resize-none bg-transparent font-serif text-lg italic leading-snug tracking-tight text-foreground placeholder:text-foreground/30 focus:outline-none"
               />
-              <div className="mt-3 flex items-center justify-between border-t border-foreground/5 pt-3">
+              <div className="mt-2 flex items-center justify-between border-t border-foreground/5 pt-2">
                 <p className="text-[10px] uppercase tracking-[0.18em] text-foreground/40">
-                  ⌘ + ⏎ to send · routes to Threads
+                  ⌘ + ⏎ · {mode === "task" ? "creates task" : "opens thread"}
                 </p>
                 <button
                   type="submit"
                   disabled={!value.trim()}
-                  className="inline-flex h-8 items-center gap-1.5 rounded-full bg-gradient-to-br from-sky-400/25 to-sky-500/10 px-3 text-[11px] font-medium text-sky-600 ring-1 ring-sky-400/30 shadow-[0_0_16px_-6px_hsl(210_90%_60%/0.55)] transition-all hover:from-sky-400/35 hover:to-sky-500/15 disabled:opacity-40 disabled:shadow-none dark:text-sky-300"
+                  className="inline-flex h-7 items-center gap-1.5 rounded-full bg-gradient-to-br from-sky-400/25 to-sky-500/10 px-3 text-[11px] font-medium text-sky-600 ring-1 ring-sky-400/30 shadow-[0_0_16px_-6px_hsl(210_90%_60%/0.55)] transition-all hover:from-sky-400/35 hover:to-sky-500/15 disabled:opacity-40 disabled:shadow-none dark:text-sky-300"
                 >
-                  Send
-                  <ArrowUp className="size-3.5" strokeWidth={2} />
+                  {mode === "task" ? "Create" : "Send"}
+                  <ArrowUp className="size-3" strokeWidth={2} />
                 </button>
               </div>
             </form>
