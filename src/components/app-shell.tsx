@@ -201,15 +201,26 @@ export function PageShell({
         <AppSidebar active={active} />
         <main className="flex-1 px-6 pt-10 pb-28 lg:pl-32 lg:pr-10">
           <div className="mx-auto max-w-7xl animate-fade-in-up">
-            <header className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-              <div>
-                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
+            <header className="relative mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -left-10 -top-10 size-48 rounded-full opacity-60 blur-3xl"
+                style={{
+                  background:
+                    "radial-gradient(circle, hsl(25 70% 60% / 0.18), transparent 70%)",
+                }}
+              />
+              <div className="relative">
+                <p className="mb-2 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/45">
+                  <span className="size-1.5 rounded-full bg-accent shadow-[0_0_8px_currentColor]" />
                   {eyebrow}
                 </p>
                 <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
                   {accentWord ? (
                     <>
-                      <span className="not-italic text-accent">{accentWord}</span>
+                      <span className="not-italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">
+                        {accentWord}
+                      </span>
                       {title ? <span className="text-foreground/80"> · {title}</span> : null}
                     </>
                   ) : (
