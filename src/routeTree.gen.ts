@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThreadsRouteImport } from './routes/threads'
 import { Route as ScheduleRouteImport } from './routes/schedule'
 import { Route as OutreachRouteImport } from './routes/outreach'
+import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as AssignmentsRouteImport } from './routes/assignments'
@@ -30,6 +31,11 @@ const ScheduleRoute = ScheduleRouteImport.update({
 const OutreachRoute = OutreachRouteImport.update({
   id: '/outreach',
   path: '/outreach',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpportunitiesRoute = OpportunitiesRouteImport.update({
+  id: '/opportunities',
+  path: '/opportunities',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocumentsRoute = DocumentsRouteImport.update({
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/assignments': typeof AssignmentsRoute
   '/contacts': typeof ContactsRoute
   '/documents': typeof DocumentsRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
   '/schedule': typeof ScheduleRoute
   '/threads': typeof ThreadsRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/assignments': typeof AssignmentsRoute
   '/contacts': typeof ContactsRoute
   '/documents': typeof DocumentsRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
   '/schedule': typeof ScheduleRoute
   '/threads': typeof ThreadsRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/assignments': typeof AssignmentsRoute
   '/contacts': typeof ContactsRoute
   '/documents': typeof DocumentsRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
   '/schedule': typeof ScheduleRoute
   '/threads': typeof ThreadsRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/assignments'
     | '/contacts'
     | '/documents'
+    | '/opportunities'
     | '/outreach'
     | '/schedule'
     | '/threads'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/assignments'
     | '/contacts'
     | '/documents'
+    | '/opportunities'
     | '/outreach'
     | '/schedule'
     | '/threads'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/assignments'
     | '/contacts'
     | '/documents'
+    | '/opportunities'
     | '/outreach'
     | '/schedule'
     | '/threads'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   AssignmentsRoute: typeof AssignmentsRoute
   ContactsRoute: typeof ContactsRoute
   DocumentsRoute: typeof DocumentsRoute
+  OpportunitiesRoute: typeof OpportunitiesRoute
   OutreachRoute: typeof OutreachRoute
   ScheduleRoute: typeof ScheduleRoute
   ThreadsRoute: typeof ThreadsRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/outreach'
       fullPath: '/outreach'
       preLoaderRoute: typeof OutreachRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/opportunities': {
+      id: '/opportunities'
+      path: '/opportunities'
+      fullPath: '/opportunities'
+      preLoaderRoute: typeof OpportunitiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/documents': {
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   AssignmentsRoute: AssignmentsRoute,
   ContactsRoute: ContactsRoute,
   DocumentsRoute: DocumentsRoute,
+  OpportunitiesRoute: OpportunitiesRoute,
   OutreachRoute: OutreachRoute,
   ScheduleRoute: ScheduleRoute,
   ThreadsRoute: ThreadsRoute,
