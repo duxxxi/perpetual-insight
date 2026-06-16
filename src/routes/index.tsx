@@ -617,33 +617,36 @@ function Sidebar() {
     { icon: Settings, label: "Settings" },
   ];
   return (
-    <nav className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
-      <div className="glass-panel-strong flex flex-col items-center gap-1 rounded-full px-2 py-4">
-        <div className="mb-2 flex size-10 items-center justify-center rounded-full bg-foreground font-serif text-sm italic text-background">
-          P
+    <>
+      <nav className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
+        <div className="glass-panel-strong flex flex-col items-center gap-1 rounded-full px-2 py-4">
+          <div className="mb-2 flex size-10 items-center justify-center rounded-full bg-foreground font-serif text-sm italic text-background">
+            P
+          </div>
+          {items.map((it) => (
+            <button
+              key={it.label}
+              title={it.label}
+              className={`group relative flex size-10 items-center justify-center rounded-full transition-colors ${
+                it.active ? "bg-foreground/5 text-foreground" : "text-foreground/45 hover:bg-foreground/5 hover:text-foreground"
+              }`}
+            >
+              <it.icon className="size-[18px]" strokeWidth={1.5} />
+              <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
+                {it.label}
+              </span>
+            </button>
+          ))}
+          <div className="mt-2 flex size-10 items-center justify-center rounded-full text-foreground/45 hover:text-foreground">
+            <Bell className="size-[18px]" strokeWidth={1.5} />
+          </div>
         </div>
-        {items.map((it) => (
-          <button
-            key={it.label}
-            title={it.label}
-            className={`group relative flex size-10 items-center justify-center rounded-full transition-colors ${
-              it.active ? "bg-foreground/5 text-foreground" : "text-foreground/45 hover:bg-foreground/5 hover:text-foreground"
-            }`}
-          >
-            <it.icon className="size-[18px]" strokeWidth={1.5} />
-            <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
-              {it.label}
-            </span>
-          </button>
-        ))}
-        <div className="mt-2 flex size-10 items-center justify-center rounded-full text-foreground/45 hover:text-foreground">
-          <Bell className="size-[18px]" strokeWidth={1.5} />
-        </div>
-      </div>
-      <div className="mt-3 flex justify-center">
+      </nav>
+      <div className="fixed bottom-5 left-5 z-40 hidden lg:block">
         <ThemeToggle orientation="vertical" />
       </div>
-    </nav>
+    </>
+  );
   );
 }
 
