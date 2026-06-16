@@ -715,6 +715,59 @@ function WorkCard({
   );
 }
 
+function ActionDialog({
+  trigger,
+  title,
+  kicker,
+  body,
+  actions,
+}: {
+  trigger: React.ReactNode;
+  title: string;
+  kicker?: string;
+  body?: string;
+  actions?: { label: string; primary?: boolean }[];
+}) {
+  const acts = actions ?? [
+    { label: "Take action", primary: true },
+    { label: "Dismiss" },
+  ];
+  return (
+    <Dialog>
+      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      <DialogContent className="glass-panel-strong max-w-md rounded-3xl border-foreground/10 bg-background/85 p-0 backdrop-blur-2xl">
+        <DialogHeader className="space-y-1 border-b border-foreground/5 px-5 py-4 text-left">
+          {kicker && (
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/45">
+              {kicker}
+            </p>
+          )}
+          <DialogTitle className="font-serif text-xl italic">{title}</DialogTitle>
+        </DialogHeader>
+        {body && (
+          <div className="px-5 py-4">
+            <p className="text-sm leading-relaxed text-foreground/70">{body}</p>
+          </div>
+        )}
+        <div className="flex items-center justify-end gap-2 border-t border-foreground/5 px-4 py-3">
+          {acts.map((a) => (
+            <button
+              key={a.label}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                a.primary
+                  ? "bg-foreground text-background hover:opacity-90"
+                  : "text-foreground/60 hover:bg-foreground/5 hover:text-foreground"
+              }`}
+            >
+              {a.label}
+            </button>
+          ))}
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 function IntelItem({
   time,
   title,
@@ -727,16 +780,23 @@ function IntelItem({
   hot?: boolean;
 }) {
   return (
-    <div className="group cursor-pointer py-1">
-      <div className="mb-1.5 flex items-center justify-between">
-        <span className="font-mono text-[10px] text-foreground/35">{time}</span>
-        {hot && <span className="size-1.5 rounded-full bg-accent" />}
-      </div>
-      <p className="text-sm font-medium leading-snug text-foreground group-hover:text-accent">
-        {title}
-      </p>
-      <p className="mt-1 text-xs leading-relaxed text-foreground/50">{body}</p>
-    </div>
+    <ActionDialog
+      kicker={time}
+      title={title}
+      body={body}
+      trigger={
+        <button className="group block w-full cursor-pointer py-1 text-left">
+          <div className="mb-1.5 flex items-center justify-between">
+            <span className="font-mono text-[10px] text-foreground/35">{time}</span>
+            {hot && <span className="size-1.5 rounded-full bg-accent" />}
+          </div>
+          <p className="text-sm font-medium leading-snug text-foreground group-hover:text-accent">
+            {title}
+          </p>
+          <p className="mt-1 text-xs leading-relaxed text-foreground/50">{body}</p>
+        </button>
+      }
+    />
   );
 }
 
@@ -746,12 +806,40 @@ function Divider() {
 
 function SuggestedItem({ title, body }: { title: string; body: string }) {
   return (
-    <button className="group block w-full rounded-2xl border border-dashed border-foreground/10 bg-transparent p-4 text-left transition-colors hover:border-foreground/20 hover:bg-[var(--glass-surface)]">
-      <p className="text-sm leading-snug text-foreground/75 group-hover:text-foreground">{title}</p>
-      <p className="mt-1 text-xs leading-relaxed text-foreground/45">{body}</p>
-    </button>
+    <div className="group relative w-full rounded-2xl border border-dashed border-foreground/10 bg-transparent p-4 transition-colors hover:border-foreground/20 hover:bg-[var(--glass-surface)]">
+      <ActionDialog
+        title={title}
+        kicker="Suggested"
+        body={body}
+        actions={[
+          { label: "Add as task", primary: true },
+          { label: "Dismiss" },
+        ]}
+        trigger={
+          <button className="block w-full pr-16 text-left">
+            <p className="text-sm leading-snug text-foreground/75 group-hover:text-foreground">{title}</p>
+            <p className="mt-1 text-xs leading-relaxed text-foreground/45">{body}</p>
+          </button>
+        }
+      />
+      <div className="absolute right-3 top-3 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+        <button
+          aria-label="Add as task"
+          className="inline-flex size-6 items-center justify-center rounded-full bg-foreground/5 text-foreground/60 hover:bg-foreground hover:text-background"
+        >
+          <Plus className="size-3" strokeWidth={2.5} />
+        </button>
+        <button
+          aria-label="Dismiss"
+          className="inline-flex size-6 items-center justify-center rounded-full bg-foreground/5 text-foreground/60 hover:bg-destructive/10 hover:text-destructive"
+        >
+          <X className="size-3" strokeWidth={2.5} />
+        </button>
+      </div>
+    </div>
   );
 }
+
 
 function ScheduleRow({
   time,
