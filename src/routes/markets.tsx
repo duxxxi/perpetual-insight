@@ -65,7 +65,7 @@ function MarketsPage() {
               </button>
             ))}
           </div>
-          <button className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[12px] font-medium">
+          <button data-pill className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[12px] font-medium">
             <Bell className="size-3.5" strokeWidth={1.75} /> Alerts
           </button>
         </div>
@@ -86,10 +86,10 @@ function MarketsPage() {
               WTI down 5.95% takes ~€0.18/kg out of your CIF Yerevan cost on the next softwood lot. Gold and silver both green on safe-haven flows — your treasury USDC hedge looks well-positioned. Baltic Dry softening 1.4% suggests freight will stay accommodative through Q3.
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
-              <button className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background">
+              <button data-pill className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background">
                 Update EuroMach quote
               </button>
-              <button className="rounded-full bg-foreground/5 px-3.5 py-1.5 text-[11px] font-medium text-foreground/70">
+              <button data-pill className="rounded-full bg-foreground/5 px-3.5 py-1.5 text-[11px] font-medium text-foreground/70">
                 Set FX alert at 1.160
               </button>
             </div>
@@ -119,7 +119,7 @@ function QuoteCard({ q }: { q: Quote }) {
           <p className="mt-0.5 font-mono text-[13px] font-semibold text-foreground/90">{q.sym}</p>
           <p className="text-[11px] text-foreground/55">{q.name}</p>
         </div>
-        <button className="opacity-0 transition-opacity group-hover:opacity-100">
+        <button data-pill className="opacity-0 transition-opacity group-hover:opacity-100">
           <ArrowUpRight className="size-3.5 text-foreground/45" />
         </button>
       </div>

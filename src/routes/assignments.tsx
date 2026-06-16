@@ -91,7 +91,7 @@ function AssignmentsPage() {
               </button>
             ))}
           </div>
-          <button className="glass-panel-strong inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium hover:bg-foreground/5">
+          <button data-pill className="glass-panel-strong inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium hover:bg-foreground/5">
             <Plus className="size-3.5" strokeWidth={2} /> New assignment
           </button>
         </div>
@@ -112,10 +112,10 @@ function AssignmentsPage() {
               Three threads from this morning look like commitments. Promote them to assignments so nothing slips before the EuroMach board review on Friday.
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
-              <button className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background hover:opacity-90">
+              <button data-pill className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background hover:opacity-90">
                 Promote 3 to assignments
               </button>
-              <button className="rounded-full bg-foreground/5 px-3.5 py-1.5 text-[11px] font-medium text-foreground/70 hover:bg-foreground/10">
+              <button data-pill className="rounded-full bg-foreground/5 px-3.5 py-1.5 text-[11px] font-medium text-foreground/70 hover:bg-foreground/10">
                 Review one-by-one
               </button>
             </div>
@@ -192,7 +192,7 @@ function TaskCard({ task }: { task: Task }) {
             </span>
             <span className="text-[10px] font-mono text-foreground/40">{task.due}</span>
             {task.thread && (
-              <button className="ml-auto inline-flex items-center gap-0.5 text-[10px] text-foreground/45 opacity-0 transition-opacity group-hover:opacity-100">
+              <button data-pill className="ml-auto inline-flex items-center gap-0.5 text-[10px] text-foreground/45 opacity-0 transition-opacity group-hover:opacity-100">
                 Thread <ArrowUpRight className="size-2.5" />
               </button>
             )}

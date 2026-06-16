@@ -161,7 +161,7 @@ function ConnectionPill({ c, compact = false }: { c: Conn; compact?: boolean }) 
           <div className="mt-0.5 flex items-center justify-between gap-2">
             <p className="truncate text-[10.5px] text-foreground/50">{c.detail}</p>
             {!isSoon && !compact && (
-              <button className="inline-flex shrink-0 items-center gap-1 rounded-full bg-foreground/[0.05] px-2 py-0.5 text-[10px] font-medium text-foreground/70 ring-1 ring-foreground/10 transition-colors hover:bg-foreground/[0.08]">
+              <button data-pill className="inline-flex shrink-0 items-center gap-1 rounded-full bg-foreground/[0.05] px-2 py-0.5 text-[10px] font-medium text-foreground/70 ring-1 ring-foreground/10 transition-colors hover:bg-foreground/[0.08]">
                 Disconnect
               </button>
             )}
@@ -191,7 +191,7 @@ function ConnectionsPage() {
               className="w-44 bg-transparent text-foreground placeholder:text-foreground/40 focus:outline-none"
             />
           </div>
-          <button className="inline-flex items-center gap-1 rounded-full bg-accent/[0.10] px-2.5 py-1.5 text-[11px] font-medium text-accent ring-1 ring-accent/25 transition-all hover:bg-accent/[0.16] hover:shadow-[0_0_14px_-3px_hsl(25_70%_55%/0.40)]">
+          <button data-pill className="inline-flex items-center gap-1 rounded-full bg-accent/[0.10] px-2.5 py-1.5 text-[11px] font-medium text-accent ring-1 ring-accent/25 transition-all hover:bg-accent/[0.16] hover:shadow-[0_0_14px_-3px_hsl(25_70%_55%/0.40)]">
             <Plus className="size-3" strokeWidth={2.5} /> Request
           </button>
         </div>
@@ -236,13 +236,13 @@ function ConnectionsPage() {
                     <p className="truncate text-[10.5px] text-foreground/50">{c.detail}</p>
                   </div>
                   <div className="relative flex shrink-0 items-center gap-1">
-                    <button
+                    <button data-pill
                       title="Manage"
                       className="inline-flex size-7 items-center justify-center rounded-full text-foreground/55 transition-colors hover:bg-foreground/[0.06] hover:text-foreground/85"
                     >
                       <Settings2 className="size-3.5" strokeWidth={1.75} />
                     </button>
-                    <button className="rounded-full bg-foreground/[0.05] px-2.5 py-1 text-[10px] font-medium text-foreground/70 ring-1 ring-foreground/10 transition-colors hover:bg-foreground/[0.08]">
+                    <button data-pill className="rounded-full bg-foreground/[0.05] px-2.5 py-1 text-[10px] font-medium text-foreground/70 ring-1 ring-foreground/10 transition-colors hover:bg-foreground/[0.08]">
                       Disconnect
                     </button>
                   </div>
@@ -256,7 +256,7 @@ function ConnectionsPage() {
       {/* Segmented filter */}
       <div className="mb-4 flex flex-wrap items-center gap-1.5">
         {(["All", ...categories] as const).map((c, i) => (
-          <button
+          <button data-pill
             key={c}
             className={`rounded-full px-3 py-1 text-[11px] font-medium ring-1 transition-colors ${
               i === 0
@@ -309,7 +309,7 @@ function ConnectionsPage() {
               placeholder="e.g. Ramp, Anthropic, Refinitiv…"
               className="flex-1 rounded-full bg-foreground/[0.04] px-4 py-2 text-[13px] text-foreground placeholder:text-foreground/40 ring-1 ring-foreground/10 focus:outline-none focus:ring-foreground/20"
             />
-            <button className="rounded-full bg-accent/[0.10] px-4 py-2 text-[12px] font-medium text-accent ring-1 ring-accent/25 transition-all hover:bg-accent/[0.16] hover:shadow-[0_0_14px_-3px_hsl(25_70%_55%/0.40)]">
+            <button data-pill className="rounded-full bg-accent/[0.10] px-4 py-2 text-[12px] font-medium text-accent ring-1 ring-accent/25 transition-all hover:bg-accent/[0.16] hover:shadow-[0_0_14px_-3px_hsl(25_70%_55%/0.40)]">
               Submit
             </button>
           </div>

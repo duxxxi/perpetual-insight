@@ -266,7 +266,7 @@ function ThreadsPage() {
                     </button>
                   );
                 })}
-                <button
+                <button data-pill
                   className="ml-1 flex size-7 items-center justify-center rounded-full text-foreground/45 hover:text-foreground"
                   title="Filter"
                 >
@@ -461,7 +461,7 @@ function ThreadDetail({ thread }: { thread: Thread }) {
               placeholder="Ask Perpetuity to take it further…"
               className="flex-1 bg-transparent text-sm placeholder:text-foreground/40 focus:outline-none"
             />
-            <button className="inline-flex size-8 items-center justify-center rounded-xl bg-foreground text-background transition-transform hover:scale-105">
+            <button data-pill className="inline-flex size-8 items-center justify-center rounded-xl bg-foreground text-background transition-transform hover:scale-105">
               <ArrowUp className="size-4" />
             </button>
           </div>
@@ -557,7 +557,7 @@ function Pill({ children, tone }: { children: React.ReactNode; tone: "rose" | "a
 
 function IconButton({ children, title }: { children: React.ReactNode; title: string }) {
   return (
-    <button
+    <button data-pill
       title={title}
       className="flex size-8 items-center justify-center rounded-full text-foreground/50 transition-colors hover:bg-foreground/5 hover:text-foreground"
     >
@@ -576,7 +576,7 @@ function SmartAction({
   primary?: boolean;
 }) {
   return (
-    <button
+    <button data-pill
       className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium transition-colors ${
         primary
           ? "bg-foreground text-background hover:bg-foreground/90"

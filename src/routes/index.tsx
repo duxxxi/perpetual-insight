@@ -112,7 +112,7 @@ function DashboardPage() {
                   { label: "Later" },
                 ]}
                 trigger={
-                  <button className="glass-panel-strong inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors hover:text-accent">
+                  <button data-pill className="glass-panel-strong inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors hover:text-accent">
                     Prepare briefing
                     <ArrowUpRight className="size-3" />
                   </button>
@@ -325,7 +325,7 @@ function AskPerpetuity() {
             placeholder="Ask Perpetuity anything…"
             className="flex-1 bg-transparent text-sm font-medium placeholder:text-foreground/40 focus:outline-none"
           />
-          <button className="inline-flex size-9 items-center justify-center rounded-2xl bg-foreground text-background transition-transform hover:scale-105">
+          <button data-pill className="inline-flex size-9 items-center justify-center rounded-2xl bg-foreground text-background transition-transform hover:scale-105">
             <ArrowUp className="size-4" />
           </button>
         </div>
@@ -333,19 +333,19 @@ function AskPerpetuity() {
           {/* Add task */}
           <Popover>
             <PopoverTrigger asChild>
-              <button className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] text-foreground/55 transition-colors hover:bg-foreground/5 hover:text-foreground">
+              <button data-pill className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] text-foreground/55 transition-colors hover:bg-foreground/5 hover:text-foreground">
                 <Plus className="size-3.5" />
                 Add task
               </button>
             </PopoverTrigger>
             <PopoverContent align="start" className="w-60 rounded-2xl border-foreground/10 bg-background/85 p-1.5 backdrop-blur-2xl">
-              <button className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors hover:bg-foreground/5">
+              <button data-pill className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors hover:bg-foreground/5">
                 <Paperclip className="size-4 text-foreground/60" />
                 <span>Upload files</span>
               </button>
               <div className="my-1 h-px bg-foreground/5" />
               {addTaskItems.slice(1).map((it) => (
-                <button key={it.label} className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors hover:bg-foreground/5">
+                <button data-pill key={it.label} className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors hover:bg-foreground/5">
                   <it.icon className="size-4 text-foreground/60" />
                   <span>{it.label}</span>
                 </button>
@@ -356,7 +356,7 @@ function AskPerpetuity() {
           {/* Permissions */}
           <Popover>
             <PopoverTrigger asChild>
-              <button className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] text-foreground/55 transition-colors hover:bg-foreground/5 hover:text-foreground">
+              <button data-pill className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] text-foreground/55 transition-colors hover:bg-foreground/5 hover:text-foreground">
                 <Shield className="size-3.5" />
                 Permissions
               </button>
@@ -383,7 +383,7 @@ function AskPerpetuity() {
                 ))}
               </div>
               <div className="border-t border-foreground/5 px-4 py-2.5">
-                <button className="inline-flex items-center gap-1 text-xs font-medium text-foreground/70 hover:text-foreground">
+                <button data-pill className="inline-flex items-center gap-1 text-xs font-medium text-foreground/70 hover:text-foreground">
                   Learn more
                   <ArrowUpRight className="size-3" />
                 </button>
@@ -419,7 +419,7 @@ function StatusPill({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="glass-panel group inline-flex h-7 items-center gap-1.5 rounded-full pl-0.5 pr-2.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
+        <button data-pill className="glass-panel group inline-flex h-7 items-center gap-1.5 rounded-full pl-0.5 pr-2.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
           <span
             className={`flex size-[22px] items-center justify-center rounded-full bg-gradient-to-br ${gradient} text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20`}
           >
@@ -444,7 +444,7 @@ function TripPill() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="glass-panel group inline-flex h-7 items-center gap-1.5 rounded-full pl-0.5 pr-2.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
+        <button data-pill className="glass-panel group inline-flex h-7 items-center gap-1.5 rounded-full pl-0.5 pr-2.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
           <span className="flex size-[22px] items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20">
             <Plane className="size-3" strokeWidth={2.5} />
           </span>
@@ -488,7 +488,7 @@ function PillDialogContent({
       </DialogHeader>
       <div className="max-h-[60vh] overflow-y-auto p-2">
         {items.map((it, i) => (
-          <button
+          <button data-pill
             key={i}
             className="flex w-full items-start gap-3 rounded-2xl p-3 text-left transition-colors hover:bg-foreground/[0.04]"
           >
@@ -516,7 +516,7 @@ function MorningBriefPill() {
         { label: "Read later" },
       ]}
       trigger={
-        <button className="group relative inline-flex shrink-0 items-center gap-2.5 self-start rounded-full md:self-end">
+        <button data-pill className="group relative inline-flex shrink-0 items-center gap-2.5 self-start rounded-full md:self-end">
           <span className="ai-iridescent absolute -inset-px rounded-full opacity-60 blur-[2px] transition-opacity group-hover:opacity-90" aria-hidden />
           <span className="glass-panel-strong relative inline-flex items-center gap-2.5 rounded-full py-1.5 pl-1.5 pr-4">
             <span className="ai-iridescent flex size-7 items-center justify-center rounded-full ring-1 ring-foreground/5">
@@ -638,7 +638,7 @@ function WorkCard({
                   kicker={tag}
                   body={`${a.label} for: ${title}`}
                   trigger={
-                    <button className="inline-flex items-center gap-1.5 rounded-full border border-foreground/10 bg-background/40 px-3 py-1.5 text-[11px] font-medium text-foreground/75 transition-colors hover:border-foreground/20 hover:bg-foreground hover:text-background">
+                    <button data-pill className="inline-flex items-center gap-1.5 rounded-full border border-foreground/10 bg-background/40 px-3 py-1.5 text-[11px] font-medium text-foreground/75 transition-colors hover:border-foreground/20 hover:bg-foreground hover:text-background">
                       <a.icon className="size-3" />
                       {a.label}
                     </button>
@@ -690,7 +690,7 @@ function ActionDialog({
         )}
         <div className="flex items-center justify-end gap-2 border-t border-foreground/5 px-4 py-3">
           {acts.map((a) => (
-            <button
+            <button data-pill
               key={a.label}
               className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
                 a.primary
@@ -724,7 +724,7 @@ function IntelItem({
       title={title}
       body={body}
       trigger={
-        <button className="group block w-full cursor-pointer py-1 text-left">
+        <button data-pill className="group block w-full cursor-pointer py-1 text-left">
           <div className="mb-1.5 flex items-center justify-between">
             <span className="font-mono text-[10px] text-foreground/35">{time}</span>
             {hot && <span className="size-1.5 rounded-full bg-accent" />}
@@ -755,20 +755,20 @@ function SuggestedItem({ title, body }: { title: string; body: string }) {
           { label: "Dismiss" },
         ]}
         trigger={
-          <button className="block w-full pr-16 text-left">
+          <button data-pill className="block w-full pr-16 text-left">
             <p className="text-sm leading-snug text-foreground/75 group-hover:text-foreground">{title}</p>
             <p className="mt-1 text-xs leading-relaxed text-foreground/45">{body}</p>
           </button>
         }
       />
       <div className="absolute right-3 top-3 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-        <button
+        <button data-pill
           aria-label="Add as task"
           className="inline-flex size-6 items-center justify-center rounded-full bg-foreground/5 text-foreground/60 hover:bg-foreground hover:text-background"
         >
           <Plus className="size-3" strokeWidth={2.5} />
         </button>
-        <button
+        <button data-pill
           aria-label="Dismiss"
           className="inline-flex size-6 items-center justify-center rounded-full bg-foreground/5 text-foreground/60 hover:bg-destructive/10 hover:text-destructive"
         >
