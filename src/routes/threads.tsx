@@ -222,7 +222,7 @@ function ThreadsPage() {
         <main className="flex-1 px-5 pt-6 pb-20 lg:pl-24 lg:pr-8">
           <div className="mx-auto max-w-7xl animate-fade-in-up">
             {/* Header */}
-            <header className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <header className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
                   Activity log · 142 threads · 9 open
@@ -238,7 +238,7 @@ function ThreadsPage() {
             </header>
 
             {/* Toolbar */}
-            <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div className="mb-3 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
               <div className="glass-panel flex items-center gap-2 rounded-full px-4 py-2 md:w-[420px]">
                 <Search className="size-4 text-foreground/40" strokeWidth={1.75} />
                 <input
@@ -257,7 +257,7 @@ function ThreadsPage() {
                     <button
                       key={c}
                       onClick={() => setKind(c)}
-                      className={`rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${
+                      className={`rounded-full px-2.5 py-1 text-[11px] font-medium transition-colors ${
                         active
                           ? "bg-foreground text-background"
                           : "text-foreground/55 hover:text-foreground"
@@ -286,7 +286,7 @@ function ThreadsPage() {
                       <li key={t.id}>
                         <button
                           onClick={() => setSelectedId(t.id)}
-                          className={`w-full px-4 py-3.5 text-left transition-colors ${
+                          className={`w-full px-3.5 py-2.5 text-left transition-colors ${
                             selectedId === t.id
                               ? "bg-foreground/[0.05]"
                               : "hover:bg-foreground/[0.025]"
@@ -578,7 +578,7 @@ function SmartAction({
 }) {
   return (
     <button
-      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${
+      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium transition-colors ${
         primary
           ? "bg-foreground text-background hover:bg-foreground/90"
           : "glass-panel-strong text-foreground/80 hover:text-foreground"
@@ -610,7 +610,7 @@ function PriorityRow() {
       {items.map((it) => (
         <span
           key={it.label}
-          className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium"
+          className="glass-panel inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium"
         >
           <it.icon className={`size-3.5 ${tones[it.tone]}`} strokeWidth={1.75} />
           <span className="font-mono text-foreground/80">{it.count}</span>
