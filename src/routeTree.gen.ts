@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThreadsRouteImport } from './routes/threads'
 import { Route as ScheduleRouteImport } from './routes/schedule'
+import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as AssignmentsRouteImport } from './routes/assignments'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -22,6 +23,11 @@ const ThreadsRoute = ThreadsRouteImport.update({
 const ScheduleRoute = ScheduleRouteImport.update({
   id: '/schedule',
   path: '/schedule',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OutreachRoute = OutreachRouteImport.update({
+  id: '/outreach',
+  path: '/outreach',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AssignmentsRoute = AssignmentsRouteImport.update({
@@ -38,12 +44,14 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assignments': typeof AssignmentsRoute
+  '/outreach': typeof OutreachRoute
   '/schedule': typeof ScheduleRoute
   '/threads': typeof ThreadsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assignments': typeof AssignmentsRoute
+  '/outreach': typeof OutreachRoute
   '/schedule': typeof ScheduleRoute
   '/threads': typeof ThreadsRoute
 }
@@ -51,20 +59,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/assignments': typeof AssignmentsRoute
+  '/outreach': typeof OutreachRoute
   '/schedule': typeof ScheduleRoute
   '/threads': typeof ThreadsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/assignments' | '/schedule' | '/threads'
+  fullPaths: '/' | '/assignments' | '/outreach' | '/schedule' | '/threads'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/assignments' | '/schedule' | '/threads'
-  id: '__root__' | '/' | '/assignments' | '/schedule' | '/threads'
+  to: '/' | '/assignments' | '/outreach' | '/schedule' | '/threads'
+  id: '__root__' | '/' | '/assignments' | '/outreach' | '/schedule' | '/threads'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AssignmentsRoute: typeof AssignmentsRoute
+  OutreachRoute: typeof OutreachRoute
   ScheduleRoute: typeof ScheduleRoute
   ThreadsRoute: typeof ThreadsRoute
 }
@@ -83,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/schedule'
       fullPath: '/schedule'
       preLoaderRoute: typeof ScheduleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/outreach': {
+      id: '/outreach'
+      path: '/outreach'
+      fullPath: '/outreach'
+      preLoaderRoute: typeof OutreachRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/assignments': {
@@ -105,6 +122,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AssignmentsRoute: AssignmentsRoute,
+  OutreachRoute: OutreachRoute,
   ScheduleRoute: ScheduleRoute,
   ThreadsRoute: ThreadsRoute,
 }
