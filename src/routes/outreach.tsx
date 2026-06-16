@@ -64,8 +64,8 @@ function OutreachPage() {
               </button>
             ))}
           </div>
-          <button data-pill className="glass-panel-strong inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium">
-            <Plus className="size-3.5" strokeWidth={2} /> New campaign
+          <button data-pill data-detail-title="New campaign" data-detail-body="Start a new outreach campaign — pick a channel (Email, LinkedIn, WhatsApp), an audience segment, and let Perpetuity draft the first sequence from past replies." className="glass-panel-strong inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium">
+            <Plus className="size-3" strokeWidth={2} /> New campaign
           </button>
         </div>
       }
