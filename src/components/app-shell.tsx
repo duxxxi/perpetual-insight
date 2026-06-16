@@ -278,7 +278,7 @@ export function PageShell({
                 <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
                   {accentWord ? (
                     <>
-                      <span className="not-italic bg-gradient-to-br from-accent via-[hsl(22_92%_55%)] to-accent-2 bg-clip-text text-transparent">
+                      <span className="not-italic bg-gradient-to-br from-[hsl(220_15%_42%)] via-[hsl(220_8%_72%)] to-[hsl(220_18%_28%)] bg-clip-text text-transparent">
                         {accentWord}
                       </span>
                       {title ? <span className="text-foreground/80"> · {title}</span> : null}
