@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { useState } from "react";
 import {
   Home,
   MessagesSquare,
@@ -11,9 +12,16 @@ import {
   LineChart,
   Plug,
   Settings,
-  Bell,
+  Plus,
+  ArrowUp,
+  Sparkles,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 /* ---------- Ambient background wash ---------- */
 export function AmbientBackground() {
