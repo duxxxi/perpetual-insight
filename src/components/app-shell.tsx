@@ -237,12 +237,6 @@ function AskPerpetuityButton() {
   );
 }
 
-function _SidebarEnd() {
-  return null;
-      </div>
-    </nav>
-  );
-}
 
 /* ---------- Footer ---------- */
 export function AppFooter() {
