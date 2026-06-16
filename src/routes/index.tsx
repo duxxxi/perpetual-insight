@@ -13,6 +13,8 @@ import {
   Settings,
   Bell,
   Plus,
+  X,
+
   Shield,
   ArrowUp,
   ArrowUpRight,
