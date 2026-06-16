@@ -435,14 +435,14 @@ function StatusPill({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="glass-panel group inline-flex items-center gap-2 rounded-full py-1.5 pl-1.5 pr-3.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
+        <button className="glass-panel group inline-flex h-8 items-center gap-2 rounded-full pl-1 pr-3 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
           <span
-            className={`flex size-7 items-center justify-center rounded-full bg-gradient-to-br ${gradient} text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20`}
+            className={`flex size-6 items-center justify-center rounded-full bg-gradient-to-br ${gradient} text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20`}
           >
-            <Icon className="size-3.5" strokeWidth={2.5} />
+            <Icon className="size-3" strokeWidth={2.5} />
           </span>
-          <span className="font-mono text-[13px] font-semibold tabular-nums">{count}</span>
-          <span className="text-[13px] text-foreground/70">{label}</span>
+          <span className="font-mono text-[12px] font-semibold tabular-nums">{count}</span>
+          <span className="text-[12px] text-foreground/70">{label}</span>
         </button>
       </DialogTrigger>
       <PillDialogContent title={label} count={count} gradient={gradient} Icon={Icon} items={items} />
@@ -460,18 +460,19 @@ function TripPill() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="glass-panel group inline-flex items-center gap-2 rounded-full py-1.5 pl-1.5 pr-3.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
-          <span className="flex size-7 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20">
-            <Plane className="size-3.5" strokeWidth={2.5} />
+        <button className="glass-panel group inline-flex h-8 items-center gap-2 rounded-full pl-1 pr-3 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
+          <span className="flex size-6 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20">
+            <Plane className="size-3" strokeWidth={2.5} />
           </span>
-          <span className="text-[13px] font-medium">Bratislava</span>
-          <span className="text-[11px] text-foreground/50">· 5 days</span>
+          <span className="font-mono text-[12px] font-semibold tabular-nums">5d</span>
+          <span className="text-[12px] text-foreground/70">Bratislava</span>
         </button>
       </DialogTrigger>
       <PillDialogContent title="Trip to Bratislava" count="5d" gradient="from-amber-400 to-orange-600" Icon={Plane} items={items} />
     </Dialog>
   );
 }
+
 
 function PillDialogContent({
   title,
