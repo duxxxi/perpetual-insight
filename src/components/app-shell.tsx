@@ -110,15 +110,15 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
   const items: { key: SidebarKey; icon: typeof Home; label: string; to: string }[] = [
     { key: "home", icon: Home, label: "Home", to: "/" },
     { key: "threads", icon: MessagesSquare, label: "Threads", to: "/threads" },
-    { key: "assignments", icon: ListChecks, label: "Assignments", to: "/" },
-    { key: "schedule", icon: Calendar, label: "Schedule", to: "/" },
-    { key: "outreach", icon: Send, label: "Outreach", to: "/" },
-    { key: "contacts", icon: Users, label: "Contacts", to: "/" },
-    { key: "documents", icon: FileText, label: "Documents", to: "/" },
-    { key: "opportunities", icon: Compass, label: "Opportunities", to: "/" },
-    { key: "markets", icon: LineChart, label: "Markets", to: "/" },
-    { key: "connections", icon: Plug, label: "Connections", to: "/" },
-    { key: "settings", icon: Settings, label: "Settings", to: "/" },
+    { key: "assignments", icon: ListChecks, label: "Assignments", to: "/assignments" },
+    { key: "schedule", icon: Calendar, label: "Schedule", to: "/schedule" },
+    { key: "outreach", icon: Send, label: "Outreach", to: "/outreach" },
+    { key: "contacts", icon: Users, label: "Contacts", to: "/contacts" },
+    { key: "documents", icon: FileText, label: "Documents", to: "/documents" },
+    { key: "opportunities", icon: Compass, label: "Opportunities", to: "/opportunities" },
+    { key: "markets", icon: LineChart, label: "Markets", to: "/markets" },
+    { key: "connections", icon: Plug, label: "Connections", to: "/connections" },
+    { key: "settings", icon: Settings, label: "Settings", to: "/settings" },
   ];
   return (
     <nav className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
@@ -171,5 +171,59 @@ export function AppFooter() {
         <ThemeToggle />
       </div>
     </footer>
+  );
+}
+
+/* ---------- Shared page shell ---------- */
+import { useTheme } from "@/hooks/use-theme";
+
+export function PageShell({
+  active,
+  eyebrow,
+  title,
+  accentWord,
+  rightSlot,
+  children,
+}: {
+  active: SidebarKey;
+  eyebrow: string;
+  title: string;
+  accentWord?: string;
+  rightSlot?: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  useTheme();
+  return (
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
+      <AmbientBackground />
+      <CommodityTicker />
+      <div className="flex">
+        <AppSidebar active={active} />
+        <main className="flex-1 px-6 pt-10 pb-28 lg:pl-32 lg:pr-10">
+          <div className="mx-auto max-w-7xl animate-fade-in-up">
+            <header className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
+                  {eyebrow}
+                </p>
+                <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
+                  {accentWord ? (
+                    <>
+                      <span className="not-italic text-accent">{accentWord}</span>
+                      {title ? <span className="text-foreground/80"> · {title}</span> : null}
+                    </>
+                  ) : (
+                    title
+                  )}
+                </h1>
+              </div>
+              {rightSlot}
+            </header>
+            {children}
+          </div>
+        </main>
+      </div>
+      <AppFooter />
+    </div>
   );
 }
