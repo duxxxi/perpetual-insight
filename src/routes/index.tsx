@@ -631,6 +631,13 @@ function SectionLabel({
   );
 }
 
+const tagTones: Record<string, string> = {
+  Payment: "text-rose-700/80",
+  Engineering: "text-blue-700/80",
+  Treasury: "text-amber-700/80",
+  Compliance: "text-violet-700/80",
+};
+
 function WorkCard({
   tag,
   title,
@@ -645,6 +652,7 @@ function WorkCard({
   urgent?: boolean;
 }) {
   const [done, setDone] = useState(false);
+
   return (
     <article
       className={`relative rounded-3xl p-5 transition-all ${
