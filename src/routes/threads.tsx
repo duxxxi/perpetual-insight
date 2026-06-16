@@ -207,9 +207,15 @@ function ThreadsPage() {
   useTheme();
   const [selectedId, setSelectedId] = useState<string>(threads[0].id);
   const [kind, setKind] = useState<(typeof kinds)[number]>("All");
+  const [quick, setQuick] = useState<null | "urgent" | "trip">(null);
   const selected = threads.find((t) => t.id === selectedId)!;
 
-  const filtered = kind === "All" ? threads : threads.filter((t) => t.kind === kind);
+  const filtered = threads.filter((t) => {
+    if (kind !== "All" && t.kind !== kind) return false;
+    if (quick === "urgent" && t.priority !== "urgent") return false;
+    if (quick === "trip" && t.tag !== "Trip") return false;
+    return true;
+  });
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
@@ -219,7 +225,7 @@ function ThreadsPage() {
       <div className="flex">
         <AppSidebar active="threads" />
 
-        <main className="flex-1 px-5 pt-6 pb-20 lg:pl-24 lg:pr-8">
+        <main className="flex-1 px-5 pt-6 pb-14 lg:pl-24 lg:pr-8">
           <div className="mx-auto max-w-7xl animate-fade-in-up">
             {/* Header */}
             <header className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
@@ -234,7 +240,14 @@ function ThreadsPage() {
                   Every conversation, task, and suggestion Perpetuity has handled with you.
                 </p>
               </div>
-              <PriorityRow />
+              <PriorityRow
+                quick={quick}
+                onQuick={(q) => setQuick(quick === q ? null : q)}
+                onKind={(k) => {
+                  setKind(k);
+                  setQuick(null);
+                }}
+              />
             </header>
 
             {/* Toolbar */}
