@@ -65,48 +65,12 @@ function DashboardPage() {
   useTheme();
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
-      {/* Ambient two-tone wash — light */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 dark:hidden"
-        style={{
-          background:
-            "radial-gradient(60rem 40rem at 12% -10%, hsl(25 40% 80% / 0.25), transparent 60%), radial-gradient(50rem 35rem at 100% 110%, hsl(20 10% 12% / 0.06), transparent 60%)",
-        }}
-      />
-      {/* Ambient two-tone wash — dark */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 hidden dark:block"
-        style={{
-          background:
-            "radial-gradient(60rem 40rem at 12% -10%, hsl(25 40% 55% / 0.12), transparent 60%), radial-gradient(50rem 35rem at 100% 110%, hsl(210 30% 40% / 0.10), transparent 60%)",
-        }}
-      />
-
-      {/* Commodity ticker — glass/iridescent style */}
-      <div className="sticky top-0 z-40">
-        <div className="relative overflow-hidden">
-          {/* Iridescent glow behind */}
-          <div className="ai-iridescent absolute -inset-px rounded-2xl opacity-40 blur-[2px]" aria-hidden />
-          <div className="glass-panel-strong relative overflow-hidden rounded-2xl border border-foreground/5">
-            {/* Subtle top sheen */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
-            />
-            <div className="ticker-mask relative overflow-hidden py-2.5">
-              <div className="animate-ticker flex whitespace-nowrap">
-                <TickerRow />
-                <TickerRow />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <AmbientBackground />
+      <CommodityTicker />
 
       <div className="flex">
-        <Sidebar />
+        <AppSidebar active="home" />
+
 
         <main className="flex-1 px-8 pt-14 pb-32 lg:pl-32 lg:pr-12 xl:pr-16">
           <div className="mx-auto max-w-6xl animate-fade-in-up">
