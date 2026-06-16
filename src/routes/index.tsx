@@ -581,12 +581,15 @@ function MorningBriefPill() {
 
 function TickerRow() {
   return (
-    <div className="flex shrink-0 gap-10 px-6 text-[10px] font-medium uppercase tracking-[0.18em] text-foreground/40">
+    <div className="flex shrink-0 gap-3 px-6">
       {ticker.map((t, i) => (
-        <span key={i} className="inline-flex items-center gap-2">
-          <span>{t.sym}</span>
-          <span className="font-semibold text-foreground">{t.price}</span>
-          <span className={t.dir === "up" ? "text-emerald-700" : "text-rose-700"}>{t.chg}</span>
+        <span
+          key={i}
+          className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] px-3 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-foreground/50 ring-1 ring-white/[0.04] backdrop-blur-sm"
+        >
+          <span className="text-foreground/35">{t.sym}</span>
+          <span className="font-semibold text-foreground/85">{t.price}</span>
+          <span className={t.dir === "up" ? "text-emerald-400/80" : "text-rose-400/80"}>{t.chg}</span>
         </span>
       ))}
     </div>
