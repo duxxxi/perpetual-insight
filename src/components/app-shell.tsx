@@ -276,14 +276,14 @@ function AskPerpetuityButton() {
 /* ---------- Footer ---------- */
 export function AppFooter() {
   return (
-    <footer className="fixed bottom-0 left-0 right-0 z-30 flex items-center justify-between border-t border-foreground/5 bg-background/70 px-8 py-3 text-[10px] font-medium tracking-[0.18em] text-foreground/35 backdrop-blur-xl">
-      <div className="flex items-center gap-6">
-        <span className="hidden sm:inline">ENCRYPTED · TLS 1.3</span>
-        <span>LAST SYNC · 14:40 UTC</span>
-      </div>
+    <footer className="fixed bottom-0 left-0 right-0 z-30 flex items-center justify-between border-t border-foreground/5 bg-background/70 px-5 py-1.5 text-[9px] font-medium tracking-[0.16em] text-foreground/40 backdrop-blur-xl">
       <div className="flex items-center gap-4">
-        <span className="hidden md:inline">PERPETUITY INTELLIGENCE</span>
-        <span className="size-1 rounded-full bg-accent" />
+        <span className="hidden sm:inline">ENCRYPTED · TLS 1.3</span>
+        <span>SYNC · 14:40 UTC</span>
+      </div>
+      <div className="flex items-center gap-3">
+        <span className="hidden md:inline">PERPETUITY</span>
+        <span className="size-1 rounded-full bg-accent shadow-[0_0_6px_currentColor]" />
         <ThemeToggle />
       </div>
     </footer>
