@@ -86,7 +86,7 @@ function AssignmentsPage() {
       }
     >
       {/* Perpetuity proposal strip */}
-      <div className="glass-panel-strong relative mb-6 overflow-hidden rounded-3xl p-5">
+      <div className="glass-panel-strong relative mb-4 overflow-hidden rounded-3xl p-5">
         <div className="ai-iridescent absolute inset-x-5 top-0 h-px opacity-60" aria-hidden />
         <div className="flex items-start gap-3">
           <div className="ai-iridescent flex size-8 items-center justify-center rounded-full ring-1 ring-foreground/5">

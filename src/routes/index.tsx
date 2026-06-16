@@ -84,7 +84,7 @@ function DashboardPage() {
 
 
             {/* Trip card — compact */}
-            <div className="glass-panel group mb-8 flex items-center justify-between gap-4 rounded-2xl px-4 py-3">
+            <div className="glass-panel group mb-5 flex items-center justify-between gap-3 rounded-2xl px-4 py-3">
               <div className="flex items-center gap-3 min-w-0">
                 <div className="glass-panel-strong flex size-9 items-center justify-center rounded-xl">
                   <Plane className="size-3.5 text-accent" />
@@ -123,7 +123,7 @@ function DashboardPage() {
             <AskPerpetuity />
 
             {/* Status pills row — under chatbox */}
-            <div className="mb-10 -mt-10 flex flex-wrap items-center gap-2">
+            <div className="mb-6 -mt-8 flex flex-wrap items-center gap-2">
               <StatusPill
                 icon={AlertOctagon}
                 gradient="from-rose-500 to-red-600"
@@ -165,7 +165,7 @@ function DashboardPage() {
 
 
             {/* Two-column workspace */}
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
               {/* Active Work — primary */}
               <section className="lg:col-span-7">
                 <SectionLabel kicker="Priority" tone="primary">Active Work</SectionLabel>
@@ -211,7 +211,7 @@ function DashboardPage() {
                 </div>
 
                 {/* Today's schedule */}
-                <div className="mt-12">
+                <div className="mt-8">
                   <SectionLabel kicker="Today" tone="quiet">Schedule</SectionLabel>
                   <div className="glass-panel mt-5 rounded-3xl p-2">
                     <ScheduleRow time="09:30" title="Buyer call: EuroMach GmbH" sub="Video call" tone="emerald" Icon={Video} />
@@ -301,7 +301,7 @@ function AskPerpetuity() {
   ];
 
   return (
-    <div className="relative mb-16 group">
+    <div className="relative mb-10 group">
       <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-70 blur-[2px]" aria-hidden />
       <div className="glass-panel-strong relative rounded-3xl p-5">
         <div className="flex items-center gap-3">
