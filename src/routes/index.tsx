@@ -60,16 +60,6 @@ export const Route = createFileRoute("/")({
   component: DashboardPage,
 });
 
-const ticker = [
-  { sym: "WTI", price: "$79.83", chg: "-5.95%", dir: "down" as const },
-  { sym: "NAT GAS", price: "$3.127", chg: "+0.22%", dir: "up" as const },
-  { sym: "GOLD", price: "$4,385", chg: "+3.45%", dir: "up" as const },
-  { sym: "SILVER", price: "$71.19", chg: "+4.73%", dir: "up" as const },
-  { sym: "COPPER", price: "$6.494", chg: "+0.76%", dir: "up" as const },
-  { sym: "BRENT", price: "$87.33", chg: "-2.94%", dir: "down" as const },
-  { sym: "EUR/USD", price: "1.1567", chg: "+0.18%", dir: "up" as const },
-  { sym: "ALU", price: "$2,241", chg: "+0.80%", dir: "up" as const },
-];
 
 function DashboardPage() {
   useTheme();
