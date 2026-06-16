@@ -61,19 +61,26 @@ const ticker = [
 
 function TickerRow() {
   return (
-    <div className="flex shrink-0 gap-3 px-6">
-      {ticker.map((t, i) => (
-        <span
-          key={i}
-          className="inline-flex items-center gap-2 rounded-full bg-foreground/[0.04] px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-foreground/80 ring-1 ring-foreground/[0.06] backdrop-blur-sm"
-        >
-          <span className="text-foreground/50">{t.sym}</span>
-          <span className="font-semibold text-foreground">{t.price}</span>
-          <span className={t.dir === "up" ? "text-emerald-600" : "text-rose-600"}>
-            {t.chg}
+    <div className="flex shrink-0 gap-2 px-4">
+      {ticker.map((t, i) => {
+        const up = t.dir === "up";
+        return (
+          <span
+            key={i}
+            className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] ring-1 backdrop-blur-sm ${
+              up
+                ? "bg-emerald-500/[0.06] ring-emerald-500/15"
+                : "bg-rose-500/[0.06] ring-rose-500/15"
+            }`}
+          >
+            <span className="text-foreground/55">{t.sym}</span>
+            <span className="font-semibold text-foreground/90">{t.price}</span>
+            <span className={up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}>
+              {t.chg}
+            </span>
           </span>
-        </span>
-      ))}
+        );
+      })}
     </div>
   );
 }
@@ -88,7 +95,7 @@ export function CommodityTicker() {
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
           />
-          <div className="ticker-mask relative overflow-hidden py-2.5">
+          <div className="ticker-mask relative overflow-hidden py-1.5">
             <div className="animate-ticker flex whitespace-nowrap">
               <TickerRow />
               <TickerRow />
