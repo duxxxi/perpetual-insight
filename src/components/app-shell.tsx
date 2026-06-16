@@ -129,11 +129,11 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
     { key: "settings", icon: Settings, label: "Settings", to: "/settings" },
   ];
   return (
-    <nav className="fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
-      <div className="glass-panel-strong flex flex-col items-center gap-0.5 rounded-full px-1.5 py-3">
+    <nav className="fixed left-3 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
+      <div className="glass-panel-strong flex flex-col items-center gap-0.5 rounded-full px-1 py-2">
         <Link
           to="/"
-          className="mb-1.5 flex size-9 items-center justify-center rounded-full bg-foreground font-serif text-sm italic text-background"
+          className="mb-1 flex size-8 items-center justify-center rounded-full bg-foreground font-serif text-[13px] italic text-background"
         >
           P
         </Link>
@@ -144,13 +144,13 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
               key={it.key}
               to={it.to}
               title={it.label}
-              className={`group relative flex size-9 items-center justify-center rounded-full transition-colors ${
+              className={`group relative flex size-8 items-center justify-center rounded-full transition-colors ${
                 isActive
                   ? "bg-gradient-to-br from-accent/25 to-accent/5 text-accent ring-1 ring-accent/25 shadow-[0_0_18px_-6px_hsl(25_70%_55%/0.45)]"
                   : "text-foreground/45 hover:bg-foreground/5 hover:text-foreground"
               }`}
             >
-              <it.icon className="size-[16px]" strokeWidth={1.5} />
+              <it.icon className="size-[15px]" strokeWidth={1.5} />
               <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
                 {it.label}
               </span>
@@ -163,27 +163,35 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
   );
 }
 
-/* ---------- Ask Perpetuity (new conversation) ---------- */
+/* ---------- Ask Perpetuity (new conversation or task) ---------- */
+import { taskStore } from "@/lib/task-store";
+
 function AskPerpetuityButton() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
+  const [mode, setMode] = useState<"chat" | "task">("chat");
   const navigate = useNavigate();
 
   const submit = (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!value.trim()) return;
+    if (mode === "task") {
+      taskStore.add({ title: value.trim(), tag: "New" });
+    }
     setOpen(false);
     setValue("");
-    navigate({ to: "/threads" });
+    setTimeout(() => {
+      navigate({ to: mode === "task" ? "/assignments" : "/threads" });
+    }, 60);
   };
 
   return (
     <>
       <button
         type="button"
-        title="New conversation"
+        title="New conversation or task"
         onClick={() => setOpen(true)}
-        className="group relative mt-1.5 flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-sky-400/30 to-sky-500/10 text-sky-500 ring-1 ring-sky-400/30 shadow-[0_0_18px_-6px_hsl(210_90%_60%/0.55)] transition-all hover:from-sky-400/40 hover:to-sky-500/15 hover:shadow-[0_0_22px_-4px_hsl(210_90%_60%/0.7)] dark:text-sky-300"
+        className="group relative mt-1 flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-sky-400/30 to-sky-500/10 text-sky-500 ring-1 ring-sky-400/30 shadow-[0_0_18px_-6px_hsl(210_90%_60%/0.55)] transition-all hover:from-sky-400/40 hover:to-sky-500/15 hover:shadow-[0_0_22px_-4px_hsl(210_90%_60%/0.7)] dark:text-sky-300"
       >
         <Plus className="size-[16px]" strokeWidth={2} />
         <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
@@ -196,15 +204,31 @@ function AskPerpetuityButton() {
           <DialogTitle className="sr-only">Ask Perpetuity</DialogTitle>
           <div className="relative overflow-hidden rounded-2xl">
             <div className="ai-iridescent absolute inset-x-0 top-0 h-px opacity-70" aria-hidden />
-            <div className="flex items-center gap-2 px-5 pt-5">
-              <span className="inline-flex size-7 items-center justify-center rounded-full bg-gradient-to-br from-sky-400/30 to-sky-500/10 text-sky-500 ring-1 ring-sky-400/30 dark:text-sky-300">
-                <Sparkles className="size-3.5" strokeWidth={1.75} />
-              </span>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-foreground/50">
-                Ask Perpetuity
-              </p>
+            <div className="flex items-center justify-between gap-2 px-4 pt-4">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex size-6 items-center justify-center rounded-full bg-gradient-to-br from-sky-400/30 to-sky-500/10 text-sky-500 ring-1 ring-sky-400/30 dark:text-sky-300">
+                  <Sparkles className="size-3" strokeWidth={1.75} />
+                </span>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-foreground/50">
+                  Ask Perpetuity
+                </p>
+              </div>
+              <div className="glass-panel flex items-center gap-0.5 rounded-full p-0.5">
+                {(["chat", "task"] as const).map((m) => (
+                  <button
+                    key={m}
+                    type="button"
+                    onClick={() => setMode(m)}
+                    className={`rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] transition-colors ${
+                      mode === m ? "bg-foreground text-background" : "text-foreground/55 hover:text-foreground"
+                    }`}
+                  >
+                    {m === "chat" ? "Conversation" : "Task"}
+                  </button>
+                ))}
+              </div>
             </div>
-            <form onSubmit={submit} className="px-5 pb-5 pt-3">
+            <form onSubmit={submit} className="px-4 pb-4 pt-2">
               <textarea
                 autoFocus
                 value={value}
@@ -212,21 +236,25 @@ function AskPerpetuityButton() {
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) submit();
                 }}
-                placeholder="Start a conversation, draft a task, or ask anything…"
-                rows={4}
-                className="w-full resize-none bg-transparent font-serif text-xl italic leading-snug tracking-tight text-foreground placeholder:text-foreground/30 focus:outline-none"
+                placeholder={
+                  mode === "task"
+                    ? "Describe the task… (lands in Assignments + Active Work)"
+                    : "Start a conversation, ask anything…"
+                }
+                rows={3}
+                className="w-full resize-none bg-transparent font-serif text-lg italic leading-snug tracking-tight text-foreground placeholder:text-foreground/30 focus:outline-none"
               />
-              <div className="mt-3 flex items-center justify-between border-t border-foreground/5 pt-3">
+              <div className="mt-2 flex items-center justify-between border-t border-foreground/5 pt-2">
                 <p className="text-[10px] uppercase tracking-[0.18em] text-foreground/40">
-                  ⌘ + ⏎ to send · routes to Threads
+                  ⌘ + ⏎ · {mode === "task" ? "creates task" : "opens thread"}
                 </p>
                 <button
                   type="submit"
                   disabled={!value.trim()}
-                  className="inline-flex h-8 items-center gap-1.5 rounded-full bg-gradient-to-br from-sky-400/25 to-sky-500/10 px-3 text-[11px] font-medium text-sky-600 ring-1 ring-sky-400/30 shadow-[0_0_16px_-6px_hsl(210_90%_60%/0.55)] transition-all hover:from-sky-400/35 hover:to-sky-500/15 disabled:opacity-40 disabled:shadow-none dark:text-sky-300"
+                  className="inline-flex h-7 items-center gap-1.5 rounded-full bg-gradient-to-br from-sky-400/25 to-sky-500/10 px-3 text-[11px] font-medium text-sky-600 ring-1 ring-sky-400/30 shadow-[0_0_16px_-6px_hsl(210_90%_60%/0.55)] transition-all hover:from-sky-400/35 hover:to-sky-500/15 disabled:opacity-40 disabled:shadow-none dark:text-sky-300"
                 >
-                  Send
-                  <ArrowUp className="size-3.5" strokeWidth={2} />
+                  {mode === "task" ? "Create" : "Send"}
+                  <ArrowUp className="size-3" strokeWidth={2} />
                 </button>
               </div>
             </form>
@@ -280,7 +308,7 @@ export function PageShell({
       <CommodityTicker />
       <div className="flex">
         <AppSidebar active={active} />
-        <main className="flex-1 px-6 pt-8 pb-24 lg:pl-28 lg:pr-10">
+        <main className="flex-1 px-5 pt-6 pb-20 lg:pl-24 lg:pr-8">
           <div className="mx-auto max-w-7xl animate-fade-in-up">
             <header className="relative mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div

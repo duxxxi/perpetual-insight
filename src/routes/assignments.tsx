@@ -11,6 +11,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { PageShell } from "@/components/app-shell";
+import { useUserTasks } from "@/lib/task-store";
 
 export const Route = createFileRoute("/assignments")({
   head: () => ({
@@ -56,12 +57,23 @@ const columns: { key: Status; label: string; tone: string }[] = [
 
 function AssignmentsPage() {
   const [filter, setFilter] = useState<"All" | "You" | "Perpetuity">("All");
-  const visible = filter === "All" ? tasks : tasks.filter((t) => t.owner === filter);
+  const userTasks = useUserTasks();
+  const userTaskCards: Task[] = userTasks.map((u) => ({
+    id: u.id,
+    title: u.title,
+    context: u.body ?? "Created via Ask Perpetuity",
+    due: "Just now",
+    owner: "You",
+    priority: "P1",
+    status: u.done ? "done" : "todo",
+  }));
+  const allTasks = [...userTaskCards, ...tasks];
+  const visible = filter === "All" ? allTasks : allTasks.filter((t) => t.owner === filter);
 
   return (
     <PageShell
       active="assignments"
-      eyebrow={`${tasks.filter((t) => t.status !== "done").length} open · 2 urgent`}
+      eyebrow={`${allTasks.filter((t) => t.status !== "done").length} open · 2 urgent`}
       title="that move the trade forward"
       accentWord="Assignments"
       rightSlot={
@@ -86,7 +98,7 @@ function AssignmentsPage() {
       }
     >
       {/* Perpetuity proposal strip */}
-      <div className="glass-panel-strong relative mb-6 overflow-hidden rounded-3xl p-5">
+      <div className="glass-panel-strong relative mb-4 overflow-hidden rounded-3xl p-5">
         <div className="ai-iridescent absolute inset-x-5 top-0 h-px opacity-60" aria-hidden />
         <div className="flex items-start gap-3">
           <div className="ai-iridescent flex size-8 items-center justify-center rounded-full ring-1 ring-foreground/5">
