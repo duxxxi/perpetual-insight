@@ -207,9 +207,15 @@ function ThreadsPage() {
   useTheme();
   const [selectedId, setSelectedId] = useState<string>(threads[0].id);
   const [kind, setKind] = useState<(typeof kinds)[number]>("All");
+  const [quick, setQuick] = useState<null | "urgent" | "trip">(null);
   const selected = threads.find((t) => t.id === selectedId)!;
 
-  const filtered = kind === "All" ? threads : threads.filter((t) => t.kind === kind);
+  const filtered = threads.filter((t) => {
+    if (kind !== "All" && t.kind !== kind) return false;
+    if (quick === "urgent" && t.priority !== "urgent") return false;
+    if (quick === "trip" && t.tag !== "Trip") return false;
+    return true;
+  });
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
@@ -219,7 +225,7 @@ function ThreadsPage() {
       <div className="flex">
         <AppSidebar active="threads" />
 
-        <main className="flex-1 px-5 pt-6 pb-20 lg:pl-24 lg:pr-8">
+        <main className="flex-1 px-5 pt-6 pb-14 lg:pl-24 lg:pr-8">
           <div className="mx-auto max-w-7xl animate-fade-in-up">
             {/* Header */}
             <header className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
@@ -234,7 +240,14 @@ function ThreadsPage() {
                   Every conversation, task, and suggestion Perpetuity has handled with you.
                 </p>
               </div>
-              <PriorityRow />
+              <PriorityRow
+                quick={quick}
+                onQuick={(q) => setQuick(quick === q ? null : q)}
+                onKind={(k) => {
+                  setKind(k);
+                  setQuick(null);
+                }}
+              />
             </header>
 
             {/* Toolbar */}
@@ -519,7 +532,7 @@ const tagStyles: Record<TagT, string> = {
 function TagChip({ tag }: { tag: TagT }) {
   return (
     <span
-      className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] ring-1 ${tagStyles[tag]}`}
+      className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-full px-1.5 py-px text-[9px] font-medium uppercase tracking-[0.1em] ring-1 ${tagStyles[tag]}`}
     >
       {tag}
     </span>
@@ -537,7 +550,7 @@ const statusStyles: Record<Status, string> = {
 function StatusChip({ status }: { status: Status }) {
   return (
     <span
-      className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] ring-1 ${statusStyles[status]}`}
+      className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-full px-1.5 py-px text-[9px] font-medium uppercase tracking-[0.1em] ring-1 ${statusStyles[status]}`}
     >
       {status}
     </span>
@@ -550,7 +563,7 @@ function Pill({ children, tone }: { children: React.ReactNode; tone: "rose" | "a
       ? "text-rose-700/85 bg-rose-500/10 ring-rose-500/15 dark:text-rose-300"
       : "text-amber-700/85 bg-amber-500/10 ring-amber-500/15 dark:text-amber-300";
   return (
-    <span className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] ring-1 ${cls}`}>
+    <span className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-full px-1.5 py-px text-[9px] font-medium uppercase tracking-[0.1em] ring-1 ${cls}`}>
       {children}
     </span>
   );
@@ -590,13 +603,21 @@ function SmartAction({
   );
 }
 
-function PriorityRow() {
+function PriorityRow({
+  quick,
+  onQuick,
+  onKind,
+}: {
+  quick: null | "urgent" | "trip";
+  onQuick: (q: "urgent" | "trip") => void;
+  onKind: (k: (typeof kinds)[number]) => void;
+}) {
   const items = [
-    { icon: AlertOctagon, count: 3, label: "Urgent", tone: "rose" as const },
-    { icon: ListChecks, count: 5, label: "Tasks open", tone: "emerald" as const },
-    { icon: Lightbulb, count: 4, label: "Suggestions", tone: "amber" as const },
-    { icon: TrendingUp, count: 7, label: "Updates", tone: "violet" as const },
-    { icon: Plane, count: 1, label: "Trip", tone: "teal" as const },
+    { key: "urgent" as const, icon: AlertOctagon, count: 3, label: "Urgent", tone: "rose" as const, action: () => onQuick("urgent") },
+    { key: "tasks" as const, icon: ListChecks, count: 5, label: "Tasks open", tone: "emerald" as const, action: () => onKind("Task") },
+    { key: "sug" as const, icon: Lightbulb, count: 4, label: "Suggestions", tone: "amber" as const, action: () => onKind("Suggestion") },
+    { key: "upd" as const, icon: TrendingUp, count: 7, label: "Updates", tone: "violet" as const, action: () => onKind("Briefing") },
+    { key: "trip" as const, icon: Plane, count: 1, label: "Trip", tone: "teal" as const, action: () => onQuick("trip") },
   ];
   const tones: Record<string, string> = {
     rose: "text-rose-700/85 dark:text-rose-300",
@@ -606,17 +627,24 @@ function PriorityRow() {
     teal: "text-teal-700/85 dark:text-teal-300",
   };
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      {items.map((it) => (
-        <span
-          key={it.label}
-          className="glass-panel inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium"
-        >
-          <it.icon className={`size-3.5 ${tones[it.tone]}`} strokeWidth={1.75} />
-          <span className="font-mono text-foreground/80">{it.count}</span>
-          <span className="text-foreground/55">{it.label}</span>
-        </span>
-      ))}
+    <div className="flex flex-wrap items-center gap-1.5">
+      {items.map((it) => {
+        const active = quick === it.key;
+        return (
+          <button
+            key={it.label}
+            type="button"
+            onClick={it.action}
+            className={`glass-panel inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-medium transition-colors hover:bg-foreground/[0.05] ${
+              active ? "ring-1 ring-accent/40" : ""
+            }`}
+          >
+            <it.icon className={`size-3 ${tones[it.tone]}`} strokeWidth={1.75} />
+            <span className="font-mono text-foreground/80">{it.count}</span>
+            <span className="text-foreground/55">{it.label}</span>
+          </button>
+        );
+      })}
     </div>
   );
 }
