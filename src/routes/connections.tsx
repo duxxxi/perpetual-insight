@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, Plus, Sparkles, Search, Mail, Settings2 } from "lucide-react";
+import { Check, Plus, Search, Mail, Settings2 } from "lucide-react";
+import { useState } from "react";
 import { PageShell } from "@/components/app-shell";
 
 export const Route = createFileRoute("/connections")({
@@ -62,19 +63,61 @@ const statusTone: Record<Status, string> = {
 
 const categories: Category[] = ["Workspace", "Communication", "CRM & Sales", "Finance", "Productivity"];
 
-function BrandLogo({ domain, name }: { domain: string; name: string }) {
+const iconMap: Record<string, string> = {
+  "google.com": "google",
+  "microsoft.com": "microsoft",
+  "outlook.com": "microsoftoutlook",
+  "telegram.org": "telegram",
+  "whatsapp.com": "whatsapp",
+  "slack.com": "slack",
+  "hubspot.com": "hubspot",
+  "salesforce.com": "salesforce",
+  "pipedrive.com": "pipedrive",
+  "calendly.com": "calendly",
+  "xero.com": "xero",
+  "stripe.com": "stripe",
+  "notion.so": "notion",
+};
+
+function BrandLogo({ domain, name, brand }: { domain: string; name: string; brand: string }) {
+  const [err, setErr] = useState(false);
+
   if (domain === "__email") {
-    return <Mail className="size-4" strokeWidth={1.75} />;
+    return <Mail className="size-[18px]" strokeWidth={1.75} />;
   }
+
+  const iconMap: Record<string, string> = {
+    "google.com": "google",
+    "microsoft.com": "microsoft",
+    "outlook.com": "microsoftoutlook",
+    "telegram.org": "telegram",
+    "whatsapp.com": "whatsapp",
+    "slack.com": "slack",
+    "hubspot.com": "hubspot",
+    "salesforce.com": "salesforce",
+    "pipedrive.com": "pipedrive",
+    "calendly.com": "calendly",
+    "xero.com": "xero",
+    "stripe.com": "stripe",
+    "notion.so": "notion",
+  };
+
+  const slug = iconMap[domain];
+  if (!slug || err) {
+    return (
+      <span className="text-[11px] font-bold uppercase" style={{ color: `hsl(${brand})` }}>
+        {name.charAt(0)}
+      </span>
+    );
+  }
+
   return (
     <img
-      src={`https://logo.clearbit.com/${domain}`}
+      src={`https://cdn.simpleicons.org/${slug}`}
       alt={`${name} logo`}
       loading="lazy"
-      className="size-4 object-contain"
-      onError={(e) => {
-        (e.currentTarget as HTMLImageElement).style.display = "none";
-      }}
+      className="size-[18px] object-contain"
+      onError={() => setErr(true)}
     />
   );
 }
@@ -103,7 +146,7 @@ function ConnectionPill({ c, compact = false }: { c: Conn; compact?: boolean }) 
             boxShadow: `inset 0 1px 0 hsl(${c.brand} / 0.18)`,
           }}
         >
-          <BrandLogo domain={c.logo} name={c.name} />
+          <BrandLogo domain={c.logo} name={c.name} brand={c.brand} />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-2">
@@ -148,8 +191,8 @@ function ConnectionsPage() {
               className="w-44 bg-transparent text-foreground placeholder:text-foreground/40 focus:outline-none"
             />
           </div>
-          <button className="inline-flex items-center gap-1.5 rounded-full bg-foreground px-3.5 py-2 text-[12px] font-medium text-background transition-transform hover:scale-[1.02]">
-            <Plus className="size-3.5" strokeWidth={2.25} /> Request integration
+          <button className="inline-flex items-center gap-1 rounded-full bg-accent/[0.10] px-2.5 py-1.5 text-[11px] font-medium text-accent ring-1 ring-accent/25 transition-all hover:bg-accent/[0.16] hover:shadow-[0_0_14px_-3px_hsl(25_70%_55%/0.40)]">
+            <Plus className="size-3" strokeWidth={2.5} /> Request
           </button>
         </div>
       }
@@ -183,7 +226,7 @@ function ConnectionsPage() {
                     className="relative flex size-8 shrink-0 items-center justify-center rounded-lg bg-background ring-1 ring-foreground/8"
                     style={{ boxShadow: `inset 0 1px 0 hsl(${c.brand} / 0.22)` }}
                   >
-                    <BrandLogo domain={c.logo} name={c.name} />
+                    <BrandLogo domain={c.logo} name={c.name} brand={c.brand} />
                   </div>
                   <div className="relative min-w-0 flex-1">
                     <div className="flex items-center gap-1.5">
@@ -209,19 +252,6 @@ function ConnectionsPage() {
           </div>
         </div>
       </section>
-
-      {/* Suggest strip */}
-      <div className="glass-panel mb-5 flex flex-wrap items-center gap-3 rounded-2xl px-4 py-3">
-        <div className="ai-iridescent flex size-8 items-center justify-center rounded-full ring-1 ring-foreground/5">
-          <Sparkles className="size-3.5 text-foreground/85" strokeWidth={1.75} />
-        </div>
-        <p className="flex-1 text-[12.5px] text-foreground/75">
-          Strong on Google + Telegram. HubSpot and Outlook will unlock pipeline and second-inbox triage when available.
-        </p>
-        <button className="rounded-full bg-foreground px-3 py-1.5 text-[11px] font-medium text-background">
-          Notify me
-        </button>
-      </div>
 
       {/* Segmented filter */}
       <div className="mb-4 flex flex-wrap items-center gap-1.5">
@@ -279,7 +309,7 @@ function ConnectionsPage() {
               placeholder="e.g. Ramp, Anthropic, Refinitiv…"
               className="flex-1 rounded-full bg-foreground/[0.04] px-4 py-2 text-[13px] text-foreground placeholder:text-foreground/40 ring-1 ring-foreground/10 focus:outline-none focus:ring-foreground/20"
             />
-            <button className="rounded-full bg-foreground px-4 py-2 text-[12px] font-medium text-background">
+            <button className="rounded-full bg-accent/[0.10] px-4 py-2 text-[12px] font-medium text-accent ring-1 ring-accent/25 transition-all hover:bg-accent/[0.16] hover:shadow-[0_0_14px_-3px_hsl(25_70%_55%/0.40)]">
               Submit
             </button>
           </div>
