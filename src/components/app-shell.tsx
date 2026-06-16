@@ -163,6 +163,64 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
   );
 }
 
+/* ---------- New chat (replaces bell) ---------- */
+function NewChatButton() {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <button
+          title="New thread"
+          className="group relative mt-2 flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-[hsl(160_80%_45%)] to-[hsl(200_95%_52%)] text-white ring-1 ring-white/30 shadow-[0_0_22px_-4px_hsl(170_85%_50%/0.65)] transition-transform hover:scale-105 active:scale-95"
+        >
+          <span
+            aria-hidden
+            className="absolute inset-0 rounded-full bg-gradient-to-br from-white/30 to-transparent opacity-70"
+          />
+          <Plus className="relative size-[18px]" strokeWidth={2.25} />
+          <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
+            New thread
+          </span>
+        </button>
+      </DialogTrigger>
+      <DialogContent className="border-0 bg-transparent p-0 shadow-none sm:max-w-2xl">
+        <div className="relative">
+          <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-80 blur-[3px]" aria-hidden />
+          <div className="glass-panel-strong relative rounded-3xl p-5">
+            <div className="mb-3 flex items-center gap-2">
+              <Sparkles className="size-3.5 text-accent-2" />
+              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-foreground/55">
+                New thread · Ask Perpetuity
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="ai-iridescent size-7 rounded-full ring-1 ring-foreground/5" aria-hidden />
+              <input
+                autoFocus
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                placeholder="Start a new conversation…"
+                className="flex-1 bg-transparent text-sm font-medium placeholder:text-foreground/40 focus:outline-none"
+              />
+              <button
+                onClick={() => setOpen(false)}
+                className="inline-flex size-9 items-center justify-center rounded-2xl bg-gradient-to-br from-[hsl(160_80%_45%)] to-[hsl(200_95%_52%)] text-white shadow-[0_0_18px_-4px_hsl(170_85%_50%/0.6)] transition-transform hover:scale-105"
+              >
+                <ArrowUp className="size-4" />
+              </button>
+            </div>
+            <p className="mt-4 border-t border-foreground/5 pt-3 text-[11px] text-foreground/50">
+              This will start a new thread in your activity database.
+            </p>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+
 /* ---------- Footer ---------- */
 export function AppFooter() {
   return (
