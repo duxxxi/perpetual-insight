@@ -57,7 +57,18 @@ const columns: { key: Status; label: string; tone: string }[] = [
 
 function AssignmentsPage() {
   const [filter, setFilter] = useState<"All" | "You" | "Perpetuity">("All");
-  const visible = filter === "All" ? tasks : tasks.filter((t) => t.owner === filter);
+  const userTasks = useUserTasks();
+  const userTaskCards: Task[] = userTasks.map((u) => ({
+    id: u.id,
+    title: u.title,
+    context: u.body ?? "Created via Ask Perpetuity",
+    due: "Just now",
+    owner: "You",
+    priority: "P1",
+    status: u.done ? "done" : "todo",
+  }));
+  const allTasks = [...userTaskCards, ...tasks];
+  const visible = filter === "All" ? allTasks : allTasks.filter((t) => t.owner === filter);
 
   return (
     <PageShell
