@@ -531,69 +531,6 @@ function MorningBriefPill() {
 
 
 
-function TickerRow() {
-  return (
-    <div className="flex shrink-0 gap-3 px-6">
-      {ticker.map((t, i) => (
-        <span
-          key={i}
-          className="inline-flex items-center gap-2 rounded-full bg-foreground/[0.04] px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-foreground/80 ring-1 ring-foreground/[0.06] backdrop-blur-sm"
-        >
-          <span className="text-foreground/50">{t.sym}</span>
-          <span className="font-semibold text-foreground">{t.price}</span>
-          <span className={t.dir === "up" ? "text-emerald-600" : "text-rose-600"}>{t.chg}</span>
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function Sidebar() {
-  const items = [
-    { icon: Home, label: "Home", active: true },
-    { icon: MessagesSquare, label: "Threads" },
-    { icon: ListChecks, label: "Assignments" },
-    { icon: Calendar, label: "Schedule" },
-    { icon: Send, label: "Outreach" },
-    { icon: Users, label: "Contacts" },
-    { icon: FileText, label: "Documents" },
-    { icon: Compass, label: "Opportunities" },
-    { icon: LineChart, label: "Markets" },
-    { icon: Plug, label: "Connections" },
-    { icon: Settings, label: "Settings" },
-  ];
-  return (
-    <>
-      <nav className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
-        <div className="glass-panel-strong flex flex-col items-center gap-1 rounded-full px-2 py-4">
-          <div className="mb-2 flex size-10 items-center justify-center rounded-full bg-foreground font-serif text-sm italic text-background">
-            P
-          </div>
-          {items.map((it) => (
-            <button
-              key={it.label}
-              title={it.label}
-              className={`group relative flex size-10 items-center justify-center rounded-full transition-colors ${
-                it.active ? "bg-foreground/5 text-foreground" : "text-foreground/45 hover:bg-foreground/5 hover:text-foreground"
-              }`}
-            >
-              <it.icon className="size-[18px]" strokeWidth={1.5} />
-              <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
-                {it.label}
-              </span>
-            </button>
-          ))}
-          <div className="mt-2 flex size-10 items-center justify-center rounded-full text-foreground/45 hover:text-foreground">
-            <Bell className="size-[18px]" strokeWidth={1.5} />
-          </div>
-        </div>
-      </nav>
-      <div className="fixed bottom-5 left-5 z-40 hidden lg:block">
-        <ThemeToggle orientation="vertical" />
-      </div>
-    </>
-  );
-}
 
 function SectionLabel({
   children,
