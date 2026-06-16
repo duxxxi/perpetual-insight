@@ -315,15 +315,20 @@ function ThreadsPage() {
                               <p className="mt-1 line-clamp-1 text-[12px] leading-relaxed text-foreground/50">
                                 {t.preview}
                               </p>
-                              <div className="mt-2 flex items-center gap-1.5">
-                                <TagChip tag={t.tag} />
-                                <StatusChip status={t.status} />
-                                {t.priority === "urgent" && <Pill tone="rose">Urgent</Pill>}
-                                {t.priority === "watch" && <Pill tone="amber">Watch</Pill>}
-                                {t.starred && (
-                                  <Star className="size-3 fill-accent text-accent" strokeWidth={1.5} />
-                                )}
-                                <span className="ml-auto text-[10px] uppercase tracking-[0.18em] text-foreground/35">
+                              <div className="mt-2 flex items-center gap-2">
+                                <div
+                                  className="flex min-w-0 flex-1 items-center gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <TagChip tag={t.tag} />
+                                  <StatusChip status={t.status} />
+                                  {t.priority === "urgent" && <Pill tone="rose">Urgent</Pill>}
+                                  {t.priority === "watch" && <Pill tone="amber">Watch</Pill>}
+                                  {t.starred && (
+                                    <Star className="size-3 shrink-0 fill-accent text-accent" strokeWidth={1.5} />
+                                  )}
+                                </div>
+                                <span className="shrink-0 text-[10px] uppercase tracking-[0.18em] text-foreground/35">
                                   {t.kind}
                                 </span>
                               </div>
@@ -514,7 +519,7 @@ const tagStyles: Record<TagT, string> = {
 function TagChip({ tag }: { tag: TagT }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] ring-1 ${tagStyles[tag]}`}
+      className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] ring-1 ${tagStyles[tag]}`}
     >
       {tag}
     </span>
@@ -532,7 +537,7 @@ const statusStyles: Record<Status, string> = {
 function StatusChip({ status }: { status: Status }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] ring-1 ${statusStyles[status]}`}
+      className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] ring-1 ${statusStyles[status]}`}
     >
       {status}
     </span>
@@ -545,7 +550,7 @@ function Pill({ children, tone }: { children: React.ReactNode; tone: "rose" | "a
       ? "text-rose-700/85 bg-rose-500/10 ring-rose-500/15 dark:text-rose-300"
       : "text-amber-700/85 bg-amber-500/10 ring-amber-500/15 dark:text-amber-300";
   return (
-    <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] ring-1 ${cls}`}>
+    <span className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] ring-1 ${cls}`}>
       {children}
     </span>
   );
