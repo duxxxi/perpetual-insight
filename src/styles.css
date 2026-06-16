@@ -85,9 +85,9 @@
   --input: hsl(40 20% 94% / 0.12);
   --ring: hsl(25 40% 55% / 0.4);
 
-  --glass-surface: rgba(28, 25, 23, 0.45);
-  --glass-surface-strong: rgba(28, 25, 23, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-surface: rgba(40, 36, 33, 0.55);
+  --glass-surface-strong: rgba(48, 43, 39, 0.7);
+  --glass-border: rgba(255, 245, 230, 0.08);
 }
 
 @layer base {
@@ -112,14 +112,18 @@
   backdrop-filter: blur(24px) saturate(110%);
   background: var(--glass-surface);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 4px 24px -12px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 4px 24px -12px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 0 color-mix(in oklab, var(--color-foreground) 6%, transparent);
 }
 
 @utility glass-panel-strong {
   backdrop-filter: blur(28px) saturate(120%);
   background: var(--glass-surface-strong);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 8px 32px -16px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 8px 32px -16px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 0 color-mix(in oklab, var(--color-foreground) 8%, transparent);
 }
 
 @utility ticker-mask {
