@@ -70,7 +70,7 @@ function DashboardPage() {
               <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                 <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
                   Good afternoon,{" "}
-                  <span className="not-italic text-accent">Perpetuity</span>
+                  <span className="not-italic bg-gradient-to-br from-accent via-[hsl(22_92%_55%)] to-accent-2 bg-clip-text text-transparent">Perpetuity</span>
                 </h1>
                 <MorningBriefPill />
               </div>
