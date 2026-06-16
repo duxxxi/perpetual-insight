@@ -280,9 +280,9 @@ export function PageShell({
       <CommodityTicker />
       <div className="flex">
         <AppSidebar active={active} />
-        <main className="flex-1 px-6 pt-10 pb-28 lg:pl-32 lg:pr-10">
+        <main className="flex-1 px-6 pt-8 pb-24 lg:pl-28 lg:pr-10">
           <div className="mx-auto max-w-7xl animate-fade-in-up">
-            <header className="relative mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <header className="relative mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div
                 aria-hidden
                 className="pointer-events-none absolute -left-10 -top-10 size-48 rounded-full opacity-60 blur-3xl"
