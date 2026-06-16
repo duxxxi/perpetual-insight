@@ -8,7 +8,6 @@ import {
   ArrowUp,
   Sparkles,
   Reply,
-  Forward,
   Archive,
   Tag,
   MoreHorizontal,
@@ -16,6 +15,13 @@ import {
   AlertOctagon,
   TrendingUp,
   Plane,
+  MessageSquare,
+  ListChecks,
+  Lightbulb,
+  BookOpen,
+  Clock,
+  Circle,
+  Play,
 } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 import {
@@ -29,9 +35,9 @@ export const Route = createFileRoute("/threads")({
   head: () => ({
     meta: [
       { title: "Threads — Perpetuity" },
-      { name: "description", content: "Every conversation, prioritized by Perpetuity." },
+      { name: "description", content: "Every conversation, task, and suggestion in one place." },
       { property: "og:title", content: "Threads — Perpetuity" },
-      { property: "og:description", content: "Every conversation, prioritized by Perpetuity." },
+      { property: "og:description", content: "Every conversation, task, and suggestion in one place." },
     ],
   }),
   component: ThreadsPage,
@@ -39,135 +45,171 @@ export const Route = createFileRoute("/threads")({
 
 /* ---------- Data ---------- */
 
+type Kind = "Conversation" | "Task" | "Suggestion" | "Briefing";
+type Status = "Open" | "In progress" | "Done" | "Dismissed" | "Acted";
+type TagT = "Payment" | "Treasury" | "Engineering" | "Compliance" | "Buyer" | "Trip" | "Market" | "Ops";
+
 type Thread = {
   id: string;
-  from: string;
-  company: string;
-  subject: string;
+  kind: Kind;
+  title: string;
   preview: string;
   time: string;
-  channel: "Email" | "WhatsApp" | "LinkedIn" | "Telegram";
-  tag: "Payment" | "Treasury" | "Engineering" | "Compliance" | "Buyer" | "Trip";
+  tag: TagT;
+  status: Status;
   priority?: "urgent" | "watch" | null;
   unread?: boolean;
   starred?: boolean;
+  source: string; // origin surface, e.g. "Dashboard chat", "Auto-suggested", "Daily brief"
+  steps?: number; // for conversations / tasks
   summary: string;
+  body: string;
 };
 
 const threads: Thread[] = [
   {
     id: "1",
-    from: "Stripe Billing",
-    company: "stripe.com",
-    subject: "Payment failed — $8.00 recurring",
+    kind: "Conversation",
+    title: "Should we hedge EUR exposure before the ECB print?",
     preview:
-      "Your recurring charge on acct_1ika5ja3kz32dpo1 failed for the second time. Update payment method to avoid service interruption…",
+      "You asked Perpetuity to model 25/50/75bp scenarios against the open EuroMach quote. We walked through three FX paths…",
     time: "14:32",
-    channel: "Email",
-    tag: "Payment",
+    tag: "Treasury",
+    status: "In progress",
     priority: "urgent",
     unread: true,
+    starred: true,
+    source: "Dashboard chat",
+    steps: 6,
     summary:
-      "Stripe failed twice charging $8.00 on acct_1ika5ja3kz32dpo1. Likely card expiry on the saved instrument. Suggested: update card or switch to USDC settlement.",
+      "Six-message thread modeling EUR/USD hedge before Thursday's ECB. Current lean: half-hedge at 1.156 forward, leave 50% floating against the EuroMach Q3 quote.",
+    body:
+      "You: 'What happens to the EuroMach margin if ECB surprises 50bp?'\nPerpetuity: walked through three scenarios, flagged that a 50bp cut compresses margin to 9.2% from 13.1%, suggested a half-hedge at the 1-week forward.",
   },
   {
     id: "2",
-    from: "Marta Kováčová",
-    company: "EuroMach a.s.",
-    subject: "Re: Q3 quote — 40t softwood",
+    kind: "Task",
+    title: "Send firm CIF Yerevan price to EuroMach (week 28)",
     preview:
-      "Thanks for the prelim numbers. The board would like a firm price for 40t delivered Bratislava-Yerevan in week 28. Can you…",
+      "Drafted reply ready for approval. Pulls margin from current FX (EUR/USD 1.1567) and freight from Klaipeda-Yerevan lane…",
     time: "13:18",
-    channel: "Email",
     tag: "Buyer",
+    status: "Open",
     priority: "watch",
     unread: true,
-    starred: true,
+    source: "Auto-created from thread",
+    steps: 3,
     summary:
-      "EuroMach is converting on the 40t softwood Q3 order. Wants firm CIF Yerevan pricing. Margin window: 11–14% at current FX (EUR/USD 1.1567).",
+      "Task is one approval away. Draft uses 12.4% margin, week-28 delivery, USDC settlement option. You need to confirm price floor before send.",
+    body:
+      "Step 1 — pulled latest FX & freight ✓\nStep 2 — drafted CIF Yerevan quote ✓\nStep 3 — awaiting your approval to send to Marta Kováčová.",
   },
   {
     id: "3",
-    from: "Railway Deploys",
-    company: "railway.app",
-    subject: "Build failed · @export-analytica/web",
+    kind: "Suggestion",
+    title: "Move 12,400 USDC over the verified Bybit rail",
     preview:
-      "Deploy 8a2f failed at 19:38 UTC. Step: install → vite build. Exit code 1. View logs to inspect the failure trace…",
-    time: "Yesterday",
-    channel: "Email",
-    tag: "Engineering",
-    priority: "urgent",
-    unread: true,
+      "The 4.89 USDC test cleared in 38s with 0.31 in fees. Same path is now safe for the larger tranche queued in treasury…",
+    time: "12:05",
+    tag: "Treasury",
+    status: "Open",
+    source: "Auto-suggested",
     summary:
-      "Vite build failed on @export-analytica/web. Likely missing env VITE_API_URL after last rotation. Three retries since 19:38 UTC.",
+      "Perpetuity noticed the successful test withdrawal and is suggesting you promote the queued 12,400 USDC transfer on the same path. One click to execute or dismiss.",
+    body:
+      "Trigger: Bybit test withdrawal 4.89 USDC settled cleanly.\nProposed action: release the queued 12,400 USDC tranche to the same destination wallet.\nRisk note: gas spike on destination chain is 0.8% above 24h median — still within tolerance.",
   },
   {
     id: "4",
-    from: "Yerevan Marriott",
-    company: "marriott.com",
-    subject: "Reservation pending confirmation",
+    kind: "Briefing",
+    title: "Morning brief — Mon, Jun 16",
     preview:
-      "Dear Mr. Perpetuity, we are holding your reservation for Jun 19–20. Kindly confirm by 18:00 local time to secure…",
-    time: "11:04",
-    channel: "Email",
-    tag: "Trip",
-    priority: "watch",
+      "Three things that moved overnight: REACH update on CIS timber, Klaipeda berth confirmed, and Stripe billing failure on the analytics workspace…",
+    time: "07:00",
+    tag: "Ops",
+    status: "Acted",
+    source: "Daily brief",
     summary:
-      "Hotel hold expires today at 18:00 Yerevan time. Single confirm-reply unlocks the booking; no payment required up front.",
+      "You read the brief, opened the REACH compliance draft, and snoozed the Klaipeda update. Stripe failure spun off into its own task thread.",
+    body:
+      "1. REACH restriction on six HS codes lands Jul 1 — three suppliers affected.\n2. Container berthed Klaipeda; BL + seal docs inbound from Volkov.\n3. Stripe failed twice on acct_1ika5ja3kz32dpo1 — card likely expired.",
   },
   {
     id: "5",
-    from: "Bybit",
-    company: "bybit.com",
-    subject: "Withdrawal confirmed — 4.89 USDC",
+    kind: "Conversation",
+    title: "Draft an outreach sequence for 8 Yerevan distributors",
     preview:
-      "Your withdrawal of 4.89 USDC has been processed and broadcast to the network. Hash 0x8a2…f3c.",
-    time: "10:21",
-    channel: "Email",
-    tag: "Treasury",
+      "You shared the shortlist Friday. Perpetuity proposed a 3-touch cadence in EN/RU with a localized landing variant…",
+    time: "Yesterday",
+    tag: "Buyer",
+    status: "Done",
+    source: "Dashboard chat",
+    steps: 11,
     summary:
-      "USDC test withdrawal cleared. Treasury rail is healthy; safe to move the larger 12,400 USDC tranche on the same path.",
+      "Eleven-message session. Final output: 3-touch EN/RU sequence, scheduled to begin Wednesday 09:00 Yerevan, with reply routing into the Buyer thread bucket.",
+    body:
+      "You iterated on tone (less formal), CTA (book a 20-min call), and timing (avoid Friday). Sequence is approved and queued in Outreach.",
   },
   {
     id: "6",
-    from: "EU Trade Bulletin",
-    company: "trade.ec.europa.eu",
-    subject: "REACH update — timber from CIS",
+    kind: "Task",
+    title: "File REACH compliance notice for Q3 CIS shipments",
     preview:
-      "New restrictions on six HS codes affecting softwood imports from CIS countries enter into force Jul 1…",
-    time: "Mon",
-    channel: "Email",
+      "Draft notice covers the six restricted HS codes. Needs counter-sign from Andrei before Jul 1 deadline…",
+    time: "Yesterday",
     tag: "Compliance",
+    status: "In progress",
     priority: "watch",
+    source: "Auto-created from brief",
+    steps: 4,
     summary:
-      "REACH restriction lands Jul 1. Three of your CIS suppliers ship the affected HS codes. Draft compliance notice already in your approvals queue.",
+      "Two of four steps complete. Counter-signature is the blocker. ETA to filing: 36h after Andrei signs.",
+    body:
+      "Step 1 — pulled affected HS codes ✓\nStep 2 — drafted notice in EN/RU ✓\nStep 3 — awaiting Andrei Volkov counter-sign\nStep 4 — file with customs broker.",
   },
   {
     id: "7",
-    from: "Andrei Volkov",
-    company: "Volkov Lumber",
-    subject: "Container ETA Klaipeda",
+    kind: "Suggestion",
+    title: "Switch acct_1ika5ja3kz32dpo1 to USDC settlement",
     preview:
-      "Vessel berthed this morning. Discharge tomorrow 06:00. Will share BL scan and seal numbers as soon as…",
+      "Same card has failed Stripe twice this month. USDC rail to your treasury is healthy. Estimated saving: $14/mo in fees…",
     time: "Mon",
-    channel: "WhatsApp",
-    tag: "Buyer",
+    tag: "Payment",
+    status: "Dismissed",
+    source: "Auto-suggested",
     summary:
-      "Container is on schedule, discharge tomorrow 06:00 Klaipeda. BL + seal numbers inbound; nothing for you to do until docs land.",
+      "You dismissed this last cycle — keeping it visible for context. Perpetuity will re-surface if a third failure occurs.",
+    body:
+      "Reason for surfacing: 2 consecutive Stripe failures on the same instrument.\nProposed action: migrate the analytics workspace to USDC settlement.\nYour decision (Mon 11:42): dismissed — 'card update is easier this cycle'.",
+  },
+  {
+    id: "8",
+    kind: "Briefing",
+    title: "Market pulse — softwood, Klaipeda lane",
+    preview:
+      "Spot pricing held flat WoW. Freight is up 2.3% on the Klaipeda-Yerevan corridor. Two competitor quotes hit the wire…",
+    time: "Mon",
+    tag: "Market",
+    status: "Acted",
+    source: "Auto-briefing",
+    summary:
+      "You forwarded this brief to the Buyer task on the EuroMach quote so the new freight number is baked into the firm price.",
+    body:
+      "Softwood spot: €182/m³ (flat WoW).\nFreight Klaipeda-Yerevan: +2.3% WoW.\nCompetitor quotes seen: Holzwerk (€187) and Baltic Mills (€184).",
   },
 ];
 
-const channels = ["All", "Email", "WhatsApp", "LinkedIn", "Telegram"] as const;
+const kinds = ["All", "Conversation", "Task", "Suggestion", "Briefing"] as const;
 
 /* ---------- Page ---------- */
 
 function ThreadsPage() {
   useTheme();
   const [selectedId, setSelectedId] = useState<string>(threads[0].id);
-  const [channel, setChannel] = useState<(typeof channels)[number]>("All");
+  const [kind, setKind] = useState<(typeof kinds)[number]>("All");
   const selected = threads.find((t) => t.id === selectedId)!;
 
-  const filtered = channel === "All" ? threads : threads.filter((t) => t.channel === channel);
+  const filtered = kind === "All" ? threads : threads.filter((t) => t.kind === kind);
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
@@ -183,11 +225,14 @@ function ThreadsPage() {
             <header className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
-                  Inbox · 24 unread · 7 prioritized
+                  Activity log · 142 threads · 9 open
                 </p>
                 <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
                   <span className="not-italic text-accent">Threads</span>
                 </h1>
+                <p className="mt-1 text-[12px] text-foreground/55">
+                  Every conversation, task, and suggestion Perpetuity has handled with you.
+                </p>
               </div>
               <PriorityRow />
             </header>
@@ -198,7 +243,7 @@ function ThreadsPage() {
                 <Search className="size-4 text-foreground/40" strokeWidth={1.75} />
                 <input
                   type="text"
-                  placeholder="Search threads, people, companies…"
+                  placeholder="Search threads, tasks, suggestions…"
                   className="flex-1 bg-transparent text-sm placeholder:text-foreground/40 focus:outline-none"
                 />
                 <kbd className="hidden rounded-md bg-foreground/5 px-1.5 py-0.5 text-[10px] font-mono text-foreground/45 md:inline">
@@ -206,12 +251,12 @@ function ThreadsPage() {
                 </kbd>
               </div>
               <div className="glass-panel flex items-center gap-0.5 rounded-full p-0.5">
-                {channels.map((c) => {
-                  const active = channel === c;
+                {kinds.map((c) => {
+                  const active = kind === c;
                   return (
                     <button
                       key={c}
-                      onClick={() => setChannel(c)}
+                      onClick={() => setKind(c)}
                       className={`rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${
                         active
                           ? "bg-foreground text-background"
@@ -248,7 +293,7 @@ function ThreadsPage() {
                           }`}
                         >
                           <div className="flex items-start gap-3">
-                            <Avatar name={t.from} />
+                            <KindBadge kind={t.kind} />
                             <div className="min-w-0 flex-1">
                               <div className="flex items-center justify-between gap-2">
                                 <div className="flex min-w-0 items-center gap-2">
@@ -257,31 +302,29 @@ function ThreadsPage() {
                                   )}
                                   <span
                                     className={`truncate text-[13px] ${
-                                      t.unread ? "font-semibold text-foreground" : "text-foreground/80"
+                                      t.unread ? "font-semibold text-foreground" : "text-foreground/85"
                                     }`}
                                   >
-                                    {t.from}
+                                    {t.title}
                                   </span>
                                 </div>
                                 <span className="shrink-0 text-[10px] font-mono text-foreground/40">
                                   {t.time}
                                 </span>
                               </div>
-                              <p className="mt-0.5 truncate text-[13px] text-foreground/85">
-                                {t.subject}
-                              </p>
                               <p className="mt-1 line-clamp-1 text-[12px] leading-relaxed text-foreground/50">
                                 {t.preview}
                               </p>
                               <div className="mt-2 flex items-center gap-1.5">
                                 <TagChip tag={t.tag} />
+                                <StatusChip status={t.status} />
                                 {t.priority === "urgent" && <Pill tone="rose">Urgent</Pill>}
                                 {t.priority === "watch" && <Pill tone="amber">Watch</Pill>}
                                 {t.starred && (
                                   <Star className="size-3 fill-accent text-accent" strokeWidth={1.5} />
                                 )}
                                 <span className="ml-auto text-[10px] uppercase tracking-[0.18em] text-foreground/35">
-                                  {t.channel}
+                                  {t.kind}
                                 </span>
                               </div>
                             </div>
@@ -317,14 +360,15 @@ function ThreadDetail({ thread }: { thread: Thread }) {
         <div className="min-w-0">
           <div className="flex items-center gap-2">
             <TagChip tag={thread.tag} />
+            <StatusChip status={thread.status} />
             <span className="text-[10px] uppercase tracking-[0.18em] text-foreground/40">
-              {thread.channel}
+              {thread.kind}
             </span>
           </div>
-          <h2 className="mt-2 font-serif text-xl italic tracking-tight">{thread.subject}</h2>
+          <h2 className="mt-2 font-serif text-xl italic tracking-tight">{thread.title}</h2>
           <p className="mt-1 text-[12px] text-foreground/55">
-            From <span className="text-foreground/80">{thread.from}</span> ·{" "}
-            <span className="text-foreground/50">{thread.company}</span> · {thread.time}
+            <span className="text-foreground/80">{thread.source}</span>
+            {thread.steps ? ` · ${thread.steps} steps` : ""} · {thread.time}
           </p>
         </div>
         <div className="flex items-center gap-1">
@@ -361,22 +405,46 @@ function ThreadDetail({ thread }: { thread: Thread }) {
         </div>
       </div>
 
-      {/* Message body */}
+      {/* Body */}
       <div className="px-6 pb-5">
         <div className="glass-panel rounded-2xl px-5 py-4">
-          <p className="text-[13px] leading-relaxed text-foreground/80">{thread.preview}</p>
-          <p className="mt-3 text-[13px] leading-relaxed text-foreground/60">
-            — {thread.from}, {thread.company}
+          <p className="whitespace-pre-line text-[13px] leading-relaxed text-foreground/80">
+            {thread.body}
           </p>
         </div>
       </div>
 
-      {/* Smart actions */}
+      {/* Smart actions — vary by kind */}
       <div className="flex flex-wrap items-center gap-2 border-t border-foreground/5 px-6 py-4">
-        <SmartAction icon={Reply} label="Draft reply" primary />
-        <SmartAction icon={Forward} label="Forward" />
-        <SmartAction icon={CheckCircle2} label="Mark resolved" />
-        <SmartAction icon={Paperclip} label="Attach context" />
+        {thread.kind === "Conversation" && (
+          <>
+            <SmartAction icon={Reply} label="Continue chat" primary />
+            <SmartAction icon={ListChecks} label="Convert to task" />
+            <SmartAction icon={CheckCircle2} label="Mark resolved" />
+          </>
+        )}
+        {thread.kind === "Task" && (
+          <>
+            <SmartAction icon={Play} label="Approve & run" primary />
+            <SmartAction icon={Clock} label="Snooze" />
+            <SmartAction icon={CheckCircle2} label="Mark done" />
+            <SmartAction icon={Paperclip} label="Attach context" />
+          </>
+        )}
+        {thread.kind === "Suggestion" && (
+          <>
+            <SmartAction icon={CheckCircle2} label="Act on it" primary />
+            <SmartAction icon={Clock} label="Remind me later" />
+            <SmartAction icon={Circle} label="Dismiss" />
+          </>
+        )}
+        {thread.kind === "Briefing" && (
+          <>
+            <SmartAction icon={ListChecks} label="Create tasks" primary />
+            <SmartAction icon={BookOpen} label="Open full brief" />
+            <SmartAction icon={CheckCircle2} label="Mark read" />
+          </>
+        )}
       </div>
 
       {/* Composer */}
@@ -386,7 +454,7 @@ function ThreadDetail({ thread }: { thread: Thread }) {
             <div className="ai-iridescent size-6 shrink-0 rounded-full ring-1 ring-foreground/5" aria-hidden />
             <input
               type="text"
-              placeholder="Ask Perpetuity to draft a reply…"
+              placeholder="Ask Perpetuity to take it further…"
               className="flex-1 bg-transparent text-sm placeholder:text-foreground/40 focus:outline-none"
             />
             <button className="inline-flex size-8 items-center justify-center rounded-xl bg-foreground text-background transition-transform hover:scale-105">
@@ -401,34 +469,72 @@ function ThreadDetail({ thread }: { thread: Thread }) {
 
 /* ---------- Bits ---------- */
 
-function Avatar({ name }: { name: string }) {
-  const initials = name
-    .split(" ")
-    .map((w) => w[0])
-    .slice(0, 2)
-    .join("");
+const kindMeta: Record<Kind, { icon: typeof MessageSquare; cls: string }> = {
+  Conversation: {
+    icon: MessageSquare,
+    cls: "text-sky-700/85 bg-sky-500/10 ring-sky-500/15 dark:text-sky-300",
+  },
+  Task: {
+    icon: ListChecks,
+    cls: "text-emerald-700/85 bg-emerald-500/10 ring-emerald-500/15 dark:text-emerald-300",
+  },
+  Suggestion: {
+    icon: Lightbulb,
+    cls: "text-amber-700/85 bg-amber-500/10 ring-amber-500/15 dark:text-amber-300",
+  },
+  Briefing: {
+    icon: BookOpen,
+    cls: "text-violet-700/85 bg-violet-500/10 ring-violet-500/15 dark:text-violet-300",
+  },
+};
+
+function KindBadge({ kind }: { kind: Kind }) {
+  const { icon: Icon, cls } = kindMeta[kind];
   return (
-    <div className="glass-panel-strong flex size-9 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold uppercase tracking-wider text-foreground/70">
-      {initials}
+    <div
+      className={`flex size-9 shrink-0 items-center justify-center rounded-full ring-1 ${cls}`}
+      title={kind}
+    >
+      <Icon className="size-4" strokeWidth={1.75} />
     </div>
   );
 }
 
-const tagStyles: Record<Thread["tag"], string> = {
+const tagStyles: Record<TagT, string> = {
   Payment: "text-rose-700/80 bg-rose-500/10 ring-rose-500/15 dark:text-rose-300/90",
   Treasury: "text-emerald-700/80 bg-emerald-500/10 ring-emerald-500/15 dark:text-emerald-300/90",
   Engineering: "text-sky-700/80 bg-sky-500/10 ring-sky-500/15 dark:text-sky-300/90",
   Compliance: "text-violet-700/80 bg-violet-500/10 ring-violet-500/15 dark:text-violet-300/90",
   Buyer: "text-amber-700/80 bg-amber-500/10 ring-amber-500/15 dark:text-amber-300/90",
   Trip: "text-teal-700/80 bg-teal-500/10 ring-teal-500/15 dark:text-teal-300/90",
+  Market: "text-indigo-700/80 bg-indigo-500/10 ring-indigo-500/15 dark:text-indigo-300/90",
+  Ops: "text-foreground/70 bg-foreground/5 ring-foreground/10",
 };
 
-function TagChip({ tag }: { tag: Thread["tag"] }) {
+function TagChip({ tag }: { tag: TagT }) {
   return (
     <span
       className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] ring-1 ${tagStyles[tag]}`}
     >
       {tag}
+    </span>
+  );
+}
+
+const statusStyles: Record<Status, string> = {
+  Open: "text-foreground/70 bg-foreground/5 ring-foreground/10",
+  "In progress": "text-sky-700/85 bg-sky-500/10 ring-sky-500/15 dark:text-sky-300",
+  Done: "text-emerald-700/85 bg-emerald-500/10 ring-emerald-500/15 dark:text-emerald-300",
+  Acted: "text-emerald-700/85 bg-emerald-500/10 ring-emerald-500/15 dark:text-emerald-300",
+  Dismissed: "text-foreground/45 bg-foreground/[0.04] ring-foreground/10",
+};
+
+function StatusChip({ status }: { status: Status }) {
+  return (
+    <span
+      className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] ring-1 ${statusStyles[status]}`}
+    >
+      {status}
     </span>
   );
 }
@@ -482,13 +588,15 @@ function SmartAction({
 function PriorityRow() {
   const items = [
     { icon: AlertOctagon, count: 3, label: "Urgent", tone: "rose" as const },
-    { icon: TrendingUp, count: 7, label: "Updates", tone: "emerald" as const },
-    { icon: CheckCircle2, count: 2, label: "Approvals", tone: "violet" as const },
+    { icon: ListChecks, count: 5, label: "Tasks open", tone: "emerald" as const },
+    { icon: Lightbulb, count: 4, label: "Suggestions", tone: "amber" as const },
+    { icon: TrendingUp, count: 7, label: "Updates", tone: "violet" as const },
     { icon: Plane, count: 1, label: "Trip", tone: "teal" as const },
   ];
   const tones: Record<string, string> = {
     rose: "text-rose-700/85 dark:text-rose-300",
     emerald: "text-emerald-700/85 dark:text-emerald-300",
+    amber: "text-amber-700/85 dark:text-amber-300",
     violet: "text-violet-700/85 dark:text-violet-300",
     teal: "text-teal-700/85 dark:text-teal-300",
   };
