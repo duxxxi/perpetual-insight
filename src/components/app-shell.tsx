@@ -173,3 +173,57 @@ export function AppFooter() {
     </footer>
   );
 }
+
+/* ---------- Shared page shell ---------- */
+import { useTheme } from "@/hooks/use-theme";
+
+export function PageShell({
+  active,
+  eyebrow,
+  title,
+  accentWord,
+  rightSlot,
+  children,
+}: {
+  active: SidebarKey;
+  eyebrow: string;
+  title: string;
+  accentWord?: string;
+  rightSlot?: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  useTheme();
+  return (
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
+      <AmbientBackground />
+      <CommodityTicker />
+      <div className="flex">
+        <AppSidebar active={active} />
+        <main className="flex-1 px-6 pt-10 pb-28 lg:pl-32 lg:pr-10">
+          <div className="mx-auto max-w-7xl animate-fade-in-up">
+            <header className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
+                  {eyebrow}
+                </p>
+                <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
+                  {accentWord ? (
+                    <>
+                      <span className="not-italic text-accent">{accentWord}</span>
+                      {title ? <span className="text-foreground/80"> · {title}</span> : null}
+                    </>
+                  ) : (
+                    title
+                  )}
+                </h1>
+              </div>
+              {rightSlot}
+            </header>
+            {children}
+          </div>
+        </main>
+      </div>
+      <AppFooter />
+    </div>
+  );
+}
