@@ -51,6 +51,7 @@ export const Route = createFileRoute("/")({
 
 function DashboardPage() {
   useTheme();
+  const userTasks = useUserTasks();
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
       <AmbientBackground />
