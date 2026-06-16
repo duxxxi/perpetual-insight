@@ -75,13 +75,22 @@ function DashboardPage() {
   useTheme();
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
-      {/* Ambient two-tone wash */}
+      {/* Ambient two-tone wash — light */}
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10"
+        className="pointer-events-none fixed inset-0 -z-10 dark:hidden"
         style={{
           background:
             "radial-gradient(60rem 40rem at 12% -10%, hsl(25 40% 80% / 0.25), transparent 60%), radial-gradient(50rem 35rem at 100% 110%, hsl(20 10% 12% / 0.06), transparent 60%)",
+        }}
+      />
+      {/* Ambient two-tone wash — dark */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 -z-10 hidden dark:block"
+        style={{
+          background:
+            "radial-gradient(60rem 40rem at 12% -10%, hsl(25 40% 55% / 0.12), transparent 60%), radial-gradient(50rem 35rem at 100% 110%, hsl(210 30% 40% / 0.10), transparent 60%)",
         }}
       />
 
