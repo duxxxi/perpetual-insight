@@ -580,11 +580,11 @@ function TickerRow() {
       {ticker.map((t, i) => (
         <span
           key={i}
-          className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] px-3 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-foreground/50 ring-1 ring-white/[0.04] backdrop-blur-sm"
+          className="inline-flex items-center gap-2 rounded-full bg-foreground/[0.04] px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-foreground/80 ring-1 ring-foreground/[0.06] backdrop-blur-sm"
         >
-          <span className="text-foreground/35">{t.sym}</span>
-          <span className="font-semibold text-foreground/85">{t.price}</span>
-          <span className={t.dir === "up" ? "text-emerald-400/80" : "text-rose-400/80"}>{t.chg}</span>
+          <span className="text-foreground/50">{t.sym}</span>
+          <span className="font-semibold text-foreground">{t.price}</span>
+          <span className={t.dir === "up" ? "text-emerald-600" : "text-rose-600"}>{t.chg}</span>
         </span>
       ))}
     </div>
