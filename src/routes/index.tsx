@@ -44,8 +44,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { useTheme } from "@/hooks/use-theme";
+import { AmbientBackground, CommodityTicker, AppSidebar, AppFooter } from "@/components/app-shell";
 
 
 export const Route = createFileRoute("/")({
