@@ -110,15 +110,15 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
   const items: { key: SidebarKey; icon: typeof Home; label: string; to: string }[] = [
     { key: "home", icon: Home, label: "Home", to: "/" },
     { key: "threads", icon: MessagesSquare, label: "Threads", to: "/threads" },
-    { key: "assignments", icon: ListChecks, label: "Assignments", to: "/" },
-    { key: "schedule", icon: Calendar, label: "Schedule", to: "/" },
-    { key: "outreach", icon: Send, label: "Outreach", to: "/" },
-    { key: "contacts", icon: Users, label: "Contacts", to: "/" },
-    { key: "documents", icon: FileText, label: "Documents", to: "/" },
-    { key: "opportunities", icon: Compass, label: "Opportunities", to: "/" },
-    { key: "markets", icon: LineChart, label: "Markets", to: "/" },
-    { key: "connections", icon: Plug, label: "Connections", to: "/" },
-    { key: "settings", icon: Settings, label: "Settings", to: "/" },
+    { key: "assignments", icon: ListChecks, label: "Assignments", to: "/assignments" },
+    { key: "schedule", icon: Calendar, label: "Schedule", to: "/schedule" },
+    { key: "outreach", icon: Send, label: "Outreach", to: "/outreach" },
+    { key: "contacts", icon: Users, label: "Contacts", to: "/contacts" },
+    { key: "documents", icon: FileText, label: "Documents", to: "/documents" },
+    { key: "opportunities", icon: Compass, label: "Opportunities", to: "/opportunities" },
+    { key: "markets", icon: LineChart, label: "Markets", to: "/markets" },
+    { key: "connections", icon: Plug, label: "Connections", to: "/connections" },
+    { key: "settings", icon: Settings, label: "Settings", to: "/settings" },
   ];
   return (
     <nav className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
