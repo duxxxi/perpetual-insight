@@ -647,7 +647,6 @@ function Sidebar() {
       </div>
     </>
   );
-  );
 }
 
 function SectionLabel({
