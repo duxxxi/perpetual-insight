@@ -44,6 +44,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { useTheme } from "@/hooks/use-theme";
 
 
 export const Route = createFileRoute("/")({
@@ -70,6 +72,7 @@ const ticker = [
 ];
 
 function DashboardPage() {
+  useTheme();
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
       {/* Ambient two-tone wash */}
@@ -626,6 +629,9 @@ function Sidebar() {
         ))}
         <div className="mt-2 flex size-10 items-center justify-center rounded-full text-foreground/45 hover:text-foreground">
           <Bell className="size-[18px]" strokeWidth={1.5} />
+        </div>
+        <div className="mt-1.5 flex w-full justify-center">
+          <ThemeToggle />
         </div>
       </div>
     </nav>
