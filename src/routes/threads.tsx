@@ -315,15 +315,20 @@ function ThreadsPage() {
                               <p className="mt-1 line-clamp-1 text-[12px] leading-relaxed text-foreground/50">
                                 {t.preview}
                               </p>
-                              <div className="mt-2 flex items-center gap-1.5">
-                                <TagChip tag={t.tag} />
-                                <StatusChip status={t.status} />
-                                {t.priority === "urgent" && <Pill tone="rose">Urgent</Pill>}
-                                {t.priority === "watch" && <Pill tone="amber">Watch</Pill>}
-                                {t.starred && (
-                                  <Star className="size-3 fill-accent text-accent" strokeWidth={1.5} />
-                                )}
-                                <span className="ml-auto text-[10px] uppercase tracking-[0.18em] text-foreground/35">
+                              <div className="mt-2 flex items-center gap-2">
+                                <div
+                                  className="flex min-w-0 flex-1 items-center gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <TagChip tag={t.tag} />
+                                  <StatusChip status={t.status} />
+                                  {t.priority === "urgent" && <Pill tone="rose">Urgent</Pill>}
+                                  {t.priority === "watch" && <Pill tone="amber">Watch</Pill>}
+                                  {t.starred && (
+                                    <Star className="size-3 shrink-0 fill-accent text-accent" strokeWidth={1.5} />
+                                  )}
+                                </div>
+                                <span className="shrink-0 text-[10px] uppercase tracking-[0.18em] text-foreground/35">
                                   {t.kind}
                                 </span>
                               </div>
