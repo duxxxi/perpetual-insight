@@ -83,13 +83,29 @@ function BrandLogo({ domain, name, brand }: { domain: string; name: string; bran
   const [err, setErr] = useState(false);
 
   if (domain === "__email") {
-    return <Mail className="size-4" strokeWidth={1.75} />;
+    return <Mail className="size-[18px]" strokeWidth={1.75} />;
   }
+
+  const iconMap: Record<string, string> = {
+    "google.com": "google",
+    "microsoft.com": "microsoft",
+    "outlook.com": "microsoftoutlook",
+    "telegram.org": "telegram",
+    "whatsapp.com": "whatsapp",
+    "slack.com": "slack",
+    "hubspot.com": "hubspot",
+    "salesforce.com": "salesforce",
+    "pipedrive.com": "pipedrive",
+    "calendly.com": "calendly",
+    "xero.com": "xero",
+    "stripe.com": "stripe",
+    "notion.so": "notion",
+  };
 
   const slug = iconMap[domain];
   if (!slug || err) {
     return (
-      <span className="text-[10px] font-bold uppercase" style={{ color: `hsl(${brand})` }}>
+      <span className="text-[11px] font-bold uppercase" style={{ color: `hsl(${brand})` }}>
         {name.charAt(0)}
       </span>
     );
@@ -100,7 +116,7 @@ function BrandLogo({ domain, name, brand }: { domain: string; name: string; bran
       src={`https://cdn.simpleicons.org/${slug}`}
       alt={`${name} logo`}
       loading="lazy"
-      className="size-4 object-contain"
+      className="size-[18px] object-contain"
       onError={() => setErr(true)}
     />
   );
