@@ -117,35 +117,74 @@ function DashboardPage() {
 
 
 
-            {/* Trip card */}
-            <div className="glass-panel group mb-10 flex flex-col items-start justify-between gap-4 rounded-3xl p-6 md:flex-row md:items-center">
-              <div className="flex items-start gap-4">
-                <div className="glass-panel-strong flex size-11 items-center justify-center rounded-2xl">
-                  <Plane className="size-4 text-accent" />
+            {/* Trip card — compact */}
+            <div className="glass-panel group mb-8 flex items-center justify-between gap-4 rounded-2xl px-4 py-3">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="glass-panel-strong flex size-9 items-center justify-center rounded-xl">
+                  <Plane className="size-3.5 text-accent" />
                 </div>
-                <div>
-                  <div className="flex items-center gap-3">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
                     <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
                       Bratislava — 13 days
                     </span>
                     <span className="text-[10px] font-mono text-foreground/30">JUN 19 → 20</span>
                   </div>
-                  <p className="mt-1 font-serif text-xl italic">
-                    Upcoming trip: Bratislava → Yerevan → Bratislava
-                  </p>
-                  <p className="mt-1 text-xs text-foreground/50">
-                    W6 4761 · Skopje 04:30 → Bratislava · You have booked flights SKP–BRA.
+                  <p className="mt-0.5 font-serif text-sm italic truncate">
+                    Bratislava → Yerevan → Bratislava
                   </p>
                 </div>
               </div>
-              <button className="glass-panel-strong inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium transition-colors hover:text-accent">
+              <button className="glass-panel-strong inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors hover:text-accent">
                 Prepare briefing
-                <ArrowUpRight className="size-3.5" />
+                <ArrowUpRight className="size-3" />
               </button>
             </div>
 
             {/* Ask Perpetuity */}
             <AskPerpetuity />
+
+            {/* Status pills row — under chatbox */}
+            <div className="mb-10 -mt-10 flex flex-wrap items-center gap-2">
+              <StatusPill
+                icon={AlertOctagon}
+                gradient="from-rose-500 to-red-600"
+                count="3"
+                label="Urgent"
+                items={[
+                  { title: "Stripe payment failed ($8.00)", sub: "Recurring charge — acct_1ika5ja3kz32dpo1" },
+                  { title: "Railway build failure", sub: "@export-analytica/web — 19:38 UTC" },
+                  { title: "EU timber restrictions — CIS", sub: "3 suppliers affected" },
+                ]}
+              />
+              <StatusPill
+                icon={TrendingUp}
+                gradient="from-emerald-400 to-teal-600"
+                count="7"
+                label="Updates"
+                items={[
+                  { title: "Brent crude −2.94% to $87.33", sub: "Monitor freight surcharges" },
+                  { title: "EUR/USD at 1.1567", sub: "USD invoicing advantage" },
+                  { title: "Gold +3.45% to $4,385", sub: "Hedging window opening" },
+                  { title: "Bybit USDC withdrawal confirmed", sub: "4.89 USDC on-chain" },
+                  { title: "New buyer reply: EuroMach", sub: "Wants Q3 quote on 40t order" },
+                  { title: "Yerevan hotel — pending confirmation", sub: "Reply expected today" },
+                  { title: "REACH compliance check passed", sub: "Automated · 16:30" },
+                ]}
+              />
+              <StatusPill
+                icon={CheckCircle2}
+                gradient="from-violet-400 to-indigo-600"
+                count="2"
+                label="Approvals"
+                items={[
+                  { title: "Draft notice: EU timber restrictions", sub: "Ready for your approval" },
+                  { title: "Q3 pricing update — LATAM", sub: "+4.2% on softwood SKUs" },
+                ]}
+              />
+              <TripPill />
+            </div>
+
 
             {/* Two-column workspace */}
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
