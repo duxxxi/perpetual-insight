@@ -172,12 +172,8 @@ function NewChatButton() {
       <DialogTrigger asChild>
         <button
           title="New thread"
-          className="group relative mt-2 flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-[hsl(160_80%_45%)] to-[hsl(200_95%_52%)] text-white ring-1 ring-white/30 shadow-[0_0_22px_-4px_hsl(170_85%_50%/0.65)] transition-transform hover:scale-105 active:scale-95"
+          className="group relative mt-2 flex size-10 items-center justify-center rounded-full bg-[hsl(200_55%_55%)] text-white ring-1 ring-white/20 shadow-[0_4px_14px_-6px_hsl(200_55%_45%/0.55)] transition-transform hover:scale-105 hover:bg-[hsl(200_60%_50%)] active:scale-95"
         >
-          <span
-            aria-hidden
-            className="absolute inset-0 rounded-full bg-gradient-to-br from-white/30 to-transparent opacity-70"
-          />
           <Plus className="relative size-[18px]" strokeWidth={2.25} />
           <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
             New thread
