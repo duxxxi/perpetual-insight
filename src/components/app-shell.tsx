@@ -201,7 +201,7 @@ function NewChatButton() {
               />
               <button
                 onClick={() => setOpen(false)}
-                className="inline-flex size-9 items-center justify-center rounded-2xl bg-gradient-to-br from-[hsl(160_80%_45%)] to-[hsl(200_95%_52%)] text-white shadow-[0_0_18px_-4px_hsl(170_85%_50%/0.6)] transition-transform hover:scale-105"
+                className="inline-flex size-9 items-center justify-center rounded-2xl bg-[hsl(200_55%_55%)] text-white shadow-[0_4px_14px_-6px_hsl(200_55%_45%/0.55)] transition-transform hover:scale-105 hover:bg-[hsl(200_60%_50%)]"
               >
                 <ArrowUp className="size-4" />
               </button>
