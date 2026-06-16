@@ -60,21 +60,21 @@ function DashboardPage() {
         <AppSidebar active="home" />
 
 
-        <main className="flex-1 px-8 pt-14 pb-32 lg:pl-32 lg:pr-12 xl:pr-16">
+        <main className="flex-1 px-6 pt-8 pb-24 lg:pl-28 lg:pr-10 xl:pr-12">
           <div className="mx-auto max-w-6xl animate-fade-in-up">
             {/* Header */}
-            <header className="mb-8">
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
+            <header className="mb-5">
+              <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
                 MONDAY, 15 JUNE
               </p>
-              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                 <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
                   Good afternoon,{" "}
-                  <span className="not-italic text-accent">Perpetuity</span>
+                  <span className="not-italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">Perpetuity</span>
                 </h1>
                 <MorningBriefPill />
               </div>
-              <p className="mt-4 max-w-2xl text-pretty text-sm leading-relaxed text-foreground/60 md:text-base">
+              <p className="mt-3 max-w-2xl text-pretty text-sm leading-relaxed text-foreground/60">
                 You have critical payment and deployment issues requiring action today,
                 plus a multi-country trip starting in five days that needs final logistics review.
               </p>

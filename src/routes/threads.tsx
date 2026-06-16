@@ -219,16 +219,16 @@ function ThreadsPage() {
       <div className="flex">
         <AppSidebar active="threads" />
 
-        <main className="flex-1 px-6 pt-10 pb-28 lg:pl-32 lg:pr-10">
+        <main className="flex-1 px-6 pt-8 pb-24 lg:pl-28 lg:pr-10">
           <div className="mx-auto max-w-7xl animate-fade-in-up">
             {/* Header */}
-            <header className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <header className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
                   Activity log · 142 threads · 9 open
                 </p>
                 <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
-                  <span className="not-italic text-accent">Threads</span>
+                  <span className="not-italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">Threads</span>
                 </h1>
                 <p className="mt-1 text-[12px] text-foreground/55">
                   Every conversation, task, and suggestion Perpetuity has handled with you.

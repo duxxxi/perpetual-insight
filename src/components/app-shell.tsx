@@ -129,11 +129,11 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
     { key: "settings", icon: Settings, label: "Settings", to: "/settings" },
   ];
   return (
-    <nav className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
-      <div className="glass-panel-strong flex flex-col items-center gap-1 rounded-full px-2 py-4">
+    <nav className="fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
+      <div className="glass-panel-strong flex flex-col items-center gap-0.5 rounded-full px-1.5 py-3">
         <Link
           to="/"
-          className="mb-2 flex size-10 items-center justify-center rounded-full bg-foreground font-serif text-sm italic text-background"
+          className="mb-1.5 flex size-9 items-center justify-center rounded-full bg-foreground font-serif text-sm italic text-background"
         >
           P
         </Link>
@@ -144,13 +144,13 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
               key={it.key}
               to={it.to}
               title={it.label}
-              className={`group relative flex size-10 items-center justify-center rounded-full transition-colors ${
+              className={`group relative flex size-9 items-center justify-center rounded-full transition-colors ${
                 isActive
                   ? "bg-gradient-to-br from-accent/25 to-accent/5 text-accent ring-1 ring-accent/25 shadow-[0_0_18px_-6px_hsl(25_70%_55%/0.45)]"
                   : "text-foreground/45 hover:bg-foreground/5 hover:text-foreground"
               }`}
             >
-              <it.icon className="size-[18px]" strokeWidth={1.5} />
+              <it.icon className="size-[16px]" strokeWidth={1.5} />
               <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
                 {it.label}
               </span>
@@ -183,9 +183,9 @@ function AskPerpetuityButton() {
         type="button"
         title="New conversation"
         onClick={() => setOpen(true)}
-        className="group relative mt-2 flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-sky-400/30 to-sky-500/10 text-sky-500 ring-1 ring-sky-400/30 shadow-[0_0_18px_-6px_hsl(210_90%_60%/0.55)] transition-all hover:from-sky-400/40 hover:to-sky-500/15 hover:shadow-[0_0_22px_-4px_hsl(210_90%_60%/0.7)] dark:text-sky-300"
+        className="group relative mt-1.5 flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-sky-400/30 to-sky-500/10 text-sky-500 ring-1 ring-sky-400/30 shadow-[0_0_18px_-6px_hsl(210_90%_60%/0.55)] transition-all hover:from-sky-400/40 hover:to-sky-500/15 hover:shadow-[0_0_22px_-4px_hsl(210_90%_60%/0.7)] dark:text-sky-300"
       >
-        <Plus className="size-[18px]" strokeWidth={2} />
+        <Plus className="size-[16px]" strokeWidth={2} />
         <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
           New
         </span>
@@ -280,9 +280,9 @@ export function PageShell({
       <CommodityTicker />
       <div className="flex">
         <AppSidebar active={active} />
-        <main className="flex-1 px-6 pt-10 pb-28 lg:pl-32 lg:pr-10">
+        <main className="flex-1 px-6 pt-8 pb-24 lg:pl-28 lg:pr-10">
           <div className="mx-auto max-w-7xl animate-fade-in-up">
-            <header className="relative mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <header className="relative mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div
                 aria-hidden
                 className="pointer-events-none absolute -left-10 -top-10 size-48 rounded-full opacity-60 blur-3xl"
