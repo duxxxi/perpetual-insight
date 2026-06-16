@@ -162,12 +162,12 @@
 .ai-iridescent {
   background: linear-gradient(
     115deg,
-    hsl(22 95% 60% / 0.55),
-    hsl(205 100% 60% / 0.5),
-    hsl(280 80% 65% / 0.45),
-    hsl(160 80% 50% / 0.45),
-    hsl(22 95% 60% / 0.55)
+    hsl(220 12% 70% / 0.28),
+    hsl(220 8% 92% / 0.22),
+    hsl(220 14% 55% / 0.28),
+    hsl(220 8% 88% / 0.22),
+    hsl(220 12% 70% / 0.28)
   );
   background-size: 300% 300%;
-  animation: iridescent-shift 6s ease-in-out infinite;
+  animation: iridescent-shift 12s ease-in-out infinite;
 }
