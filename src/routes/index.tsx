@@ -13,6 +13,8 @@ import {
   Settings,
   Bell,
   Plus,
+  X,
+
   Shield,
   ArrowUp,
   ArrowUpRight,
@@ -101,20 +103,63 @@ function DashboardPage() {
               <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
                 MONDAY, 15 JUNE
               </p>
-              <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-                <h1 className="font-serif text-5xl italic tracking-tight md:text-6xl">
-                  Good afternoon, <span className="not-italic">Perpetuity</span>
+              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
+                  Good afternoon,{" "}
+                  <span className="not-italic text-accent">Perpetuity</span>
                 </h1>
                 <MorningBriefPill />
               </div>
-              <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-foreground/60 md:text-lg">
+              <p className="mt-4 max-w-2xl text-pretty text-sm leading-relaxed text-foreground/60 md:text-base">
                 You have critical payment and deployment issues requiring action today,
                 plus a multi-country trip starting in five days that needs final logistics review.
               </p>
             </header>
 
-            {/* Status pills row */}
-            <div className="mb-10 flex flex-wrap gap-2">
+
+
+
+            {/* Trip card — compact */}
+            <div className="glass-panel group mb-8 flex items-center justify-between gap-4 rounded-2xl px-4 py-3">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="glass-panel-strong flex size-9 items-center justify-center rounded-xl">
+                  <Plane className="size-3.5 text-accent" />
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+                      Bratislava — 13 days
+                    </span>
+                    <span className="text-[10px] font-mono text-foreground/30">JUN 19 → 20</span>
+                  </div>
+                  <p className="mt-0.5 font-serif text-sm italic truncate">
+                    Bratislava → Yerevan → Bratislava
+                  </p>
+                </div>
+              </div>
+              <ActionDialog
+                title="Prepare Bratislava briefing"
+                kicker="Trip · Jun 19 → 20"
+                body="Compile flight, hotel, buyer notes, and market context into a single briefing pack."
+                actions={[
+                  { label: "Generate briefing", primary: true },
+                  { label: "Later" },
+                ]}
+                trigger={
+                  <button className="glass-panel-strong inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors hover:text-accent">
+                    Prepare briefing
+                    <ArrowUpRight className="size-3" />
+                  </button>
+                }
+              />
+
+            </div>
+
+            {/* Ask Perpetuity */}
+            <AskPerpetuity />
+
+            {/* Status pills row — under chatbox */}
+            <div className="mb-10 -mt-10 flex flex-wrap items-center gap-2">
               <StatusPill
                 icon={AlertOctagon}
                 gradient="from-rose-500 to-red-600"
@@ -154,37 +199,6 @@ function DashboardPage() {
               <TripPill />
             </div>
 
-
-
-            {/* Trip card */}
-            <div className="glass-panel group mb-10 flex flex-col items-start justify-between gap-4 rounded-3xl p-6 md:flex-row md:items-center">
-              <div className="flex items-start gap-4">
-                <div className="glass-panel-strong flex size-11 items-center justify-center rounded-2xl">
-                  <Plane className="size-4 text-accent" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
-                      Bratislava — 13 days
-                    </span>
-                    <span className="text-[10px] font-mono text-foreground/30">JUN 19 → 20</span>
-                  </div>
-                  <p className="mt-1 font-serif text-xl italic">
-                    Upcoming trip: Bratislava → Yerevan → Bratislava
-                  </p>
-                  <p className="mt-1 text-xs text-foreground/50">
-                    W6 4761 · Skopje 04:30 → Bratislava · You have booked flights SKP–BRA.
-                  </p>
-                </div>
-              </div>
-              <button className="glass-panel-strong inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium transition-colors hover:text-accent">
-                Prepare briefing
-                <ArrowUpRight className="size-3.5" />
-              </button>
-            </div>
-
-            {/* Ask Perpetuity */}
-            <AskPerpetuity />
 
             {/* Two-column workspace */}
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
@@ -435,14 +449,14 @@ function StatusPill({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="glass-panel group inline-flex items-center gap-2 rounded-full py-1.5 pl-1.5 pr-3.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
+        <button className="glass-panel group inline-flex h-8 items-center gap-2 rounded-full pl-1 pr-3 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
           <span
-            className={`flex size-7 items-center justify-center rounded-full bg-gradient-to-br ${gradient} text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20`}
+            className={`flex size-6 items-center justify-center rounded-full bg-gradient-to-br ${gradient} text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20`}
           >
-            <Icon className="size-3.5" strokeWidth={2.5} />
+            <Icon className="size-3" strokeWidth={2.5} />
           </span>
-          <span className="font-mono text-[13px] font-semibold tabular-nums">{count}</span>
-          <span className="text-[13px] text-foreground/70">{label}</span>
+          <span className="font-mono text-[12px] font-semibold tabular-nums">{count}</span>
+          <span className="text-[12px] text-foreground/70">{label}</span>
         </button>
       </DialogTrigger>
       <PillDialogContent title={label} count={count} gradient={gradient} Icon={Icon} items={items} />
@@ -460,18 +474,19 @@ function TripPill() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="glass-panel group inline-flex items-center gap-2 rounded-full py-1.5 pl-1.5 pr-3.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
-          <span className="flex size-7 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20">
-            <Plane className="size-3.5" strokeWidth={2.5} />
+        <button className="glass-panel group inline-flex h-8 items-center gap-2 rounded-full pl-1 pr-3 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
+          <span className="flex size-6 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20">
+            <Plane className="size-3" strokeWidth={2.5} />
           </span>
-          <span className="text-[13px] font-medium">Bratislava</span>
-          <span className="text-[11px] text-foreground/50">· 5 days</span>
+          <span className="font-mono text-[12px] font-semibold tabular-nums">5d</span>
+          <span className="text-[12px] text-foreground/70">Bratislava</span>
         </button>
       </DialogTrigger>
       <PillDialogContent title="Trip to Bratislava" count="5d" gradient="from-amber-400 to-orange-600" Icon={Plane} items={items} />
     </Dialog>
   );
 }
+
 
 function PillDialogContent({
   title,
@@ -522,18 +537,30 @@ function PillDialogContent({
 
 function MorningBriefPill() {
   return (
-    <button className="group relative inline-flex shrink-0 items-center gap-2.5 self-start rounded-full md:self-end">
-      <span className="ai-iridescent absolute -inset-px rounded-full opacity-60 blur-[2px] transition-opacity group-hover:opacity-90" aria-hidden />
-      <span className="glass-panel-strong relative inline-flex items-center gap-2.5 rounded-full py-1.5 pl-1.5 pr-4">
-        <span className="ai-iridescent flex size-7 items-center justify-center rounded-full ring-1 ring-foreground/5">
-          <Sparkles className="size-3.5 text-foreground/80" />
-        </span>
-        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Morning Brief</span>
-        <ArrowUpRight className="size-3.5 text-foreground/40 transition-colors group-hover:text-foreground" />
-      </span>
-    </button>
+    <ActionDialog
+      title="Your Morning Brief"
+      kicker="Monday, 15 June"
+      body="3 urgent items, 7 updates, and 2 approvals are waiting. Open the brief for a guided walkthrough."
+      actions={[
+        { label: "Open brief", primary: true },
+        { label: "Read later" },
+      ]}
+      trigger={
+        <button className="group relative inline-flex shrink-0 items-center gap-2.5 self-start rounded-full md:self-end">
+          <span className="ai-iridescent absolute -inset-px rounded-full opacity-60 blur-[2px] transition-opacity group-hover:opacity-90" aria-hidden />
+          <span className="glass-panel-strong relative inline-flex items-center gap-2.5 rounded-full py-1.5 pl-1.5 pr-4">
+            <span className="ai-iridescent flex size-7 items-center justify-center rounded-full ring-1 ring-foreground/5">
+              <Sparkles className="size-3.5 text-foreground/80" />
+            </span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Morning Brief</span>
+            <ArrowUpRight className="size-3.5 text-foreground/40 transition-colors group-hover:text-foreground" />
+          </span>
+        </button>
+      }
+    />
   );
 }
+
 
 
 function TickerRow() {
@@ -628,6 +655,13 @@ function SectionLabel({
   );
 }
 
+const tagTones: Record<string, string> = {
+  Payment: "text-rose-700/80",
+  Engineering: "text-blue-700/80",
+  Treasury: "text-amber-700/80",
+  Compliance: "text-violet-700/80",
+};
+
 function WorkCard({
   tag,
   title,
@@ -642,6 +676,7 @@ function WorkCard({
   urgent?: boolean;
 }) {
   const [done, setDone] = useState(false);
+
   return (
     <article
       className={`relative rounded-3xl p-5 transition-all ${
@@ -666,7 +701,7 @@ function WorkCard({
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-accent">{tag}</span>
+              <span className={`text-[10px] font-bold uppercase tracking-[0.18em] ${tagTones[tag] ?? "text-accent"}`}>{tag}</span>
               {urgent && (
                 <span className="inline-flex items-center gap-1 rounded-full bg-destructive/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-destructive">
                   <CircleDot className="size-2" /> Urgent
@@ -682,19 +717,78 @@ function WorkCard({
           {actions && actions.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-2">
               {actions.map((a) => (
-                <button
+                <ActionDialog
                   key={a.label}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-foreground/10 bg-background/40 px-3 py-1.5 text-[11px] font-medium text-foreground/75 transition-colors hover:border-foreground/20 hover:bg-foreground hover:text-background"
-                >
-                  <a.icon className="size-3" />
-                  {a.label}
-                </button>
+                  title={a.label}
+                  kicker={tag}
+                  body={`${a.label} for: ${title}`}
+                  trigger={
+                    <button className="inline-flex items-center gap-1.5 rounded-full border border-foreground/10 bg-background/40 px-3 py-1.5 text-[11px] font-medium text-foreground/75 transition-colors hover:border-foreground/20 hover:bg-foreground hover:text-background">
+                      <a.icon className="size-3" />
+                      {a.label}
+                    </button>
+                  }
+                />
               ))}
             </div>
           )}
+
         </div>
       </div>
     </article>
+  );
+}
+
+function ActionDialog({
+  trigger,
+  title,
+  kicker,
+  body,
+  actions,
+}: {
+  trigger: React.ReactNode;
+  title: string;
+  kicker?: string;
+  body?: string;
+  actions?: { label: string; primary?: boolean }[];
+}) {
+  const acts = actions ?? [
+    { label: "Take action", primary: true },
+    { label: "Dismiss" },
+  ];
+  return (
+    <Dialog>
+      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      <DialogContent className="glass-panel-strong max-w-md rounded-3xl border-foreground/10 bg-background/85 p-0 backdrop-blur-2xl">
+        <DialogHeader className="space-y-1 border-b border-foreground/5 px-5 py-4 text-left">
+          {kicker && (
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/45">
+              {kicker}
+            </p>
+          )}
+          <DialogTitle className="font-serif text-xl italic">{title}</DialogTitle>
+        </DialogHeader>
+        {body && (
+          <div className="px-5 py-4">
+            <p className="text-sm leading-relaxed text-foreground/70">{body}</p>
+          </div>
+        )}
+        <div className="flex items-center justify-end gap-2 border-t border-foreground/5 px-4 py-3">
+          {acts.map((a) => (
+            <button
+              key={a.label}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                a.primary
+                  ? "bg-foreground text-background hover:opacity-90"
+                  : "text-foreground/60 hover:bg-foreground/5 hover:text-foreground"
+              }`}
+            >
+              {a.label}
+            </button>
+          ))}
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
 
@@ -710,16 +804,23 @@ function IntelItem({
   hot?: boolean;
 }) {
   return (
-    <div className="group cursor-pointer py-1">
-      <div className="mb-1.5 flex items-center justify-between">
-        <span className="font-mono text-[10px] text-foreground/35">{time}</span>
-        {hot && <span className="size-1.5 rounded-full bg-accent" />}
-      </div>
-      <p className="text-sm font-medium leading-snug text-foreground group-hover:text-accent">
-        {title}
-      </p>
-      <p className="mt-1 text-xs leading-relaxed text-foreground/50">{body}</p>
-    </div>
+    <ActionDialog
+      kicker={time}
+      title={title}
+      body={body}
+      trigger={
+        <button className="group block w-full cursor-pointer py-1 text-left">
+          <div className="mb-1.5 flex items-center justify-between">
+            <span className="font-mono text-[10px] text-foreground/35">{time}</span>
+            {hot && <span className="size-1.5 rounded-full bg-accent" />}
+          </div>
+          <p className="text-sm font-medium leading-snug text-foreground group-hover:text-accent">
+            {title}
+          </p>
+          <p className="mt-1 text-xs leading-relaxed text-foreground/50">{body}</p>
+        </button>
+      }
+    />
   );
 }
 
@@ -729,12 +830,40 @@ function Divider() {
 
 function SuggestedItem({ title, body }: { title: string; body: string }) {
   return (
-    <button className="group block w-full rounded-2xl border border-dashed border-foreground/10 bg-transparent p-4 text-left transition-colors hover:border-foreground/20 hover:bg-[var(--glass-surface)]">
-      <p className="text-sm leading-snug text-foreground/75 group-hover:text-foreground">{title}</p>
-      <p className="mt-1 text-xs leading-relaxed text-foreground/45">{body}</p>
-    </button>
+    <div className="group relative w-full rounded-2xl border border-dashed border-foreground/10 bg-transparent p-4 transition-colors hover:border-foreground/20 hover:bg-[var(--glass-surface)]">
+      <ActionDialog
+        title={title}
+        kicker="Suggested"
+        body={body}
+        actions={[
+          { label: "Add as task", primary: true },
+          { label: "Dismiss" },
+        ]}
+        trigger={
+          <button className="block w-full pr-16 text-left">
+            <p className="text-sm leading-snug text-foreground/75 group-hover:text-foreground">{title}</p>
+            <p className="mt-1 text-xs leading-relaxed text-foreground/45">{body}</p>
+          </button>
+        }
+      />
+      <div className="absolute right-3 top-3 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+        <button
+          aria-label="Add as task"
+          className="inline-flex size-6 items-center justify-center rounded-full bg-foreground/5 text-foreground/60 hover:bg-foreground hover:text-background"
+        >
+          <Plus className="size-3" strokeWidth={2.5} />
+        </button>
+        <button
+          aria-label="Dismiss"
+          className="inline-flex size-6 items-center justify-center rounded-full bg-foreground/5 text-foreground/60 hover:bg-destructive/10 hover:text-destructive"
+        >
+          <X className="size-3" strokeWidth={2.5} />
+        </button>
+      </div>
+    </div>
   );
 }
+
 
 function ScheduleRow({
   time,
