@@ -73,7 +73,7 @@ function AssignmentsPage() {
   return (
     <PageShell
       active="assignments"
-      eyebrow={`${tasks.filter((t) => t.status !== "done").length} open · 2 urgent`}
+      eyebrow={`${allTasks.filter((t) => t.status !== "done").length} open · 2 urgent`}
       title="that move the trade forward"
       accentWord="Assignments"
       rightSlot={
