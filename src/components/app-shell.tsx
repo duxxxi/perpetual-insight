@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { useState } from "react";
 import {
   Home,
   MessagesSquare,
@@ -11,9 +12,16 @@ import {
   LineChart,
   Plug,
   Settings,
-  Bell,
+  Plus,
+  ArrowUp,
+  Sparkles,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 /* ---------- Ambient background wash ---------- */
 export function AmbientBackground() {
@@ -125,7 +133,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
       <div className="glass-panel-strong flex flex-col items-center gap-1 rounded-full px-2 py-4">
         <Link
           to="/"
-          className="mb-2 flex size-10 items-center justify-center rounded-full bg-foreground font-serif text-sm italic text-background"
+          className="mb-2 flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-accent via-[hsl(22_92%_55%)] to-accent-2 font-serif text-sm italic text-white shadow-[0_0_22px_-6px_hsl(22_92%_55%/0.7)] ring-1 ring-white/20"
         >
           P
         </Link>
@@ -149,13 +157,69 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
             </Link>
           );
         })}
-        <div className="mt-2 flex size-10 items-center justify-center rounded-full text-foreground/45 hover:text-foreground">
-          <Bell className="size-[18px]" strokeWidth={1.5} />
-        </div>
+        <NewChatButton />
       </div>
     </nav>
   );
 }
+
+/* ---------- New chat (replaces bell) ---------- */
+function NewChatButton() {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <button
+          title="New thread"
+          className="group relative mt-2 flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-[hsl(160_80%_45%)] to-[hsl(200_95%_52%)] text-white ring-1 ring-white/30 shadow-[0_0_22px_-4px_hsl(170_85%_50%/0.65)] transition-transform hover:scale-105 active:scale-95"
+        >
+          <span
+            aria-hidden
+            className="absolute inset-0 rounded-full bg-gradient-to-br from-white/30 to-transparent opacity-70"
+          />
+          <Plus className="relative size-[18px]" strokeWidth={2.25} />
+          <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
+            New thread
+          </span>
+        </button>
+      </DialogTrigger>
+      <DialogContent className="border-0 bg-transparent p-0 shadow-none sm:max-w-2xl">
+        <div className="relative">
+          <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-80 blur-[3px]" aria-hidden />
+          <div className="glass-panel-strong relative rounded-3xl p-5">
+            <div className="mb-3 flex items-center gap-2">
+              <Sparkles className="size-3.5 text-accent-2" />
+              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-foreground/55">
+                New thread · Ask Perpetuity
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="ai-iridescent size-7 rounded-full ring-1 ring-foreground/5" aria-hidden />
+              <input
+                autoFocus
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                placeholder="Start a new conversation…"
+                className="flex-1 bg-transparent text-sm font-medium placeholder:text-foreground/40 focus:outline-none"
+              />
+              <button
+                onClick={() => setOpen(false)}
+                className="inline-flex size-9 items-center justify-center rounded-2xl bg-gradient-to-br from-[hsl(160_80%_45%)] to-[hsl(200_95%_52%)] text-white shadow-[0_0_18px_-4px_hsl(170_85%_50%/0.6)] transition-transform hover:scale-105"
+              >
+                <ArrowUp className="size-4" />
+              </button>
+            </div>
+            <p className="mt-4 border-t border-foreground/5 pt-3 text-[11px] text-foreground/50">
+              This will start a new thread in your activity database.
+            </p>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 
 /* ---------- Footer ---------- */
 export function AppFooter() {
@@ -218,7 +282,7 @@ export function PageShell({
                 <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
                   {accentWord ? (
                     <>
-                      <span className="not-italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">
+                      <span className="not-italic bg-gradient-to-br from-accent via-[hsl(22_92%_55%)] to-accent-2 bg-clip-text text-transparent">
                         {accentWord}
                       </span>
                       {title ? <span className="text-foreground/80"> · {title}</span> : null}
