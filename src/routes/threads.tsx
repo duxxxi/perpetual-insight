@@ -219,7 +219,7 @@ function ThreadsPage() {
       <div className="flex">
         <AppSidebar active="threads" />
 
-        <main className="flex-1 px-6 pt-8 pb-24 lg:pl-28 lg:pr-10">
+        <main className="flex-1 px-5 pt-6 pb-20 lg:pl-24 lg:pr-8">
           <div className="mx-auto max-w-7xl animate-fade-in-up">
             {/* Header */}
             <header className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
