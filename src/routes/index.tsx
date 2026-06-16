@@ -137,10 +137,22 @@ function DashboardPage() {
                   </p>
                 </div>
               </div>
-              <button className="glass-panel-strong inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors hover:text-accent">
-                Prepare briefing
-                <ArrowUpRight className="size-3" />
-              </button>
+              <ActionDialog
+                title="Prepare Bratislava briefing"
+                kicker="Trip · Jun 19 → 20"
+                body="Compile flight, hotel, buyer notes, and market context into a single briefing pack."
+                actions={[
+                  { label: "Generate briefing", primary: true },
+                  { label: "Later" },
+                ]}
+                trigger={
+                  <button className="glass-panel-strong inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors hover:text-accent">
+                    Prepare briefing
+                    <ArrowUpRight className="size-3" />
+                  </button>
+                }
+              />
+
             </div>
 
             {/* Ask Perpetuity */}
