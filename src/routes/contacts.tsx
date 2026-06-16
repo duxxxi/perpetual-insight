@@ -54,7 +54,7 @@ function ContactsPage() {
       title="kept warm by Perpetuity"
       accentWord="Contacts"
       rightSlot={
-        <button className="glass-panel-strong inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium">
+        <button data-pill className="glass-panel-strong inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium">
           <Plus className="size-3.5" strokeWidth={2} /> Add contact
         </button>
       }
@@ -99,10 +99,10 @@ function ContactsPage() {
               Hannes hasn't heard from you in 19 days — he usually replies inside 6. A short note about the USDC rail going healthy would keep treasury options open.
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
-              <button className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background">
+              <button data-pill className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background">
                 Draft note to Hannes
               </button>
-              <button className="rounded-full bg-foreground/5 px-3.5 py-1.5 text-[11px] font-medium text-foreground/70">
+              <button data-pill className="rounded-full bg-foreground/5 px-3.5 py-1.5 text-[11px] font-medium text-foreground/70">
                 Show all cooling relationships
               </button>
             </div>
@@ -160,7 +160,7 @@ function ContactsPage() {
                   {selected.role} · <span className="text-foreground/80">{selected.company}</span>
                 </p>
               </div>
-              <button className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background">
+              <button data-pill className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background">
                 Open thread
               </button>
             </div>
@@ -190,10 +190,10 @@ function ContactsPage() {
             </div>
 
             <div className="flex items-center gap-2 border-t border-foreground/5 px-5 py-4">
-              <button className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium">
+              <button data-pill className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium">
                 <Building2 className="size-3" strokeWidth={1.75} /> Company file
               </button>
-              <button className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium">
+              <button data-pill className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium">
                 Introduce <ArrowUpRight className="size-3" />
               </button>
             </div>

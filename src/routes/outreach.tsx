@@ -64,7 +64,7 @@ function OutreachPage() {
               </button>
             ))}
           </div>
-          <button className="glass-panel-strong inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium">
+          <button data-pill className="glass-panel-strong inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium">
             <Plus className="size-3.5" strokeWidth={2} /> New campaign
           </button>
         </div>
@@ -103,10 +103,10 @@ function OutreachPage() {
               14 buyers from the Q3 softwood campaign opened your last note but didn't reply. I drafted a short follow-up tied to today's WTI move (-5.95%). Want to review and send?
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
-              <button className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background">
+              <button data-pill className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background">
                 Review draft (14)
               </button>
-              <button className="rounded-full bg-foreground/5 px-3.5 py-1.5 text-[11px] font-medium text-foreground/70">
+              <button data-pill className="rounded-full bg-foreground/5 px-3.5 py-1.5 text-[11px] font-medium text-foreground/70">
                 Schedule for tomorrow 09:00
               </button>
             </div>
@@ -164,7 +164,7 @@ function OutreachPage() {
           <p className="text-[13px] text-foreground/70">
             Ask Perpetuity to compose: <span className="text-foreground/90">"Warm-up the Klaipeda forwarders before Thursday."</span>
           </p>
-          <button className="ml-auto inline-flex size-8 items-center justify-center rounded-xl bg-foreground text-background">
+          <button data-pill className="ml-auto inline-flex size-8 items-center justify-center rounded-xl bg-foreground text-background">
             <Send className="size-3.5" />
           </button>
         </div>

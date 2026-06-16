@@ -62,11 +62,11 @@ function SchedulePage() {
       rightSlot={
         <div className="flex items-center gap-2">
           <div className="glass-panel flex items-center gap-0.5 rounded-full p-0.5">
-            <button className="flex size-7 items-center justify-center rounded-full text-foreground/55 hover:text-foreground">
+            <button data-pill className="flex size-7 items-center justify-center rounded-full text-foreground/55 hover:text-foreground">
               <ChevronLeft className="size-3.5" />
             </button>
-            <button className="rounded-full px-3 py-1 text-[11px] font-medium text-foreground/70 hover:bg-foreground/5">Today</button>
-            <button className="flex size-7 items-center justify-center rounded-full text-foreground/55 hover:text-foreground">
+            <button data-pill className="rounded-full px-3 py-1 text-[11px] font-medium text-foreground/70 hover:bg-foreground/5">Today</button>
+            <button data-pill className="flex size-7 items-center justify-center rounded-full text-foreground/55 hover:text-foreground">
               <ChevronRight className="size-3.5" />
             </button>
           </div>
@@ -101,10 +101,10 @@ function SchedulePage() {
               Thursday's Yerevan site visit at Marriott follows the EuroMach board dinner. I've drafted a Q3 terms brief from the Volkov thread and pulled three recent comparables for the rebalance — ready to review.
             </p>
             <div className="mt-2.5 flex flex-wrap gap-1.5">
-              <button className="rounded-full bg-foreground px-3 py-1 text-[10.5px] font-medium text-background">
+              <button data-pill className="rounded-full bg-foreground px-3 py-1 text-[10.5px] font-medium text-background">
                 Open prep brief
               </button>
-              <button className="rounded-full bg-foreground/5 px-3 py-1 text-[10.5px] font-medium text-foreground/70">
+              <button data-pill className="rounded-full bg-foreground/5 px-3 py-1 text-[10.5px] font-medium text-foreground/70">
                 Research attendees
               </button>
             </div>
@@ -148,7 +148,7 @@ function SchedulePage() {
                   const s = kindStyle[e.kind];
                   const Icon = s.icon;
                   return (
-                    <button
+                    <button data-pill
                       key={e.id}
                       style={{ top, height }}
                       className={`absolute inset-x-0.5 flex gap-1 overflow-hidden rounded-lg px-1.5 py-1 text-left ring-1 ring-foreground/5 backdrop-blur-sm transition-colors ${s.bg}`}
@@ -184,7 +184,7 @@ function SchedulePage() {
                 <Icon className="size-3" strokeWidth={1.75} /> {e.title}
               </p>
               <p className="mt-0.5 text-[11px] text-foreground/55">{e.where}</p>
-              <button className="mt-2 inline-flex items-center gap-1 text-[10.5px] text-accent">
+              <button data-pill className="mt-2 inline-flex items-center gap-1 text-[10.5px] text-accent">
                 Open prep <ArrowUpRight className="size-3" />
               </button>
             </div>

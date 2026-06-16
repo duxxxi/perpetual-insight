@@ -118,7 +118,7 @@ function SettingsPage() {
                   <p className="text-[13px] font-medium">API keys</p>
                   <p className="text-[11px] text-foreground/55">3 active · last rotated 14d ago</p>
                 </div>
-                <button className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium">
+                <button data-pill className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium">
                   <KeyRound className="size-3" strokeWidth={1.75} /> Rotate
                 </button>
               </div>

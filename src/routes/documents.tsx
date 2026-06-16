@@ -66,10 +66,10 @@ function DocumentsPage() {
       accentWord="Documents"
       rightSlot={
         <div className="flex items-center gap-2">
-          <button className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium">
+          <button data-pill className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium">
             <Folder className="size-3.5" strokeWidth={1.75} /> New folder
           </button>
-          <button className="glass-panel-strong inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium">
+          <button data-pill className="glass-panel-strong inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium">
             Upload
           </button>
         </div>
@@ -146,13 +146,13 @@ function DocumentsPage() {
                 </div>
               </div>
               <div className="mt-4 flex items-center gap-2">
-                <button className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background">
+                <button data-pill className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background">
                   Open
                 </button>
-                <button className="glass-panel inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[11px] font-medium">
+                <button data-pill className="glass-panel inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[11px] font-medium">
                   <Download className="size-3" /> Download
                 </button>
-                <button className="glass-panel inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[11px] font-medium">
+                <button data-pill className="glass-panel inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[11px] font-medium">
                   <Share2 className="size-3" /> Share
                 </button>
               </div>

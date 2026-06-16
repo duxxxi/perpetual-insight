@@ -85,7 +85,7 @@ function OpportunitiesPage() {
       rightSlot={
         <div className="glass-panel flex items-center gap-0.5 rounded-full p-0.5">
           {(["All", "Fresh", "Saved"] as const).map((f, i) => (
-            <button
+            <button data-pill
               key={f}
               className={`rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${
                 i === 0 ? "bg-foreground text-background" : "text-foreground/55 hover:text-foreground"
@@ -117,13 +117,13 @@ function OpportunitiesPage() {
             {opps[0].thesis}
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-2">
-            <button className="rounded-full bg-foreground px-4 py-2 text-[12px] font-medium text-background">
+            <button data-pill className="rounded-full bg-foreground px-4 py-2 text-[12px] font-medium text-background">
               Build a plan
             </button>
-            <button className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium">
+            <button data-pill className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium">
               <Bookmark className="size-3.5" strokeWidth={1.75} /> Track it
             </button>
-            <button className="text-[12px] text-foreground/55 hover:text-foreground">
+            <button data-pill className="text-[12px] text-foreground/55 hover:text-foreground">
               Why now ↗
             </button>
           </div>
@@ -184,7 +184,7 @@ function OpportunitiesPage() {
               <div className="flex items-center gap-1">
                 <IconBtn><ThumbsUp className="size-3.5" strokeWidth={1.75} /></IconBtn>
                 <IconBtn><ThumbsDown className="size-3.5" strokeWidth={1.75} /></IconBtn>
-                <button className="ml-1 inline-flex items-center gap-1 rounded-full bg-foreground/5 px-3 py-1.5 text-[11px] font-medium text-foreground/80 hover:bg-foreground/10">
+                <button data-pill className="ml-1 inline-flex items-center gap-1 rounded-full bg-foreground/5 px-3 py-1.5 text-[11px] font-medium text-foreground/80 hover:bg-foreground/10">
                   Explore <ArrowUpRight className="size-3" />
                 </button>
               </div>
@@ -207,7 +207,7 @@ function Stat({ label, value, accent }: { label: string; value: string; accent?:
 
 function IconBtn({ children }: { children: React.ReactNode }) {
   return (
-    <button className="flex size-7 items-center justify-center rounded-full text-foreground/45 hover:bg-foreground/5 hover:text-foreground">
+    <button data-pill className="flex size-7 items-center justify-center rounded-full text-foreground/45 hover:bg-foreground/5 hover:text-foreground">
       {children}
     </button>
   );
