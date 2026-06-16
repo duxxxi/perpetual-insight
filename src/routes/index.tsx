@@ -1,20 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
-  Home,
-  MessagesSquare,
-  ListChecks,
-  Send,
-  Users,
   FileText,
-  Compass,
-  LineChart,
-  Plug,
-  Settings,
-  Bell,
   Plus,
   X,
-
   Shield,
   ArrowUp,
   ArrowUpRight,
@@ -28,7 +17,6 @@ import {
   PenLine,
   Reply,
   BarChart3,
-  Calendar,
   Video,
   Mail,
   CircleDot,
