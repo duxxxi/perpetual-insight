@@ -669,7 +669,7 @@ function WorkCard({
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-accent">{tag}</span>
+              <span className={`text-[10px] font-bold uppercase tracking-[0.18em] ${tagTones[tag] ?? "text-accent"}`}>{tag}</span>
               {urgent && (
                 <span className="inline-flex items-center gap-1 rounded-full bg-destructive/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-destructive">
                   <CircleDot className="size-2" /> Urgent
@@ -685,16 +685,22 @@ function WorkCard({
           {actions && actions.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-2">
               {actions.map((a) => (
-                <button
+                <ActionDialog
                   key={a.label}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-foreground/10 bg-background/40 px-3 py-1.5 text-[11px] font-medium text-foreground/75 transition-colors hover:border-foreground/20 hover:bg-foreground hover:text-background"
-                >
-                  <a.icon className="size-3" />
-                  {a.label}
-                </button>
+                  title={a.label}
+                  kicker={tag}
+                  body={`${a.label} for: ${title}`}
+                  trigger={
+                    <button className="inline-flex items-center gap-1.5 rounded-full border border-foreground/10 bg-background/40 px-3 py-1.5 text-[11px] font-medium text-foreground/75 transition-colors hover:border-foreground/20 hover:bg-foreground hover:text-background">
+                      <a.icon className="size-3" />
+                      {a.label}
+                    </button>
+                  }
+                />
               ))}
             </div>
           )}
+
         </div>
       </div>
     </article>
