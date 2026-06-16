@@ -86,26 +86,26 @@ function SchedulePage() {
         </div>
       }
     >
-      {/* AI travel suggestion */}
-      <div className="glass-panel-strong relative mb-6 overflow-hidden rounded-3xl p-5">
-        <div className="ai-iridescent absolute inset-x-5 top-0 h-px opacity-60" aria-hidden />
-        <div className="flex items-start gap-3">
-          <div className="ai-iridescent flex size-8 items-center justify-center rounded-full ring-1 ring-foreground/5">
-            <Sparkles className="size-4 text-foreground/80" strokeWidth={1.75} />
+      {/* AI prep suggestion */}
+      <div className="glass-panel-strong relative mb-4 overflow-hidden rounded-2xl p-3.5">
+        <div className="ai-iridescent absolute inset-x-3.5 top-0 h-px opacity-60" aria-hidden />
+        <div className="flex items-start gap-2.5">
+          <div className="ai-iridescent flex size-7 items-center justify-center rounded-full ring-1 ring-foreground/5">
+            <Sparkles className="size-3.5 text-foreground/80" strokeWidth={1.75} />
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground/45">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-foreground/45">
               Perpetuity suggests
             </p>
-            <p className="mt-1.5 text-[14px] leading-relaxed text-foreground/85">
-              Your Thursday Vienna→Yerevan flight lands 19:50 local. Marriott reception closes 22:00. I can pre-check you in and pre-order a car from ZVK at 20:10.
+            <p className="mt-1 text-[12.5px] leading-relaxed text-foreground/85">
+              Thursday's Yerevan site visit at Marriott follows the EuroMach board dinner. I've drafted a Q3 terms brief from the Volkov thread and pulled three recent comparables for the rebalance — ready to review.
             </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <button className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background">
-                Arrange the car
+            <div className="mt-2.5 flex flex-wrap gap-1.5">
+              <button className="rounded-full bg-foreground px-3 py-1 text-[10.5px] font-medium text-background">
+                Open prep brief
               </button>
-              <button className="rounded-full bg-foreground/5 px-3.5 py-1.5 text-[11px] font-medium text-foreground/70">
-                Show alternatives
+              <button className="rounded-full bg-foreground/5 px-3 py-1 text-[10.5px] font-medium text-foreground/70">
+                Research attendees
               </button>
             </div>
           </div>
@@ -113,24 +113,24 @@ function SchedulePage() {
       </div>
 
       {/* Calendar */}
-      <div className="glass-panel-strong overflow-hidden rounded-3xl">
+      <div className="glass-panel-strong overflow-hidden rounded-2xl">
         {/* Day header */}
-        <div className="grid grid-cols-[60px_repeat(7,1fr)] border-b border-foreground/5">
+        <div className="grid grid-cols-[48px_repeat(7,1fr)] border-b border-foreground/5">
           <div />
           {days.map((d, i) => (
-            <div key={d} className={`px-2 py-3 text-center ${i === 0 ? "" : "border-l border-foreground/5"}`}>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground/40">{d.split(" ")[0]}</p>
-              <p className={`mt-0.5 font-serif text-lg italic ${i === 0 ? "text-accent" : "text-foreground/85"}`}>{d.split(" ")[1]}</p>
+            <div key={d} className={`px-1.5 py-2 text-center ${i === 0 ? "" : "border-l border-foreground/5"}`}>
+              <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-foreground/40">{d.split(" ")[0]}</p>
+              <p className={`font-serif text-[15px] italic leading-tight ${i === 0 ? "text-accent" : "text-foreground/85"}`}>{d.split(" ")[1]}</p>
             </div>
           ))}
         </div>
 
         {/* Body */}
-        <div className="relative grid grid-cols-[60px_repeat(7,1fr)]">
+        <div className="relative grid grid-cols-[48px_repeat(7,1fr)]">
           {/* Hour gutter */}
           <div className="flex flex-col">
             {hours.map((h) => (
-              <div key={h} className="h-14 border-b border-foreground/5 px-2 pt-1 text-right text-[10px] font-mono text-foreground/35">
+              <div key={h} className="h-10 border-b border-foreground/5 px-1.5 pt-0.5 text-right text-[9px] font-mono text-foreground/35">
                 {String(h).padStart(2, "0")}:00
               </div>
             ))}
@@ -138,28 +138,28 @@ function SchedulePage() {
           {days.map((_d, dayIdx) => (
             <div key={dayIdx} className="relative border-l border-foreground/5">
               {hours.map((h) => (
-                <div key={h} className="h-14 border-b border-foreground/5" />
+                <div key={h} className="h-10 border-b border-foreground/5" />
               ))}
               {events
                 .filter((e) => e.day === dayIdx)
                 .map((e) => {
-                  const top = (e.start - hours[0]) * 56;
-                  const height = e.duration * 56 - 4;
+                  const top = (e.start - hours[0]) * 40;
+                  const height = e.duration * 40 - 3;
                   const s = kindStyle[e.kind];
                   const Icon = s.icon;
                   return (
                     <button
                       key={e.id}
                       style={{ top, height }}
-                      className={`absolute inset-x-1 flex gap-1.5 overflow-hidden rounded-xl px-2 py-1.5 text-left ring-1 ring-foreground/5 backdrop-blur-sm transition-colors ${s.bg}`}
+                      className={`absolute inset-x-0.5 flex gap-1 overflow-hidden rounded-lg px-1.5 py-1 text-left ring-1 ring-foreground/5 backdrop-blur-sm transition-colors ${s.bg}`}
                     >
                       <div className={`w-0.5 shrink-0 rounded-full ${s.bar}`} />
                       <div className="min-w-0 flex-1">
-                        <p className="flex items-center gap-1 truncate text-[11px] font-medium text-foreground/90">
+                        <p className="flex items-center gap-1 truncate text-[10px] font-medium text-foreground/90">
                           <Icon className="size-2.5 shrink-0" strokeWidth={2} />
                           {e.title}
                         </p>
-                        <p className="mt-0.5 truncate text-[10px] text-foreground/55">{e.where}</p>
+                        <p className="truncate text-[9px] text-foreground/55">{e.where}</p>
                       </div>
                     </button>
                   );
@@ -170,22 +170,22 @@ function SchedulePage() {
       </div>
 
       {/* Up next */}
-      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="mt-4 grid grid-cols-1 gap-2.5 md:grid-cols-3">
         {events.slice(0, 3).map((e) => {
           const s = kindStyle[e.kind];
           const Icon = s.icon;
           return (
-            <div key={e.id} className="glass-panel rounded-2xl p-4">
-              <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground/45">
-                <span className={`size-1.5 rounded-full ${s.bar}`} />
+            <div key={e.id} className="glass-panel rounded-xl p-3">
+              <div className="flex items-center gap-1.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-foreground/45">
+                <span className={`size-1 rounded-full ${s.bar}`} />
                 {days[e.day]} · {String(e.start).padStart(2, "0")}:00
               </div>
-              <p className="mt-2 flex items-center gap-1.5 text-[14px] font-medium text-foreground/90">
-                <Icon className="size-3.5" strokeWidth={1.75} /> {e.title}
+              <p className="mt-1.5 flex items-center gap-1.5 text-[12.5px] font-medium text-foreground/90">
+                <Icon className="size-3" strokeWidth={1.75} /> {e.title}
               </p>
-              <p className="mt-1 text-[12px] text-foreground/55">{e.where}</p>
-              <button className="mt-3 inline-flex items-center gap-1 text-[11px] text-accent">
-                Open <ArrowUpRight className="size-3" />
+              <p className="mt-0.5 text-[11px] text-foreground/55">{e.where}</p>
+              <button className="mt-2 inline-flex items-center gap-1 text-[10.5px] text-accent">
+                Open prep <ArrowUpRight className="size-3" />
               </button>
             </div>
           );
