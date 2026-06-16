@@ -11,6 +11,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { PageShell } from "@/components/app-shell";
+import { useUserTasks } from "@/lib/task-store";
 
 export const Route = createFileRoute("/assignments")({
   head: () => ({
