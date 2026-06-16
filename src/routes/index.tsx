@@ -1,20 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
-  Home,
-  MessagesSquare,
-  ListChecks,
-  Send,
-  Users,
   FileText,
-  Compass,
-  LineChart,
-  Plug,
-  Settings,
-  Bell,
   Plus,
   X,
-
   Shield,
   ArrowUp,
   ArrowUpRight,
@@ -28,7 +17,6 @@ import {
   PenLine,
   Reply,
   BarChart3,
-  Calendar,
   Video,
   Mail,
   CircleDot,
@@ -44,8 +32,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { useTheme } from "@/hooks/use-theme";
+import { AmbientBackground, CommodityTicker, AppSidebar, AppFooter } from "@/components/app-shell";
 
 
 export const Route = createFileRoute("/")({
@@ -60,63 +48,17 @@ export const Route = createFileRoute("/")({
   component: DashboardPage,
 });
 
-const ticker = [
-  { sym: "WTI", price: "$79.83", chg: "-5.95%", dir: "down" as const },
-  { sym: "NAT GAS", price: "$3.127", chg: "+0.22%", dir: "up" as const },
-  { sym: "GOLD", price: "$4,385", chg: "+3.45%", dir: "up" as const },
-  { sym: "SILVER", price: "$71.19", chg: "+4.73%", dir: "up" as const },
-  { sym: "COPPER", price: "$6.494", chg: "+0.76%", dir: "up" as const },
-  { sym: "BRENT", price: "$87.33", chg: "-2.94%", dir: "down" as const },
-  { sym: "EUR/USD", price: "1.1567", chg: "+0.18%", dir: "up" as const },
-  { sym: "ALU", price: "$2,241", chg: "+0.80%", dir: "up" as const },
-];
 
 function DashboardPage() {
   useTheme();
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
-      {/* Ambient two-tone wash — light */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 dark:hidden"
-        style={{
-          background:
-            "radial-gradient(60rem 40rem at 12% -10%, hsl(25 40% 80% / 0.25), transparent 60%), radial-gradient(50rem 35rem at 100% 110%, hsl(20 10% 12% / 0.06), transparent 60%)",
-        }}
-      />
-      {/* Ambient two-tone wash — dark */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 hidden dark:block"
-        style={{
-          background:
-            "radial-gradient(60rem 40rem at 12% -10%, hsl(25 40% 55% / 0.12), transparent 60%), radial-gradient(50rem 35rem at 100% 110%, hsl(210 30% 40% / 0.10), transparent 60%)",
-        }}
-      />
-
-      {/* Commodity ticker — glass/iridescent style */}
-      <div className="sticky top-0 z-40">
-        <div className="relative overflow-hidden">
-          {/* Iridescent glow behind */}
-          <div className="ai-iridescent absolute -inset-px rounded-2xl opacity-40 blur-[2px]" aria-hidden />
-          <div className="glass-panel-strong relative overflow-hidden rounded-2xl border border-foreground/5">
-            {/* Subtle top sheen */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
-            />
-            <div className="ticker-mask relative overflow-hidden py-2.5">
-              <div className="animate-ticker flex whitespace-nowrap">
-                <TickerRow />
-                <TickerRow />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <AmbientBackground />
+      <CommodityTicker />
 
       <div className="flex">
-        <Sidebar />
+        <AppSidebar active="home" />
+
 
         <main className="flex-1 px-8 pt-14 pb-32 lg:pl-32 lg:pr-12 xl:pr-16">
           <div className="mx-auto max-w-6xl animate-fade-in-up">
@@ -332,16 +274,8 @@ function DashboardPage() {
         </main>
       </div>
 
-      <footer className="fixed bottom-0 left-0 right-0 z-30 flex items-center justify-between border-t border-foreground/5 bg-background/70 px-8 py-3 text-[10px] font-medium tracking-[0.18em] text-foreground/35 backdrop-blur-xl">
-        <div className="flex items-center gap-6">
-          <span className="hidden sm:inline">ENCRYPTED · TLS 1.3</span>
-          <span>LAST SYNC · 14:40 UTC</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="size-1 rounded-full bg-accent" />
-          <span>PERPETUITY INTELLIGENCE</span>
-        </div>
-      </footer>
+      <AppFooter />
+
     </div>
   );
 }
@@ -585,69 +519,6 @@ function MorningBriefPill() {
 
 
 
-function TickerRow() {
-  return (
-    <div className="flex shrink-0 gap-3 px-6">
-      {ticker.map((t, i) => (
-        <span
-          key={i}
-          className="inline-flex items-center gap-2 rounded-full bg-foreground/[0.04] px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-foreground/80 ring-1 ring-foreground/[0.06] backdrop-blur-sm"
-        >
-          <span className="text-foreground/50">{t.sym}</span>
-          <span className="font-semibold text-foreground">{t.price}</span>
-          <span className={t.dir === "up" ? "text-emerald-600" : "text-rose-600"}>{t.chg}</span>
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function Sidebar() {
-  const items = [
-    { icon: Home, label: "Home", active: true },
-    { icon: MessagesSquare, label: "Threads" },
-    { icon: ListChecks, label: "Assignments" },
-    { icon: Calendar, label: "Schedule" },
-    { icon: Send, label: "Outreach" },
-    { icon: Users, label: "Contacts" },
-    { icon: FileText, label: "Documents" },
-    { icon: Compass, label: "Opportunities" },
-    { icon: LineChart, label: "Markets" },
-    { icon: Plug, label: "Connections" },
-    { icon: Settings, label: "Settings" },
-  ];
-  return (
-    <>
-      <nav className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
-        <div className="glass-panel-strong flex flex-col items-center gap-1 rounded-full px-2 py-4">
-          <div className="mb-2 flex size-10 items-center justify-center rounded-full bg-foreground font-serif text-sm italic text-background">
-            P
-          </div>
-          {items.map((it) => (
-            <button
-              key={it.label}
-              title={it.label}
-              className={`group relative flex size-10 items-center justify-center rounded-full transition-colors ${
-                it.active ? "bg-foreground/5 text-foreground" : "text-foreground/45 hover:bg-foreground/5 hover:text-foreground"
-              }`}
-            >
-              <it.icon className="size-[18px]" strokeWidth={1.5} />
-              <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
-                {it.label}
-              </span>
-            </button>
-          ))}
-          <div className="mt-2 flex size-10 items-center justify-center rounded-full text-foreground/45 hover:text-foreground">
-            <Bell className="size-[18px]" strokeWidth={1.5} />
-          </div>
-        </div>
-      </nav>
-      <div className="fixed bottom-5 left-5 z-40 hidden lg:block">
-        <ThemeToggle orientation="vertical" />
-      </div>
-    </>
-  );
-}
 
 function SectionLabel({
   children,
