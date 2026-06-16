@@ -83,27 +83,22 @@ function DashboardPage() {
         }}
       />
 
-      {/* Commodity ticker — Apple Intelligence glass */}
+      {/* Commodity ticker — glass/iridescent style */}
       <div className="sticky top-0 z-40">
-        <div className="relative overflow-hidden border-b border-white/[0.04] bg-[hsl(20_8%_10%_/0.55)] backdrop-blur-2xl">
-          {/* Subtle top sheen */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
-          />
-          {/* Soft inner glow */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(40rem 8rem at 50% 0%, hsl(25 30% 55% / 0.06), transparent 70%)",
-            }}
-          />
-          <div className="ticker-mask relative overflow-hidden py-2">
-            <div className="animate-ticker flex whitespace-nowrap">
-              <TickerRow />
-              <TickerRow />
+        <div className="relative overflow-hidden">
+          {/* Iridescent glow behind */}
+          <div className="ai-iridescent absolute -inset-px rounded-2xl opacity-40 blur-[2px]" aria-hidden />
+          <div className="glass-panel-strong relative overflow-hidden rounded-2xl border border-foreground/5">
+            {/* Subtle top sheen */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
+            />
+            <div className="ticker-mask relative overflow-hidden py-2.5">
+              <div className="animate-ticker flex whitespace-nowrap">
+                <TickerRow />
+                <TickerRow />
+              </div>
             </div>
           </div>
         </div>
