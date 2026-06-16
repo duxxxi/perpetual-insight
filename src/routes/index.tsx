@@ -170,6 +170,18 @@ function DashboardPage() {
               <section className="lg:col-span-7">
                 <SectionLabel kicker="Priority" tone="primary">Active Work</SectionLabel>
                 <div className="mt-4 space-y-3">
+                  {userTasks.map((ut) => (
+                    <WorkCard
+                      key={ut.id}
+                      tag={ut.tag}
+                      title={ut.title}
+                      body={ut.body ?? "Created from Ask Perpetuity. Open in Assignments to add detail."}
+                      actions={[
+                        { icon: PenLine, label: "Open in Assignments" },
+                        { icon: Reply, label: "Add detail" },
+                      ]}
+                    />
+                  ))}
                   <WorkCard
                     tag="Payment"
                     urgent
