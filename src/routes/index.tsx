@@ -44,6 +44,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { useTheme } from "@/hooks/use-theme";
 
 
 export const Route = createFileRoute("/")({
@@ -70,15 +72,25 @@ const ticker = [
 ];
 
 function DashboardPage() {
+  useTheme();
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
-      {/* Ambient two-tone wash */}
+      {/* Ambient two-tone wash — light */}
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10"
+        className="pointer-events-none fixed inset-0 -z-10 dark:hidden"
         style={{
           background:
             "radial-gradient(60rem 40rem at 12% -10%, hsl(25 40% 80% / 0.25), transparent 60%), radial-gradient(50rem 35rem at 100% 110%, hsl(20 10% 12% / 0.06), transparent 60%)",
+        }}
+      />
+      {/* Ambient two-tone wash — dark */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 -z-10 hidden dark:block"
+        style={{
+          background:
+            "radial-gradient(60rem 40rem at 12% -10%, hsl(25 40% 55% / 0.12), transparent 60%), radial-gradient(50rem 35rem at 100% 110%, hsl(210 30% 40% / 0.10), transparent 60%)",
         }}
       />
 
@@ -626,6 +638,9 @@ function Sidebar() {
         ))}
         <div className="mt-2 flex size-10 items-center justify-center rounded-full text-foreground/45 hover:text-foreground">
           <Bell className="size-[18px]" strokeWidth={1.5} />
+        </div>
+        <div className="mt-1.5 flex w-full justify-center">
+          <ThemeToggle orientation="vertical" />
         </div>
       </div>
     </nav>
