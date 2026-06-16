@@ -631,7 +631,7 @@ function Sidebar() {
           <Bell className="size-[18px]" strokeWidth={1.5} />
         </div>
         <div className="mt-1.5 flex w-full justify-center">
-          <ThemeToggle />
+          <ThemeToggle orientation="vertical" />
         </div>
       </div>
     </nav>

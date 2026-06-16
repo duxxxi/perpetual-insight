@@ -4,9 +4,15 @@ import { cn } from "@/lib/utils";
 
 /**
  * Apple-style segmented pill: Light · Auto · Dark.
- * Compact, glass surface, matches the Loro × Apple register used across the dashboard.
+ * Supports horizontal (default) and vertical orientation for sidebar use.
  */
-export function ThemeToggle({ className }: { className?: string }) {
+export function ThemeToggle({
+  className,
+  orientation = "horizontal",
+}: {
+  className?: string;
+  orientation?: "horizontal" | "vertical";
+}) {
   const { mode, setTheme } = useTheme();
 
   const options = [
@@ -20,7 +26,8 @@ export function ThemeToggle({ className }: { className?: string }) {
       role="radiogroup"
       aria-label="Theme"
       className={cn(
-        "glass-panel inline-flex items-center gap-0.5 rounded-full p-0.5",
+        "glass-panel inline-flex items-center gap-0.5 p-0.5",
+        orientation === "vertical" ? "flex-col rounded-full" : "rounded-full",
         className,
       )}
     >
@@ -36,7 +43,7 @@ export function ThemeToggle({ className }: { className?: string }) {
             className={cn(
               "relative flex size-7 items-center justify-center rounded-full transition-all",
               active
-                ? "bg-foreground text-background shadow-[0_2px_8px_-2px_hsl(20_10%_12%/0.25)]"
+                ? "bg-foreground text-background shadow-[0_2px_8px_-2px_rgba(0,0,0,0.25)]"
                 : "text-foreground/45 hover:text-foreground/80",
             )}
           >
