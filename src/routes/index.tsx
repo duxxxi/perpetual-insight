@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/dialog";
 import { useTheme } from "@/hooks/use-theme";
 import { AmbientBackground, CommodityTicker, AppSidebar, AppFooter } from "@/components/app-shell";
+import { useUserTasks } from "@/lib/task-store";
 
 
 export const Route = createFileRoute("/")({
