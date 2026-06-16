@@ -603,13 +603,21 @@ function SmartAction({
   );
 }
 
-function PriorityRow() {
+function PriorityRow({
+  quick,
+  onQuick,
+  onKind,
+}: {
+  quick: null | "urgent" | "trip";
+  onQuick: (q: "urgent" | "trip") => void;
+  onKind: (k: (typeof kinds)[number]) => void;
+}) {
   const items = [
-    { icon: AlertOctagon, count: 3, label: "Urgent", tone: "rose" as const },
-    { icon: ListChecks, count: 5, label: "Tasks open", tone: "emerald" as const },
-    { icon: Lightbulb, count: 4, label: "Suggestions", tone: "amber" as const },
-    { icon: TrendingUp, count: 7, label: "Updates", tone: "violet" as const },
-    { icon: Plane, count: 1, label: "Trip", tone: "teal" as const },
+    { key: "urgent" as const, icon: AlertOctagon, count: 3, label: "Urgent", tone: "rose" as const, action: () => onQuick("urgent") },
+    { key: "tasks" as const, icon: ListChecks, count: 5, label: "Tasks open", tone: "emerald" as const, action: () => onKind("Task") },
+    { key: "sug" as const, icon: Lightbulb, count: 4, label: "Suggestions", tone: "amber" as const, action: () => onKind("Suggestion") },
+    { key: "upd" as const, icon: TrendingUp, count: 7, label: "Updates", tone: "violet" as const, action: () => onKind("Briefing") },
+    { key: "trip" as const, icon: Plane, count: 1, label: "Trip", tone: "teal" as const, action: () => onQuick("trip") },
   ];
   const tones: Record<string, string> = {
     rose: "text-rose-700/85 dark:text-rose-300",
@@ -619,17 +627,24 @@ function PriorityRow() {
     teal: "text-teal-700/85 dark:text-teal-300",
   };
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      {items.map((it) => (
-        <span
-          key={it.label}
-          className="glass-panel inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium"
-        >
-          <it.icon className={`size-3.5 ${tones[it.tone]}`} strokeWidth={1.75} />
-          <span className="font-mono text-foreground/80">{it.count}</span>
-          <span className="text-foreground/55">{it.label}</span>
-        </span>
-      ))}
+    <div className="flex flex-wrap items-center gap-1.5">
+      {items.map((it) => {
+        const active = quick === it.key;
+        return (
+          <button
+            key={it.label}
+            type="button"
+            onClick={it.action}
+            className={`glass-panel inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-medium transition-colors hover:bg-foreground/[0.05] ${
+              active ? "ring-1 ring-accent/40" : ""
+            }`}
+          >
+            <it.icon className={`size-3 ${tones[it.tone]}`} strokeWidth={1.75} />
+            <span className="font-mono text-foreground/80">{it.count}</span>
+            <span className="text-foreground/55">{it.label}</span>
+          </button>
+        );
+      })}
     </div>
   );
 }
