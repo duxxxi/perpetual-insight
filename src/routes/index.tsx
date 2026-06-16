@@ -28,7 +28,6 @@ import {
   PenLine,
   Reply,
   BarChart3,
-  Sparkles,
   Calendar,
   Video,
   Mail,
