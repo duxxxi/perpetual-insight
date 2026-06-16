@@ -537,18 +537,30 @@ function PillDialogContent({
 
 function MorningBriefPill() {
   return (
-    <button className="group relative inline-flex shrink-0 items-center gap-2.5 self-start rounded-full md:self-end">
-      <span className="ai-iridescent absolute -inset-px rounded-full opacity-60 blur-[2px] transition-opacity group-hover:opacity-90" aria-hidden />
-      <span className="glass-panel-strong relative inline-flex items-center gap-2.5 rounded-full py-1.5 pl-1.5 pr-4">
-        <span className="ai-iridescent flex size-7 items-center justify-center rounded-full ring-1 ring-foreground/5">
-          <Sparkles className="size-3.5 text-foreground/80" />
-        </span>
-        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Morning Brief</span>
-        <ArrowUpRight className="size-3.5 text-foreground/40 transition-colors group-hover:text-foreground" />
-      </span>
-    </button>
+    <ActionDialog
+      title="Your Morning Brief"
+      kicker="Monday, 15 June"
+      body="3 urgent items, 7 updates, and 2 approvals are waiting. Open the brief for a guided walkthrough."
+      actions={[
+        { label: "Open brief", primary: true },
+        { label: "Read later" },
+      ]}
+      trigger={
+        <button className="group relative inline-flex shrink-0 items-center gap-2.5 self-start rounded-full md:self-end">
+          <span className="ai-iridescent absolute -inset-px rounded-full opacity-60 blur-[2px] transition-opacity group-hover:opacity-90" aria-hidden />
+          <span className="glass-panel-strong relative inline-flex items-center gap-2.5 rounded-full py-1.5 pl-1.5 pr-4">
+            <span className="ai-iridescent flex size-7 items-center justify-center rounded-full ring-1 ring-foreground/5">
+              <Sparkles className="size-3.5 text-foreground/80" />
+            </span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Morning Brief</span>
+            <ArrowUpRight className="size-3.5 text-foreground/40 transition-colors group-hover:text-foreground" />
+          </span>
+        </button>
+      }
+    />
   );
 }
+
 
 
 function TickerRow() {
