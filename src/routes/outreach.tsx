@@ -64,8 +64,8 @@ function OutreachPage() {
               </button>
             ))}
           </div>
-          <button data-pill className="glass-panel-strong inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium">
-            <Plus className="size-3.5" strokeWidth={2} /> New campaign
+          <button data-pill data-detail-title="New campaign" data-detail-body="Start a new outreach campaign — pick a channel (Email, LinkedIn, WhatsApp), an audience segment, and let Perpetuity draft the first sequence from past replies." className="glass-panel-strong inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium">
+            <Plus className="size-3" strokeWidth={2} /> New campaign
           </button>
         </div>
       }
@@ -78,13 +78,19 @@ function OutreachPage() {
           { k: "Replied", v: "21", chg: "+5 vs last wk" },
           { k: "Meetings booked", v: "6", chg: "3 by Perpetuity" },
         ].map((s) => (
-          <div key={s.k} className="glass-panel rounded-2xl px-4 py-3">
+          <button
+            key={s.k}
+            data-detail
+            data-detail-title={`${s.k} · ${s.v}`}
+            data-detail-body={`${s.k} this week: ${s.v} (${s.chg}). Tap into the campaign list below to see which threads contributed.`}
+            className="glass-panel rounded-2xl px-4 py-3 text-left transition-colors hover:bg-foreground/[0.04]"
+          >
             <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground/40">{s.k}</p>
             <p className="mt-1 font-serif text-2xl italic tracking-tight">{s.v}</p>
             <p className="mt-0.5 flex items-center gap-1 text-[10px] text-emerald-600">
               <TrendingUp className="size-2.5" /> {s.chg}
             </p>
-          </div>
+          </button>
         ))}
       </div>
 
@@ -131,6 +137,9 @@ function OutreachPage() {
             return (
               <li
                 key={c.id}
+                data-detail
+                data-detail-title={c.name}
+                data-detail-body={`${c.channel} · ${c.audience}\nSent ${c.sent} · Opened ${c.opened} (${openRate}%) · Replied ${c.replied}\nStatus: ${c.status}. Open to review the sequence, replies, and Perpetuity's suggested next touches.`}
                 className="grid cursor-pointer grid-cols-[1.6fr_1fr_repeat(3,72px)_90px] items-center gap-4 px-5 py-3.5 transition-colors hover:bg-foreground/[0.03]"
               >
                 <div className="flex items-center gap-3">
