@@ -550,7 +550,7 @@ function Pill({ children, tone }: { children: React.ReactNode; tone: "rose" | "a
       ? "text-rose-700/85 bg-rose-500/10 ring-rose-500/15 dark:text-rose-300"
       : "text-amber-700/85 bg-amber-500/10 ring-amber-500/15 dark:text-amber-300";
   return (
-    <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] ring-1 ${cls}`}>
+    <span className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.12em] ring-1 ${cls}`}>
       {children}
     </span>
   );
