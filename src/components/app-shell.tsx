@@ -157,9 +157,88 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
             </Link>
           );
         })}
-        <div className="mt-2 flex size-10 items-center justify-center rounded-full text-foreground/45 hover:text-foreground">
-          <Bell className="size-[18px]" strokeWidth={1.5} />
-        </div>
+        <AskPerpetuityButton />
+      </div>
+    </nav>
+  );
+}
+
+/* ---------- Ask Perpetuity (new conversation) ---------- */
+function AskPerpetuityButton() {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
+  const navigate = useNavigate();
+
+  const submit = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (!value.trim()) return;
+    setOpen(false);
+    setValue("");
+    navigate({ to: "/threads" });
+  };
+
+  return (
+    <>
+      <button
+        type="button"
+        title="New conversation"
+        onClick={() => setOpen(true)}
+        className="group relative mt-2 flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-sky-400/30 to-sky-500/10 text-sky-500 ring-1 ring-sky-400/30 shadow-[0_0_18px_-6px_hsl(210_90%_60%/0.55)] transition-all hover:from-sky-400/40 hover:to-sky-500/15 hover:shadow-[0_0_22px_-4px_hsl(210_90%_60%/0.7)] dark:text-sky-300"
+      >
+        <Plus className="size-[18px]" strokeWidth={2} />
+        <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
+          New
+        </span>
+      </button>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-2xl gap-0 border-foreground/10 bg-background/85 p-0 backdrop-blur-2xl sm:rounded-2xl">
+          <DialogTitle className="sr-only">Ask Perpetuity</DialogTitle>
+          <div className="relative overflow-hidden rounded-2xl">
+            <div className="ai-iridescent absolute inset-x-0 top-0 h-px opacity-70" aria-hidden />
+            <div className="flex items-center gap-2 px-5 pt-5">
+              <span className="inline-flex size-7 items-center justify-center rounded-full bg-gradient-to-br from-sky-400/30 to-sky-500/10 text-sky-500 ring-1 ring-sky-400/30 dark:text-sky-300">
+                <Sparkles className="size-3.5" strokeWidth={1.75} />
+              </span>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-foreground/50">
+                Ask Perpetuity
+              </p>
+            </div>
+            <form onSubmit={submit} className="px-5 pb-5 pt-3">
+              <textarea
+                autoFocus
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) submit();
+                }}
+                placeholder="Start a conversation, draft a task, or ask anything…"
+                rows={4}
+                className="w-full resize-none bg-transparent font-serif text-xl italic leading-snug tracking-tight text-foreground placeholder:text-foreground/30 focus:outline-none"
+              />
+              <div className="mt-3 flex items-center justify-between border-t border-foreground/5 pt-3">
+                <p className="text-[10px] uppercase tracking-[0.18em] text-foreground/40">
+                  ⌘ + ⏎ to send · routes to Threads
+                </p>
+                <button
+                  type="submit"
+                  disabled={!value.trim()}
+                  className="inline-flex h-8 items-center gap-1.5 rounded-full bg-gradient-to-br from-sky-400/25 to-sky-500/10 px-3 text-[11px] font-medium text-sky-600 ring-1 ring-sky-400/30 shadow-[0_0_16px_-6px_hsl(210_90%_60%/0.55)] transition-all hover:from-sky-400/35 hover:to-sky-500/15 disabled:opacity-40 disabled:shadow-none dark:text-sky-300"
+                >
+                  Send
+                  <ArrowUp className="size-3.5" strokeWidth={2} />
+                </button>
+              </div>
+            </form>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
+function _SidebarEnd() {
+  return null;
       </div>
     </nav>
   );
