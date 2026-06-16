@@ -28,7 +28,6 @@ import {
   PenLine,
   Reply,
   BarChart3,
-  Sparkles,
   Calendar,
   Video,
   Mail,
@@ -83,27 +82,22 @@ function DashboardPage() {
         }}
       />
 
-      {/* Commodity ticker — Apple Intelligence glass */}
+      {/* Commodity ticker — glass/iridescent style */}
       <div className="sticky top-0 z-40">
-        <div className="relative overflow-hidden border-b border-white/[0.04] bg-[hsl(20_8%_10%_/0.55)] backdrop-blur-2xl">
-          {/* Subtle top sheen */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
-          />
-          {/* Soft inner glow */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(40rem 8rem at 50% 0%, hsl(25 30% 55% / 0.06), transparent 70%)",
-            }}
-          />
-          <div className="ticker-mask relative overflow-hidden py-2">
-            <div className="animate-ticker flex whitespace-nowrap">
-              <TickerRow />
-              <TickerRow />
+        <div className="relative overflow-hidden">
+          {/* Iridescent glow behind */}
+          <div className="ai-iridescent absolute -inset-px rounded-2xl opacity-40 blur-[2px]" aria-hidden />
+          <div className="glass-panel-strong relative overflow-hidden rounded-2xl border border-foreground/5">
+            {/* Subtle top sheen */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
+            />
+            <div className="ticker-mask relative overflow-hidden py-2.5">
+              <div className="animate-ticker flex whitespace-nowrap">
+                <TickerRow />
+                <TickerRow />
+              </div>
             </div>
           </div>
         </div>
@@ -566,7 +560,7 @@ function MorningBriefPill() {
           <span className="ai-iridescent absolute -inset-px rounded-full opacity-60 blur-[2px] transition-opacity group-hover:opacity-90" aria-hidden />
           <span className="glass-panel-strong relative inline-flex items-center gap-2.5 rounded-full py-1.5 pl-1.5 pr-4">
             <span className="ai-iridescent flex size-7 items-center justify-center rounded-full ring-1 ring-foreground/5">
-              <Sparkles className="size-3.5 text-foreground/80" />
+              <FileText className="size-3.5 text-foreground/80" />
             </span>
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Morning Brief</span>
             <ArrowUpRight className="size-3.5 text-foreground/40 transition-colors group-hover:text-foreground" />
@@ -585,11 +579,11 @@ function TickerRow() {
       {ticker.map((t, i) => (
         <span
           key={i}
-          className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] px-3 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-foreground/50 ring-1 ring-white/[0.04] backdrop-blur-sm"
+          className="inline-flex items-center gap-2 rounded-full bg-foreground/[0.04] px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-foreground/80 ring-1 ring-foreground/[0.06] backdrop-blur-sm"
         >
-          <span className="text-foreground/35">{t.sym}</span>
-          <span className="font-semibold text-foreground/85">{t.price}</span>
-          <span className={t.dir === "up" ? "text-emerald-400/80" : "text-rose-400/80"}>{t.chg}</span>
+          <span className="text-foreground/50">{t.sym}</span>
+          <span className="font-semibold text-foreground">{t.price}</span>
+          <span className={t.dir === "up" ? "text-emerald-600" : "text-rose-600"}>{t.chg}</span>
         </span>
       ))}
     </div>
