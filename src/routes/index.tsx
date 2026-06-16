@@ -101,58 +101,19 @@ function DashboardPage() {
               <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
                 MONDAY, 15 JUNE
               </p>
-              <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-                <h1 className="font-serif text-5xl italic tracking-tight md:text-6xl">
-                  Good afternoon, <span className="not-italic">Perpetuity</span>
+              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
+                  Good afternoon,{" "}
+                  <span className="not-italic text-accent">Perpetuity</span>
                 </h1>
                 <MorningBriefPill />
               </div>
-              <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-foreground/60 md:text-lg">
+              <p className="mt-4 max-w-2xl text-pretty text-sm leading-relaxed text-foreground/60 md:text-base">
                 You have critical payment and deployment issues requiring action today,
                 plus a multi-country trip starting in five days that needs final logistics review.
               </p>
             </header>
 
-            {/* Status pills row */}
-            <div className="mb-10 flex flex-wrap gap-2">
-              <StatusPill
-                icon={AlertOctagon}
-                gradient="from-rose-500 to-red-600"
-                count="3"
-                label="Urgent"
-                items={[
-                  { title: "Stripe payment failed ($8.00)", sub: "Recurring charge — acct_1ika5ja3kz32dpo1" },
-                  { title: "Railway build failure", sub: "@export-analytica/web — 19:38 UTC" },
-                  { title: "EU timber restrictions — CIS", sub: "3 suppliers affected" },
-                ]}
-              />
-              <StatusPill
-                icon={TrendingUp}
-                gradient="from-emerald-400 to-teal-600"
-                count="7"
-                label="Updates"
-                items={[
-                  { title: "Brent crude −2.94% to $87.33", sub: "Monitor freight surcharges" },
-                  { title: "EUR/USD at 1.1567", sub: "USD invoicing advantage" },
-                  { title: "Gold +3.45% to $4,385", sub: "Hedging window opening" },
-                  { title: "Bybit USDC withdrawal confirmed", sub: "4.89 USDC on-chain" },
-                  { title: "New buyer reply: EuroMach", sub: "Wants Q3 quote on 40t order" },
-                  { title: "Yerevan hotel — pending confirmation", sub: "Reply expected today" },
-                  { title: "REACH compliance check passed", sub: "Automated · 16:30" },
-                ]}
-              />
-              <StatusPill
-                icon={CheckCircle2}
-                gradient="from-violet-400 to-indigo-600"
-                count="2"
-                label="Approvals"
-                items={[
-                  { title: "Draft notice: EU timber restrictions", sub: "Ready for your approval" },
-                  { title: "Q3 pricing update — LATAM", sub: "+4.2% on softwood SKUs" },
-                ]}
-              />
-              <TripPill />
-            </div>
 
 
 
