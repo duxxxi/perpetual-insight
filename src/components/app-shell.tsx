@@ -157,9 +157,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
             </Link>
           );
         })}
-        <div className="mt-2 flex size-10 items-center justify-center rounded-full text-foreground/45 hover:text-foreground">
-          <Bell className="size-[18px]" strokeWidth={1.5} />
-        </div>
+        <NewChatButton />
       </div>
     </nav>
   );
