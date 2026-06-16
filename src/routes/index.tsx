@@ -169,7 +169,7 @@ function DashboardPage() {
               {/* Active Work — primary */}
               <section className="lg:col-span-7">
                 <SectionLabel kicker="Priority" tone="primary">Active Work</SectionLabel>
-                <div className="mt-5 space-y-4">
+                <div className="mt-4 space-y-3">
                   <WorkCard
                     tag="Payment"
                     urgent
@@ -213,7 +213,7 @@ function DashboardPage() {
                 {/* Today's schedule */}
                 <div className="mt-8">
                   <SectionLabel kicker="Today" tone="quiet">Schedule</SectionLabel>
-                  <div className="glass-panel mt-5 rounded-3xl p-2">
+                  <div className="glass-panel mt-4 rounded-3xl p-1.5">
                     <ScheduleRow time="09:30" title="Buyer call: EuroMach GmbH" sub="Video call" tone="emerald" Icon={Video} />
                     <ScheduleDivider />
                     <ScheduleRow time="11:00" title="Review tender: Railway components – Poland" sub="Internal" tone="accent" Icon={FileText} />
@@ -229,7 +229,7 @@ function DashboardPage() {
               <aside className="space-y-8 lg:col-span-5">
                 <div>
                   <SectionLabel kicker="Intel" tone="accent">Need to Know</SectionLabel>
-                  <div className="glass-panel mt-5 rounded-3xl p-6">
+                  <div className="glass-panel mt-4 rounded-3xl p-5">
                     <IntelItem
                       time="09:41"
                       title="Upcoming multi-country trip: Bratislava → Yerevan → Bratislava (Jun 19–20)"
@@ -253,7 +253,7 @@ function DashboardPage() {
 
                 <div>
                   <SectionLabel kicker="Optional" tone="muted">Suggested</SectionLabel>
-                  <div className="mt-5 space-y-3">
+                  <div className="mt-4 space-y-2.5">
                     <SuggestedItem
                       title="Clean up duplicate pitch deck versions in Drive"
                       body="You have two copies of the full pitch deck in Drive. Consolidate to a single master."
@@ -303,7 +303,7 @@ function AskPerpetuity() {
   return (
     <div className="relative mb-10 group">
       <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-70 blur-[2px]" aria-hidden />
-      <div className="glass-panel-strong relative rounded-3xl p-5">
+      <div className="glass-panel-strong relative rounded-3xl p-4">
         <div className="flex items-center gap-3">
           <div className="ai-iridescent size-7 rounded-full ring-1 ring-foreground/5" aria-hidden />
           <input
@@ -405,9 +405,9 @@ function StatusPill({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="glass-panel group inline-flex h-8 items-center gap-2 rounded-full pl-1 pr-3 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
+        <button className="glass-panel group inline-flex h-7 items-center gap-1.5 rounded-full pl-0.5 pr-2.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
           <span
-            className={`flex size-6 items-center justify-center rounded-full bg-gradient-to-br ${gradient} text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20`}
+            className={`flex size-[22px] items-center justify-center rounded-full bg-gradient-to-br ${gradient} text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20`}
           >
             <Icon className="size-3" strokeWidth={2.5} />
           </span>
@@ -430,8 +430,8 @@ function TripPill() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="glass-panel group inline-flex h-8 items-center gap-2 rounded-full pl-1 pr-3 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
-          <span className="flex size-6 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20">
+        <button className="glass-panel group inline-flex h-7 items-center gap-1.5 rounded-full pl-0.5 pr-2.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
+          <span className="flex size-[22px] items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20">
             <Plane className="size-3" strokeWidth={2.5} />
           </span>
           <span className="font-mono text-[12px] font-semibold tabular-nums">5d</span>
@@ -580,7 +580,7 @@ function WorkCard({
 
   return (
     <article
-      className={`relative rounded-3xl p-5 transition-all ${
+      className={`relative rounded-3xl p-4 transition-all ${
         urgent ? "glass-panel-strong shadow-[0_8px_40px_-16px_hsl(25_60%_45%/0.2)]" : "glass-panel"
       } hover:bg-[var(--glass-surface-strong)]`}
     >
