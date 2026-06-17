@@ -85,9 +85,9 @@ function DashboardPage() {
                 MONDAY, 15 JUNE
               </p>
               <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                <h1 className="font-sans text-3xl font-medium tracking-tight md:text-4xl">
+                <h1 className="font-serif text-4xl tracking-tight md:text-5xl">
                   {greeting},{" "}
-                  <span className="font-serif italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">Stevan</span>
+                  <span className="italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">Stevan</span>
                 </h1>
                 <MorningBriefPill />
               </div>
@@ -241,7 +241,7 @@ function DashboardPage() {
 
                 {/* Today's schedule */}
                 <div className="mt-8">
-                  <SectionLabel kicker="Today" tone="quiet">Schedule</SectionLabel>
+                  <SectionLabel kicker="Today" tone="accent">Schedule</SectionLabel>
                   <div className="glass-panel mt-4 rounded-3xl p-1.5">
                     <ScheduleRow time="09:30" title="Buyer call: EuroMach GmbH" sub="Video call" tone="emerald" Icon={Video} />
                     <ScheduleDivider />
@@ -281,7 +281,7 @@ function DashboardPage() {
                 </div>
 
                 <div>
-                  <SectionLabel kicker="Optional" tone="muted">Suggested</SectionLabel>
+                  <SectionLabel kicker="Optional" tone="accent">Suggested</SectionLabel>
                   <div className="mt-4 space-y-2.5">
                     <SuggestedItem
                       title="Clean up duplicate pitch deck versions in Drive"
