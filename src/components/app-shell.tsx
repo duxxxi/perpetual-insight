@@ -8,7 +8,6 @@ import {
   Users,
   FileText,
   Compass,
-  LineChart,
   Plug,
   Settings,
   Plus,

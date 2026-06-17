@@ -13,7 +13,6 @@ import { Route as ThreadsRouteImport } from './routes/threads'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as OpportunitiesRouteImport } from './routes/opportunities'
-import { Route as MarketsRouteImport } from './routes/markets'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as ConnectionsRouteImport } from './routes/connections'
@@ -38,11 +37,6 @@ const OutreachRoute = OutreachRouteImport.update({
 const OpportunitiesRoute = OpportunitiesRouteImport.update({
   id: '/opportunities',
   path: '/opportunities',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MarketsRoute = MarketsRouteImport.update({
-  id: '/markets',
-  path: '/markets',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocumentsRoute = DocumentsRouteImport.update({
@@ -77,7 +71,6 @@ export interface FileRoutesByFullPath {
   '/connections': typeof ConnectionsRoute
   '/contacts': typeof ContactsRoute
   '/documents': typeof DocumentsRoute
-  '/markets': typeof MarketsRoute
   '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
   '/settings': typeof SettingsRoute
@@ -89,7 +82,6 @@ export interface FileRoutesByTo {
   '/connections': typeof ConnectionsRoute
   '/contacts': typeof ContactsRoute
   '/documents': typeof DocumentsRoute
-  '/markets': typeof MarketsRoute
   '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
   '/settings': typeof SettingsRoute
@@ -102,7 +94,6 @@ export interface FileRoutesById {
   '/connections': typeof ConnectionsRoute
   '/contacts': typeof ContactsRoute
   '/documents': typeof DocumentsRoute
-  '/markets': typeof MarketsRoute
   '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
   '/settings': typeof SettingsRoute
@@ -116,7 +107,6 @@ export interface FileRouteTypes {
     | '/connections'
     | '/contacts'
     | '/documents'
-    | '/markets'
     | '/opportunities'
     | '/outreach'
     | '/settings'
@@ -128,7 +118,6 @@ export interface FileRouteTypes {
     | '/connections'
     | '/contacts'
     | '/documents'
-    | '/markets'
     | '/opportunities'
     | '/outreach'
     | '/settings'
@@ -140,7 +129,6 @@ export interface FileRouteTypes {
     | '/connections'
     | '/contacts'
     | '/documents'
-    | '/markets'
     | '/opportunities'
     | '/outreach'
     | '/settings'
@@ -153,7 +141,6 @@ export interface RootRouteChildren {
   ConnectionsRoute: typeof ConnectionsRoute
   ContactsRoute: typeof ContactsRoute
   DocumentsRoute: typeof DocumentsRoute
-  MarketsRoute: typeof MarketsRoute
   OpportunitiesRoute: typeof OpportunitiesRoute
   OutreachRoute: typeof OutreachRoute
   SettingsRoute: typeof SettingsRoute
@@ -188,13 +175,6 @@ declare module '@tanstack/react-router' {
       path: '/opportunities'
       fullPath: '/opportunities'
       preLoaderRoute: typeof OpportunitiesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/markets': {
-      id: '/markets'
-      path: '/markets'
-      fullPath: '/markets'
-      preLoaderRoute: typeof MarketsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/documents': {
@@ -241,7 +221,6 @@ const rootRouteChildren: RootRouteChildren = {
   ConnectionsRoute: ConnectionsRoute,
   ContactsRoute: ContactsRoute,
   DocumentsRoute: DocumentsRoute,
-  MarketsRoute: MarketsRoute,
   OpportunitiesRoute: OpportunitiesRoute,
   OutreachRoute: OutreachRoute,
   SettingsRoute: SettingsRoute,
@@ -250,3 +229,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
