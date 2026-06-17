@@ -85,9 +85,9 @@ function DashboardPage() {
                 MONDAY, 15 JUNE
               </p>
               <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
+                <h1 className="font-sans text-3xl font-medium tracking-tight md:text-4xl">
                   {greeting},{" "}
-                  <span className="not-italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">Stevan</span>
+                  <span className="font-serif italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">Stevan</span>
                 </h1>
                 <MorningBriefPill />
               </div>
@@ -565,10 +565,10 @@ function SectionLabel({
     quiet: "text-foreground/55",
   };
   const sizeStyles: Record<string, string> = {
-    primary: "font-sans text-2xl font-semibold tracking-tight",
-    accent: "font-sans text-xl font-semibold tracking-tight",
-    muted: "font-sans text-lg font-semibold tracking-tight",
-    quiet: "font-sans text-xl font-semibold tracking-tight",
+    primary: "font-sans text-lg font-medium tracking-tight",
+    accent: "font-sans text-base font-medium tracking-tight",
+    muted: "font-sans text-base font-medium tracking-tight",
+    quiet: "font-sans text-base font-medium tracking-tight",
   };
   return (
     <div className="flex items-end justify-between gap-3 px-1">
@@ -640,7 +640,7 @@ function WorkCard({
             </div>
             <ArrowUpRight className="size-3.5 text-foreground/30" />
           </div>
-          <h4 className={`mt-1.5 font-sans text-lg font-semibold leading-snug ${done ? "line-through text-foreground/40" : ""}`}>
+          <h4 className={`mt-1.5 font-sans text-[15px] font-medium leading-snug ${done ? "line-through text-foreground/40" : ""}`}>
             {title}
           </h4>
           <p className="mt-2 text-xs leading-relaxed text-foreground/55">{body}</p>
