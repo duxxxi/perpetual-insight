@@ -66,9 +66,12 @@ export function ConversationDialog({
   // Subscribe so external updates reflect
   useEffect(() => {
     if (!id) return;
-    return conversationStore.subscribe(() => {
+    const unsub = conversationStore.subscribe(() => {
       setConv(conversationStore.get(id) ?? null);
     });
+    return () => {
+      unsub();
+    };
   }, [id]);
 
   // Auto-scroll & focus
@@ -106,8 +109,7 @@ export function ConversationDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        className="max-w-2xl gap-0 border-foreground/10 bg-background/80 p-0 backdrop-blur-2xl sm:rounded-3xl overflow-hidden"
-        showCloseButton={false}
+        className="max-w-2xl gap-0 border-foreground/10 bg-background/80 p-0 backdrop-blur-2xl sm:rounded-3xl overflow-hidden [&>button[type=button]:last-of-type]:hidden"
       >
         <DialogTitle className="sr-only">
           {conv?.title ?? "Ask Perpetuity"}
