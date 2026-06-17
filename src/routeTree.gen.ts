@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThreadsRouteImport } from './routes/threads'
 import { Route as SettingsRouteImport } from './routes/settings'
-import { Route as ScheduleRouteImport } from './routes/schedule'
 import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as MarketsRouteImport } from './routes/markets'
@@ -29,11 +28,6 @@ const ThreadsRoute = ThreadsRouteImport.update({
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScheduleRoute = ScheduleRouteImport.update({
-  id: '/schedule',
-  path: '/schedule',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OutreachRoute = OutreachRouteImport.update({
@@ -86,7 +80,6 @@ export interface FileRoutesByFullPath {
   '/markets': typeof MarketsRoute
   '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
-  '/schedule': typeof ScheduleRoute
   '/settings': typeof SettingsRoute
   '/threads': typeof ThreadsRoute
 }
@@ -99,7 +92,6 @@ export interface FileRoutesByTo {
   '/markets': typeof MarketsRoute
   '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
-  '/schedule': typeof ScheduleRoute
   '/settings': typeof SettingsRoute
   '/threads': typeof ThreadsRoute
 }
@@ -113,7 +105,6 @@ export interface FileRoutesById {
   '/markets': typeof MarketsRoute
   '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
-  '/schedule': typeof ScheduleRoute
   '/settings': typeof SettingsRoute
   '/threads': typeof ThreadsRoute
 }
@@ -128,7 +119,6 @@ export interface FileRouteTypes {
     | '/markets'
     | '/opportunities'
     | '/outreach'
-    | '/schedule'
     | '/settings'
     | '/threads'
   fileRoutesByTo: FileRoutesByTo
@@ -141,7 +131,6 @@ export interface FileRouteTypes {
     | '/markets'
     | '/opportunities'
     | '/outreach'
-    | '/schedule'
     | '/settings'
     | '/threads'
   id:
@@ -154,7 +143,6 @@ export interface FileRouteTypes {
     | '/markets'
     | '/opportunities'
     | '/outreach'
-    | '/schedule'
     | '/settings'
     | '/threads'
   fileRoutesById: FileRoutesById
@@ -168,7 +156,6 @@ export interface RootRouteChildren {
   MarketsRoute: typeof MarketsRoute
   OpportunitiesRoute: typeof OpportunitiesRoute
   OutreachRoute: typeof OutreachRoute
-  ScheduleRoute: typeof ScheduleRoute
   SettingsRoute: typeof SettingsRoute
   ThreadsRoute: typeof ThreadsRoute
 }
@@ -187,13 +174,6 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof SettingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/schedule': {
-      id: '/schedule'
-      path: '/schedule'
-      fullPath: '/schedule'
-      preLoaderRoute: typeof ScheduleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/outreach': {
@@ -264,10 +244,19 @@ const rootRouteChildren: RootRouteChildren = {
   MarketsRoute: MarketsRoute,
   OpportunitiesRoute: OpportunitiesRoute,
   OutreachRoute: OutreachRoute,
-  ScheduleRoute: ScheduleRoute,
   SettingsRoute: SettingsRoute,
   ThreadsRoute: ThreadsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
