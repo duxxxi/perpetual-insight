@@ -640,7 +640,7 @@ function WorkCard({
             </div>
             <ArrowUpRight className="size-3.5 text-foreground/30" />
           </div>
-          <h4 className={`mt-1.5 font-sans text-lg font-semibold leading-snug ${done ? "line-through text-foreground/40" : ""}`}>
+          <h4 className={`mt-1.5 font-sans text-[15px] font-medium leading-snug ${done ? "line-through text-foreground/40" : ""}`}>
             {title}
           </h4>
           <p className="mt-2 text-xs leading-relaxed text-foreground/55">{body}</p>
