@@ -243,7 +243,7 @@ function AssignmentsPage() {
     <PageShell
       active="assignments"
       eyebrow={`${allTasks.filter((t) => t.status !== "done").length} open · 2 urgent`}
-      title="\u00a0"
+      title=""
       accentWord="Assignments"
       rightSlot={
         <div className="flex items-center gap-2">
