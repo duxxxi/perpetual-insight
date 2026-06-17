@@ -193,7 +193,7 @@ function ContactsPage() {
     <PageShell
       active="contacts"
       eyebrow={`${contacts.length} relationships · 2 going cold`}
-      title="kept warm by Perpetuity"
+      title=""
       accentWord="Contacts"
       rightSlot={
         <button
