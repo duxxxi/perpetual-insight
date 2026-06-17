@@ -208,7 +208,7 @@ function OutreachPage() {
             className="glass-panel rounded-2xl px-4 py-3 text-left transition-colors hover:bg-foreground/[0.04]"
           >
             <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground/40">{s.k}</p>
-            <p className="mt-1 font-serif text-2xl italic tracking-tight">{s.v}</p>
+            <p className="mt-1 font-sans text-2xl font-semibold tracking-tight">{s.v}</p>
             <p className="mt-0.5 flex items-center gap-1 text-[10px] text-emerald-600">
               <TrendingUp className="size-2.5" /> {s.chg}
             </p>

@@ -60,7 +60,7 @@ export function usePerpetuityPanel() {
                 <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-foreground/45">
                   {detail.eyebrow ?? "Perpetuity · brief"}
                 </p>
-                <h3 className="mt-1 font-serif text-[19px] italic leading-snug text-foreground">
+                <h3 className="mt-1 font-sans text-[19px] font-semibold leading-snug text-foreground">
                   {detail.title}
                 </h3>
               </div>

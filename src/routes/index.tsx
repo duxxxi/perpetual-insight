@@ -68,7 +68,7 @@ function DashboardPage() {
 
       {/* Company name under ticker */}
       <div className="flex justify-center pt-4 pb-2">
-        <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-foreground/30">
+        <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-foreground/70">
           Perpetuity
         </span>
       </div>
@@ -113,7 +113,7 @@ function DashboardPage() {
                     </span>
                     <span className="text-[10px] font-mono text-foreground/30">JUN 19 → 20</span>
                   </div>
-                  <p className="mt-0.5 font-serif text-sm italic truncate">
+                  <p className="mt-0.5 font-sans text-sm font-medium truncate">
                     Bratislava → Yerevan → Bratislava
                   </p>
                 </div>
@@ -498,7 +498,7 @@ function PillDialogContent({
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/45">
             {count} · {title}
           </p>
-          <DialogTitle className="font-serif text-xl italic">{title}</DialogTitle>
+          <DialogTitle className="font-sans text-xl font-semibold">{title}</DialogTitle>
         </div>
       </DialogHeader>
       <div className="max-h-[60vh] overflow-y-auto p-2">
@@ -565,10 +565,10 @@ function SectionLabel({
     quiet: "text-foreground/55",
   };
   const sizeStyles: Record<string, string> = {
-    primary: "font-serif text-2xl italic",
-    accent: "font-serif text-xl italic",
-    muted: "font-serif text-lg italic",
-    quiet: "font-serif text-xl italic",
+    primary: "font-sans text-2xl font-semibold tracking-tight",
+    accent: "font-sans text-xl font-semibold tracking-tight",
+    muted: "font-sans text-lg font-semibold tracking-tight",
+    quiet: "font-sans text-xl font-semibold tracking-tight",
   };
   return (
     <div className="flex items-end justify-between gap-3 px-1">
@@ -640,7 +640,7 @@ function WorkCard({
             </div>
             <ArrowUpRight className="size-3.5 text-foreground/30" />
           </div>
-          <h4 className={`mt-1.5 font-serif text-lg italic leading-snug ${done ? "line-through text-foreground/40" : ""}`}>
+          <h4 className={`mt-1.5 font-sans text-lg font-semibold leading-snug ${done ? "line-through text-foreground/40" : ""}`}>
             {title}
           </h4>
           <p className="mt-2 text-xs leading-relaxed text-foreground/55">{body}</p>
@@ -696,7 +696,7 @@ function ActionDialog({
               {kicker}
             </p>
           )}
-          <DialogTitle className="font-serif text-xl italic">{title}</DialogTitle>
+          <DialogTitle className="font-sans text-xl font-semibold">{title}</DialogTitle>
         </DialogHeader>
         {body && (
           <div className="px-5 py-4">

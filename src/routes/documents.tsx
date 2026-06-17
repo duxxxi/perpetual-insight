@@ -291,7 +291,7 @@ function DocumentsPage() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-[10px] uppercase tracking-[0.18em] text-foreground/45">{selected.kind}</p>
-                  <h2 className="mt-0.5 font-serif text-[17px] italic leading-snug tracking-tight">{selected.name}</h2>
+                  <h2 className="mt-0.5 font-sans text-[17px] font-semibold leading-snug tracking-tight">{selected.name}</h2>
                   <p className="mt-1 text-[11px] text-foreground/55">
                     {selected.size} · updated {selected.updated} · {selected.owner}
                   </p>

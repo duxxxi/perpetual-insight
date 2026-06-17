@@ -229,7 +229,7 @@ function ThreadsPage() {
                 <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
                   Activity log · 142 threads · 9 open
                 </p>
-                <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
+                <h1 className="font-sans text-3xl font-semibold tracking-tight md:text-4xl">
                   <span className="not-italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">Threads</span>
                 </h1>
                 <p className="mt-1 text-[12px] text-foreground/55">
@@ -416,7 +416,7 @@ function ThreadDetail({
               {thread.kind}
             </span>
           </div>
-          <h2 className="mt-2 font-serif text-xl italic tracking-tight">{thread.title}</h2>
+          <h2 className="mt-2 font-sans text-xl font-semibold tracking-tight">{thread.title}</h2>
           <p className="mt-1 text-[12px] text-foreground/55">
             <span className="text-foreground/80">{thread.source}</span>
             {thread.steps ? ` · ${thread.steps} steps` : ""} · {thread.time}

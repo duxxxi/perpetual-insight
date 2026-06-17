@@ -520,7 +520,7 @@ function TaskDetailDialog({
                 <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-foreground/45">
                   Perpetuity · brief
                 </p>
-                <h3 className="mt-1 font-serif text-[19px] italic leading-snug text-foreground">
+                <h3 className="mt-1 font-sans text-[19px] font-semibold leading-snug text-foreground">
                   {task.title}
                 </h3>
                 <div className="mt-1.5 flex flex-wrap items-center gap-1.5 text-[10.5px] text-foreground/55">
@@ -665,7 +665,7 @@ function NewAssignmentDialog({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="What needs to happen?"
-            className="mt-2 w-full bg-transparent font-serif text-lg italic tracking-tight text-foreground placeholder:text-foreground/30 focus:outline-none"
+            className="mt-2 w-full bg-transparent font-sans text-lg font-medium tracking-tight text-foreground placeholder:text-foreground/30 focus:outline-none"
           />
           <textarea
             value={body}
@@ -714,7 +714,7 @@ function ProposalDialog({
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-foreground/45">
             {mode === "promote" ? "Promote 3 threads" : "Review one-by-one"}
           </p>
-          <h3 className="mt-1 font-serif text-[18px] italic text-foreground">
+          <h3 className="mt-1 font-sans text-[18px] font-semibold text-foreground">
             {mode === "promote"
               ? "Convert these threads into tracked assignments?"
               : "Step through each candidate"}
