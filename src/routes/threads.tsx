@@ -205,6 +205,7 @@ function ThreadsPage() {
   useTheme();
   const [selectedId, setSelectedId] = useState<string>(threads[0].id);
   const [kind, setKind] = useState<(typeof kinds)[number]>("All");
+  const { open, panel } = usePerpetuityPanel();
   const selected = threads.find((t) => t.id === selectedId)!;
 
   const filtered = threads.filter((t) => {
