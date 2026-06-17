@@ -27,6 +27,7 @@ import {
   AppSidebar,
   AppFooter,
 } from "@/components/app-shell";
+import { usePerpetuityPanel, type PanelDetail } from "@/components/perpetuity-panel";
 
 export const Route = createFileRoute("/threads")({
   head: () => ({
