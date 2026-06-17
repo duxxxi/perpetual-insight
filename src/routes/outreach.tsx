@@ -138,7 +138,7 @@ function OutreachPage() {
     <PageShell
       active="outreach"
       eyebrow="4 campaigns · 21 replies this week"
-      title="that lands at the right moment"
+      title="\u00a0"
       accentWord="Outreach"
       rightSlot={
         <div className="flex items-center gap-2">
