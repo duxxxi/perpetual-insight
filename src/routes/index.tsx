@@ -67,7 +67,7 @@ function DashboardPage() {
       <CommodityTicker />
 
       {/* Company name under ticker */}
-      <div className="flex justify-center pt-1 pb-1">
+      <div className="flex justify-center pt-4 pb-2">
         <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-foreground/30">
           Perpetuity
         </span>
