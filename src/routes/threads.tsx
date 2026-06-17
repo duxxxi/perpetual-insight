@@ -28,6 +28,8 @@ import {
   AppFooter,
 } from "@/components/app-shell";
 import { usePerpetuityPanel, type PanelDetail } from "@/components/perpetuity-panel";
+import { useConversations } from "@/lib/conversation-store";
+import { ConversationDialog } from "@/components/conversation-dialog";
 
 export const Route = createFileRoute("/threads")({
   head: () => ({
@@ -203,12 +205,41 @@ const kinds = ["All", "Conversation", "Task", "Suggestion", "Briefing"] as const
 
 function ThreadsPage() {
   useTheme();
-  const [selectedId, setSelectedId] = useState<string>(threads[0].id);
+  const stored = useConversations();
+  const [resumeId, setResumeId] = useState<string | null>(null);
+
+  const storedAsThreads: Thread[] = stored.map((c) => {
+    const last = c.messages[c.messages.length - 1];
+    const first = c.messages[0];
+    return {
+      id: c.id,
+      kind: "Conversation",
+      title: c.title,
+      preview: last?.text ?? "",
+      time: new Date(c.updatedAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      tag: "Ops",
+      status: "In progress",
+      source: "Dashboard chat",
+      steps: c.messages.length,
+      summary: `${c.messages.length} message${c.messages.length === 1 ? "" : "s"} · started ${new Date(c.createdAt).toLocaleString()}`,
+      body: c.messages
+        .map((m) => `${m.role === "user" ? "You" : "Perpetuity"}: ${m.text}`)
+        .join("\n\n"),
+      unread: false,
+      starred: false,
+      priority: null,
+    };
+  });
+
+  const allThreads: Thread[] = [...storedAsThreads, ...threads];
+
+  const [selectedId, setSelectedId] = useState<string>(allThreads[0]?.id ?? threads[0].id);
   const [kind, setKind] = useState<(typeof kinds)[number]>("All");
   const { open, panel } = usePerpetuityPanel();
-  const selected = threads.find((t) => t.id === selectedId)!;
+  const selected = allThreads.find((t) => t.id === selectedId) ?? allThreads[0];
+  const isStoredConv = selected?.id.startsWith("c_");
 
-  const filtered = threads.filter((t) => {
+  const filtered = allThreads.filter((t) => {
     if (kind !== "All" && t.kind !== kind) return false;
     return true;
   });
@@ -357,6 +388,17 @@ function ThreadsPage() {
 
               {/* Detail */}
               <section className="lg:col-span-7">
+                {isStoredConv && (
+                  <div className="mb-2 flex justify-end">
+                    <button
+                      type="button"
+                      onClick={() => setResumeId(selected.id)}
+                      className="inline-flex items-center gap-1.5 rounded-full bg-foreground px-3 py-1.5 text-[11px] font-medium text-background hover:opacity-90"
+                    >
+                      Resume conversation
+                    </button>
+                  </div>
+                )}
                 <ThreadDetail thread={selected} open={open} />
               </section>
             </div>
@@ -365,6 +407,11 @@ function ThreadsPage() {
       </div>
 
       {panel}
+      <ConversationDialog
+        open={!!resumeId}
+        onOpenChange={(o) => !o && setResumeId(null)}
+        conversationId={resumeId}
+      />
       <AppFooter />
     </div>
   );
