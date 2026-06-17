@@ -61,16 +61,27 @@ function DashboardPage() {
   useTheme();
   const userTasks = useUserTasks();
   const greeting = getGreeting();
+  const [appleTheme, setAppleTheme] = useState(false);
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
+    <div className={`${appleTheme ? "theme-apple " : ""}min-h-screen bg-background text-foreground font-sans selection:bg-accent/15`}>
       <AmbientBackground />
       <CommodityTicker />
 
       {/* Company name under ticker */}
-      <div className="flex justify-center pt-4 pb-2">
+      <div className="flex justify-center pt-4 pb-2 gap-3 items-center">
         <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-foreground/70">
           Perpetuity
         </span>
+        <button
+          type="button"
+          onClick={() => setAppleTheme((v) => !v)}
+          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card/60 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.2em] text-foreground/70 hover:text-foreground hover:border-accent/50 transition"
+          title="Toggle theme variant"
+        >
+          <span className={appleTheme ? "text-foreground/40" : "text-accent"}>Loro</span>
+          <span className="text-foreground/30">/</span>
+          <span className={appleTheme ? "text-accent" : "text-foreground/40"}>Apple</span>
+        </button>
       </div>
 
       <div className="flex">
