@@ -787,9 +787,19 @@ function Pill({ children, tone }: { children: React.ReactNode; tone: "rose" | "a
   );
 }
 
-function IconButton({ children, title }: { children: React.ReactNode; title: string }) {
+function IconButton({
+  children,
+  title,
+  onClick,
+}: {
+  children: React.ReactNode;
+  title: string;
+  onClick?: () => void;
+}) {
   return (
-    <button data-pill
+    <button
+      type="button"
+      onClick={onClick}
       title={title}
       className="flex size-8 items-center justify-center rounded-full text-foreground/50 transition-colors hover:bg-foreground/5 hover:text-foreground"
     >
@@ -802,13 +812,17 @@ function SmartAction({
   icon: Icon,
   label,
   primary,
+  onClick,
 }: {
   icon: typeof Reply;
   label: string;
   primary?: boolean;
+  onClick?: () => void;
 }) {
   return (
-    <button data-pill
+    <button
+      type="button"
+      onClick={onClick}
       className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium transition-colors ${
         primary
           ? "bg-foreground text-background hover:bg-foreground/90"
