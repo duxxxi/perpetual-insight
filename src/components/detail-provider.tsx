@@ -22,12 +22,17 @@ export function DetailProvider({ children }: { children: ReactNode }) {
     function onClick(e: MouseEvent) {
       const target = e.target as HTMLElement | null;
       if (!target) return;
-      const btn = target.closest<HTMLElement>("button[data-pill], [data-detail]");
+      // Explicit opt-in only: data-detail. data-pill is just a styling marker
+      // and many data-pill buttons are Radix Dialog/Popover triggers that
+      // already manage their own UI — never hijack those.
+      const btn = target.closest<HTMLElement>("[data-detail]");
       if (!btn) return;
       if (e.defaultPrevented) return;
+      // Skip Radix triggers (they have aria-haspopup / data-state) so their
+      // own Dialog/Popover opens instead of our generic panel.
+      if (btn.hasAttribute("aria-haspopup") || btn.hasAttribute("data-state")) return;
       const title =
         btn.getAttribute("data-detail-title") ||
-        btn.getAttribute("data-pill") ||
         btn.textContent?.trim() ||
         "Details";
       const body =
