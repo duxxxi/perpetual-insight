@@ -357,13 +357,14 @@ function ThreadsPage() {
 
               {/* Detail */}
               <section className="lg:col-span-7">
-                <ThreadDetail thread={selected} />
+                <ThreadDetail thread={selected} open={open} />
               </section>
             </div>
           </div>
         </main>
       </div>
 
+      {panel}
       <AppFooter />
     </div>
   );
@@ -371,7 +372,38 @@ function ThreadsPage() {
 
 /* ---------- Detail panel ---------- */
 
-function ThreadDetail({ thread }: { thread: Thread }) {
+function ThreadDetail({
+  thread,
+  open,
+}: {
+  thread: Thread;
+  open: (d: PanelDetail) => void;
+}) {
+  const base: PanelDetail = {
+    title: thread.title,
+    eyebrow: `${thread.kind} · ${thread.tag}`,
+    source: `${thread.source} · ${thread.time}`,
+    why: thread.summary,
+    body: thread.body,
+  };
+
+  const headerAction = (label: string, why: string, steps: string[]) =>
+    open({ ...base, eyebrow: `Thread · ${label}`, title: `${label} · ${thread.title}`, why, steps });
+
+  const smartAction = (label: string, why: string, steps: string[]) =>
+    open({
+      ...base,
+      eyebrow: `Action · ${label}`,
+      title: `${label} · ${thread.title}`,
+      why,
+      steps,
+      actions: [
+        { label: "Run it", primary: true },
+        { label: "Edit first" },
+        { label: "Snooze" },
+      ],
+    });
+
   return (
     <div className="glass-panel-strong rounded-3xl">
       {/* Header */}
@@ -391,16 +423,52 @@ function ThreadDetail({ thread }: { thread: Thread }) {
           </p>
         </div>
         <div className="flex items-center gap-1">
-          <IconButton title="Star">
+          <IconButton
+            title="Star"
+            onClick={() =>
+              headerAction(
+                "Star",
+                "Starring pins this thread to the top of your Threads view and tells Perpetuity to surface related context first.",
+                ["Pin to top", "Boost priority in morning brief"],
+              )
+            }
+          >
             <Star className="size-4" strokeWidth={1.5} />
           </IconButton>
-          <IconButton title="Tag">
+          <IconButton
+            title="Tag"
+            onClick={() =>
+              headerAction(
+                "Tag",
+                "Add a tag to route this thread into the right bucket — Buyer, Treasury, Compliance, Ops…",
+                ["Pick or create a tag", "Apply to thread + linked tasks"],
+              )
+            }
+          >
             <Tag className="size-4" strokeWidth={1.5} />
           </IconButton>
-          <IconButton title="Archive">
+          <IconButton
+            title="Archive"
+            onClick={() =>
+              headerAction(
+                "Archive",
+                "Move out of the active list. Perpetuity will still surface it if a related counterparty or topic moves.",
+                ["Archive now", "Auto-restore on related signal"],
+              )
+            }
+          >
             <Archive className="size-4" strokeWidth={1.5} />
           </IconButton>
-          <IconButton title="More">
+          <IconButton
+            title="More"
+            onClick={() =>
+              headerAction(
+                "More actions",
+                "Other things you can do with this thread.",
+                ["Forward to a contact", "Convert to brief", "Export PDF", "Mute notifications"],
+              )
+            }
+          >
             <MoreHorizontal className="size-4" strokeWidth={1.5} />
           </IconButton>
         </div>
@@ -437,31 +505,165 @@ function ThreadDetail({ thread }: { thread: Thread }) {
       <div className="flex flex-wrap items-center gap-2 border-t border-foreground/5 px-6 py-4">
         {thread.kind === "Conversation" && (
           <>
-            <SmartAction icon={Reply} label="Continue chat" primary />
-            <SmartAction icon={ListChecks} label="Convert to task" />
-            <SmartAction icon={CheckCircle2} label="Mark resolved" />
+            <SmartAction
+              icon={Reply}
+              label="Continue chat"
+              primary
+              onClick={() =>
+                smartAction(
+                  "Continue chat",
+                  "Reopens this conversation with Perpetuity and pre-loads the full prior context so you don't repeat yourself.",
+                  ["Restore message history", "Re-attach related docs", "Carry over CRM context"],
+                )
+              }
+            />
+            <SmartAction
+              icon={ListChecks}
+              label="Convert to task"
+              onClick={() =>
+                smartAction(
+                  "Convert to task",
+                  "Promote this conversation into a tracked assignment with owner, due date, and the chat history attached.",
+                  ["Extract action items", "Assign owner", "Set due date", "Link back to this thread"],
+                )
+              }
+            />
+            <SmartAction
+              icon={CheckCircle2}
+              label="Mark resolved"
+              onClick={() =>
+                smartAction(
+                  "Mark resolved",
+                  "Close this conversation. Perpetuity will keep it searchable and re-surface if the topic returns.",
+                  ["Close thread", "Index for future recall"],
+                )
+              }
+            />
           </>
         )}
         {thread.kind === "Task" && (
           <>
-            <SmartAction icon={Play} label="Approve & run" primary />
-            <SmartAction icon={Clock} label="Snooze" />
-            <SmartAction icon={CheckCircle2} label="Mark done" />
-            <SmartAction icon={Paperclip} label="Attach context" />
+            <SmartAction
+              icon={Play}
+              label="Approve & run"
+              primary
+              onClick={() =>
+                smartAction(
+                  "Approve & run",
+                  "Greenlight the next step. Perpetuity will execute, log it, and report back when done.",
+                  ["Send the drafted output", "Update CRM stage", "Notify counterparty", "Log the action"],
+                )
+              }
+            />
+            <SmartAction
+              icon={Clock}
+              label="Snooze"
+              onClick={() =>
+                smartAction(
+                  "Snooze",
+                  "Hide this task until later. Perpetuity will resurface based on counterparty or deadline signals.",
+                  ["Snooze 4h / Tomorrow 09:00 / Next week", "Wake on counterparty reply"],
+                )
+              }
+            />
+            <SmartAction
+              icon={CheckCircle2}
+              label="Mark done"
+              onClick={() =>
+                smartAction(
+                  "Mark done",
+                  "Close the task. Perpetuity will write a short outcome note and link it to the original thread.",
+                  ["Confirm completion", "Auto-write outcome summary"],
+                )
+              }
+            />
+            <SmartAction
+              icon={Paperclip}
+              label="Attach context"
+              onClick={() =>
+                smartAction(
+                  "Attach context",
+                  "Pull in extra docs, threads, or CRM records to inform the task.",
+                  ["Search inbox & drive", "Suggest 3 most relevant docs", "Attach & re-summarize"],
+                )
+              }
+            />
           </>
         )}
         {thread.kind === "Suggestion" && (
           <>
-            <SmartAction icon={CheckCircle2} label="Act on it" primary />
-            <SmartAction icon={Clock} label="Remind me later" />
-            <SmartAction icon={Circle} label="Dismiss" />
+            <SmartAction
+              icon={CheckCircle2}
+              label="Act on it"
+              primary
+              onClick={() =>
+                smartAction(
+                  "Act on this suggestion",
+                  "Execute the play Perpetuity proposed. The full reasoning trail is kept for review.",
+                  ["Run the proposed action", "Log decision + reasoning", "Set a 24h check-in"],
+                )
+              }
+            />
+            <SmartAction
+              icon={Clock}
+              label="Remind me later"
+              onClick={() =>
+                smartAction(
+                  "Remind me later",
+                  "Push this suggestion to a quieter moment. Perpetuity holds the reasoning for when you return.",
+                  ["Defer to tomorrow morning", "Keep linked signals tracked"],
+                )
+              }
+            />
+            <SmartAction
+              icon={Circle}
+              label="Dismiss"
+              onClick={() =>
+                smartAction(
+                  "Dismiss suggestion",
+                  "Tell Perpetuity this isn't relevant. It learns from the dismissal and won't re-surface unless signals strengthen.",
+                  ["Mark not relevant", "Tighten future thresholds"],
+                )
+              }
+            />
           </>
         )}
         {thread.kind === "Briefing" && (
           <>
-            <SmartAction icon={ListChecks} label="Create tasks" primary />
-            <SmartAction icon={BookOpen} label="Open full brief" />
-            <SmartAction icon={CheckCircle2} label="Mark read" />
+            <SmartAction
+              icon={ListChecks}
+              label="Create tasks"
+              primary
+              onClick={() =>
+                smartAction(
+                  "Create tasks from brief",
+                  "Spin off the items in this brief into tracked assignments with owners and deadlines.",
+                  ["Extract action items", "Assign owners", "Push to Assignments"],
+                )
+              }
+            />
+            <SmartAction
+              icon={BookOpen}
+              label="Open full brief"
+              onClick={() =>
+                smartAction(
+                  "Open full brief",
+                  "Read the longer-form version with sources, charts, and confidence notes.",
+                  ["Open in reader view", "Show source citations"],
+                )
+              }
+            />
+            <SmartAction
+              icon={CheckCircle2}
+              label="Mark read"
+              onClick={() =>
+                smartAction(
+                  "Mark brief read",
+                  "Acknowledge the brief. Perpetuity learns which sections you act on vs. skim.",
+                  ["Mark read", "Adjust future brief weighting"],
+                )
+              }
+            />
           </>
         )}
       </div>
@@ -476,7 +678,22 @@ function ThreadDetail({ thread }: { thread: Thread }) {
               placeholder="Ask Perpetuity to take it further…"
               className="flex-1 bg-transparent text-sm placeholder:text-foreground/40 focus:outline-none"
             />
-            <button data-pill className="inline-flex size-8 items-center justify-center rounded-xl bg-foreground text-background transition-transform hover:scale-105">
+            <button
+              type="button"
+              onClick={() =>
+                open({
+                  title: `Continue · ${thread.title}`,
+                  eyebrow: "Ask Perpetuity",
+                  why: "Drop a follow-up question or instruction. Perpetuity already has this thread, the linked docs, and the counterparty profile loaded.",
+                  steps: [
+                    "Compose your follow-up",
+                    "Perpetuity drafts a response with sources",
+                    "You approve, edit, or send straight through",
+                  ],
+                })
+              }
+              className="inline-flex size-8 items-center justify-center rounded-xl bg-foreground text-background transition-transform hover:scale-105"
+            >
               <ArrowUp className="size-4" />
             </button>
           </div>
