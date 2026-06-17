@@ -61,9 +61,8 @@ function DashboardPage() {
   useTheme();
   const userTasks = useUserTasks();
   const greeting = getGreeting();
-  const [appleTheme, setAppleTheme] = useState(false);
   return (
-    <div className={`${appleTheme ? "theme-apple " : ""}min-h-screen bg-background text-foreground font-sans selection:bg-accent/15`}>
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
       <AmbientBackground />
       <CommodityTicker />
 
@@ -72,16 +71,6 @@ function DashboardPage() {
         <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-foreground/70">
           Perpetuity
         </span>
-        <button
-          type="button"
-          onClick={() => setAppleTheme((v) => !v)}
-          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card/60 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.2em] text-foreground/70 hover:text-foreground hover:border-accent/50 transition"
-          title="Toggle theme variant"
-        >
-          <span className={appleTheme ? "text-foreground/40" : "text-accent"}>Loro</span>
-          <span className="text-foreground/30">/</span>
-          <span className={appleTheme ? "text-accent" : "text-foreground/40"}>Apple</span>
-        </button>
       </div>
 
       <div className="flex">
@@ -98,7 +87,7 @@ function DashboardPage() {
               <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                 <h1 className="font-serif font-normal text-3xl tracking-tight md:text-4xl">
                   {greeting},{" "}
-                  <span className="italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">Stevan</span>
+                  <span className="italic bg-gradient-to-br from-muted-foreground to-foreground bg-clip-text text-transparent">Stevan</span>
                 </h1>
                 <MorningBriefPill />
               </div>
