@@ -268,7 +268,20 @@ function ThreadsPage() {
                     </button>
                   );
                 })}
-                <button data-pill
+                <button
+                  type="button"
+                  onClick={() =>
+                    open({
+                      title: "Filter threads",
+                      eyebrow: "Perpetuity · filter",
+                      why: "Narrow what you see by tag, owner, priority, or last activity. Perpetuity will keep these filters across sessions.",
+                      steps: [
+                        "Pick one or more tags (Treasury, Buyer, Compliance…)",
+                        "Optionally constrain to threads opened in the last 24h",
+                        "Save as a smart view (e.g. \"Urgent buyer replies\")",
+                      ],
+                    })
+                  }
                   className="ml-1 flex size-7 items-center justify-center rounded-full text-foreground/45 hover:text-foreground"
                   title="Filter"
                 >
