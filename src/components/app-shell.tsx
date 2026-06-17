@@ -4,7 +4,6 @@ import {
   Home,
   MessagesSquare,
   ListChecks,
-  Calendar,
   Send,
   Users,
   FileText,
