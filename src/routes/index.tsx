@@ -85,7 +85,7 @@ function DashboardPage() {
                 MONDAY, 15 JUNE
               </p>
               <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                <h1 className="font-serif text-4xl tracking-tight md:text-5xl">
+                <h1 className="font-serif font-normal text-3xl tracking-tight md:text-4xl">
                   {greeting},{" "}
                   <span className="italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">Stevan</span>
                 </h1>
