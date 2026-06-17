@@ -565,10 +565,10 @@ function SectionLabel({
     quiet: "text-foreground/55",
   };
   const sizeStyles: Record<string, string> = {
-    primary: "font-sans text-2xl font-semibold tracking-tight",
-    accent: "font-sans text-xl font-semibold tracking-tight",
-    muted: "font-sans text-lg font-semibold tracking-tight",
-    quiet: "font-sans text-xl font-semibold tracking-tight",
+    primary: "font-sans text-lg font-medium tracking-tight",
+    accent: "font-sans text-base font-medium tracking-tight",
+    muted: "font-sans text-base font-medium tracking-tight",
+    quiet: "font-sans text-base font-medium tracking-tight",
   };
   return (
     <div className="flex items-end justify-between gap-3 px-1">
