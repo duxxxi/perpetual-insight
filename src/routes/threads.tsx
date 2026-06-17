@@ -230,7 +230,7 @@ function ThreadsPage() {
                   Activity log · 142 threads · 9 open
                 </p>
                 <h1 className="font-sans text-3xl font-semibold tracking-tight md:text-4xl">
-                  <span className="not-italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">Threads</span>
+                  <span className="not-italic bg-gradient-to-br from-muted-foreground to-foreground bg-clip-text text-transparent">Threads</span>
                 </h1>
                 <p className="mt-1 text-[12px] text-foreground/55">
                   Every conversation, task, and suggestion Perpetuity has handled with you.

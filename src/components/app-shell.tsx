@@ -317,7 +317,7 @@ export function PageShell({
                 className="pointer-events-none absolute -left-10 -top-10 size-48 rounded-full opacity-60 blur-3xl"
                 style={{
                   background:
-                    "radial-gradient(circle, hsl(25 70% 60% / 0.18), transparent 70%)",
+                    "radial-gradient(circle, hsl(220 20% 55% / 0.18), transparent 70%)",
                 }}
               />
               <div className="relative">
@@ -328,7 +328,7 @@ export function PageShell({
                 <h1 className="font-sans text-3xl font-semibold tracking-tight md:text-4xl">
                   {accentWord ? (
                     <>
-                      <span className="not-italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">
+                      <span className="not-italic bg-gradient-to-br from-muted-foreground to-foreground bg-clip-text text-transparent">
                         {accentWord}
                       </span>
                       {title ? <span className="text-foreground/80"> · {title}</span> : null}
