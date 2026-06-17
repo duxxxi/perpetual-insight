@@ -90,6 +90,67 @@
   --glass-border: rgba(255, 245, 230, 0.08);
 }
 
+/* ============================================================
+   Apple-tech theme variant — scoped via .theme-apple wrapper.
+   Metallic silver light mode + deep navy dark mode, with a
+   crisper systemBlue accent and tighter highlights.
+   ============================================================ */
+.theme-apple {
+  --radius: 0.875rem;
+  /* Cool metallic silver, near-white with a faint blue cast */
+  --background: hsl(220 20% 96%);
+  --foreground: hsl(220 25% 12%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(220 25% 12%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(220 25% 12%);
+  --primary: hsl(212 100% 45%);            /* systemBlue */
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(220 16% 90%);
+  --secondary-foreground: hsl(220 25% 12%);
+  --muted: hsl(220 16% 92%);
+  --muted-foreground: hsl(220 12% 40%);
+  --accent: hsl(212 100% 50%);             /* electric blue highlight */
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(4 80% 52%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(220 20% 12% / 0.10);
+  --input: hsl(220 20% 12% / 0.14);
+  --ring: hsl(212 100% 50% / 0.5);
+
+  --glass-surface: rgba(255, 255, 255, 0.62);
+  --glass-surface-strong: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(15, 23, 42, 0.10);
+}
+
+.dark .theme-apple,
+.theme-apple.dark {
+  /* Deep navy with elevated graphite surfaces */
+  --background: hsl(222 47% 6%);
+  --foreground: hsl(210 40% 96%);
+  --card: hsl(222 40% 10%);
+  --card-foreground: hsl(210 40% 96%);
+  --popover: hsl(222 40% 10%);
+  --popover-foreground: hsl(210 40% 96%);
+  --primary: hsl(210 100% 62%);            /* bright systemBlue */
+  --primary-foreground: hsl(222 47% 6%);
+  --secondary: hsl(222 35% 14%);
+  --secondary-foreground: hsl(210 40% 96%);
+  --muted: hsl(222 32% 16%);
+  --muted-foreground: hsl(215 25% 70%);
+  --accent: hsl(190 95% 55%);              /* cyan accent pop */
+  --accent-foreground: hsl(222 47% 6%);
+  --destructive: hsl(4 85% 60%);
+  --destructive-foreground: hsl(210 40% 96%);
+  --border: hsl(210 40% 96% / 0.10);
+  --input: hsl(210 40% 96% / 0.14);
+  --ring: hsl(210 100% 62% / 0.55);
+
+  --glass-surface: rgba(15, 23, 42, 0.55);
+  --glass-surface-strong: rgba(20, 30, 55, 0.75);
+  --glass-border: rgba(125, 180, 255, 0.12);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
