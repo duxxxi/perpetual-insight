@@ -50,13 +50,28 @@ export const Route = createFileRoute("/")({
 });
 
 
+function getGreeting() {
+  const hour = new Date().getHours();
+  if (hour < 12) return "Good morning";
+  if (hour < 18) return "Good afternoon";
+  return "Good evening";
+}
+
 function DashboardPage() {
   useTheme();
   const userTasks = useUserTasks();
+  const greeting = getGreeting();
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
       <AmbientBackground />
       <CommodityTicker />
+
+      {/* Company name under ticker */}
+      <div className="flex justify-center pt-1 pb-1">
+        <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-foreground/30">
+          Perpetuity
+        </span>
+      </div>
 
       <div className="flex">
         <AppSidebar active="home" />
@@ -66,13 +81,13 @@ function DashboardPage() {
           <div className="mx-auto max-w-6xl animate-fade-in-up">
             {/* Header */}
             <header className="mb-5">
-              <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
+              <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
                 MONDAY, 15 JUNE
               </p>
               <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                 <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
-                  Good afternoon,{" "}
-                  <span className="not-italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">Perpetuity</span>
+                  {greeting},{" "}
+                  <span className="not-italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">Stevan</span>
                 </h1>
                 <MorningBriefPill />
               </div>
