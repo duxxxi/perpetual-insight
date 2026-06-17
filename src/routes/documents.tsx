@@ -175,7 +175,7 @@ function DocumentsPage() {
     <PageShell
       active="documents"
       eyebrow={`${docs.length} documents · 3 added today`}
-      title="organized, summarized, searchable"
+      title=""
       accentWord="Documents"
       rightSlot={
         <div className="flex items-center gap-2">
