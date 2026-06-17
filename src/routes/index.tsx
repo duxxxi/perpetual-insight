@@ -35,6 +35,7 @@ import {
 import { useTheme } from "@/hooks/use-theme";
 import { AmbientBackground, CommodityTicker, AppSidebar, AppFooter } from "@/components/app-shell";
 import { useUserTasks } from "@/lib/task-store";
+import { ConversationDialog } from "@/components/conversation-dialog";
 
 
 export const Route = createFileRoute("/")({
@@ -313,6 +314,17 @@ function DashboardPage() {
 
 function AskPerpetuity() {
   const [permission, setPermission] = useState("ask");
+  const [draft, setDraft] = useState("");
+  const [convOpen, setConvOpen] = useState(false);
+  const [pending, setPending] = useState<string | null>(null);
+
+  const launch = () => {
+    const v = draft.trim();
+    if (!v) return;
+    setPending(v);
+    setDraft("");
+    setConvOpen(true);
+  };
 
   const permissions = [
     { id: "ask", label: "Ask before any write actions", sub: "Default" },
@@ -337,10 +349,24 @@ function AskPerpetuity() {
           <div className="ai-iridescent size-7 rounded-full ring-1 ring-foreground/5" aria-hidden />
           <input
             type="text"
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                launch();
+              }
+            }}
             placeholder="Ask Perpetuity anything…"
             className="flex-1 bg-transparent text-sm font-medium placeholder:text-foreground/40 focus:outline-none"
           />
-          <button data-pill className="inline-flex size-9 items-center justify-center rounded-2xl bg-foreground text-background transition-transform hover:scale-105">
+          <button
+            type="button"
+            onClick={launch}
+            disabled={!draft.trim()}
+            data-pill
+            className="inline-flex size-9 items-center justify-center rounded-2xl bg-foreground text-background transition-transform hover:scale-105 disabled:opacity-40 disabled:hover:scale-100"
+          >
             <ArrowUp className="size-4" />
           </button>
         </div>
