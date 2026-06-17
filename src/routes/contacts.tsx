@@ -361,7 +361,7 @@ function ContactsPage() {
                     {selected.bucket} · last touch {selected.last}
                   </span>
                 </div>
-                <h2 className="mt-1 font-serif text-2xl italic tracking-tight">{selected.name}</h2>
+                <h2 className="mt-1 font-sans text-2xl font-semibold tracking-tight">{selected.name}</h2>
                 <p className="text-[12px] text-foreground/60">
                   {selected.role} · <span className="text-foreground/80">{selected.company}</span>
                 </p>

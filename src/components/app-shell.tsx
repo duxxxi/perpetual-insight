@@ -243,7 +243,7 @@ function AskPerpetuityButton() {
                     : "Start a conversation, ask anything…"
                 }
                 rows={3}
-                className="w-full resize-none bg-transparent font-serif text-lg italic leading-snug tracking-tight text-foreground placeholder:text-foreground/30 focus:outline-none"
+                className="w-full resize-none bg-transparent font-sans text-lg font-medium leading-snug tracking-tight text-foreground placeholder:text-foreground/30 focus:outline-none"
               />
               <div className="mt-2 flex items-center justify-between border-t border-foreground/5 pt-2">
                 <p className="text-[10px] uppercase tracking-[0.18em] text-foreground/40">
@@ -325,7 +325,7 @@ export function PageShell({
                   <span className="size-1.5 rounded-full bg-accent shadow-[0_0_8px_currentColor]" />
                   {eyebrow}
                 </p>
-                <h1 className="font-serif text-3xl italic tracking-tight md:text-4xl">
+                <h1 className="font-sans text-3xl font-semibold tracking-tight md:text-4xl">
                   {accentWord ? (
                     <>
                       <span className="not-italic bg-gradient-to-br from-accent to-foreground bg-clip-text text-transparent">

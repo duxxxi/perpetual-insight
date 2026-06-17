@@ -144,7 +144,7 @@ function Panel({ title, desc, children }: { title: string; desc: string; childre
   return (
     <div className="glass-panel-strong rounded-3xl p-6">
       <div className="mb-5">
-        <h2 className="font-serif text-xl italic tracking-tight">{title}</h2>
+        <h2 className="font-sans text-xl font-semibold tracking-tight">{title}</h2>
         <p className="mt-1 text-[12px] text-foreground/55">{desc}</p>
       </div>
       <div className="space-y-2.5">{children}</div>

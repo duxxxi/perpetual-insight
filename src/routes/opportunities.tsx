@@ -174,7 +174,7 @@ function OpportunitiesPage() {
               Perpetuity's top pick today
             </p>
           </div>
-          <h2 className="mt-3 font-serif text-2xl italic tracking-tight md:text-3xl">
+          <h2 className="mt-3 font-sans text-2xl font-semibold tracking-tight md:text-3xl">
             {opps[0].title}
           </h2>
           <p className="mt-3 max-w-3xl text-[14px] leading-relaxed text-foreground/80">
@@ -258,7 +258,7 @@ function OpportunitiesPage() {
                 <Bookmark className={`size-3.5 ${bookmarked.has(o.id) ? "fill-accent" : ""}`} strokeWidth={1.75} />
               </button>
             </div>
-            <h3 className="mt-2 font-serif text-xl italic leading-snug tracking-tight">{o.title}</h3>
+            <h3 className="mt-2 font-sans text-xl font-semibold leading-snug tracking-tight">{o.title}</h3>
             <p className="mt-2 text-[13px] leading-relaxed text-foreground/75">{o.thesis}</p>
 
             <div className="mt-4 grid grid-cols-3 gap-2">
