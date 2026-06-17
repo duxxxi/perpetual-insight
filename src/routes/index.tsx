@@ -438,6 +438,12 @@ function AskPerpetuity() {
           </div>
         </div>
       </div>
+      <ConversationDialog
+        open={convOpen}
+        onOpenChange={setConvOpen}
+        initialMessage={pending}
+        conversationId={null}
+      />
     </div>
   );
 }
