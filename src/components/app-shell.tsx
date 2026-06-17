@@ -114,7 +114,6 @@ type SidebarKey =
   | "contacts"
   | "documents"
   | "opportunities"
-  | "markets"
   | "connections"
   | "settings";
 
@@ -127,7 +126,6 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
     { key: "contacts", icon: Users, label: "Contacts", to: "/contacts" },
     { key: "documents", icon: FileText, label: "Documents", to: "/documents" },
     { key: "opportunities", icon: Compass, label: "Opportunities", to: "/opportunities" },
-    { key: "markets", icon: LineChart, label: "Markets", to: "/markets" },
     { key: "connections", icon: Plug, label: "Connections", to: "/connections" },
     { key: "settings", icon: Settings, label: "Settings", to: "/settings" },
   ];
