@@ -1,7 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { FileText, FileSignature, FileSpreadsheet, FileImage, Search, Sparkles, Download, Share2, Folder, Star } from "lucide-react";
+import {
+  FileText,
+  FileSignature,
+  FileSpreadsheet,
+  FileImage,
+  Search,
+  Sparkles,
+  Download,
+  Share2,
+  Folder,
+  Star,
+} from "lucide-react";
 import { PageShell } from "@/components/app-shell";
+import { usePerpetuityPanel } from "@/components/perpetuity-panel";
 
 export const Route = createFileRoute("/documents")({
   head: () => ({
@@ -23,16 +35,93 @@ type Doc = {
   updated: string;
   owner: string;
   starred?: boolean;
+  summary: string;
+  facts: string[];
 };
 
 const docs: Doc[] = [
-  { id: "1", name: "EuroMach · Q3 Softwood Frame Agreement v3.pdf", kind: "Contract", size: "318 KB", updated: "Today · 13:42", owner: "You", starred: true },
-  { id: "2", name: "Volkov · BL-2024-0612 · Klaipeda discharge.pdf", kind: "BL", size: "1.1 MB", updated: "Today · 09:08", owner: "Andrei V." },
-  { id: "3", name: "Treasury · USDC rail test summary.md", kind: "Brief", size: "12 KB", updated: "Today · 10:24", owner: "Perpetuity" },
-  { id: "4", name: "Invoice · INV-2026-0418 · Maderas del Norte.pdf", kind: "Invoice", size: "92 KB", updated: "Yesterday", owner: "You" },
-  { id: "5", name: "Margins · H1 2026 · scenarios.xlsx", kind: "Spreadsheet", size: "204 KB", updated: "Mon", owner: "Perpetuity" },
-  { id: "6", name: "Marriott Yerevan · reservation hold.pdf", kind: "Contract", size: "44 KB", updated: "Mon", owner: "Perpetuity" },
-  { id: "7", name: "Klaipeda terminal · drone survey.jpg", kind: "Image", size: "4.8 MB", updated: "Last week", owner: "Inga P." },
+  {
+    id: "1",
+    name: "EuroMach · Q3 Softwood Frame Agreement v3.pdf",
+    kind: "Contract",
+    size: "318 KB",
+    updated: "Today · 13:42",
+    owner: "You",
+    starred: true,
+    summary:
+      "Frame agreement covers 120t softwood across Q3 at CIF Yerevan with a 6.5% volume rebate above 80t. Payment 30/60 net, INCO 2020. Three clauses changed from v2: liquidated damages, force majeure, and the FX-revision trigger now at ±4.5%.",
+    facts: [
+      "Counterparty: EuroMach a.s. (Bratislava)",
+      "Term: 1 Jul – 30 Sep 2026",
+      "Linked thread: Marta Kováčová · today 13:18",
+    ],
+  },
+  {
+    id: "2",
+    name: "Volkov · BL-2024-0612 · Klaipeda discharge.pdf",
+    kind: "BL",
+    size: "1.1 MB",
+    updated: "Today · 09:08",
+    owner: "Andrei V.",
+    summary:
+      "Bill of lading for MSC container MEDU48123… seal #482-117. Discharge window 06:00 Klaipeda Wed. Free time 7 days, demurrage €120/day after.",
+    facts: ["Container: MSC MEDU48123…", "Seal: 482-117", "Discharge: Wed 06:00 Klaipeda"],
+  },
+  {
+    id: "3",
+    name: "Treasury · USDC rail test summary.md",
+    kind: "Brief",
+    size: "12 KB",
+    updated: "Today · 10:24",
+    owner: "Perpetuity",
+    summary:
+      "4.89 USDC test cleared Bybit → cold wallet in 38s with 0.31 USDC fees. Path is healthy for the queued 12,400 USDC tranche. Gas spike 0.8% above 24h median — within tolerance.",
+    facts: ["Latency: 38s", "Fees: 0.31 USDC", "Recommended tranche: 12,400 USDC"],
+  },
+  {
+    id: "4",
+    name: "Invoice · INV-2026-0418 · Maderas del Norte.pdf",
+    kind: "Invoice",
+    size: "92 KB",
+    updated: "Yesterday",
+    owner: "You",
+    summary:
+      "Invoice for €18,420 net 30. Maderas del Norte (Bilbao). Three line items: 22t mixed grades, transit insurance, document handling.",
+    facts: ["Amount: €18,420", "Terms: Net 30 (due Jul 17)", "Status: sent, awaiting ack"],
+  },
+  {
+    id: "5",
+    name: "Margins · H1 2026 · scenarios.xlsx",
+    kind: "Spreadsheet",
+    size: "204 KB",
+    updated: "Mon",
+    owner: "Perpetuity",
+    summary:
+      "Three scenarios for H1 close. Base case lands at 11.8% blended margin. ECB cut compresses to 9.2%. Romanian arb opens to 13.4% if it lands by week 28.",
+    facts: ["Base: 11.8%", "ECB -50bp: 9.2%", "RO arb hit: 13.4%"],
+  },
+  {
+    id: "6",
+    name: "Marriott Yerevan · reservation hold.pdf",
+    kind: "Contract",
+    size: "44 KB",
+    updated: "Mon",
+    owner: "Perpetuity",
+    summary:
+      "Reservation hold for 3 nights · Thu–Sat. Hold expires today 18:00 Yerevan. Rate locked at corporate (Amex •• 4421 on file). Block covers EuroMach board dinner.",
+    facts: ["Hold: #YVN-88421", "Expires: Today 18:00 Yerevan", "Nights: 3 (Thu–Sat)"],
+  },
+  {
+    id: "7",
+    name: "Klaipeda terminal · drone survey.jpg",
+    kind: "Image",
+    size: "4.8 MB",
+    updated: "Last week",
+    owner: "Inga P.",
+    summary:
+      "Drone shot of terminal apron and berth allocation taken Wed 14:20 by Inga. Useful for confirming yard space ahead of the MSC discharge.",
+    facts: ["Captured: Wed 14:20", "Source: Inga Petrauskė", "Use: yard space confirmation"],
+  },
 ];
 
 const iconFor = {
@@ -55,8 +144,32 @@ const kindTone = {
 
 function DocumentsPage() {
   const [selectedId, setSelectedId] = useState(docs[0].id);
+  const { open, panel } = usePerpetuityPanel();
   const selected = docs.find((d) => d.id === selectedId)!;
   const SelectedIcon = iconFor[selected.kind];
+
+  const docAction = (verb: "Open" | "Download" | "Share", d: Doc) =>
+    open({
+      title: `${verb} · ${d.name}`,
+      eyebrow: `Documents · ${verb.toLowerCase()}`,
+      source: `${d.kind} · ${d.size} · updated ${d.updated} · ${d.owner}`,
+      why:
+        verb === "Open"
+          ? "Open in Perpetuity's reader with the summary, key facts, and every linked thread, contact, and counterparty on the right rail."
+          : verb === "Download"
+          ? "Pulls a clean PDF copy to your device — Perpetuity also keeps the cloud version versioned."
+          : "Generates a signed, expiring link. You pick the audience; Perpetuity tracks who opened it and when.",
+      steps:
+        verb === "Share"
+          ? ["Pick recipients", "Set link expiry (24h / 7d / never)", "Watch open events in Threads"]
+          : verb === "Download"
+          ? ["Pull latest version", "Log the export in audit trail"]
+          : ["Open in reader", "Show linked threads", "Suggest follow-up tasks"],
+      artifacts: [
+        { kind: "doc", label: d.name },
+        ...d.facts.slice(0, 2).map((f) => ({ kind: "data" as const, label: f })),
+      ],
+    });
 
   return (
     <PageShell
@@ -66,10 +179,38 @@ function DocumentsPage() {
       accentWord="Documents"
       rightSlot={
         <div className="flex items-center gap-2">
-          <button data-pill className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium">
+          <button
+            type="button"
+            onClick={() =>
+              open({
+                title: "New folder",
+                eyebrow: "Documents · organize",
+                why: "Perpetuity groups documents automatically by counterparty, deal, and topic — folders are for the few cases where you want a manual override.",
+                steps: ["Name the folder", "Pick a parent (or root)", "Set auto-route rules"],
+                actions: [{ label: "Create", primary: true }],
+              })
+            }
+            className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium hover:bg-foreground/5"
+          >
             <Folder className="size-3.5" strokeWidth={1.75} /> New folder
           </button>
-          <button data-pill className="glass-panel-strong inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium">
+          <button
+            type="button"
+            onClick={() =>
+              open({
+                title: "Upload documents",
+                eyebrow: "Documents · ingest",
+                why: "Drop in PDFs, images, spreadsheets. Perpetuity OCRs, classifies, summarizes, and links them to the right counterparty and thread.",
+                steps: [
+                  "Drag files in (or paste from clipboard)",
+                  "Perpetuity classifies + summarizes",
+                  "Confirm or correct the auto-linking",
+                ],
+                actions: [{ label: "Open uploader", primary: true }],
+              })
+            }
+            className="glass-panel-strong inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12px] font-medium hover:bg-foreground/5"
+          >
             Upload
           </button>
         </div>
@@ -82,6 +223,16 @@ function DocumentsPage() {
           type="text"
           placeholder="Search across every contract, BL, and brief…"
           className="flex-1 bg-transparent text-sm placeholder:text-foreground/40 focus:outline-none"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              open({
+                title: `Search · "${(e.target as HTMLInputElement).value || "…"}"`,
+                eyebrow: "Documents · semantic search",
+                why: "Searches the meaning, not just keywords — finds the clause even when the wording differs.",
+                steps: ["Show top 10 semantic matches", "Cluster by counterparty", "Offer to summarize across hits"],
+              });
+            }
+          }}
         />
         <span className="text-[10px] uppercase tracking-[0.15em] text-foreground/35">Semantic · powered by Perpetuity</span>
       </div>
@@ -103,6 +254,7 @@ function DocumentsPage() {
                   <li key={d.id}>
                     <button
                       onClick={() => setSelectedId(d.id)}
+                      onDoubleClick={() => docAction("Open", d)}
                       className={`grid w-full grid-cols-[1fr_90px_120px_40px] items-center gap-3 px-5 py-3 text-left transition-colors ${
                         selectedId === d.id ? "bg-foreground/[0.05]" : "hover:bg-foreground/[0.025]"
                       }`}
@@ -146,13 +298,25 @@ function DocumentsPage() {
                 </div>
               </div>
               <div className="mt-4 flex items-center gap-2">
-                <button data-pill className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background">
+                <button
+                  type="button"
+                  onClick={() => docAction("Open", selected)}
+                  className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background hover:opacity-90"
+                >
                   Open
                 </button>
-                <button data-pill className="glass-panel inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[11px] font-medium">
+                <button
+                  type="button"
+                  onClick={() => docAction("Download", selected)}
+                  className="glass-panel inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[11px] font-medium hover:bg-foreground/5"
+                >
                   <Download className="size-3" /> Download
                 </button>
-                <button data-pill className="glass-panel inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[11px] font-medium">
+                <button
+                  type="button"
+                  onClick={() => docAction("Share", selected)}
+                  className="glass-panel inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[11px] font-medium hover:bg-foreground/5"
+                >
                   <Share2 className="size-3" /> Share
                 </button>
               </div>
@@ -170,19 +334,60 @@ function DocumentsPage() {
                     Perpetuity summary
                   </p>
                   <p className="mt-1.5 text-[13.5px] leading-relaxed text-foreground/85">
-                    Frame agreement covers 120t softwood across Q3 at CIF Yerevan with a 6.5% volume rebate above 80t. Payment 30/60 net, INCO 2020. Three clauses changed from v2: liquidated damages, force majeure, and the FX-revision trigger now at ±4.5%.
+                    {selected.summary}
                   </p>
                   <ul className="mt-3 space-y-1.5 text-[12px] text-foreground/70">
-                    <li>· Counterparty: EuroMach a.s. (Bratislava)</li>
-                    <li>· Term: 1 Jul – 30 Sep 2026</li>
-                    <li>· Linked thread: Marta Kováčová · today 13:18</li>
+                    {selected.facts.map((f) => (
+                      <li key={f}>· {f}</li>
+                    ))}
                   </ul>
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        open({
+                          title: `Ask Perpetuity · ${selected.name}`,
+                          eyebrow: "Documents · ask",
+                          why: "Ask anything about this document — clauses, risks, comparable terms, or how it links to your other deals.",
+                          steps: [
+                            "Type a question",
+                            "Perpetuity answers with citations from the doc",
+                            "Convert findings to tasks or threads",
+                          ],
+                          actions: [{ label: "Open ask box", primary: true }],
+                        })
+                      }
+                      className="rounded-full bg-foreground/5 px-3 py-1 text-[10.5px] font-medium text-foreground/70 hover:bg-foreground/10"
+                    >
+                      Ask about this doc
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        open({
+                          title: `Compare · ${selected.name}`,
+                          eyebrow: "Documents · compare",
+                          why: "Diff against the prior version (or any related doc) — Perpetuity highlights material clause changes only.",
+                          steps: [
+                            "Pick the comparison target (v2, similar contract…)",
+                            "Review highlighted diffs",
+                            "Promote material changes to a review task",
+                          ],
+                        })
+                      }
+                      className="rounded-full bg-foreground/5 px-3 py-1 text-[10.5px] font-medium text-foreground/70 hover:bg-foreground/10"
+                    >
+                      Compare versions
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
       </div>
+
+      {panel}
     </PageShell>
   );
 }
