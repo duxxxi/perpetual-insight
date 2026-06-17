@@ -65,29 +65,30 @@
 }
 
 .dark {
-  --background: hsl(20 10% 8%);
-  --foreground: hsl(40 20% 94%);
-  --card: hsl(20 10% 12%);
-  --card-foreground: hsl(40 20% 94%);
-  --popover: hsl(20 10% 12%);
-  --popover-foreground: hsl(40 20% 94%);
-  --primary: hsl(40 20% 94%);
-  --primary-foreground: hsl(20 10% 12%);
-  --secondary: hsl(20 10% 16%);
-  --secondary-foreground: hsl(40 20% 94%);
-  --muted: hsl(20 10% 16%);
-  --muted-foreground: hsl(40 10% 65%);
-  --accent: hsl(25 40% 55%);
-  --accent-foreground: hsl(20 10% 8%);
-  --destructive: hsl(0 55% 55%);
-  --destructive-foreground: hsl(40 20% 94%);
-  --border: hsl(40 20% 94% / 0.08);
-  --input: hsl(40 20% 94% / 0.12);
-  --ring: hsl(25 40% 55% / 0.4);
+  /* Perpetuity dark — near-black obsidian with warm gold accent */
+  --background: hsl(220 18% 4%);
+  --foreground: hsl(40 10% 96%);
+  --card: hsl(220 16% 8%);
+  --card-foreground: hsl(40 10% 96%);
+  --popover: hsl(220 16% 8%);
+  --popover-foreground: hsl(40 10% 96%);
+  --primary: hsl(40 10% 96%);
+  --primary-foreground: hsl(220 18% 4%);
+  --secondary: hsl(220 14% 12%);
+  --secondary-foreground: hsl(40 10% 96%);
+  --muted: hsl(220 14% 12%);
+  --muted-foreground: hsl(220 10% 55%);
+  --accent: hsl(38 90% 58%);
+  --accent-foreground: hsl(220 18% 4%);
+  --destructive: hsl(0 65% 55%);
+  --destructive-foreground: hsl(40 10% 96%);
+  --border: hsl(40 10% 96% / 0.08);
+  --input: hsl(40 10% 96% / 0.12);
+  --ring: hsl(38 90% 58% / 0.4);
 
-  --glass-surface: rgba(40, 36, 33, 0.55);
-  --glass-surface-strong: rgba(48, 43, 39, 0.7);
-  --glass-border: rgba(255, 245, 230, 0.08);
+  --glass-surface: rgba(12, 14, 20, 0.55);
+  --glass-surface-strong: rgba(18, 22, 32, 0.75);
+  --glass-border: rgba(255, 250, 240, 0.08);
 }
 
 /* ============================================================
