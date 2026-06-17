@@ -4,7 +4,6 @@ import {
   Home,
   MessagesSquare,
   ListChecks,
-  Calendar,
   Send,
   Users,
   FileText,
@@ -112,7 +111,6 @@ type SidebarKey =
   | "home"
   | "threads"
   | "assignments"
-  | "schedule"
   | "outreach"
   | "contacts"
   | "documents"
@@ -126,7 +124,6 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
     { key: "home", icon: Home, label: "Home", to: "/" },
     { key: "threads", icon: MessagesSquare, label: "Threads", to: "/threads" },
     { key: "assignments", icon: ListChecks, label: "Assignments", to: "/assignments" },
-    { key: "schedule", icon: Calendar, label: "Schedule", to: "/schedule" },
     { key: "outreach", icon: Send, label: "Outreach", to: "/outreach" },
     { key: "contacts", icon: Users, label: "Contacts", to: "/contacts" },
     { key: "documents", icon: FileText, label: "Documents", to: "/documents" },
