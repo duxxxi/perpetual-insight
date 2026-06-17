@@ -180,7 +180,7 @@ function ConnectionsPage() {
     <PageShell
       active="connections"
       eyebrow={`${connected.length} connected · ${rest.length} available`}
-      title="that Perpetuity reads and writes for you"
+      title=""
       accentWord="Systems"
       rightSlot={
         <div className="flex items-center gap-2">
