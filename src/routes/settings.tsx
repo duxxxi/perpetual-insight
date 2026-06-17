@@ -33,7 +33,7 @@ function SettingsPage() {
     <PageShell
       active="settings"
       eyebrow="Your preferences"
-      title="tuned to your taste"
+      title=""
       accentWord="Perpetuity"
     >
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
