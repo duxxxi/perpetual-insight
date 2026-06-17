@@ -143,7 +143,7 @@ function OpportunitiesPage() {
     <PageShell
       active="opportunities"
       eyebrow="3 fresh · 1 expiring · 12 watching"
-      title="that Perpetuity found while you slept"
+      title=""
       accentWord="Opportunities"
       rightSlot={
         <div className="glass-panel flex items-center gap-0.5 rounded-full p-0.5">
