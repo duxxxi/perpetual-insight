@@ -308,10 +308,6 @@ function ContactsPage() {
   const [selectedPersonId, setSelectedPersonId] = useState<string | null>(null);
   const { open, panel } = usePerpetuityPanel();
 
-  const markets = useMemo(
-    () => ["All", ...Array.from(new Set(companies.map((c) => c.country))).sort()],
-    [],
-  );
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
