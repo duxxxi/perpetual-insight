@@ -308,10 +308,6 @@ function ContactsPage() {
   const [selectedPersonId, setSelectedPersonId] = useState<string | null>(null);
   const { open, panel } = usePerpetuityPanel();
 
-  const markets = useMemo(
-    () => ["All", ...Array.from(new Set(companies.map((c) => c.country))).sort()],
-    [],
-  );
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -368,21 +364,27 @@ function ContactsPage() {
     >
       {/* Filters */}
       <div className="mb-4 flex flex-col gap-3">
-        <div className="glass-panel flex items-center gap-2 rounded-full px-4 py-2 md:w-[460px]">
-          <Search className="size-4 text-foreground/40" strokeWidth={1.75} />
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search companies, people, cities…"
-            className="flex-1 bg-transparent text-sm placeholder:text-foreground/40 focus:outline-none"
-          />
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div className="glass-panel flex flex-1 items-center gap-2 rounded-full px-4 py-2 md:max-w-[460px]">
+            <Search className="size-4 text-foreground/40" strokeWidth={1.75} />
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search companies, people, cities…"
+              className="flex-1 bg-transparent text-sm placeholder:text-foreground/40 focus:outline-none"
+            />
+          </div>
+          <HealthChips value={health} onChange={setHealth} />
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <FilterRow label="Type" value={bucket} options={buckets} onChange={setBucket} />
-          <FilterRow label="Health" value={health} options={healths} onChange={setHealth} />
-          <FilterRow label="Market" value={market} options={markets} onChange={setMarket} />
+          <MarketFlags
+            value={market}
+            onChange={setMarket}
+            options={companies.map((c) => ({ country: c.country, flag: c.flag }))}
+          />
         </div>
       </div>
 
@@ -520,6 +522,104 @@ function FilterRow<T extends string>({
           </button>
         ))}
       </div>
+    </div>
+  );
+}
+
+function HealthChips({
+  value,
+  onChange,
+}: {
+  value: (typeof healths)[number];
+  onChange: (v: (typeof healths)[number]) => void;
+}) {
+  const meta: Record<(typeof healths)[number], { dot: string; glow: string }> = {
+    All: { dot: "bg-foreground/40", glow: "from-foreground/10 to-foreground/0" },
+    Active: { dot: "bg-emerald-500", glow: "from-emerald-400/30 to-emerald-400/0" },
+    Cooling: { dot: "bg-amber-500", glow: "from-amber-400/30 to-amber-400/0" },
+    New: { dot: "bg-sky-500", glow: "from-sky-400/30 to-sky-400/0" },
+  };
+  return (
+    <div className="relative inline-flex items-center gap-1.5">
+      <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-full opacity-40 blur-[2px]" aria-hidden />
+      <div className="glass-panel-strong relative flex items-center gap-1 rounded-full p-1">
+        <span className="px-2 text-[9px] font-semibold uppercase tracking-[0.22em] text-foreground/45">
+          Health
+        </span>
+        {healths.map((h) => {
+          const active = value === h;
+          return (
+            <button
+              key={h}
+              onClick={() => onChange(h)}
+              className={`group relative flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium transition-all ${
+                active
+                  ? "bg-foreground/10 text-foreground shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-foreground)_12%,transparent)]"
+                  : "text-foreground/55 hover:text-foreground"
+              }`}
+            >
+              {active && (
+                <span
+                  aria-hidden
+                  className={`absolute inset-0 rounded-full bg-gradient-to-r ${meta[h].glow} opacity-80`}
+                />
+              )}
+              <span className={`relative size-1.5 rounded-full ${meta[h].dot}`} />
+              <span className="relative">{h}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function MarketFlags({
+  value,
+  onChange,
+  options,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  options: { country: string; flag: string }[];
+}) {
+  const unique = Array.from(
+    new Map(options.map((o) => [o.country, o.flag])).entries(),
+  ).sort((a, b) => a[0].localeCompare(b[0]));
+  return (
+    <div className="glass-panel flex items-center gap-1 rounded-full p-1">
+      <span className="px-2 text-[9px] font-semibold uppercase tracking-[0.22em] text-foreground/45">
+        Market
+      </span>
+      <button
+        onClick={() => onChange("All")}
+        className={`rounded-full px-2.5 py-1 text-[11px] font-medium transition-colors ${
+          value === "All"
+            ? "bg-foreground text-background"
+            : "text-foreground/55 hover:text-foreground"
+        }`}
+      >
+        All
+      </button>
+      <div className="mx-0.5 h-4 w-px bg-foreground/10" aria-hidden />
+      {unique.map(([country, flag]) => {
+        const active = value === country;
+        return (
+          <button
+            key={country}
+            onClick={() => onChange(active ? "All" : country)}
+            title={country}
+            aria-label={country}
+            className={`relative flex size-7 items-center justify-center rounded-full text-base transition-all ${
+              active
+                ? "bg-foreground/10 ring-1 ring-foreground/20 scale-110"
+                : "opacity-60 hover:opacity-100 hover:bg-foreground/[0.04]"
+            }`}
+          >
+            <span aria-hidden>{flag}</span>
+          </button>
+        );
+      })}
     </div>
   );
 }
