@@ -368,21 +368,27 @@ function ContactsPage() {
     >
       {/* Filters */}
       <div className="mb-4 flex flex-col gap-3">
-        <div className="glass-panel flex items-center gap-2 rounded-full px-4 py-2 md:w-[460px]">
-          <Search className="size-4 text-foreground/40" strokeWidth={1.75} />
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search companies, people, cities…"
-            className="flex-1 bg-transparent text-sm placeholder:text-foreground/40 focus:outline-none"
-          />
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div className="glass-panel flex flex-1 items-center gap-2 rounded-full px-4 py-2 md:max-w-[460px]">
+            <Search className="size-4 text-foreground/40" strokeWidth={1.75} />
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search companies, people, cities…"
+              className="flex-1 bg-transparent text-sm placeholder:text-foreground/40 focus:outline-none"
+            />
+          </div>
+          <HealthChips value={health} onChange={setHealth} />
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <FilterRow label="Type" value={bucket} options={buckets} onChange={setBucket} />
-          <FilterRow label="Health" value={health} options={healths} onChange={setHealth} />
-          <FilterRow label="Market" value={market} options={markets} onChange={setMarket} />
+          <MarketFlags
+            value={market}
+            onChange={setMarket}
+            options={companies.map((c) => ({ country: c.country, flag: c.flag }))}
+          />
         </div>
       </div>
 
