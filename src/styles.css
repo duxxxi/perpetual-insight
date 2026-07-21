@@ -31,64 +31,65 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-serif: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-pixel: "VT323", "JetBrains Mono", ui-monospace, monospace;
 }
 
 :root {
-  --radius: 1rem;
-  /* Two-tone: warm cashmere bone + deep obsidian graphite, with muted cognac as the only accent */
-  --background: hsl(40 20% 94%);
-  --foreground: hsl(20 10% 12%);
-  --card: hsl(40 20% 97%);
-  --card-foreground: hsl(20 10% 12%);
-  --popover: hsl(40 20% 97%);
-  --popover-foreground: hsl(20 10% 12%);
-  --primary: hsl(20 10% 12%);
-  --primary-foreground: hsl(40 20% 96%);
-  --secondary: hsl(40 14% 88%);
-  --secondary-foreground: hsl(20 10% 12%);
-  --muted: hsl(40 14% 90%);
-  --muted-foreground: hsl(20 8% 38%);
-  --accent: hsl(25 40% 45%);
-  --accent-foreground: hsl(40 20% 96%);
-  --destructive: hsl(0 55% 45%);
-  --destructive-foreground: hsl(40 20% 96%);
-  --border: hsl(20 10% 12% / 0.08);
-  --input: hsl(20 10% 12% / 0.12);
-  --ring: hsl(25 40% 45% / 0.4);
+  --radius: 0.875rem;
+  /* Cool metallic silver — near-white with a faint blue cast, tech feel */
+  --background: hsl(220 22% 97%);
+  --foreground: hsl(222 30% 10%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(222 30% 10%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(222 30% 10%);
+  --primary: hsl(222 30% 10%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(220 18% 93%);
+  --secondary-foreground: hsl(222 30% 10%);
+  --muted: hsl(220 18% 94%);
+  --muted-foreground: hsl(220 12% 42%);
+  --accent: hsl(212 100% 48%);            /* systemBlue */
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(4 78% 52%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(222 30% 10% / 0.09);
+  --input: hsl(222 30% 10% / 0.12);
+  --ring: hsl(212 100% 48% / 0.45);
 
-  --glass-surface: rgba(255, 255, 255, 0.45);
-  --glass-surface-strong: rgba(255, 255, 255, 0.6);
-  --glass-border: rgba(28, 25, 23, 0.08);
+  --glass-surface: rgba(255, 255, 255, 0.65);
+  --glass-surface-strong: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(15, 23, 42, 0.08);
 }
 
 .dark {
-  /* Perpetuity dark — near-black obsidian with warm gold accent */
-  --background: hsl(220 18% 4%);
-  --foreground: hsl(40 10% 96%);
-  --card: hsl(220 16% 8%);
-  --card-foreground: hsl(40 10% 96%);
-  --popover: hsl(220 16% 8%);
-  --popover-foreground: hsl(40 10% 96%);
-  --primary: hsl(40 10% 96%);
-  --primary-foreground: hsl(220 18% 4%);
-  --secondary: hsl(220 14% 12%);
-  --secondary-foreground: hsl(40 10% 96%);
-  --muted: hsl(220 14% 12%);
-  --muted-foreground: hsl(220 10% 55%);
-  --accent: hsl(38 90% 58%);
-  --accent-foreground: hsl(220 18% 4%);
-  --destructive: hsl(0 65% 55%);
-  --destructive-foreground: hsl(40 10% 96%);
-  --border: hsl(40 10% 96% / 0.08);
-  --input: hsl(40 10% 96% / 0.12);
-  --ring: hsl(38 90% 58% / 0.4);
+  /* Deep obsidian with cool silver accents */
+  --background: hsl(222 24% 5%);
+  --foreground: hsl(210 25% 96%);
+  --card: hsl(222 22% 9%);
+  --card-foreground: hsl(210 25% 96%);
+  --popover: hsl(222 22% 9%);
+  --popover-foreground: hsl(210 25% 96%);
+  --primary: hsl(210 25% 96%);
+  --primary-foreground: hsl(222 24% 5%);
+  --secondary: hsl(222 20% 13%);
+  --secondary-foreground: hsl(210 25% 96%);
+  --muted: hsl(222 20% 13%);
+  --muted-foreground: hsl(215 15% 65%);
+  --accent: hsl(200 95% 62%);
+  --accent-foreground: hsl(222 24% 5%);
+  --destructive: hsl(4 78% 60%);
+  --destructive-foreground: hsl(210 25% 96%);
+  --border: hsl(210 25% 96% / 0.09);
+  --input: hsl(210 25% 96% / 0.14);
+  --ring: hsl(200 95% 62% / 0.5);
 
-  --glass-surface: rgba(12, 14, 20, 0.55);
-  --glass-surface-strong: rgba(18, 22, 32, 0.75);
-  --glass-border: rgba(255, 250, 240, 0.08);
+  --glass-surface: rgba(14, 18, 28, 0.6);
+  --glass-surface-strong: rgba(20, 26, 40, 0.8);
+  --glass-border: rgba(180, 200, 230, 0.10);
 }
 
 /* ============================================================
