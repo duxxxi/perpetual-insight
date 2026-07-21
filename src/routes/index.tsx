@@ -258,27 +258,8 @@ function DashboardPage() {
               {/* Right rail */}
               <aside className="space-y-8 lg:col-span-5">
                 <div>
-                  <SectionLabel kicker="Intel" tone="accent">Need to Know</SectionLabel>
-                  <div className="glass-panel mt-4 rounded-3xl p-5">
-                    <IntelItem
-                      time="09:41"
-                      title="Upcoming multi-country trip: Bratislava → Yerevan → Bratislava (Jun 19–20)"
-                      body="You have booked flights SKP–BRA. Hotel in Yerevan pending confirmation."
-                      hot
-                    />
-                    <Divider />
-                    <IntelItem
-                      time="08:22"
-                      title="Brent crude down 2.94% to $87.33 — monitor freight costs for timber & pulp exports"
-                      body="Energy price decline typically eases bunker surcharges within 10 days."
-                    />
-                    <Divider />
-                    <IntelItem
-                      time="06:05"
-                      title="EUR/USD at 1.1567 — USD invoicing advantage for North American sales"
-                      body="Strong USD pricing relative to EUR contracts opened in Q1."
-                    />
-                  </div>
+                  <SectionLabel kicker="Live · 14:40 UTC" tone="accent">Signals</SectionLabel>
+                  <LiveSignals />
                 </div>
 
                 <div>
