@@ -39,31 +39,32 @@
 
 :root {
   --radius: 0.875rem;
-  /* Cool metallic silver — near-white with a faint blue cast, tech feel */
-  --background: hsl(220 22% 97%);
-  --foreground: hsl(222 30% 10%);
+  /* Bloomberg-terminal-for-exporters: brighter, crisper silver with cooler blue undertones */
+  --background: hsl(210 30% 98%);
+  --foreground: hsl(222 35% 8%);
   --card: hsl(0 0% 100%);
-  --card-foreground: hsl(222 30% 10%);
+  --card-foreground: hsl(222 35% 8%);
   --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(222 30% 10%);
-  --primary: hsl(222 30% 10%);
+  --popover-foreground: hsl(222 35% 8%);
+  --primary: hsl(222 35% 8%);
   --primary-foreground: hsl(0 0% 100%);
-  --secondary: hsl(220 18% 93%);
-  --secondary-foreground: hsl(222 30% 10%);
-  --muted: hsl(220 18% 94%);
-  --muted-foreground: hsl(220 12% 42%);
-  --accent: hsl(212 100% 48%);            /* systemBlue */
+  --secondary: hsl(215 22% 94%);
+  --secondary-foreground: hsl(222 35% 8%);
+  --muted: hsl(215 22% 95%);
+  --muted-foreground: hsl(220 14% 40%);
+  --accent: hsl(214 100% 50%);            /* crisp electric blue */
   --accent-foreground: hsl(0 0% 100%);
-  --destructive: hsl(4 78% 52%);
+  --destructive: hsl(4 82% 54%);
   --destructive-foreground: hsl(0 0% 100%);
-  --border: hsl(222 30% 10% / 0.09);
-  --input: hsl(222 30% 10% / 0.12);
-  --ring: hsl(212 100% 48% / 0.45);
+  --border: hsl(222 35% 8% / 0.08);
+  --input: hsl(222 35% 8% / 0.12);
+  --ring: hsl(214 100% 50% / 0.45);
 
-  --glass-surface: rgba(255, 255, 255, 0.65);
-  --glass-surface-strong: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(15, 23, 42, 0.08);
+  --glass-surface: rgba(255, 255, 255, 0.72);
+  --glass-surface-strong: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(15, 23, 42, 0.07);
 }
+
 
 .dark {
   /* Deep obsidian with cool silver accents */

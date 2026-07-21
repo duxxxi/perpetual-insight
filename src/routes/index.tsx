@@ -69,7 +69,7 @@ function DashboardPage() {
 
       {/* Company name under ticker */}
       <div className="flex justify-center pt-4 pb-2 gap-3 items-center">
-        <span className="font-pixel text-[15px] tracking-[0.3em] text-foreground/70">
+        <span className="font-mono text-[15px] tracking-[0.3em] text-foreground/70">
           PERPETUITY
         </span>
       </div>
@@ -938,7 +938,7 @@ function PredictionBar({ p }: { p: (typeof predictions)[number] }) {
           <div className="mb-1.5 flex items-center justify-between gap-3">
             <p className="line-clamp-1 text-[12px] font-medium text-foreground/85 group-hover:text-foreground">{p.q}</p>
             <div className="flex shrink-0 items-baseline gap-1.5">
-              <span className="font-pixel text-[18px] leading-none text-foreground">{p.prob}%</span>
+              <span className="font-mono text-[18px] leading-none text-foreground">{p.prob}%</span>
               <span className={`font-mono text-[9px] font-semibold ${p.up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}>{p.chg}</span>
             </div>
           </div>
@@ -960,7 +960,7 @@ function LiveSignals() {
       {/* Market movers with sparklines */}
       <div className="glass-panel rounded-3xl p-3">
         <div className="mb-2 flex items-center justify-between px-1">
-          <p className="font-pixel text-[13px] tracking-wider text-foreground/70">MARKET · MOVERS</p>
+          <p className="font-mono text-[13px] tracking-wider text-foreground/70">MARKET · MOVERS</p>
           <span className="inline-flex items-center gap-1 font-mono text-[9px] font-semibold uppercase tracking-wider text-foreground/40">
             <span className="size-1 rounded-full bg-emerald-500 shadow-[0_0_6px_currentColor]" /> LIVE
           </span>
@@ -975,7 +975,7 @@ function LiveSignals() {
       {/* Prediction markets */}
       <div className="glass-panel rounded-3xl p-3">
         <div className="mb-2 flex items-center justify-between px-1">
-          <p className="font-pixel text-[13px] tracking-wider text-foreground/70">PREDICTION · MARKETS</p>
+          <p className="font-mono text-[13px] tracking-wider text-foreground/70">PREDICTION · MARKETS</p>
           <span className="font-mono text-[9px] font-semibold uppercase tracking-wider text-foreground/40">24h Δ</span>
         </div>
         <div className="space-y-0.5">
@@ -990,7 +990,7 @@ function LiveSignals() {
         <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-3xl opacity-30 blur-[3px]" aria-hidden />
         <div className="relative flex items-center justify-between gap-3">
           <div>
-            <p className="font-pixel text-[13px] tracking-wider text-foreground/70">PORTFOLIO · PULSE</p>
+            <p className="font-mono text-[13px] tracking-wider text-foreground/70">PORTFOLIO · PULSE</p>
             <p className="mt-1 font-serif text-2xl font-semibold tracking-tight">
               <span className="text-silver-metallic">€ 4.28M</span>
             </p>
