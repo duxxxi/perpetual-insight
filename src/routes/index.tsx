@@ -69,8 +69,8 @@ function DashboardPage() {
 
       {/* Company name under ticker */}
       <div className="flex justify-center pt-4 pb-2 gap-3 items-center">
-        <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-foreground/70">
-          Perpetuity
+        <span className="font-pixel text-[15px] tracking-[0.3em] text-foreground/70">
+          PERPETUITY
         </span>
       </div>
 
