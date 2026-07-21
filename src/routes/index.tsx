@@ -69,8 +69,8 @@ function DashboardPage() {
 
       {/* Company name under ticker */}
       <div className="flex justify-center pt-4 pb-2 gap-3 items-center">
-        <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-foreground/70">
-          Perpetuity
+        <span className="font-pixel text-[15px] tracking-[0.3em] text-foreground/70">
+          PERPETUITY
         </span>
       </div>
 
@@ -86,9 +86,9 @@ function DashboardPage() {
                 MONDAY, 15 JUNE
               </p>
               <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                <h1 className="font-serif font-normal text-3xl tracking-tight md:text-4xl">
+                <h1 className="font-serif font-normal text-3xl tracking-tight md:text-[38px]">
                   {greeting},{" "}
-                  <span className="italic bg-gradient-to-br from-muted-foreground to-foreground bg-clip-text text-transparent">Stevan</span>
+                  <span className="italic text-silver-metallic">Stevan</span>
                 </h1>
                 <MorningBriefPill />
               </div>
@@ -258,27 +258,8 @@ function DashboardPage() {
               {/* Right rail */}
               <aside className="space-y-8 lg:col-span-5">
                 <div>
-                  <SectionLabel kicker="Intel" tone="accent">Need to Know</SectionLabel>
-                  <div className="glass-panel mt-4 rounded-3xl p-5">
-                    <IntelItem
-                      time="09:41"
-                      title="Upcoming multi-country trip: Bratislava → Yerevan → Bratislava (Jun 19–20)"
-                      body="You have booked flights SKP–BRA. Hotel in Yerevan pending confirmation."
-                      hot
-                    />
-                    <Divider />
-                    <IntelItem
-                      time="08:22"
-                      title="Brent crude down 2.94% to $87.33 — monitor freight costs for timber & pulp exports"
-                      body="Energy price decline typically eases bunker surcharges within 10 days."
-                    />
-                    <Divider />
-                    <IntelItem
-                      time="06:05"
-                      title="EUR/USD at 1.1567 — USD invoicing advantage for North American sales"
-                      body="Strong USD pricing relative to EUR contracts opened in Q1."
-                    />
-                  </div>
+                  <SectionLabel kicker="Live · 14:40 UTC" tone="accent">Signals</SectionLabel>
+                  <LiveSignals />
                 </div>
 
                 <div>
@@ -864,3 +845,168 @@ function ScheduleRow({
 function ScheduleDivider() {
   return <div className="mx-4 h-px bg-foreground/5" />;
 }
+
+/* ---------- Live Signals (sparklines + prediction markets) ---------- */
+
+function Sparkline({
+  points,
+  up,
+  width = 96,
+  height = 28,
+}: {
+  points: number[];
+  up: boolean;
+  width?: number;
+  height?: number;
+}) {
+  const min = Math.min(...points);
+  const max = Math.max(...points);
+  const range = Math.max(max - min, 0.0001);
+  const step = width / (points.length - 1);
+  const coords = points.map((p, i) => {
+    const x = i * step;
+    const y = height - ((p - min) / range) * height;
+    return [x, y] as const;
+  });
+  const line = coords.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+  const area = `${line} L${width},${height} L0,${height} Z`;
+  const last = coords[coords.length - 1];
+  const color = up ? "text-emerald-500" : "text-rose-500";
+  return (
+    <svg viewBox={`0 0 ${width} ${height}`} width={width} height={height} className={`sparkline ${color}`}>
+      <path className="area" d={area} />
+      <path className="line" d={line} />
+      <circle cx={last[0]} cy={last[1]} r="1.8" />
+    </svg>
+  );
+}
+
+const stockSignals = [
+  { sym: "TIMBER-EU", name: "Timber futures · EU", price: "€438.20", chg: "+2.14%", up: true,
+    points: [420, 418, 422, 419, 425, 430, 428, 433, 431, 435, 438] },
+  { sym: "PULP-USD", name: "Pulp index · Nordic", price: "$1,284", chg: "-1.32%", up: false,
+    points: [1310, 1305, 1308, 1295, 1300, 1292, 1290, 1288, 1285, 1282, 1284] },
+  { sym: "BRENT", name: "Brent crude · ICE", price: "$87.33", chg: "-2.94%", up: false,
+    points: [92, 91.5, 91, 90.4, 89.8, 89.2, 88.5, 88.1, 87.9, 87.5, 87.33] },
+  { sym: "COPPER", name: "Copper · LME", price: "$6,494", chg: "+0.76%", up: true,
+    points: [6440, 6448, 6455, 6462, 6458, 6470, 6478, 6485, 6482, 6490, 6494] },
+];
+
+function StockSignalCard({ s }: { s: (typeof stockSignals)[number] }) {
+  return (
+    <ActionDialog
+      title={s.name}
+      kicker={`${s.sym} · ${s.chg}`}
+      body={`Real-time signal for ${s.name}. Perpetuity flags this because it materially impacts your open contracts and freight exposure.`}
+      actions={[{ label: "Open desk", primary: true }, { label: "Set alert" }]}
+      trigger={
+        <button
+          data-pill
+          className="glass-panel group flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
+        >
+          <div className="min-w-0 flex-1">
+            <div className="flex items-baseline gap-2">
+              <span className="font-mono text-[10px] font-semibold tracking-wider text-foreground/50">{s.sym}</span>
+              <span className={`font-mono text-[10px] font-semibold tabular-nums ${s.up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}>{s.chg}</span>
+            </div>
+            <p className="mt-0.5 truncate text-[12px] font-medium leading-tight text-foreground/85">{s.name}</p>
+            <p className="mt-0.5 font-mono text-[11px] tabular-nums text-foreground/60">{s.price}</p>
+          </div>
+          <Sparkline points={s.points} up={s.up} />
+        </button>
+      }
+    />
+  );
+}
+
+const predictions = [
+  { q: "ECB cuts rates before Sep 2026", prob: 68, chg: "+4", up: true },
+  { q: "EU timber CIS restrictions ratified Q3", prob: 82, chg: "+11", up: true },
+  { q: "USD/EUR below 1.14 by Aug", prob: 41, chg: "-6", up: false },
+  { q: "Suez freight surcharge lifted in 30d", prob: 29, chg: "+2", up: true },
+];
+
+function PredictionBar({ p }: { p: (typeof predictions)[number] }) {
+  return (
+    <ActionDialog
+      title={p.q}
+      kicker={`Polymarket-style · ${p.prob}% probability`}
+      body={`Aggregated from prediction markets and news signals. Perpetuity surfaces this because it correlates with your open positions.`}
+      actions={[{ label: "See sources", primary: true }, { label: "Track" }]}
+      trigger={
+        <button data-pill className="group block w-full rounded-2xl px-3 py-2.5 text-left transition-colors hover:bg-[var(--glass-surface)]">
+          <div className="mb-1.5 flex items-center justify-between gap-3">
+            <p className="line-clamp-1 text-[12px] font-medium text-foreground/85 group-hover:text-foreground">{p.q}</p>
+            <div className="flex shrink-0 items-baseline gap-1.5">
+              <span className="font-pixel text-[18px] leading-none text-foreground">{p.prob}%</span>
+              <span className={`font-mono text-[9px] font-semibold ${p.up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}>{p.chg}</span>
+            </div>
+          </div>
+          <div className="relative h-1.5 overflow-hidden rounded-full bg-foreground/5">
+            <div
+              className={`absolute inset-y-0 left-0 rounded-full ${p.up ? "bg-gradient-to-r from-emerald-400 to-emerald-500" : "bg-gradient-to-r from-rose-400 to-rose-500"}`}
+              style={{ width: `${p.prob}%` }}
+            />
+          </div>
+        </button>
+      }
+    />
+  );
+}
+
+function LiveSignals() {
+  return (
+    <div className="mt-4 space-y-4">
+      {/* Market movers with sparklines */}
+      <div className="glass-panel rounded-3xl p-3">
+        <div className="mb-2 flex items-center justify-between px-1">
+          <p className="font-pixel text-[13px] tracking-wider text-foreground/70">MARKET · MOVERS</p>
+          <span className="inline-flex items-center gap-1 font-mono text-[9px] font-semibold uppercase tracking-wider text-foreground/40">
+            <span className="size-1 rounded-full bg-emerald-500 shadow-[0_0_6px_currentColor]" /> LIVE
+          </span>
+        </div>
+        <div className="grid grid-cols-1 gap-1.5">
+          {stockSignals.map((s) => (
+            <StockSignalCard key={s.sym} s={s} />
+          ))}
+        </div>
+      </div>
+
+      {/* Prediction markets */}
+      <div className="glass-panel rounded-3xl p-3">
+        <div className="mb-2 flex items-center justify-between px-1">
+          <p className="font-pixel text-[13px] tracking-wider text-foreground/70">PREDICTION · MARKETS</p>
+          <span className="font-mono text-[9px] font-semibold uppercase tracking-wider text-foreground/40">24h Δ</span>
+        </div>
+        <div className="space-y-0.5">
+          {predictions.map((p) => (
+            <PredictionBar key={p.q} p={p} />
+          ))}
+        </div>
+      </div>
+
+      {/* Pulse */}
+      <div className="glass-panel-strong relative overflow-hidden rounded-3xl p-4">
+        <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-3xl opacity-30 blur-[3px]" aria-hidden />
+        <div className="relative flex items-center justify-between gap-3">
+          <div>
+            <p className="font-pixel text-[13px] tracking-wider text-foreground/70">PORTFOLIO · PULSE</p>
+            <p className="mt-1 font-serif text-2xl font-semibold tracking-tight">
+              <span className="text-silver-metallic">€ 4.28M</span>
+            </p>
+            <p className="mt-0.5 font-mono text-[10px] tabular-nums text-emerald-600 dark:text-emerald-400">
+              +€ 84,120 · +2.01% today
+            </p>
+          </div>
+          <Sparkline
+            up
+            width={130}
+            height={44}
+            points={[4.10, 4.12, 4.09, 4.14, 4.16, 4.13, 4.18, 4.22, 4.20, 4.25, 4.28]}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
