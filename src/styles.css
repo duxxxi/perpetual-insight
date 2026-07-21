@@ -219,11 +219,36 @@
 .ai-iridescent {
   background: linear-gradient(
     115deg,
-    hsl(25 60% 60% / 0.35),
-    hsl(210 70% 65% / 0.3),
-    hsl(280 50% 65% / 0.25),
-    hsl(25 60% 60% / 0.35)
+    hsl(212 100% 65% / 0.35),
+    hsl(190 90% 65% / 0.30),
+    hsl(240 60% 70% / 0.25),
+    hsl(212 100% 65% / 0.35)
   );
   background-size: 300% 300%;
   animation: iridescent-shift 6s ease-in-out infinite;
 }
+
+/* Cool silver/chrome metallic sweep for headline accent words */
+.text-silver-metallic {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--color-foreground) 95%, transparent) 0%,
+    color-mix(in oklab, var(--color-foreground) 55%, transparent) 40%,
+    color-mix(in oklab, var(--color-foreground) 92%, transparent) 70%,
+    color-mix(in oklab, var(--color-foreground) 60%, transparent) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility font-pixel {
+  font-family: var(--font-pixel);
+  letter-spacing: 0.02em;
+}
+
+/* Sparkline stroke inherits accent by default */
+.sparkline path.line { fill: none; stroke: currentColor; stroke-width: 1.5; }
+.sparkline path.area { fill: currentColor; opacity: 0.12; }
+.sparkline circle { fill: currentColor; }
+
