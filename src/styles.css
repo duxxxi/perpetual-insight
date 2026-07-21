@@ -31,66 +31,66 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-serif: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-pixel: "VT323", "JetBrains Mono", ui-monospace, monospace;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+  --font-pixel: "JetBrains Mono", ui-monospace, monospace;
 }
 
 :root {
-  --radius: 0.875rem;
-  /* Bloomberg-terminal-for-exporters: brighter, crisper silver with cooler blue undertones */
-  --background: hsl(210 30% 98%);
-  --foreground: hsl(222 35% 8%);
+  --radius: 0.75rem;
+  /* Apple Sonoma / macOS system palette — near-white with cool gray hairlines */
+  --background: hsl(220 20% 96.5%);         /* #F5F5F7 */
+  --foreground: hsl(220 15% 11%);           /* #1D1D1F */
   --card: hsl(0 0% 100%);
-  --card-foreground: hsl(222 35% 8%);
+  --card-foreground: hsl(220 15% 11%);
   --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(222 35% 8%);
-  --primary: hsl(222 35% 8%);
+  --popover-foreground: hsl(220 15% 11%);
+  --primary: hsl(211 100% 50%);             /* systemBlue #007AFF */
   --primary-foreground: hsl(0 0% 100%);
-  --secondary: hsl(215 22% 94%);
-  --secondary-foreground: hsl(222 35% 8%);
-  --muted: hsl(215 22% 95%);
-  --muted-foreground: hsl(220 14% 40%);
-  --accent: hsl(214 100% 50%);            /* crisp electric blue */
+  --secondary: hsl(220 14% 93%);
+  --secondary-foreground: hsl(220 15% 11%);
+  --muted: hsl(220 14% 94%);
+  --muted-foreground: hsl(220 8% 46%);      /* #86868B */
+  --accent: hsl(211 100% 50%);              /* systemBlue */
   --accent-foreground: hsl(0 0% 100%);
-  --destructive: hsl(4 82% 54%);
+  --destructive: hsl(3 100% 59%);           /* systemRed #FF3B30 */
   --destructive-foreground: hsl(0 0% 100%);
-  --border: hsl(222 35% 8% / 0.08);
-  --input: hsl(222 35% 8% / 0.12);
-  --ring: hsl(214 100% 50% / 0.45);
+  --border: hsl(220 10% 84% / 0.9);         /* #D2D2D7 hairline */
+  --input: hsl(220 10% 84%);
+  --ring: hsl(211 100% 50% / 0.5);
 
   --glass-surface: rgba(255, 255, 255, 0.72);
-  --glass-surface-strong: rgba(255, 255, 255, 0.9);
-  --glass-border: rgba(15, 23, 42, 0.07);
+  --glass-surface-strong: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(0, 0, 0, 0.06);
 }
 
 
 .dark {
-  /* Deep obsidian with cool silver accents */
-  --background: hsl(222 24% 5%);
-  --foreground: hsl(210 25% 96%);
-  --card: hsl(222 22% 9%);
-  --card-foreground: hsl(210 25% 96%);
-  --popover: hsl(222 22% 9%);
-  --popover-foreground: hsl(210 25% 96%);
-  --primary: hsl(210 25% 96%);
-  --primary-foreground: hsl(222 24% 5%);
-  --secondary: hsl(222 20% 13%);
-  --secondary-foreground: hsl(210 25% 96%);
-  --muted: hsl(222 20% 13%);
-  --muted-foreground: hsl(215 15% 65%);
-  --accent: hsl(200 95% 62%);
-  --accent-foreground: hsl(222 24% 5%);
-  --destructive: hsl(4 78% 60%);
-  --destructive-foreground: hsl(210 25% 96%);
-  --border: hsl(210 25% 96% / 0.09);
-  --input: hsl(210 25% 96% / 0.14);
-  --ring: hsl(200 95% 62% / 0.5);
+  /* Sonoma dark — graphite with cool blue undertone */
+  --background: hsl(220 14% 8%);            /* deep graphite */
+  --foreground: hsl(220 15% 96%);
+  --card: hsl(220 14% 11%);
+  --card-foreground: hsl(220 15% 96%);
+  --popover: hsl(220 14% 11%);
+  --popover-foreground: hsl(220 15% 96%);
+  --primary: hsl(211 100% 62%);             /* brighter systemBlue on dark */
+  --primary-foreground: hsl(220 14% 8%);
+  --secondary: hsl(220 14% 14%);
+  --secondary-foreground: hsl(220 15% 96%);
+  --muted: hsl(220 14% 14%);
+  --muted-foreground: hsl(220 10% 65%);
+  --accent: hsl(211 100% 62%);
+  --accent-foreground: hsl(220 14% 8%);
+  --destructive: hsl(3 100% 65%);
+  --destructive-foreground: hsl(220 15% 96%);
+  --border: hsl(220 15% 96% / 0.10);
+  --input: hsl(220 15% 96% / 0.14);
+  --ring: hsl(211 100% 62% / 0.55);
 
-  --glass-surface: rgba(14, 18, 28, 0.6);
-  --glass-surface-strong: rgba(20, 26, 40, 0.8);
-  --glass-border: rgba(180, 200, 230, 0.10);
+  --glass-surface: rgba(20, 22, 28, 0.6);
+  --glass-surface-strong: rgba(28, 30, 38, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 /* ============================================================
