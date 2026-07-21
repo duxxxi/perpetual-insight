@@ -30,7 +30,7 @@ export function AmbientBackground() {
         className="pointer-events-none fixed inset-0 -z-10 dark:hidden"
         style={{
           background:
-            "radial-gradient(60rem 40rem at 12% -10%, hsl(25 40% 80% / 0.25), transparent 60%), radial-gradient(50rem 35rem at 100% 110%, hsl(20 10% 12% / 0.06), transparent 60%)",
+            "radial-gradient(60rem 40rem at 12% -10%, hsl(211 100% 70% / 0.10), transparent 60%), radial-gradient(50rem 35rem at 100% 110%, hsl(220 20% 50% / 0.06), transparent 60%)",
         }}
       />
       <div
@@ -38,7 +38,7 @@ export function AmbientBackground() {
         className="pointer-events-none fixed inset-0 -z-10 hidden dark:block"
         style={{
           background:
-            "radial-gradient(60rem 40rem at 12% -10%, hsl(25 40% 55% / 0.12), transparent 60%), radial-gradient(50rem 35rem at 100% 110%, hsl(210 30% 40% / 0.10), transparent 60%)",
+            "radial-gradient(60rem 40rem at 12% -10%, hsl(211 100% 62% / 0.10), transparent 60%), radial-gradient(50rem 35rem at 100% 110%, hsl(210 40% 40% / 0.08), transparent 60%)",
         }}
       />
     </>
@@ -147,7 +147,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
               title={it.label}
               className={`group relative flex size-8 items-center justify-center rounded-full transition-colors ${
                 isActive
-                  ? "bg-gradient-to-br from-accent/25 to-accent/5 text-accent ring-1 ring-accent/25 shadow-[0_0_18px_-6px_hsl(25_70%_55%/0.45)]"
+                  ? "bg-accent/10 text-accent ring-1 ring-accent/25 shadow-[0_0_18px_-8px_hsl(211_100%_50%/0.55)]"
                   : "text-foreground/45 hover:bg-foreground/5 hover:text-foreground"
               }`}
             >
