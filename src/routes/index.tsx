@@ -358,7 +358,7 @@ function AskPerpetuity() {
             onClick={launch}
             disabled={!draft.trim()}
             data-pill
-            className="inline-flex size-9 items-center justify-center rounded-2xl bg-accent/90 text-accent-foreground shadow-[0_0_16px_-4px_hsl(211_100%_50%/0.45)] transition-all hover:scale-105 hover:bg-accent hover:shadow-[0_0_20px_-4px_hsl(211_100%_50%/0.6)] disabled:opacity-40 disabled:hover:scale-100 disabled:hover:shadow-none"
+            className="inline-flex size-9 items-center justify-center rounded-2xl bg-accent/90 text-accent-foreground shadow-[0_0_16px_-4px_rgba(10,15,25,0.35)] transition-all hover:scale-105 hover:bg-accent hover:shadow-[0_0_20px_-4px_rgba(10,15,25,0.35)] disabled:opacity-40 disabled:hover:scale-100 disabled:hover:shadow-none"
           >
             <ArrowUp className="size-4" />
           </button>
@@ -734,7 +734,7 @@ function ActionDialog({
               key={a.label}
               className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
                 a.primary
-                  ? "bg-accent text-accent-foreground shadow-[0_0_14px_-4px_hsl(211_100%_50%/0.4)] hover:bg-accent/90"
+                  ? "bg-accent text-accent-foreground shadow-[0_0_14px_-4px_rgba(10,15,25,0.35)] hover:bg-accent/90"
                   : "text-foreground/60 hover:bg-foreground/5 hover:text-foreground"
               }`}
             >

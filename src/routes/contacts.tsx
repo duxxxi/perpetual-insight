@@ -290,7 +290,7 @@ const healths = ["All", "Active", "Cooling", "New"] as const;
 const healthDot: Record<Health, string> = {
   Active: "bg-emerald-500",
   Cooling: "bg-amber-500",
-  New: "bg-sky-500",
+  New: "bg-foreground/30",
 };
 
 const tierLabel: Record<Tier, string> = {
@@ -537,7 +537,7 @@ function HealthChips({
     All: { dot: "bg-foreground/40", glow: "from-foreground/10 to-foreground/0" },
     Active: { dot: "bg-emerald-500", glow: "from-emerald-400/30 to-emerald-400/0" },
     Cooling: { dot: "bg-amber-500", glow: "from-amber-400/30 to-amber-400/0" },
-    New: { dot: "bg-sky-500", glow: "from-sky-400/30 to-sky-400/0" },
+    New: { dot: "bg-foreground/30", glow: "from-foreground/20 to-foreground/20" },
   };
   return (
     <div className="relative inline-flex items-center gap-1.5">

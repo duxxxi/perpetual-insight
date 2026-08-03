@@ -136,7 +136,7 @@ const iconFor = {
 const kindTone = {
   Contract: "bg-violet-500/10 text-violet-700 ring-violet-500/15 dark:text-violet-300",
   Invoice: "bg-amber-500/10 text-amber-700 ring-amber-500/15 dark:text-amber-300",
-  BL: "bg-sky-500/10 text-sky-700 ring-sky-500/15 dark:text-sky-300",
+  BL: "bg-foreground/[0.06] text-foreground/70 ring-foreground/10 dark:text-foreground/70",
   Spreadsheet: "bg-emerald-500/10 text-emerald-700 ring-emerald-500/15 dark:text-emerald-300",
   Brief: "bg-foreground/10 text-foreground/80 ring-foreground/10",
   Image: "bg-rose-500/10 text-rose-700 ring-rose-500/15 dark:text-rose-300",
