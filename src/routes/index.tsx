@@ -1064,10 +1064,10 @@ function LiveSignals() {
   const [hero, ...rest] = series;
 
   return (
-    <div className="mt-4 space-y-3">
+    <div className="mt-3 space-y-2">
       {hero ? <MarketHero s={hero} /> : null}
 
-      <div className="glass-panel rounded-3xl p-3">
+      <div className="glass-panel rounded-2xl p-2.5">
         <SectionCaption label="Commodities · FX" right={<LiveDot />} />
         {markets.isPending ? (
           <SkeletonRows />
@@ -1084,7 +1084,7 @@ function LiveSignals() {
         )}
       </div>
 
-      <div className="glass-panel rounded-3xl p-3">
+      <div className="glass-panel rounded-2xl p-2.5">
         <SectionCaption
           label="Polymarket odds"
           right={
@@ -1101,7 +1101,7 @@ function LiveSignals() {
         {odds.isPending ? (
           <SkeletonRows count={5} />
         ) : odds.data?.markets.length ? (
-          <div className="space-y-1">
+          <div className="space-y-0.5">
             {odds.data.markets.map((m) => (
               <OddsRow key={m.question} m={m} />
             ))}
