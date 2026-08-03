@@ -44,7 +44,7 @@ export function AmbientBackground() {
       {/* frosted sheet: brightening wash + fine specular grain */}
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10"
+        className="pointer-events-none fixed inset-0 -z-10 dark:hidden"
         style={{
           background:
             "linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.20) 42%, rgba(255,255,255,0.42))",
