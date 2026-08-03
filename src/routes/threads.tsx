@@ -755,7 +755,7 @@ function ThreadDetail({
 const kindMeta: Record<Kind, { icon: typeof MessageSquare; cls: string }> = {
   Conversation: {
     icon: MessageSquare,
-    cls: "text-sky-700/85 bg-foreground/30/10 ring-foreground/30/15 dark:text-foreground/70",
+    cls: "text-foreground/70 bg-foreground/[0.06] ring-foreground/10 dark:text-foreground/70",
   },
   Task: {
     icon: ListChecks,
@@ -786,7 +786,7 @@ function KindBadge({ kind }: { kind: Kind }) {
 const tagStyles: Record<TagT, string> = {
   Payment: "text-rose-700/80 bg-rose-500/10 ring-rose-500/15 dark:text-rose-300/90",
   Treasury: "text-emerald-700/80 bg-emerald-500/10 ring-emerald-500/15 dark:text-emerald-300/90",
-  Engineering: "text-sky-700/80 bg-foreground/30/10 ring-foreground/30/15 dark:text-foreground/70/90",
+  Engineering: "text-foreground/70 bg-foreground/[0.06] ring-foreground/10 dark:text-foreground/70",
   Compliance: "text-violet-700/80 bg-violet-500/10 ring-violet-500/15 dark:text-violet-300/90",
   Buyer: "text-amber-700/80 bg-amber-500/10 ring-amber-500/15 dark:text-amber-300/90",
   Trip: "text-teal-700/80 bg-teal-500/10 ring-teal-500/15 dark:text-teal-300/90",
@@ -806,7 +806,7 @@ function TagChip({ tag }: { tag: TagT }) {
 
 const statusStyles: Record<Status, string> = {
   Open: "text-foreground/70 bg-foreground/5 ring-foreground/10",
-  "In progress": "text-sky-700/85 bg-foreground/30/10 ring-foreground/30/15 dark:text-foreground/70",
+  "In progress": "text-foreground/70 bg-foreground/[0.06] ring-foreground/10 dark:text-foreground/70",
   Done: "text-emerald-700/85 bg-emerald-500/10 ring-emerald-500/15 dark:text-emerald-300",
   Acted: "text-emerald-700/85 bg-emerald-500/10 ring-emerald-500/15 dark:text-emerald-300",
   Dismissed: "text-foreground/45 bg-foreground/[0.04] ring-foreground/10",
