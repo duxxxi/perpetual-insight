@@ -134,7 +134,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
       <div className="glass-panel-strong flex flex-col items-center gap-0.5 rounded-full px-1 py-2">
         <Link
           to="/"
-          className="mb-1 flex size-8 items-center justify-center rounded-full bg-foreground font-serif text-[13px] italic text-background"
+          className="mb-1 flex size-8 items-center justify-center rounded-full bg-accent/10 font-serif text-[13px] italic text-accent ring-1 ring-accent/25"
         >
           P
         </Link>
