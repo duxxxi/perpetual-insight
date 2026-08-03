@@ -254,14 +254,50 @@
 .ai-iridescent {
   background: linear-gradient(
     115deg,
-    hsl(220 20% 90% / 0.55),
-    hsl(200 25% 80% / 0.40),
-    hsl(260 18% 85% / 0.35),
-    hsl(220 20% 92% / 0.55)
+    hsl(205 85% 68% / 0.55),
+    hsl(175 70% 62% / 0.45),
+    hsl(265 70% 72% / 0.45),
+    hsl(45 90% 70% / 0.40),
+    hsl(205 85% 68% / 0.55)
   );
-  background-size: 300% 300%;
-  animation: iridescent-shift 8s ease-in-out infinite;
+  background-size: 320% 320%;
+  animation: iridescent-shift 9s ease-in-out infinite;
 }
+
+/* Soft spectral halo — for the primary Ask Perpetuity surface */
+.ai-halo {
+  background: conic-gradient(
+    from 0deg,
+    hsl(205 90% 62% / 0.55),
+    hsl(170 75% 58% / 0.45),
+    hsl(90 65% 62% / 0.35),
+    hsl(45 95% 66% / 0.45),
+    hsl(320 70% 68% / 0.40),
+    hsl(265 75% 68% / 0.50),
+    hsl(205 90% 62% / 0.55)
+  );
+  animation: halo-spin 14s linear infinite;
+}
+
+@keyframes halo-spin {
+  to { transform: rotate(1turn); }
+}
+
+/* Metallic brushed sheen overlay for the canvas */
+.metal-sheen {
+  background:
+    repeating-linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0.055) 0px,
+      rgba(255, 255, 255, 0) 2px,
+      rgba(255, 255, 255, 0.045) 4px,
+      rgba(0, 0, 0, 0.02) 7px,
+      rgba(255, 255, 255, 0) 11px
+    ),
+    linear-gradient(115deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0.22) 62%, rgba(255, 255, 255, 0) 88%);
+  mix-blend-mode: soft-light;
+}
+
 
 
 /* Cool silver/chrome metallic sweep for headline accent words */

@@ -27,20 +27,24 @@ export function AmbientBackground() {
     <>
       {/* Light mode */}
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden dark:hidden">
-        <div className="absolute inset-0" style={{ background: "linear-gradient(160deg, hsl(210 40% 97%), hsl(215 26% 90%) 55%, hsl(225 22% 87%))" }} />
-        <div className="absolute -left-32 -top-40 size-[42rem] rounded-full blur-[110px]" style={{ background: "radial-gradient(circle at 35% 35%, hsl(0 0% 100% / 0.95), hsl(205 55% 82% / 0.55) 45%, transparent 72%)" }} />
-        <div className="absolute -right-40 top-1/4 size-[38rem] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle at 60% 40%, hsl(265 45% 82% / 0.55), hsl(220 50% 80% / 0.4) 50%, transparent 74%)" }} />
-        <div className="absolute -bottom-48 left-1/4 size-[40rem] rounded-full blur-[130px]" style={{ background: "radial-gradient(circle at 50% 50%, hsl(190 55% 82% / 0.5), hsl(215 40% 78% / 0.38) 52%, transparent 76%)" }} />
-        <div className="absolute bottom-1/4 right-1/3 size-[22rem] rounded-full blur-[90px]" style={{ background: "radial-gradient(circle at 45% 45%, hsl(30 60% 88% / 0.4), transparent 70%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(160deg, hsl(210 42% 98%), hsl(212 28% 92%) 40%, hsl(222 20% 86%) 72%, hsl(216 26% 91%))" }} />
+        <div className="absolute -left-32 -top-40 size-[42rem] rounded-full blur-[110px]" style={{ background: "radial-gradient(circle at 35% 35%, hsl(0 0% 100% / 0.95), hsl(205 70% 80% / 0.55) 45%, transparent 72%)" }} />
+        <div className="absolute -right-40 top-1/4 size-[38rem] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle at 60% 40%, hsl(265 60% 82% / 0.5), hsl(220 60% 80% / 0.38) 50%, transparent 74%)" }} />
+        <div className="absolute -bottom-48 left-1/4 size-[40rem] rounded-full blur-[130px]" style={{ background: "radial-gradient(circle at 50% 50%, hsl(168 60% 80% / 0.45), hsl(200 50% 80% / 0.3) 52%, transparent 76%)" }} />
+        <div className="absolute bottom-1/4 right-1/3 size-[24rem] rounded-full blur-[95px]" style={{ background: "radial-gradient(circle at 45% 45%, hsl(42 90% 82% / 0.42), transparent 70%)" }} />
+        <div className="metal-sheen absolute inset-0" />
       </div>
 
       {/* Dark mode */}
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 hidden overflow-hidden dark:block">
-        <div className="absolute inset-0" style={{ background: "linear-gradient(160deg, hsl(225 18% 9%), hsl(224 16% 6%) 60%, hsl(228 20% 8%))" }} />
-        <div className="absolute -left-36 -top-44 size-[42rem] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle at 40% 40%, hsl(210 35% 70% / 0.28), hsl(220 40% 50% / 0.14) 50%, transparent 74%)" }} />
-        <div className="absolute -right-44 top-1/5 size-[38rem] rounded-full blur-[130px]" style={{ background: "radial-gradient(circle at 55% 45%, hsl(265 40% 65% / 0.20), transparent 72%)" }} />
-        <div className="absolute -bottom-52 left-1/4 size-[40rem] rounded-full blur-[140px]" style={{ background: "radial-gradient(circle at 50% 50%, hsl(195 45% 62% / 0.18), transparent 74%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(160deg, hsl(225 20% 10%), hsl(224 16% 6%) 60%, hsl(230 22% 9%))" }} />
+        <div className="absolute -left-36 -top-44 size-[42rem] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle at 40% 40%, hsl(205 60% 62% / 0.26), hsl(220 45% 48% / 0.14) 50%, transparent 74%)" }} />
+        <div className="absolute -right-44 top-1/5 size-[38rem] rounded-full blur-[130px]" style={{ background: "radial-gradient(circle at 55% 45%, hsl(268 55% 62% / 0.20), transparent 72%)" }} />
+        <div className="absolute -bottom-52 left-1/4 size-[40rem] rounded-full blur-[140px]" style={{ background: "radial-gradient(circle at 50% 50%, hsl(168 55% 55% / 0.16), transparent 74%)" }} />
+        <div className="absolute bottom-1/3 right-1/4 size-[20rem] rounded-full blur-[100px]" style={{ background: "radial-gradient(circle at 50% 50%, hsl(42 80% 60% / 0.12), transparent 72%)" }} />
+        <div className="metal-sheen absolute inset-0 opacity-40" />
       </div>
+
     </>
   );
 }
@@ -119,23 +123,30 @@ type SidebarKey =
   | "settings";
 
 export function AppSidebar({ active }: { active: SidebarKey }) {
-  const items: { key: SidebarKey; icon: typeof Home; label: string; to: string }[] = [
-    { key: "home", icon: Home, label: "Home", to: "/" },
-    { key: "threads", icon: MessagesSquare, label: "Threads", to: "/threads" },
-    { key: "assignments", icon: ListChecks, label: "Assignments", to: "/assignments" },
-    { key: "outreach", icon: Send, label: "Outreach", to: "/outreach" },
-    { key: "contacts", icon: Users, label: "Contacts", to: "/contacts" },
-    { key: "documents", icon: FileText, label: "Documents", to: "/documents" },
-    { key: "opportunities", icon: Compass, label: "Opportunities", to: "/opportunities" },
-    { key: "connections", icon: Plug, label: "Connections", to: "/connections" },
-    { key: "settings", icon: Settings, label: "Settings", to: "/settings" },
+  const items: {
+    key: SidebarKey;
+    icon: typeof Home;
+    label: string;
+    to: string;
+    hue: string;
+  }[] = [
+    { key: "home", icon: Home, label: "Home", to: "/", hue: "205 90% 55%" },
+    { key: "threads", icon: MessagesSquare, label: "Threads", to: "/threads", hue: "265 75% 62%" },
+    { key: "assignments", icon: ListChecks, label: "Assignments", to: "/assignments", hue: "160 70% 42%" },
+    { key: "outreach", icon: Send, label: "Outreach", to: "/outreach", hue: "42 92% 48%" },
+    { key: "contacts", icon: Users, label: "Contacts", to: "/contacts", hue: "330 70% 58%" },
+    { key: "documents", icon: FileText, label: "Documents", to: "/documents", hue: "190 80% 42%" },
+    { key: "opportunities", icon: Compass, label: "Opportunities", to: "/opportunities", hue: "20 85% 55%" },
+    { key: "connections", icon: Plug, label: "Connections", to: "/connections", hue: "95 55% 42%" },
+    { key: "settings", icon: Settings, label: "Settings", to: "/settings", hue: "220 12% 50%" },
   ];
   return (
     <nav className="fixed left-3 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
-      <div className="glass-panel-strong flex flex-col items-center gap-0.5 rounded-full px-1 py-2">
+      <div className="glass-panel-strong relative flex flex-col items-center gap-0.5 overflow-hidden rounded-full px-1 py-2">
+        <div className="ai-halo pointer-events-none absolute -inset-8 opacity-25 blur-[30px]" aria-hidden />
         <Link
           to="/"
-          className="mb-1 flex size-8 items-center justify-center rounded-full glass-chip font-serif text-[13px] italic text-foreground/80"
+          className="relative mb-1 flex size-8 items-center justify-center rounded-full glass-chip font-serif text-[13px] italic text-foreground/85 shadow-[0_0_14px_-4px_hsl(205_90%_60%/0.5)]"
         >
           P
         </Link>
@@ -146,13 +157,25 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
               key={it.key}
               to={it.to}
               title={it.label}
-              className={`group relative flex size-8 items-center justify-center rounded-full transition-colors ${
+              style={
+                {
+                  "--nav-hue": `hsl(${it.hue})`,
+                } as React.CSSProperties
+              }
+              className={`group relative flex size-8 items-center justify-center rounded-full transition-all ${
                 isActive
-                  ? "glass-chip text-foreground shadow-[0_0_18px_-10px_rgba(10,15,25,0.35)]"
-                  : "text-foreground/45 hover:bg-foreground/5 hover:text-foreground"
+                  ? "glass-chip text-[color:var(--nav-hue)] shadow-[0_0_18px_-6px_var(--nav-hue)]"
+                  : "text-foreground/45 hover:bg-foreground/5 hover:text-[color:var(--nav-hue)]"
               }`}
             >
-              <it.icon className="size-[15px]" strokeWidth={1.5} />
+              {isActive ? (
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-full opacity-40 blur-[6px]"
+                  style={{ background: "radial-gradient(circle, var(--nav-hue), transparent 70%)" }}
+                />
+              ) : null}
+              <it.icon className="relative size-[15px]" strokeWidth={1.6} />
               <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-background/90 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-foreground shadow-lg ring-1 ring-foreground/10 backdrop-blur-md opacity-0 transition-opacity group-hover:opacity-100">
                 {it.label}
               </span>
@@ -164,6 +187,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
     </nav>
   );
 }
+
 
 /* ---------- Ask Perpetuity (new conversation or task) ---------- */
 import { taskStore } from "@/lib/task-store";
