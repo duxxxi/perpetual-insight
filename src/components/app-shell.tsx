@@ -152,7 +152,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
               }`}
             >
               <it.icon className="size-[15px]" strokeWidth={1.5} />
-              <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
+              <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-background/90 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-foreground shadow-lg ring-1 ring-foreground/10 backdrop-blur-md opacity-0 transition-opacity group-hover:opacity-100">
                 {it.label}
               </span>
             </Link>
