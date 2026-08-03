@@ -678,7 +678,7 @@ function WorkCard({
                   kicker={tag}
                   body={`${a.label} for: ${title}`}
                   trigger={
-                    <button data-pill className="inline-flex items-center gap-1.5 rounded-full border border-foreground/10 bg-background/40 px-3 py-1.5 text-[11px] font-medium text-foreground/75 transition-colors hover:border-foreground/20 hover:bg-foreground hover:text-background">
+                    <button data-pill className="inline-flex items-center gap-1.5 rounded-full border border-accent/15 bg-accent/5 px-3 py-1.5 text-[11px] font-medium text-accent transition-colors hover:bg-accent hover:text-accent-foreground">
                       <a.icon className="size-3" />
                       {a.label}
                     </button>
