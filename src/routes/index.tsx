@@ -8,6 +8,8 @@ import {
   type PolyOdds,
 } from "@/lib/market.functions";
 import { useEffect, useState } from "react";
+import { GlobeOrb } from "@/components/globe-orb";
+
 import {
   FileText,
   Plus,
