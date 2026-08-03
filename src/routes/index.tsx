@@ -59,17 +59,21 @@ export const Route = createFileRoute("/")({
 });
 
 
-function getGreeting() {
-  const hour = new Date().getHours();
-  if (hour < 12) return "Good morning";
-  if (hour < 18) return "Good afternoon";
-  return "Good evening";
+function useGreeting() {
+  const [greeting, setGreeting] = useState("Good morning");
+  useEffect(() => {
+    const hour = new Date().getHours();
+    if (hour < 12) setGreeting("Good morning");
+    else if (hour < 18) setGreeting("Good afternoon");
+    else setGreeting("Good evening");
+  }, []);
+  return greeting;
 }
 
 function DashboardPage() {
   useTheme();
   const userTasks = useUserTasks();
-  const greeting = getGreeting();
+  const greeting = useGreeting();
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
       <AmbientBackground />
