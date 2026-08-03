@@ -336,8 +336,8 @@ function AskPerpetuity() {
 
   return (
     <div className="relative mb-10 group">
-      <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-70 blur-[2px]" aria-hidden />
-      <div className="glass-panel-strong relative rounded-3xl p-4">
+      <div className="ai-iridescent absolute -inset-[2px] rounded-3xl opacity-80 blur-[6px] transition-opacity group-focus-within:opacity-100" aria-hidden />
+      <div className="glass-panel-strong glass-sheen relative rounded-3xl p-4">
         <div className="flex items-center gap-3">
           <div className="ai-iridescent size-7 rounded-full ring-1 ring-foreground/5" aria-hidden />
           <input
