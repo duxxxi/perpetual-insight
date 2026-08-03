@@ -60,14 +60,14 @@
   --input: hsl(220 10% 84% / 0.6);
   --ring: hsl(220 12% 40% / 0.35);
 
-  /* Glass with a faint cool tint so panels read as glass, not grey card */
-  --glass-surface: hsl(220 40% 100% / 0.46);
-  --glass-surface-strong: hsl(220 45% 100% / 0.66);
-  --glass-border: hsl(220 60% 100% / 0.72);
-  --glass-hairline: hsl(220 40% 20% / 0.07);
-  --glass-tint: hsl(230 70% 60% / 0.06);
-  --glass-tint-2: hsl(190 70% 55% / 0.05);
-  --glow-accent: hsl(224 60% 55% / 0.30);
+  /* Frosted silver glass — neutral metallic, no color tint */
+  --glass-surface: hsl(220 16% 100% / 0.50);
+  --glass-surface-strong: hsl(220 16% 100% / 0.70);
+  --glass-border: hsl(0 0% 100% / 0.75);
+  --glass-hairline: hsl(220 12% 20% / 0.07);
+  --glass-tint: hsl(0 0% 100% / 0.34);
+  --glass-tint-2: hsl(220 12% 70% / 0.10);
+  --glow-accent: hsl(220 10% 55% / 0.22);
 }
 
 
