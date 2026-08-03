@@ -40,7 +40,7 @@
 :root {
   --radius: 0.875rem;
   /* Frosted glass — cool silver canvas, graphite ink, no blue dominance */
-  --background: hsl(218 18% 91%);
+  --background: hsl(214 26% 96%);
   --foreground: hsl(220 14% 12%);
   --card: hsl(0 0% 100% / 0.72);
   --card-foreground: hsl(220 14% 12%);
