@@ -98,8 +98,9 @@ export function CommodityTicker() {
   return (
     <div className="sticky top-0 z-40">
       <div className="relative overflow-hidden">
-        <div className="ai-iridescent absolute -inset-px rounded-2xl opacity-40 blur-[2px]" aria-hidden />
-        <div className="glass-panel-strong relative overflow-hidden rounded-2xl border border-foreground/5">
+        <div className="ai-iridescent absolute -inset-px rounded-2xl opacity-55 blur-[3px]" aria-hidden />
+        <div className="glass-panel-strong glass-sheen relative overflow-hidden rounded-2xl border border-foreground/5">
+
           <div
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
