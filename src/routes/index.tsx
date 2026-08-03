@@ -340,7 +340,7 @@ function AskPerpetuity() {
       <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-70 blur-[2px]" aria-hidden />
       <div className="glass-panel-strong relative rounded-3xl p-4">
         <div className="flex items-center gap-3">
-          <div className="ai-iridescent size-7 rounded-full ring-1 ring-foreground/5" aria-hidden />
+          <div className="globe-orb size-7 shrink-0 ring-1 ring-foreground/10" aria-hidden />
           <input
             type="text"
             value={draft}
