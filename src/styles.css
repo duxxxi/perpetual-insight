@@ -89,10 +89,11 @@
   --input: hsl(220 20% 100% / 0.12);
   --ring: hsl(210 18% 72% / 0.35);
 
-  --glass-surface: rgba(38, 42, 50, 0.38);
-  --glass-surface-strong: rgba(44, 48, 58, 0.58);
-  --glass-border: rgba(255, 255, 255, 0.09);
-  --glass-hairline: rgba(255, 255, 255, 0.06);
+  --glass-surface: rgba(16, 18, 23, 0.45);
+  --glass-surface-strong: rgba(13, 15, 20, 0.62);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-hairline: rgba(255, 255, 255, 0.05);
+
 }
 
 
