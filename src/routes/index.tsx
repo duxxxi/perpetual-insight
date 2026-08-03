@@ -996,24 +996,24 @@ function OddsRow({ m }: { m: PolyOdds }) {
       href={m.url}
       target="_blank"
       rel="noreferrer"
-      className="group block rounded-2xl px-2.5 py-2 transition-colors hover:bg-[var(--glass-surface)]"
+      className="group block rounded-xl px-2 py-1.5 transition-colors hover:bg-[var(--glass-surface)]"
     >
-      <div className="mb-1.5 flex items-start justify-between gap-3">
+      <div className="mb-1 flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="line-clamp-2 text-[12px] font-medium leading-snug text-foreground/85 group-hover:text-foreground">
+          <p className="line-clamp-2 text-[11px] font-medium leading-snug text-foreground/85 group-hover:text-foreground">
             {m.question}
           </p>
           {m.volume24h ? (
-            <p className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-foreground/35">
+            <p className="mt-0.5 font-mono text-[8px] uppercase tracking-[0.12em] text-foreground/35">
               ${Math.round(m.volume24h).toLocaleString("en-US")} · 24h vol
             </p>
           ) : null}
         </div>
         <div className="flex shrink-0 items-baseline gap-1.5">
-          <span className="font-mono text-[19px] leading-none tabular-nums text-foreground">{m.prob}%</span>
+          <span className="font-mono text-[16px] leading-none tabular-nums text-foreground">{m.prob}%</span>
           {m.chg24h !== null ? (
             <span
-              className={`font-mono text-[9px] font-semibold tabular-nums ${
+              className={`font-mono text-[8px] font-semibold tabular-nums ${
                 up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
               }`}
             >
@@ -1023,7 +1023,7 @@ function OddsRow({ m }: { m: PolyOdds }) {
           ) : null}
         </div>
       </div>
-      <div className="relative h-1 overflow-hidden rounded-full bg-foreground/[0.07]">
+      <div className="relative h-1 overflow-hidden rounded-full bg-foreground/[0.06]">
         <div
           className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-accent/70 to-accent"
           style={{ width: `${m.prob}%` }}
