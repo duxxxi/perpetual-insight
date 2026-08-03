@@ -123,23 +123,30 @@ type SidebarKey =
   | "settings";
 
 export function AppSidebar({ active }: { active: SidebarKey }) {
-  const items: { key: SidebarKey; icon: typeof Home; label: string; to: string }[] = [
-    { key: "home", icon: Home, label: "Home", to: "/" },
-    { key: "threads", icon: MessagesSquare, label: "Threads", to: "/threads" },
-    { key: "assignments", icon: ListChecks, label: "Assignments", to: "/assignments" },
-    { key: "outreach", icon: Send, label: "Outreach", to: "/outreach" },
-    { key: "contacts", icon: Users, label: "Contacts", to: "/contacts" },
-    { key: "documents", icon: FileText, label: "Documents", to: "/documents" },
-    { key: "opportunities", icon: Compass, label: "Opportunities", to: "/opportunities" },
-    { key: "connections", icon: Plug, label: "Connections", to: "/connections" },
-    { key: "settings", icon: Settings, label: "Settings", to: "/settings" },
+  const items: {
+    key: SidebarKey;
+    icon: typeof Home;
+    label: string;
+    to: string;
+    hue: string;
+  }[] = [
+    { key: "home", icon: Home, label: "Home", to: "/", hue: "205 90% 55%" },
+    { key: "threads", icon: MessagesSquare, label: "Threads", to: "/threads", hue: "265 75% 62%" },
+    { key: "assignments", icon: ListChecks, label: "Assignments", to: "/assignments", hue: "160 70% 42%" },
+    { key: "outreach", icon: Send, label: "Outreach", to: "/outreach", hue: "42 92% 48%" },
+    { key: "contacts", icon: Users, label: "Contacts", to: "/contacts", hue: "330 70% 58%" },
+    { key: "documents", icon: FileText, label: "Documents", to: "/documents", hue: "190 80% 42%" },
+    { key: "opportunities", icon: Compass, label: "Opportunities", to: "/opportunities", hue: "20 85% 55%" },
+    { key: "connections", icon: Plug, label: "Connections", to: "/connections", hue: "95 55% 42%" },
+    { key: "settings", icon: Settings, label: "Settings", to: "/settings", hue: "220 12% 50%" },
   ];
   return (
     <nav className="fixed left-3 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
-      <div className="glass-panel-strong flex flex-col items-center gap-0.5 rounded-full px-1 py-2">
+      <div className="glass-panel-strong relative flex flex-col items-center gap-0.5 overflow-hidden rounded-full px-1 py-2">
+        <div className="ai-halo pointer-events-none absolute -inset-8 opacity-25 blur-[30px]" aria-hidden />
         <Link
           to="/"
-          className="mb-1 flex size-8 items-center justify-center rounded-full glass-chip font-serif text-[13px] italic text-foreground/80"
+          className="relative mb-1 flex size-8 items-center justify-center rounded-full glass-chip font-serif text-[13px] italic text-foreground/85 shadow-[0_0_14px_-4px_hsl(205_90%_60%/0.5)]"
         >
           P
         </Link>
@@ -150,13 +157,25 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
               key={it.key}
               to={it.to}
               title={it.label}
-              className={`group relative flex size-8 items-center justify-center rounded-full transition-colors ${
+              style={
+                {
+                  "--nav-hue": `hsl(${it.hue})`,
+                } as React.CSSProperties
+              }
+              className={`group relative flex size-8 items-center justify-center rounded-full transition-all ${
                 isActive
-                  ? "glass-chip text-foreground shadow-[0_0_18px_-10px_rgba(10,15,25,0.35)]"
-                  : "text-foreground/45 hover:bg-foreground/5 hover:text-foreground"
+                  ? "glass-chip text-[color:var(--nav-hue)] shadow-[0_0_18px_-6px_var(--nav-hue)]"
+                  : "text-foreground/45 hover:bg-foreground/5 hover:text-[color:var(--nav-hue)]"
               }`}
             >
-              <it.icon className="size-[15px]" strokeWidth={1.5} />
+              {isActive ? (
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-full opacity-40 blur-[6px]"
+                  style={{ background: "radial-gradient(circle, var(--nav-hue), transparent 70%)" }}
+                />
+              ) : null}
+              <it.icon className="relative size-[15px]" strokeWidth={1.6} />
               <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-background/90 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-foreground shadow-lg ring-1 ring-foreground/10 backdrop-blur-md opacity-0 transition-opacity group-hover:opacity-100">
                 {it.label}
               </span>
@@ -168,6 +187,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
     </nav>
   );
 }
+
 
 /* ---------- Ask Perpetuity (new conversation or task) ---------- */
 import { taskStore } from "@/lib/task-store";
