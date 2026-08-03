@@ -240,14 +240,15 @@
 .ai-iridescent {
   background: linear-gradient(
     115deg,
-    hsl(212 100% 65% / 0.35),
-    hsl(190 90% 65% / 0.30),
-    hsl(240 60% 70% / 0.25),
-    hsl(212 100% 65% / 0.35)
+    hsl(220 20% 90% / 0.55),
+    hsl(200 25% 80% / 0.40),
+    hsl(260 18% 85% / 0.35),
+    hsl(220 20% 92% / 0.55)
   );
   background-size: 300% 300%;
-  animation: iridescent-shift 6s ease-in-out infinite;
+  animation: iridescent-shift 8s ease-in-out infinite;
 }
+
 
 /* Cool silver/chrome metallic sweep for headline accent words */
 .text-silver-metallic {
