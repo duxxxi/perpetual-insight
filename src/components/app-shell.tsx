@@ -135,7 +135,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
       <div className="glass-panel-strong flex flex-col items-center gap-0.5 rounded-full px-1 py-2">
         <Link
           to="/"
-          className="mb-1 flex size-8 items-center justify-center rounded-full bg-accent/10 font-serif text-[13px] italic text-accent ring-1 ring-accent/25"
+          className="mb-1 flex size-8 items-center justify-center rounded-full glass-chip font-serif text-[13px] italic text-foreground/80"
         >
           P
         </Link>
@@ -148,7 +148,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
               title={it.label}
               className={`group relative flex size-8 items-center justify-center rounded-full transition-colors ${
                 isActive
-                  ? "bg-accent/10 text-accent ring-1 ring-accent/25 shadow-[0_0_18px_-8px_hsl(211_100%_50%/0.55)]"
+                  ? "glass-chip text-foreground shadow-[0_0_18px_-10px_rgba(10,15,25,0.35)]"
                   : "text-foreground/45 hover:bg-foreground/5 hover:text-foreground"
               }`}
             >
@@ -193,7 +193,7 @@ function AskPerpetuityButton() {
         type="button"
         title="New conversation or task"
         onClick={() => setOpen(true)}
-        className="group relative mt-1 flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-sky-400/30 to-sky-500/10 text-sky-500 ring-1 ring-sky-400/30 shadow-[0_0_18px_-6px_hsl(210_90%_60%/0.55)] transition-all hover:from-sky-400/40 hover:to-sky-500/15 hover:shadow-[0_0_22px_-4px_hsl(210_90%_60%/0.7)] dark:text-sky-300"
+        className="group relative mt-1 flex size-8 items-center justify-center rounded-full glass-chip text-foreground/80 transition-all hover:text-foreground hover:shadow-[0_0_22px_-8px_rgba(10,15,25,0.4)]"
       >
         <Plus className="size-[16px]" strokeWidth={2} />
         <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-background/90 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-foreground shadow-lg ring-1 ring-foreground/10 backdrop-blur-md opacity-0 transition-opacity group-hover:opacity-100">
@@ -208,7 +208,7 @@ function AskPerpetuityButton() {
             <div className="ai-iridescent absolute inset-x-0 top-0 h-px opacity-70" aria-hidden />
             <div className="flex items-center justify-between gap-2 px-4 pt-4">
               <div className="flex items-center gap-2">
-                <span className="inline-flex size-6 items-center justify-center rounded-full bg-gradient-to-br from-sky-400/30 to-sky-500/10 text-sky-500 ring-1 ring-sky-400/30 dark:text-sky-300">
+                <span className="inline-flex size-6 items-center justify-center rounded-full glass-chip text-foreground/75">
                   <Sparkles className="size-3" strokeWidth={1.75} />
                 </span>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-foreground/50">
@@ -222,7 +222,7 @@ function AskPerpetuityButton() {
                     type="button"
                     onClick={() => setMode(m)}
                     className={`rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] transition-colors ${
-                      mode === m ? "bg-accent text-accent-foreground shadow-[0_0_12px_-4px_hsl(211_100%_50%/0.4)]" : "text-foreground/55 hover:text-foreground"
+                      mode === m ? "glass-panel-strong text-foreground" : "text-foreground/55 hover:text-foreground"
                     }`}
                   >
                     {m === "chat" ? "Conversation" : "Task"}
@@ -253,7 +253,7 @@ function AskPerpetuityButton() {
                 <button
                   type="submit"
                   disabled={!value.trim()}
-                  className="inline-flex h-7 items-center gap-1.5 rounded-full bg-gradient-to-br from-sky-400/25 to-sky-500/10 px-3 text-[11px] font-medium text-sky-600 ring-1 ring-sky-400/30 shadow-[0_0_16px_-6px_hsl(210_90%_60%/0.55)] transition-all hover:from-sky-400/35 hover:to-sky-500/15 disabled:opacity-40 disabled:shadow-none dark:text-sky-300"
+                  className="inline-flex h-7 items-center gap-1.5 rounded-full glass-chip px-3 text-[11px] font-medium text-foreground/85 transition-all hover:text-foreground disabled:opacity-40"
                 >
                   {mode === "task" ? "Create" : "Send"}
                   <ArrowUp className="size-3" strokeWidth={2} />
