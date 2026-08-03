@@ -221,7 +221,7 @@ function AskPerpetuityButton() {
                     type="button"
                     onClick={() => setMode(m)}
                     className={`rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] transition-colors ${
-                      mode === m ? "bg-foreground text-background" : "text-foreground/55 hover:text-foreground"
+                      mode === m ? "bg-accent text-accent-foreground shadow-[0_0_12px_-4px_hsl(211_100%_50%/0.4)]" : "text-foreground/55 hover:text-foreground"
                     }`}
                   >
                     {m === "chat" ? "Conversation" : "Task"}
