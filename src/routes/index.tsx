@@ -98,10 +98,11 @@ function DashboardPage() {
                 MONDAY, 15 JUNE
               </p>
               <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                <h1 className="font-serif font-normal text-3xl tracking-tight md:text-[38px]">
-                  {greeting},{" "}
-                  <span className="italic text-silver-metallic">Stevan</span>
+                <h1 className="font-sans text-[30px] font-semibold leading-[1.05] tracking-[-0.03em] md:text-[36px]">
+                  <span className="text-foreground/45">{greeting},</span>{" "}
+                  <span className="text-silver-metallic">Stevan</span>
                 </h1>
+
                 <MorningBriefPill />
               </div>
               <p className="mt-3 max-w-2xl text-pretty text-sm leading-relaxed text-foreground/60">
