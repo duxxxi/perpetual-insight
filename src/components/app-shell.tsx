@@ -30,7 +30,7 @@ export function AmbientBackground() {
         className="pointer-events-none fixed inset-0 -z-10 dark:hidden"
         style={{
           background:
-            "radial-gradient(60rem 40rem at 4% -12%, hsl(0 0% 100% / 0.95), transparent 62%), radial-gradient(48rem 34rem at 14% 8%, hsl(215 92% 60% / 0.30), transparent 66%), radial-gradient(42rem 32rem at 92% 4%, hsl(275 85% 68% / 0.26), transparent 66%), radial-gradient(52rem 38rem at 100% 100%, hsl(190 90% 55% / 0.26), transparent 64%), radial-gradient(40rem 30rem at 46% 56%, hsl(330 80% 70% / 0.14), transparent 72%)",
+            "radial-gradient(62rem 42rem at 4% -14%, hsl(0 0% 100% / 0.98), transparent 64%), radial-gradient(50rem 36rem at 16% 6%, hsl(220 16% 92% / 0.85), transparent 68%), radial-gradient(44rem 34rem at 94% 2%, hsl(215 14% 88% / 0.70), transparent 68%), radial-gradient(54rem 40rem at 100% 100%, hsl(220 12% 86% / 0.65), transparent 66%), radial-gradient(42rem 32rem at 48% 58%, hsl(0 0% 100% / 0.55), transparent 74%)",
         }}
       />
       <div
