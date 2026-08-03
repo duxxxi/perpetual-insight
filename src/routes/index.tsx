@@ -734,7 +734,7 @@ function ActionDialog({
               key={a.label}
               className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
                 a.primary
-                  ? "bg-foreground text-background hover:opacity-90"
+                  ? "bg-accent text-accent-foreground shadow-[0_0_14px_-4px_hsl(211_100%_50%/0.4)] hover:bg-accent/90"
                   : "text-foreground/60 hover:bg-foreground/5 hover:text-foreground"
               }`}
             >
