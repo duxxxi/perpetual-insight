@@ -804,7 +804,7 @@ function SuggestedItem({ title, body }: { title: string; body: string }) {
       <div className="absolute right-3 top-3 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
         <button data-pill
           aria-label="Add as task"
-          className="inline-flex size-6 items-center justify-center rounded-full bg-foreground/5 text-foreground/60 hover:bg-foreground hover:text-background"
+          className="inline-flex size-6 items-center justify-center rounded-full bg-accent/10 text-accent hover:bg-accent hover:text-accent-foreground"
         >
           <Plus className="size-3" strokeWidth={2.5} />
         </button>
