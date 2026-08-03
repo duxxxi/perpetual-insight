@@ -846,7 +846,7 @@ function ScheduleDivider() {
   return <div className="mx-4 h-px bg-foreground/5" />;
 }
 
-/* ---------- Live Signals (sparklines + prediction markets) ---------- */
+/* ---------- Live Signals (real market data + Polymarket odds) ---------- */
 
 function Sparkline({
   points,
@@ -859,6 +859,7 @@ function Sparkline({
   width?: number;
   height?: number;
 }) {
+  if (points.length < 2) return null;
   const min = Math.min(...points);
   const max = Math.max(...points);
   const range = Math.max(max - min, 0.0001);
@@ -881,132 +882,226 @@ function Sparkline({
   );
 }
 
-const stockSignals = [
-  { sym: "TIMBER-EU", name: "Timber futures · EU", price: "€438.20", chg: "+2.14%", up: true,
-    points: [420, 418, 422, 419, 425, 430, 428, 433, 431, 435, 438] },
-  { sym: "PULP-USD", name: "Pulp index · Nordic", price: "$1,284", chg: "-1.32%", up: false,
-    points: [1310, 1305, 1308, 1295, 1300, 1292, 1290, 1288, 1285, 1282, 1284] },
-  { sym: "BRENT", name: "Brent crude · ICE", price: "$87.33", chg: "-2.94%", up: false,
-    points: [92, 91.5, 91, 90.4, 89.8, 89.2, 88.5, 88.1, 87.9, 87.5, 87.33] },
-  { sym: "COPPER", name: "Copper · LME", price: "$6,494", chg: "+0.76%", up: true,
-    points: [6440, 6448, 6455, 6462, 6458, 6470, 6478, 6485, 6482, 6490, 6494] },
-];
+function fmtPrice(s: MarketSeries) {
+  const digits = s.price < 10 ? 3 : s.price < 1000 ? 2 : 0;
+  const value = s.price.toLocaleString("en-US", {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  });
+  const prefix = s.currency === "USD" ? "$" : s.currency === "EUR" ? "€" : "";
+  return `${prefix}${value}${s.unit ?? ""}`;
+}
 
-function StockSignalCard({ s }: { s: (typeof stockSignals)[number] }) {
+function ChangePill({ pct }: { pct: number }) {
+  const up = pct >= 0;
+  return (
+    <span
+      className={`inline-flex items-center rounded-full px-1.5 py-0.5 font-mono text-[10px] font-semibold tabular-nums ring-1 ${
+        up
+          ? "bg-emerald-500/10 text-emerald-600 ring-emerald-500/20 dark:text-emerald-400"
+          : "bg-rose-500/10 text-rose-600 ring-rose-500/20 dark:text-rose-400"
+      }`}
+    >
+      {up ? "+" : ""}
+      {pct.toFixed(2)}%
+    </span>
+  );
+}
+
+function SectionCaption({ label, right }: { label: string; right?: React.ReactNode }) {
+  return (
+    <div className="mb-2 flex items-center justify-between px-1">
+      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/55">{label}</p>
+      {right}
+    </div>
+  );
+}
+
+function LiveDot({ label = "LIVE" }: { label?: string }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-foreground/40">
+      <span className="size-1 rounded-full bg-emerald-500 shadow-[0_0_6px_currentColor]" />
+      {label}
+    </span>
+  );
+}
+
+function MarketRow({ s }: { s: MarketSeries }) {
   return (
     <ActionDialog
       title={s.name}
-      kicker={`${s.sym} · ${s.chg}`}
-      body={`Real-time signal for ${s.name}. Perpetuity flags this because it materially impacts your open contracts and freight exposure.`}
-      actions={[{ label: "Open desk", primary: true }, { label: "Set alert" }]}
+      kicker={`${s.sym} · ${fmtPrice(s)} · ${s.chgPct >= 0 ? "+" : ""}${s.chgPct.toFixed(2)}% day`}
+      body={`Live quote and one-month series pulled from public market data. Perpetuity tracks ${s.name} because it moves landed cost and margin on your open contracts.`}
+      actions={[{ label: "Brief me on the move", primary: true }, { label: "Watch this signal" }]}
       trigger={
         <button
           data-pill
-          className="glass-panel group flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
+          className="group flex w-full items-center gap-3 rounded-2xl px-2.5 py-2 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
         >
           <div className="min-w-0 flex-1">
-            <div className="flex items-baseline gap-2">
-              <span className="font-mono text-[10px] font-semibold tracking-wider text-foreground/50">{s.sym}</span>
-              <span className={`font-mono text-[10px] font-semibold tabular-nums ${s.up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}>{s.chg}</span>
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-[10px] font-semibold tracking-[0.12em] text-foreground/50">
+                {s.sym}
+              </span>
+              <ChangePill pct={s.chgPct} />
             </div>
-            <p className="mt-0.5 truncate text-[12px] font-medium leading-tight text-foreground/85">{s.name}</p>
-            <p className="mt-0.5 font-mono text-[11px] tabular-nums text-foreground/60">{s.price}</p>
+            <p className="mt-1 font-mono text-[13px] tabular-nums leading-none text-foreground/90">
+              {fmtPrice(s)}
+            </p>
           </div>
-          <Sparkline points={s.points} up={s.up} />
+          <Sparkline points={s.points} up={s.up} width={84} height={26} />
         </button>
       }
     />
   );
 }
 
-const predictions = [
-  { q: "ECB cuts rates before Sep 2026", prob: 68, chg: "+4", up: true },
-  { q: "EU timber CIS restrictions ratified Q3", prob: 82, chg: "+11", up: true },
-  { q: "USD/EUR below 1.14 by Aug", prob: 41, chg: "-6", up: false },
-  { q: "Suez freight surcharge lifted in 30d", prob: 29, chg: "+2", up: true },
-];
-
-function PredictionBar({ p }: { p: (typeof predictions)[number] }) {
+function MarketHero({ s }: { s: MarketSeries }) {
   return (
-    <ActionDialog
-      title={p.q}
-      kicker={`Polymarket-style · ${p.prob}% probability`}
-      body={`Aggregated from prediction markets and news signals. Perpetuity surfaces this because it correlates with your open positions.`}
-      actions={[{ label: "See sources", primary: true }, { label: "Track" }]}
-      trigger={
-        <button data-pill className="group block w-full rounded-2xl px-3 py-2.5 text-left transition-colors hover:bg-[var(--glass-surface)]">
-          <div className="mb-1.5 flex items-center justify-between gap-3">
-            <p className="line-clamp-1 text-[12px] font-medium text-foreground/85 group-hover:text-foreground">{p.q}</p>
-            <div className="flex shrink-0 items-baseline gap-1.5">
-              <span className="font-mono text-[18px] leading-none text-foreground">{p.prob}%</span>
-              <span className={`font-mono text-[9px] font-semibold ${p.up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}>{p.chg}</span>
-            </div>
+    <div className="glass-panel-strong relative overflow-hidden rounded-3xl p-4">
+      <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-3xl opacity-25 blur-[3px]" aria-hidden />
+      <div className="relative flex items-end justify-between gap-3">
+        <div className="min-w-0">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/45">{s.sym}</p>
+          <p className="mt-1 font-mono text-[26px] leading-none tabular-nums">
+            <span className="text-silver-metallic">{fmtPrice(s)}</span>
+          </p>
+          <div className="mt-1.5 flex items-center gap-2">
+            <ChangePill pct={s.chgPct} />
+            <span className="truncate text-[11px] text-foreground/45">{s.name}</span>
           </div>
-          <div className="relative h-1.5 overflow-hidden rounded-full bg-foreground/5">
-            <div
-              className={`absolute inset-y-0 left-0 rounded-full ${p.up ? "bg-gradient-to-r from-emerald-400 to-emerald-500" : "bg-gradient-to-r from-rose-400 to-rose-500"}`}
-              style={{ width: `${p.prob}%` }}
-            />
-          </div>
-        </button>
-      }
-    />
-  );
-}
-
-function LiveSignals() {
-  return (
-    <div className="mt-4 space-y-4">
-      {/* Market movers with sparklines */}
-      <div className="glass-panel rounded-3xl p-3">
-        <div className="mb-2 flex items-center justify-between px-1">
-          <p className="font-mono text-[13px] tracking-wider text-foreground/70">MARKET · MOVERS</p>
-          <span className="inline-flex items-center gap-1 font-mono text-[9px] font-semibold uppercase tracking-wider text-foreground/40">
-            <span className="size-1 rounded-full bg-emerald-500 shadow-[0_0_6px_currentColor]" /> LIVE
-          </span>
         </div>
-        <div className="grid grid-cols-1 gap-1.5">
-          {stockSignals.map((s) => (
-            <StockSignalCard key={s.sym} s={s} />
-          ))}
-        </div>
-      </div>
-
-      {/* Prediction markets */}
-      <div className="glass-panel rounded-3xl p-3">
-        <div className="mb-2 flex items-center justify-between px-1">
-          <p className="font-mono text-[13px] tracking-wider text-foreground/70">PREDICTION · MARKETS</p>
-          <span className="font-mono text-[9px] font-semibold uppercase tracking-wider text-foreground/40">24h Δ</span>
-        </div>
-        <div className="space-y-0.5">
-          {predictions.map((p) => (
-            <PredictionBar key={p.q} p={p} />
-          ))}
-        </div>
-      </div>
-
-      {/* Pulse */}
-      <div className="glass-panel-strong relative overflow-hidden rounded-3xl p-4">
-        <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-3xl opacity-30 blur-[3px]" aria-hidden />
-        <div className="relative flex items-center justify-between gap-3">
-          <div>
-            <p className="font-mono text-[13px] tracking-wider text-foreground/70">PORTFOLIO · PULSE</p>
-            <p className="mt-1 font-serif text-2xl font-semibold tracking-tight">
-              <span className="text-silver-metallic">€ 4.28M</span>
-            </p>
-            <p className="mt-0.5 font-mono text-[10px] tabular-nums text-emerald-600 dark:text-emerald-400">
-              +€ 84,120 · +2.01% today
-            </p>
-          </div>
-          <Sparkline
-            up
-            width={130}
-            height={44}
-            points={[4.10, 4.12, 4.09, 4.14, 4.16, 4.13, 4.18, 4.22, 4.20, 4.25, 4.28]}
-          />
-        </div>
+        <Sparkline points={s.points} up={s.up} width={140} height={48} />
       </div>
     </div>
   );
 }
+
+function OddsRow({ m }: { m: PolyOdds }) {
+  const up = (m.chg24h ?? 0) >= 0;
+  return (
+    <a
+      href={m.url}
+      target="_blank"
+      rel="noreferrer"
+      className="group block rounded-2xl px-2.5 py-2 transition-colors hover:bg-[var(--glass-surface)]"
+    >
+      <div className="mb-1.5 flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="line-clamp-2 text-[12px] font-medium leading-snug text-foreground/85 group-hover:text-foreground">
+            {m.question}
+          </p>
+          {m.volume24h ? (
+            <p className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-foreground/35">
+              ${Math.round(m.volume24h).toLocaleString("en-US")} · 24h vol
+            </p>
+          ) : null}
+        </div>
+        <div className="flex shrink-0 items-baseline gap-1.5">
+          <span className="font-mono text-[19px] leading-none tabular-nums text-foreground">{m.prob}%</span>
+          {m.chg24h !== null ? (
+            <span
+              className={`font-mono text-[9px] font-semibold tabular-nums ${
+                up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
+              }`}
+            >
+              {up ? "+" : ""}
+              {m.chg24h}
+            </span>
+          ) : null}
+        </div>
+      </div>
+      <div className="relative h-1 overflow-hidden rounded-full bg-foreground/[0.07]">
+        <div
+          className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-accent/70 to-accent"
+          style={{ width: `${m.prob}%` }}
+        />
+      </div>
+    </a>
+  );
+}
+
+function SkeletonRows({ count = 4 }: { count?: number }) {
+  return (
+    <div className="space-y-2 px-1 py-1">
+      {Array.from({ length: count }).map((_, i) => (
+        <div key={i} className="h-8 animate-pulse rounded-xl bg-foreground/[0.05]" />
+      ))}
+    </div>
+  );
+}
+
+function LiveSignals() {
+  const marketFn = useServerFn(getMarketSignals);
+  const oddsFn = useServerFn(getPolymarketOdds);
+
+  const markets = useQuery({
+    queryKey: ["market-signals"],
+    queryFn: () => marketFn(),
+    refetchInterval: 120_000,
+    staleTime: 60_000,
+  });
+  const odds = useQuery({
+    queryKey: ["polymarket-odds"],
+    queryFn: () => oddsFn(),
+    refetchInterval: 180_000,
+    staleTime: 60_000,
+  });
+
+  const series = markets.data?.series ?? [];
+  const [hero, ...rest] = series;
+
+  return (
+    <div className="mt-4 space-y-3">
+      {hero ? <MarketHero s={hero} /> : null}
+
+      <div className="glass-panel rounded-3xl p-3">
+        <SectionCaption label="Commodities · FX" right={<LiveDot />} />
+        {markets.isPending ? (
+          <SkeletonRows />
+        ) : rest.length ? (
+          <div className="divide-y divide-foreground/5">
+            {rest.map((s) => (
+              <MarketRow key={s.sym} s={s} />
+            ))}
+          </div>
+        ) : (
+          <p className="px-2 py-3 text-[11px] text-foreground/45">
+            Market feed unavailable right now — retrying automatically.
+          </p>
+        )}
+      </div>
+
+      <div className="glass-panel rounded-3xl p-3">
+        <SectionCaption
+          label="Polymarket odds"
+          right={
+            <a
+              href="https://polymarket.com"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-foreground/40 hover:text-foreground/70"
+            >
+              Polymarket <ArrowUpRight className="size-2.5" />
+            </a>
+          }
+        />
+        {odds.isPending ? (
+          <SkeletonRows count={5} />
+        ) : odds.data?.markets.length ? (
+          <div className="space-y-1">
+            {odds.data.markets.map((m) => (
+              <OddsRow key={m.question} m={m} />
+            ))}
+          </div>
+        ) : (
+          <p className="px-2 py-3 text-[11px] text-foreground/45">
+            No live macro markets returned — retrying automatically.
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
 
