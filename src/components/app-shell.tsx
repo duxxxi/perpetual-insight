@@ -134,7 +134,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
       <div className="glass-panel-strong flex flex-col items-center gap-0.5 rounded-full px-1 py-2">
         <Link
           to="/"
-          className="mb-1 flex size-8 items-center justify-center rounded-full bg-foreground font-serif text-[13px] italic text-background"
+          className="mb-1 flex size-8 items-center justify-center rounded-full bg-accent/10 font-serif text-[13px] italic text-accent ring-1 ring-accent/25"
         >
           P
         </Link>
@@ -152,7 +152,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
               }`}
             >
               <it.icon className="size-[15px]" strokeWidth={1.5} />
-              <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
+              <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-background/90 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-foreground shadow-lg ring-1 ring-foreground/10 backdrop-blur-md opacity-0 transition-opacity group-hover:opacity-100">
                 {it.label}
               </span>
             </Link>
@@ -195,7 +195,7 @@ function AskPerpetuityButton() {
         className="group relative mt-1 flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-sky-400/30 to-sky-500/10 text-sky-500 ring-1 ring-sky-400/30 shadow-[0_0_18px_-6px_hsl(210_90%_60%/0.55)] transition-all hover:from-sky-400/40 hover:to-sky-500/15 hover:shadow-[0_0_22px_-4px_hsl(210_90%_60%/0.7)] dark:text-sky-300"
       >
         <Plus className="size-[16px]" strokeWidth={2} />
-        <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-background opacity-0 transition-opacity group-hover:opacity-100">
+        <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-background/90 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-foreground shadow-lg ring-1 ring-foreground/10 backdrop-blur-md opacity-0 transition-opacity group-hover:opacity-100">
           New
         </span>
       </button>
@@ -221,7 +221,7 @@ function AskPerpetuityButton() {
                     type="button"
                     onClick={() => setMode(m)}
                     className={`rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] transition-colors ${
-                      mode === m ? "bg-foreground text-background" : "text-foreground/55 hover:text-foreground"
+                      mode === m ? "bg-accent text-accent-foreground shadow-[0_0_12px_-4px_hsl(211_100%_50%/0.4)]" : "text-foreground/55 hover:text-foreground"
                     }`}
                   >
                     {m === "chat" ? "Conversation" : "Task"}

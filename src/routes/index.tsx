@@ -7,7 +7,7 @@ import {
   type MarketSeries,
   type PolyOdds,
 } from "@/lib/market.functions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FileText,
   Plus,
@@ -59,17 +59,21 @@ export const Route = createFileRoute("/")({
 });
 
 
-function getGreeting() {
-  const hour = new Date().getHours();
-  if (hour < 12) return "Good morning";
-  if (hour < 18) return "Good afternoon";
-  return "Good evening";
+function useGreeting() {
+  const [greeting, setGreeting] = useState("Good morning");
+  useEffect(() => {
+    const hour = new Date().getHours();
+    if (hour < 12) setGreeting("Good morning");
+    else if (hour < 18) setGreeting("Good afternoon");
+    else setGreeting("Good evening");
+  }, []);
+  return greeting;
 }
 
 function DashboardPage() {
   useTheme();
   const userTasks = useUserTasks();
-  const greeting = getGreeting();
+  const greeting = useGreeting();
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
       <AmbientBackground />
@@ -354,7 +358,7 @@ function AskPerpetuity() {
             onClick={launch}
             disabled={!draft.trim()}
             data-pill
-            className="inline-flex size-9 items-center justify-center rounded-2xl bg-foreground text-background transition-transform hover:scale-105 disabled:opacity-40 disabled:hover:scale-100"
+            className="inline-flex size-9 items-center justify-center rounded-2xl bg-accent/90 text-accent-foreground shadow-[0_0_16px_-4px_hsl(211_100%_50%/0.45)] transition-all hover:scale-105 hover:bg-accent hover:shadow-[0_0_20px_-4px_hsl(211_100%_50%/0.6)] disabled:opacity-40 disabled:hover:scale-100 disabled:hover:shadow-none"
           >
             <ArrowUp className="size-4" />
           </button>
@@ -674,7 +678,7 @@ function WorkCard({
                   kicker={tag}
                   body={`${a.label} for: ${title}`}
                   trigger={
-                    <button data-pill className="inline-flex items-center gap-1.5 rounded-full border border-foreground/10 bg-background/40 px-3 py-1.5 text-[11px] font-medium text-foreground/75 transition-colors hover:border-foreground/20 hover:bg-foreground hover:text-background">
+                    <button data-pill className="inline-flex items-center gap-1.5 rounded-full border border-accent/15 bg-accent/5 px-3 py-1.5 text-[11px] font-medium text-accent transition-colors hover:bg-accent hover:text-accent-foreground">
                       <a.icon className="size-3" />
                       {a.label}
                     </button>
@@ -730,7 +734,7 @@ function ActionDialog({
               key={a.label}
               className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
                 a.primary
-                  ? "bg-foreground text-background hover:opacity-90"
+                  ? "bg-accent text-accent-foreground shadow-[0_0_14px_-4px_hsl(211_100%_50%/0.4)] hover:bg-accent/90"
                   : "text-foreground/60 hover:bg-foreground/5 hover:text-foreground"
               }`}
             >
@@ -800,7 +804,7 @@ function SuggestedItem({ title, body }: { title: string; body: string }) {
       <div className="absolute right-3 top-3 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
         <button data-pill
           aria-label="Add as task"
-          className="inline-flex size-6 items-center justify-center rounded-full bg-foreground/5 text-foreground/60 hover:bg-foreground hover:text-background"
+          className="inline-flex size-6 items-center justify-center rounded-full bg-accent/10 text-accent hover:bg-accent hover:text-accent-foreground"
         >
           <Plus className="size-3" strokeWidth={2.5} />
         </button>
@@ -944,20 +948,20 @@ function MarketRow({ s }: { s: MarketSeries }) {
       trigger={
         <button
           data-pill
-          className="group flex w-full items-center gap-3 rounded-2xl px-2.5 py-2 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
+          className="group flex w-full items-center gap-2 rounded-xl px-2 py-1.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
         >
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[10px] font-semibold tracking-[0.12em] text-foreground/50">
+              <span className="font-mono text-[9px] font-semibold tracking-[0.12em] text-foreground/50">
                 {s.sym}
               </span>
               <ChangePill pct={s.chgPct} />
             </div>
-            <p className="mt-1 font-mono text-[13px] tabular-nums leading-none text-foreground/90">
+            <p className="mt-0.5 font-mono text-[12px] tabular-nums leading-none text-foreground/90">
               {fmtPrice(s)}
             </p>
           </div>
-          <Sparkline points={s.points} up={s.up} width={84} height={26} />
+          <Sparkline points={s.points} up={s.up} width={64} height={20} />
         </button>
       }
     />
@@ -966,20 +970,20 @@ function MarketRow({ s }: { s: MarketSeries }) {
 
 function MarketHero({ s }: { s: MarketSeries }) {
   return (
-    <div className="glass-panel-strong relative overflow-hidden rounded-3xl p-4">
-      <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-3xl opacity-25 blur-[3px]" aria-hidden />
+    <div className="glass-panel relative overflow-hidden rounded-2xl p-3">
+      <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-2xl opacity-20 blur-[2px]" aria-hidden />
       <div className="relative flex items-end justify-between gap-3">
         <div className="min-w-0">
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/45">{s.sym}</p>
-          <p className="mt-1 font-mono text-[26px] leading-none tabular-nums">
+          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/40">{s.sym}</p>
+          <p className="mt-1 font-mono text-[20px] leading-none tabular-nums">
             <span className="text-silver-metallic">{fmtPrice(s)}</span>
           </p>
-          <div className="mt-1.5 flex items-center gap-2">
+          <div className="mt-1 flex items-center gap-2">
             <ChangePill pct={s.chgPct} />
-            <span className="truncate text-[11px] text-foreground/45">{s.name}</span>
+            <span className="truncate text-[10px] text-foreground/45">{s.name}</span>
           </div>
         </div>
-        <Sparkline points={s.points} up={s.up} width={140} height={48} />
+        <Sparkline points={s.points} up={s.up} width={110} height={34} />
       </div>
     </div>
   );
@@ -992,24 +996,24 @@ function OddsRow({ m }: { m: PolyOdds }) {
       href={m.url}
       target="_blank"
       rel="noreferrer"
-      className="group block rounded-2xl px-2.5 py-2 transition-colors hover:bg-[var(--glass-surface)]"
+      className="group block rounded-xl px-2 py-1.5 transition-colors hover:bg-[var(--glass-surface)]"
     >
-      <div className="mb-1.5 flex items-start justify-between gap-3">
+      <div className="mb-1 flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="line-clamp-2 text-[12px] font-medium leading-snug text-foreground/85 group-hover:text-foreground">
+          <p className="line-clamp-2 text-[11px] font-medium leading-snug text-foreground/85 group-hover:text-foreground">
             {m.question}
           </p>
           {m.volume24h ? (
-            <p className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-foreground/35">
+            <p className="mt-0.5 font-mono text-[8px] uppercase tracking-[0.12em] text-foreground/35">
               ${Math.round(m.volume24h).toLocaleString("en-US")} · 24h vol
             </p>
           ) : null}
         </div>
         <div className="flex shrink-0 items-baseline gap-1.5">
-          <span className="font-mono text-[19px] leading-none tabular-nums text-foreground">{m.prob}%</span>
+          <span className="font-mono text-[16px] leading-none tabular-nums text-foreground">{m.prob}%</span>
           {m.chg24h !== null ? (
             <span
-              className={`font-mono text-[9px] font-semibold tabular-nums ${
+              className={`font-mono text-[8px] font-semibold tabular-nums ${
                 up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"
               }`}
             >
@@ -1019,7 +1023,7 @@ function OddsRow({ m }: { m: PolyOdds }) {
           ) : null}
         </div>
       </div>
-      <div className="relative h-1 overflow-hidden rounded-full bg-foreground/[0.07]">
+      <div className="relative h-1 overflow-hidden rounded-full bg-foreground/[0.06]">
         <div
           className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-accent/70 to-accent"
           style={{ width: `${m.prob}%` }}
@@ -1060,10 +1064,10 @@ function LiveSignals() {
   const [hero, ...rest] = series;
 
   return (
-    <div className="mt-4 space-y-3">
+    <div className="mt-3 space-y-2">
       {hero ? <MarketHero s={hero} /> : null}
 
-      <div className="glass-panel rounded-3xl p-3">
+      <div className="glass-panel rounded-2xl p-2.5">
         <SectionCaption label="Commodities · FX" right={<LiveDot />} />
         {markets.isPending ? (
           <SkeletonRows />
@@ -1080,7 +1084,7 @@ function LiveSignals() {
         )}
       </div>
 
-      <div className="glass-panel rounded-3xl p-3">
+      <div className="glass-panel rounded-2xl p-2.5">
         <SectionCaption
           label="Polymarket odds"
           right={
@@ -1097,7 +1101,7 @@ function LiveSignals() {
         {odds.isPending ? (
           <SkeletonRows count={5} />
         ) : odds.data?.markets.length ? (
-          <div className="space-y-1">
+          <div className="space-y-0.5">
             {odds.data.markets.map((m) => (
               <OddsRow key={m.question} m={m} />
             ))}
