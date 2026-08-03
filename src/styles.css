@@ -60,10 +60,14 @@
   --input: hsl(220 10% 84% / 0.6);
   --ring: hsl(220 12% 40% / 0.35);
 
-  --glass-surface: rgba(255, 255, 255, 0.50);
-  --glass-surface-strong: rgba(255, 255, 255, 0.68);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-hairline: rgba(15, 20, 30, 0.06);
+  /* Glass with a faint cool tint so panels read as glass, not grey card */
+  --glass-surface: hsl(220 40% 100% / 0.46);
+  --glass-surface-strong: hsl(220 45% 100% / 0.66);
+  --glass-border: hsl(220 60% 100% / 0.72);
+  --glass-hairline: hsl(220 40% 20% / 0.07);
+  --glass-tint: hsl(230 70% 60% / 0.06);
+  --glass-tint-2: hsl(190 70% 55% / 0.05);
+  --glow-accent: hsl(224 60% 55% / 0.30);
 }
 
 
@@ -89,10 +93,13 @@
   --input: hsl(220 20% 100% / 0.12);
   --ring: hsl(210 18% 72% / 0.35);
 
-  --glass-surface: rgba(38, 42, 50, 0.38);
-  --glass-surface-strong: rgba(44, 48, 58, 0.58);
-  --glass-border: rgba(255, 255, 255, 0.09);
-  --glass-hairline: rgba(255, 255, 255, 0.06);
+  --glass-surface: hsl(225 20% 20% / 0.42);
+  --glass-surface-strong: hsl(225 22% 26% / 0.60);
+  --glass-border: hsl(220 60% 90% / 0.13);
+  --glass-hairline: hsl(220 60% 100% / 0.07);
+  --glass-tint: hsl(230 80% 65% / 0.10);
+  --glass-tint-2: hsl(185 80% 60% / 0.07);
+  --glow-accent: hsl(215 70% 70% / 0.30);
 }
 
 
@@ -180,33 +187,70 @@
 }
 
 @utility glass-panel {
-  backdrop-filter: blur(30px) saturate(150%);
-  background: var(--glass-surface);
+  position: relative;
+  backdrop-filter: blur(34px) saturate(170%);
+  background:
+    linear-gradient(150deg, var(--glass-tint), transparent 45%),
+    linear-gradient(330deg, var(--glass-tint-2), transparent 50%),
+    var(--glass-surface);
   border: 1px solid var(--glass-border);
   box-shadow:
     0 1px 0 0 var(--glass-hairline),
-    0 12px 40px -20px rgba(10, 15, 25, 0.18),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.28);
+    0 14px 44px -22px rgba(10, 15, 25, 0.22),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.34),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.10);
 }
 
 @utility glass-panel-strong {
-  backdrop-filter: blur(40px) saturate(165%);
-  background: var(--glass-surface-strong);
+  position: relative;
+  backdrop-filter: blur(44px) saturate(185%);
+  background:
+    linear-gradient(150deg, var(--glass-tint), transparent 42%),
+    linear-gradient(320deg, var(--glass-tint-2), transparent 48%),
+    var(--glass-surface-strong);
   border: 1px solid var(--glass-border);
   box-shadow:
     0 1px 0 0 var(--glass-hairline),
-    0 18px 60px -28px rgba(10, 15, 25, 0.24),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.36);
+    0 20px 64px -28px rgba(10, 15, 25, 0.28),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.44),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.12);
 }
 
 /* Glass-on-glass: pills/chips that sit on an existing glass panel */
 @utility glass-chip {
-  backdrop-filter: blur(14px) saturate(140%);
-  background: color-mix(in oklab, var(--glass-surface) 70%, transparent);
+  backdrop-filter: blur(16px) saturate(150%);
+  background:
+    linear-gradient(140deg, var(--glass-tint), transparent 60%),
+    color-mix(in oklab, var(--glass-surface) 70%, transparent);
   border: 1px solid var(--glass-border);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
-    0 2px 10px -6px rgba(10, 15, 25, 0.25);
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.38),
+    0 2px 12px -6px rgba(10, 15, 25, 0.28);
+}
+
+/* Top-edge specular highlight for hero glass surfaces */
+@utility glass-sheen {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.30) 0%,
+      rgba(255, 255, 255, 0.05) 22%,
+      transparent 55%
+    );
+  }
+}
+
+/* Soft colored bloom behind a glass card */
+@utility glass-glow {
+  box-shadow:
+    0 0 0 1px var(--glass-border),
+    0 24px 70px -30px var(--glow-accent),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.36);
 }
 
 @utility ticker-mask {
@@ -240,13 +284,14 @@
 .ai-iridescent {
   background: linear-gradient(
     115deg,
-    hsl(220 20% 90% / 0.55),
-    hsl(200 25% 80% / 0.40),
-    hsl(260 18% 85% / 0.35),
-    hsl(220 20% 92% / 0.55)
+    hsl(215 85% 72% / 0.55),
+    hsl(190 80% 70% / 0.45),
+    hsl(270 70% 78% / 0.45),
+    hsl(330 70% 78% / 0.32),
+    hsl(215 85% 74% / 0.55)
   );
-  background-size: 300% 300%;
-  animation: iridescent-shift 8s ease-in-out infinite;
+  background-size: 320% 320%;
+  animation: iridescent-shift 9s ease-in-out infinite;
 }
 
 
