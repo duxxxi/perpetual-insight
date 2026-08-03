@@ -93,10 +93,13 @@
   --input: hsl(220 20% 100% / 0.12);
   --ring: hsl(210 18% 72% / 0.35);
 
-  --glass-surface: rgba(38, 42, 50, 0.38);
-  --glass-surface-strong: rgba(44, 48, 58, 0.58);
-  --glass-border: rgba(255, 255, 255, 0.09);
-  --glass-hairline: rgba(255, 255, 255, 0.06);
+  --glass-surface: hsl(225 20% 20% / 0.42);
+  --glass-surface-strong: hsl(225 22% 26% / 0.60);
+  --glass-border: hsl(220 60% 90% / 0.13);
+  --glass-hairline: hsl(220 60% 100% / 0.07);
+  --glass-tint: hsl(230 80% 65% / 0.10);
+  --glass-tint-2: hsl(185 80% 60% / 0.07);
+  --glow-accent: hsl(215 70% 70% / 0.30);
 }
 
 
