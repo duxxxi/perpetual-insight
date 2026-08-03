@@ -79,6 +79,8 @@ const POLY_QUERIES = [
   "recession",
   "oil price",
   "ecb",
+  "china trade",
+  "eu",
 ];
 
 export const getPolymarketOdds = createServerFn({ method: "GET" }).handler(async () => {
@@ -106,7 +108,7 @@ export const getPolymarketOdds = createServerFn({ method: "GET" }).handler(async
               continue;
             }
             const prob = Math.round((prices[0] ?? 0) * 100);
-            if (prob <= 2 || prob >= 98) continue;
+            if (prob < 8 || prob > 92) continue;
             collected.push({
               question: m?.question ?? event?.title ?? "",
               event: event?.title ?? "",
