@@ -30,7 +30,7 @@ export function AmbientBackground() {
         className="pointer-events-none fixed inset-0 -z-10 dark:hidden"
         style={{
           background:
-            "radial-gradient(64rem 44rem at 2% -16%, hsl(0 0% 100%), transparent 66%), radial-gradient(52rem 38rem at 20% 4%, hsl(210 40% 98% / 0.95), transparent 70%), radial-gradient(46rem 36rem at 96% 0%, hsl(200 32% 96% / 0.85), transparent 70%), radial-gradient(56rem 42rem at 100% 100%, hsl(216 28% 94% / 0.80), transparent 68%), radial-gradient(44rem 34rem at 50% 62%, hsl(0 0% 100% / 0.85), transparent 76%)",
+            "radial-gradient(70rem 45rem at 6% -14%, hsl(0 0% 100% / 0.95), transparent 60%), radial-gradient(60rem 42rem at 100% 106%, hsl(215 22% 55% / 0.22), transparent 62%), radial-gradient(45rem 34rem at 48% 42%, hsl(265 20% 72% / 0.14), transparent 70%)",
         }}
       />
       <div
@@ -38,28 +38,10 @@ export function AmbientBackground() {
         className="pointer-events-none fixed inset-0 -z-10 hidden dark:block"
         style={{
           background:
-            "radial-gradient(58rem 40rem at 6% -12%, hsl(220 18% 82% / 0.14), transparent 64%), radial-gradient(48rem 36rem at 18% 6%, hsl(215 16% 75% / 0.10), transparent 68%), radial-gradient(44rem 34rem at 94% 2%, hsl(220 14% 78% / 0.09), transparent 68%), radial-gradient(52rem 40rem at 102% 104%, hsl(220 12% 70% / 0.08), transparent 66%), radial-gradient(40rem 30rem at 50% 58%, hsl(0 0% 100% / 0.04), transparent 74%)",
+            "radial-gradient(70rem 45rem at 8% -12%, hsl(220 20% 80% / 0.10), transparent 62%), radial-gradient(55rem 38rem at 102% 108%, hsl(220 14% 70% / 0.07), transparent 62%), radial-gradient(40rem 30rem at 55% 45%, hsl(265 20% 70% / 0.06), transparent 70%)",
         }}
       />
-      {/* frosted sheet: brightening wash + fine specular grain */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 dark:hidden"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.20) 42%, rgba(255,255,255,0.42))",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 opacity-[0.05] mix-blend-soft-light dark:opacity-[0.045]"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(255,255,255,0.9) 0.5px, transparent 0.5px), radial-gradient(rgba(90,105,125,0.55) 0.5px, transparent 0.5px)",
-          backgroundSize: "5px 5px, 5px 5px",
-          backgroundPosition: "0 0, 2.5px 2.5px",
-        }}
-      />
+
     </>
   );
 }
@@ -106,9 +88,8 @@ export function CommodityTicker() {
   return (
     <div className="sticky top-0 z-40">
       <div className="relative overflow-hidden">
-        <div className="ai-iridescent absolute -inset-px rounded-2xl opacity-55 blur-[3px]" aria-hidden />
-        <div className="glass-panel-strong glass-sheen relative overflow-hidden rounded-2xl border border-foreground/5">
-
+        <div className="ai-iridescent absolute -inset-px rounded-2xl opacity-40 blur-[2px]" aria-hidden />
+        <div className="glass-panel-strong relative overflow-hidden rounded-2xl border border-foreground/5">
           <div
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
@@ -151,7 +132,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
   ];
   return (
     <nav className="fixed left-3 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
-      <div className="glass-panel-strong glass-sheen relative flex flex-col items-center gap-0.5 overflow-hidden rounded-full px-1 py-2">
+      <div className="glass-panel-strong flex flex-col items-center gap-0.5 rounded-full px-1 py-2">
         <Link
           to="/"
           className="mb-1 flex size-8 items-center justify-center rounded-full glass-chip font-serif text-[13px] italic text-foreground/80"

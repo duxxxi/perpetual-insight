@@ -114,7 +114,7 @@ function DashboardPage() {
 
 
             {/* Trip card — compact */}
-            <div className="glass-panel glass-sheen group mb-5 flex items-center justify-between gap-3 overflow-hidden rounded-2xl px-4 py-3 transition-shadow hover:shadow-[0_20px_60px_-30px_var(--glow-accent)]">
+            <div className="glass-panel group mb-5 flex items-center justify-between gap-3 rounded-2xl px-4 py-3">
               <div className="flex items-center gap-3 min-w-0">
                 <div className="glass-panel-strong flex size-9 items-center justify-center rounded-xl">
                   <Plane className="size-3.5 text-accent" />
@@ -336,8 +336,8 @@ function AskPerpetuity() {
 
   return (
     <div className="relative mb-10 group">
-      <div className="ai-iridescent absolute -inset-[2px] rounded-3xl opacity-80 blur-[6px] transition-opacity group-focus-within:opacity-100" aria-hidden />
-      <div className="glass-panel-strong glass-sheen relative rounded-3xl p-4">
+      <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-70 blur-[2px]" aria-hidden />
+      <div className="glass-panel-strong relative rounded-3xl p-4">
         <div className="flex items-center gap-3">
           <div className="ai-iridescent size-7 rounded-full ring-1 ring-foreground/5" aria-hidden />
           <input
@@ -970,7 +970,7 @@ function MarketRow({ s }: { s: MarketSeries }) {
 
 function MarketHero({ s }: { s: MarketSeries }) {
   return (
-    <div className="glass-panel glass-sheen relative overflow-hidden rounded-2xl p-3">
+    <div className="glass-panel relative overflow-hidden rounded-2xl p-3">
       <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-2xl opacity-20 blur-[2px]" aria-hidden />
       <div className="relative flex items-end justify-between gap-3">
         <div className="min-w-0">
@@ -1067,7 +1067,7 @@ function LiveSignals() {
     <div className="mt-3 space-y-2">
       {hero ? <MarketHero s={hero} /> : null}
 
-      <div className="glass-panel glass-sheen relative overflow-hidden rounded-2xl p-2.5">
+      <div className="glass-panel rounded-2xl p-2.5">
         <SectionCaption label="Commodities · FX" right={<LiveDot />} />
         {markets.isPending ? (
           <SkeletonRows />
@@ -1084,7 +1084,7 @@ function LiveSignals() {
         )}
       </div>
 
-      <div className="glass-panel glass-sheen relative overflow-hidden rounded-2xl p-2.5">
+      <div className="glass-panel rounded-2xl p-2.5">
         <SectionCaption
           label="Polymarket odds"
           right={
