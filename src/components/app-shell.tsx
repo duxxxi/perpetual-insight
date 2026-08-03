@@ -41,15 +41,23 @@ export function AmbientBackground() {
             "radial-gradient(58rem 40rem at 6% -12%, hsl(220 18% 82% / 0.14), transparent 64%), radial-gradient(48rem 36rem at 18% 6%, hsl(215 16% 75% / 0.10), transparent 68%), radial-gradient(44rem 34rem at 94% 2%, hsl(220 14% 78% / 0.09), transparent 68%), radial-gradient(52rem 40rem at 102% 104%, hsl(220 12% 70% / 0.08), transparent 66%), radial-gradient(40rem 30rem at 50% 58%, hsl(0 0% 100% / 0.04), transparent 74%)",
         }}
       />
-      {/* fine specular grain so glass surfaces catch light */}
+      {/* frosted sheet: brightening wash + fine specular grain */}
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 opacity-[0.035] mix-blend-overlay"
+        className="pointer-events-none fixed inset-0 -z-10"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.20) 42%, rgba(255,255,255,0.42))",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 -z-10 opacity-[0.05] mix-blend-soft-light dark:opacity-[0.045]"
         style={{
           backgroundImage:
-            "radial-gradient(hsl(0 0% 100%) 0.5px, transparent 0.5px), radial-gradient(hsl(220 30% 20%) 0.5px, transparent 0.5px)",
-          backgroundSize: "6px 6px, 6px 6px",
-          backgroundPosition: "0 0, 3px 3px",
+            "radial-gradient(rgba(255,255,255,0.9) 0.5px, transparent 0.5px), radial-gradient(rgba(90,105,125,0.55) 0.5px, transparent 0.5px)",
+          backgroundSize: "5px 5px, 5px 5px",
+          backgroundPosition: "0 0, 2.5px 2.5px",
         }}
       />
     </>
