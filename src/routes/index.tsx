@@ -970,7 +970,7 @@ function MarketRow({ s }: { s: MarketSeries }) {
 
 function MarketHero({ s }: { s: MarketSeries }) {
   return (
-    <div className="glass-panel relative overflow-hidden rounded-2xl p-3">
+    <div className="glass-panel glass-sheen relative overflow-hidden rounded-2xl p-3">
       <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-2xl opacity-20 blur-[2px]" aria-hidden />
       <div className="relative flex items-end justify-between gap-3">
         <div className="min-w-0">
@@ -1067,7 +1067,7 @@ function LiveSignals() {
     <div className="mt-3 space-y-2">
       {hero ? <MarketHero s={hero} /> : null}
 
-      <div className="glass-panel rounded-2xl p-2.5">
+      <div className="glass-panel glass-sheen relative overflow-hidden rounded-2xl p-2.5">
         <SectionCaption label="Commodities · FX" right={<LiveDot />} />
         {markets.isPending ? (
           <SkeletonRows />
@@ -1084,7 +1084,7 @@ function LiveSignals() {
         )}
       </div>
 
-      <div className="glass-panel rounded-2xl p-2.5">
+      <div className="glass-panel glass-sheen relative overflow-hidden rounded-2xl p-2.5">
         <SectionCaption
           label="Polymarket odds"
           right={

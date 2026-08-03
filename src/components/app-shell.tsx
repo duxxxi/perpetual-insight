@@ -143,7 +143,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
   ];
   return (
     <nav className="fixed left-3 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
-      <div className="glass-panel-strong flex flex-col items-center gap-0.5 rounded-full px-1 py-2">
+      <div className="glass-panel-strong glass-sheen relative flex flex-col items-center gap-0.5 overflow-hidden rounded-full px-1 py-2">
         <Link
           to="/"
           className="mb-1 flex size-8 items-center justify-center rounded-full glass-chip font-serif text-[13px] italic text-foreground/80"
