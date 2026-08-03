@@ -30,7 +30,7 @@ export function AmbientBackground() {
         className="pointer-events-none fixed inset-0 -z-10 dark:hidden"
         style={{
           background:
-            "radial-gradient(70rem 45rem at 6% -14%, hsl(0 0% 100% / 0.95), transparent 60%), radial-gradient(60rem 42rem at 100% 106%, hsl(215 22% 55% / 0.22), transparent 62%), radial-gradient(45rem 34rem at 48% 42%, hsl(265 20% 72% / 0.14), transparent 70%)",
+            "radial-gradient(60rem 40rem at 4% -12%, hsl(0 0% 100% / 0.95), transparent 62%), radial-gradient(48rem 34rem at 14% 8%, hsl(215 92% 62% / 0.16), transparent 66%), radial-gradient(42rem 32rem at 92% 4%, hsl(275 80% 70% / 0.14), transparent 66%), radial-gradient(52rem 38rem at 100% 100%, hsl(190 85% 58% / 0.14), transparent 64%), radial-gradient(40rem 30rem at 46% 56%, hsl(330 75% 72% / 0.07), transparent 72%)",
         }}
       />
       <div
@@ -38,10 +38,20 @@ export function AmbientBackground() {
         className="pointer-events-none fixed inset-0 -z-10 hidden dark:block"
         style={{
           background:
-            "radial-gradient(70rem 45rem at 8% -12%, hsl(220 20% 80% / 0.10), transparent 62%), radial-gradient(55rem 38rem at 102% 108%, hsl(220 14% 70% / 0.07), transparent 62%), radial-gradient(40rem 30rem at 55% 45%, hsl(265 20% 70% / 0.06), transparent 70%)",
+            "radial-gradient(58rem 40rem at 6% -12%, hsl(220 40% 85% / 0.10), transparent 62%), radial-gradient(46rem 34rem at 16% 6%, hsl(218 95% 62% / 0.20), transparent 66%), radial-gradient(42rem 32rem at 94% 2%, hsl(275 85% 65% / 0.16), transparent 66%), radial-gradient(50rem 38rem at 102% 104%, hsl(188 90% 55% / 0.14), transparent 64%), radial-gradient(38rem 30rem at 50% 58%, hsl(330 70% 65% / 0.08), transparent 72%)",
         }}
       />
-
+      {/* fine specular grain so glass surfaces catch light */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 -z-10 opacity-[0.035] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "radial-gradient(hsl(0 0% 100%) 0.5px, transparent 0.5px), radial-gradient(hsl(220 30% 20%) 0.5px, transparent 0.5px)",
+          backgroundSize: "6px 6px, 6px 6px",
+          backgroundPosition: "0 0, 3px 3px",
+        }}
+      />
     </>
   );
 }
