@@ -970,20 +970,20 @@ function MarketRow({ s }: { s: MarketSeries }) {
 
 function MarketHero({ s }: { s: MarketSeries }) {
   return (
-    <div className="glass-panel-strong relative overflow-hidden rounded-3xl p-4">
-      <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-3xl opacity-25 blur-[3px]" aria-hidden />
+    <div className="glass-panel relative overflow-hidden rounded-2xl p-3">
+      <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-2xl opacity-20 blur-[2px]" aria-hidden />
       <div className="relative flex items-end justify-between gap-3">
         <div className="min-w-0">
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/45">{s.sym}</p>
-          <p className="mt-1 font-mono text-[26px] leading-none tabular-nums">
+          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/40">{s.sym}</p>
+          <p className="mt-1 font-mono text-[20px] leading-none tabular-nums">
             <span className="text-silver-metallic">{fmtPrice(s)}</span>
           </p>
-          <div className="mt-1.5 flex items-center gap-2">
+          <div className="mt-1 flex items-center gap-2">
             <ChangePill pct={s.chgPct} />
-            <span className="truncate text-[11px] text-foreground/45">{s.name}</span>
+            <span className="truncate text-[10px] text-foreground/45">{s.name}</span>
           </div>
         </div>
-        <Sparkline points={s.points} up={s.up} width={140} height={48} />
+        <Sparkline points={s.points} up={s.up} width={110} height={34} />
       </div>
     </div>
   );
