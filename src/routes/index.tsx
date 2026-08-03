@@ -358,7 +358,7 @@ function AskPerpetuity() {
             onClick={launch}
             disabled={!draft.trim()}
             data-pill
-            className="inline-flex size-9 items-center justify-center rounded-2xl bg-foreground text-background transition-transform hover:scale-105 disabled:opacity-40 disabled:hover:scale-100"
+            className="inline-flex size-9 items-center justify-center rounded-2xl bg-accent/90 text-accent-foreground shadow-[0_0_16px_-4px_hsl(211_100%_50%/0.45)] transition-all hover:scale-105 hover:bg-accent hover:shadow-[0_0_20px_-4px_hsl(211_100%_50%/0.6)] disabled:opacity-40 disabled:hover:scale-100 disabled:hover:shadow-none"
           >
             <ArrowUp className="size-4" />
           </button>
