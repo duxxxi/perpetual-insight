@@ -21,30 +21,30 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-/* ---------- Ambient background wash ---------- */
+/* ---------- Ambient background: blurred chrome orbs for glass to refract ---------- */
 export function AmbientBackground() {
   return (
     <>
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 dark:hidden"
-        style={{
-          background:
-            "radial-gradient(70rem 45rem at 6% -14%, hsl(0 0% 100% / 0.95), transparent 60%), radial-gradient(60rem 42rem at 100% 106%, hsl(215 22% 55% / 0.22), transparent 62%), radial-gradient(45rem 34rem at 48% 42%, hsl(265 20% 72% / 0.14), transparent 70%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 hidden dark:block"
-        style={{
-          background:
-            "radial-gradient(70rem 45rem at 8% -12%, hsl(220 20% 80% / 0.10), transparent 62%), radial-gradient(55rem 38rem at 102% 108%, hsl(220 14% 70% / 0.07), transparent 62%), radial-gradient(40rem 30rem at 55% 45%, hsl(265 20% 70% / 0.06), transparent 70%)",
-        }}
-      />
+      {/* Light mode */}
+      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden dark:hidden">
+        <div className="absolute inset-0" style={{ background: "linear-gradient(160deg, hsl(210 40% 97%), hsl(215 26% 90%) 55%, hsl(225 22% 87%))" }} />
+        <div className="absolute -left-32 -top-40 size-[42rem] rounded-full blur-[110px]" style={{ background: "radial-gradient(circle at 35% 35%, hsl(0 0% 100% / 0.95), hsl(205 55% 82% / 0.55) 45%, transparent 72%)" }} />
+        <div className="absolute -right-40 top-1/4 size-[38rem] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle at 60% 40%, hsl(265 45% 82% / 0.55), hsl(220 50% 80% / 0.4) 50%, transparent 74%)" }} />
+        <div className="absolute -bottom-48 left-1/4 size-[40rem] rounded-full blur-[130px]" style={{ background: "radial-gradient(circle at 50% 50%, hsl(190 55% 82% / 0.5), hsl(215 40% 78% / 0.38) 52%, transparent 76%)" }} />
+        <div className="absolute bottom-1/4 right-1/3 size-[22rem] rounded-full blur-[90px]" style={{ background: "radial-gradient(circle at 45% 45%, hsl(30 60% 88% / 0.4), transparent 70%)" }} />
+      </div>
 
+      {/* Dark mode */}
+      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 hidden overflow-hidden dark:block">
+        <div className="absolute inset-0" style={{ background: "linear-gradient(160deg, hsl(225 18% 9%), hsl(224 16% 6%) 60%, hsl(228 20% 8%))" }} />
+        <div className="absolute -left-36 -top-44 size-[42rem] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle at 40% 40%, hsl(210 35% 70% / 0.28), hsl(220 40% 50% / 0.14) 50%, transparent 74%)" }} />
+        <div className="absolute -right-44 top-1/5 size-[38rem] rounded-full blur-[130px]" style={{ background: "radial-gradient(circle at 55% 45%, hsl(265 40% 65% / 0.20), transparent 72%)" }} />
+        <div className="absolute -bottom-52 left-1/4 size-[40rem] rounded-full blur-[140px]" style={{ background: "radial-gradient(circle at 50% 50%, hsl(195 45% 62% / 0.18), transparent 74%)" }} />
+      </div>
     </>
   );
 }
+
 
 /* ---------- Commodity ticker ---------- */
 const ticker = [
