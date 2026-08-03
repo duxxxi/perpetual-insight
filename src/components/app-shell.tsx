@@ -38,7 +38,7 @@ export function AmbientBackground() {
         className="pointer-events-none fixed inset-0 -z-10 hidden dark:block"
         style={{
           background:
-            "radial-gradient(58rem 40rem at 6% -12%, hsl(220 40% 85% / 0.10), transparent 62%), radial-gradient(46rem 34rem at 16% 6%, hsl(218 95% 62% / 0.20), transparent 66%), radial-gradient(42rem 32rem at 94% 2%, hsl(275 85% 65% / 0.16), transparent 66%), radial-gradient(50rem 38rem at 102% 104%, hsl(188 90% 55% / 0.14), transparent 64%), radial-gradient(38rem 30rem at 50% 58%, hsl(330 70% 65% / 0.08), transparent 72%)",
+            "radial-gradient(58rem 40rem at 6% -12%, hsl(220 18% 82% / 0.14), transparent 64%), radial-gradient(48rem 36rem at 18% 6%, hsl(215 16% 75% / 0.10), transparent 68%), radial-gradient(44rem 34rem at 94% 2%, hsl(220 14% 78% / 0.09), transparent 68%), radial-gradient(52rem 40rem at 102% 104%, hsl(220 12% 70% / 0.08), transparent 66%), radial-gradient(40rem 30rem at 50% 58%, hsl(0 0% 100% / 0.04), transparent 74%)",
         }}
       />
       {/* fine specular grain so glass surfaces catch light */}
