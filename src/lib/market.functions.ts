@@ -127,13 +127,17 @@ export const getPolymarketOdds = createServerFn({ method: "GET" }).handler(async
   );
 
   const seen = new Set<string>();
+  const perEvent = new Map<string, number>();
   const markets = collected
+    .sort((a, b) => (b.volume24h ?? 0) - (a.volume24h ?? 0))
     .filter((m) => {
       if (!m.question || seen.has(m.question)) return false;
+      const used = perEvent.get(m.event) ?? 0;
+      if (used >= 1) return false;
+      perEvent.set(m.event, used + 1);
       seen.add(m.question);
       return true;
     })
-    .sort((a, b) => (b.volume24h ?? 0) - (a.volume24h ?? 0))
     .slice(0, 5);
 
   return { fetchedAt: new Date().toISOString(), markets };
