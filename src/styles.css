@@ -60,14 +60,14 @@
   --input: hsl(220 10% 84% / 0.6);
   --ring: hsl(220 12% 40% / 0.35);
 
-  /* Glass with a faint cool tint so panels read as glass, not grey card */
-  --glass-surface: hsl(220 40% 100% / 0.46);
-  --glass-surface-strong: hsl(220 45% 100% / 0.66);
-  --glass-border: hsl(220 60% 100% / 0.72);
-  --glass-hairline: hsl(220 40% 20% / 0.07);
-  --glass-tint: hsl(230 70% 60% / 0.06);
-  --glass-tint-2: hsl(190 70% 55% / 0.05);
-  --glow-accent: hsl(224 60% 55% / 0.30);
+  /* Frosted silver glass — neutral metallic, no color tint */
+  --glass-surface: hsl(220 16% 100% / 0.50);
+  --glass-surface-strong: hsl(220 16% 100% / 0.70);
+  --glass-border: hsl(0 0% 100% / 0.75);
+  --glass-hairline: hsl(220 12% 20% / 0.07);
+  --glass-tint: hsl(0 0% 100% / 0.34);
+  --glass-tint-2: hsl(220 12% 70% / 0.10);
+  --glow-accent: hsl(220 10% 55% / 0.22);
 }
 
 
@@ -93,13 +93,13 @@
   --input: hsl(220 20% 100% / 0.12);
   --ring: hsl(210 18% 72% / 0.35);
 
-  --glass-surface: hsl(225 20% 20% / 0.42);
-  --glass-surface-strong: hsl(225 22% 26% / 0.60);
-  --glass-border: hsl(220 60% 90% / 0.13);
-  --glass-hairline: hsl(220 60% 100% / 0.07);
-  --glass-tint: hsl(230 80% 65% / 0.10);
-  --glass-tint-2: hsl(185 80% 60% / 0.07);
-  --glow-accent: hsl(215 70% 70% / 0.30);
+  --glass-surface: hsl(220 8% 22% / 0.44);
+  --glass-surface-strong: hsl(220 8% 28% / 0.62);
+  --glass-border: hsl(0 0% 100% / 0.12);
+  --glass-hairline: hsl(0 0% 100% / 0.07);
+  --glass-tint: hsl(0 0% 100% / 0.07);
+  --glass-tint-2: hsl(220 10% 80% / 0.05);
+  --glow-accent: hsl(220 10% 80% / 0.20);
 }
 
 
@@ -284,11 +284,11 @@
 .ai-iridescent {
   background: linear-gradient(
     115deg,
-    hsl(215 85% 72% / 0.55),
-    hsl(190 80% 70% / 0.45),
-    hsl(270 70% 78% / 0.45),
-    hsl(330 70% 78% / 0.32),
-    hsl(215 85% 74% / 0.55)
+    hsl(0 0% 100% / 0.70),
+    hsl(220 12% 78% / 0.45),
+    hsl(0 0% 100% / 0.75),
+    hsl(220 10% 68% / 0.38),
+    hsl(0 0% 100% / 0.70)
   );
   background-size: 320% 320%;
   animation: iridescent-shift 9s ease-in-out infinite;
