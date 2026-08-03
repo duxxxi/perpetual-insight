@@ -7,7 +7,7 @@ import {
   type MarketSeries,
   type PolyOdds,
 } from "@/lib/market.functions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FileText,
   Plus,
