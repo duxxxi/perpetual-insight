@@ -27,20 +27,24 @@ export function AmbientBackground() {
     <>
       {/* Light mode */}
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden dark:hidden">
-        <div className="absolute inset-0" style={{ background: "linear-gradient(160deg, hsl(210 40% 97%), hsl(215 26% 90%) 55%, hsl(225 22% 87%))" }} />
-        <div className="absolute -left-32 -top-40 size-[42rem] rounded-full blur-[110px]" style={{ background: "radial-gradient(circle at 35% 35%, hsl(0 0% 100% / 0.95), hsl(205 55% 82% / 0.55) 45%, transparent 72%)" }} />
-        <div className="absolute -right-40 top-1/4 size-[38rem] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle at 60% 40%, hsl(265 45% 82% / 0.55), hsl(220 50% 80% / 0.4) 50%, transparent 74%)" }} />
-        <div className="absolute -bottom-48 left-1/4 size-[40rem] rounded-full blur-[130px]" style={{ background: "radial-gradient(circle at 50% 50%, hsl(190 55% 82% / 0.5), hsl(215 40% 78% / 0.38) 52%, transparent 76%)" }} />
-        <div className="absolute bottom-1/4 right-1/3 size-[22rem] rounded-full blur-[90px]" style={{ background: "radial-gradient(circle at 45% 45%, hsl(30 60% 88% / 0.4), transparent 70%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(160deg, hsl(210 42% 98%), hsl(212 28% 92%) 40%, hsl(222 20% 86%) 72%, hsl(216 26% 91%))" }} />
+        <div className="absolute -left-32 -top-40 size-[42rem] rounded-full blur-[110px]" style={{ background: "radial-gradient(circle at 35% 35%, hsl(0 0% 100% / 0.95), hsl(205 70% 80% / 0.55) 45%, transparent 72%)" }} />
+        <div className="absolute -right-40 top-1/4 size-[38rem] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle at 60% 40%, hsl(265 60% 82% / 0.5), hsl(220 60% 80% / 0.38) 50%, transparent 74%)" }} />
+        <div className="absolute -bottom-48 left-1/4 size-[40rem] rounded-full blur-[130px]" style={{ background: "radial-gradient(circle at 50% 50%, hsl(168 60% 80% / 0.45), hsl(200 50% 80% / 0.3) 52%, transparent 76%)" }} />
+        <div className="absolute bottom-1/4 right-1/3 size-[24rem] rounded-full blur-[95px]" style={{ background: "radial-gradient(circle at 45% 45%, hsl(42 90% 82% / 0.42), transparent 70%)" }} />
+        <div className="metal-sheen absolute inset-0" />
       </div>
 
       {/* Dark mode */}
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 hidden overflow-hidden dark:block">
-        <div className="absolute inset-0" style={{ background: "linear-gradient(160deg, hsl(225 18% 9%), hsl(224 16% 6%) 60%, hsl(228 20% 8%))" }} />
-        <div className="absolute -left-36 -top-44 size-[42rem] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle at 40% 40%, hsl(210 35% 70% / 0.28), hsl(220 40% 50% / 0.14) 50%, transparent 74%)" }} />
-        <div className="absolute -right-44 top-1/5 size-[38rem] rounded-full blur-[130px]" style={{ background: "radial-gradient(circle at 55% 45%, hsl(265 40% 65% / 0.20), transparent 72%)" }} />
-        <div className="absolute -bottom-52 left-1/4 size-[40rem] rounded-full blur-[140px]" style={{ background: "radial-gradient(circle at 50% 50%, hsl(195 45% 62% / 0.18), transparent 74%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(160deg, hsl(225 20% 10%), hsl(224 16% 6%) 60%, hsl(230 22% 9%))" }} />
+        <div className="absolute -left-36 -top-44 size-[42rem] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle at 40% 40%, hsl(205 60% 62% / 0.26), hsl(220 45% 48% / 0.14) 50%, transparent 74%)" }} />
+        <div className="absolute -right-44 top-1/5 size-[38rem] rounded-full blur-[130px]" style={{ background: "radial-gradient(circle at 55% 45%, hsl(268 55% 62% / 0.20), transparent 72%)" }} />
+        <div className="absolute -bottom-52 left-1/4 size-[40rem] rounded-full blur-[140px]" style={{ background: "radial-gradient(circle at 50% 50%, hsl(168 55% 55% / 0.16), transparent 74%)" }} />
+        <div className="absolute bottom-1/3 right-1/4 size-[20rem] rounded-full blur-[100px]" style={{ background: "radial-gradient(circle at 50% 50%, hsl(42 80% 60% / 0.12), transparent 72%)" }} />
+        <div className="metal-sheen absolute inset-0 opacity-40" />
       </div>
+
     </>
   );
 }
