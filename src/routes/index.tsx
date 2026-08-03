@@ -948,20 +948,20 @@ function MarketRow({ s }: { s: MarketSeries }) {
       trigger={
         <button
           data-pill
-          className="group flex w-full items-center gap-3 rounded-2xl px-2.5 py-2 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
+          className="group flex w-full items-center gap-2 rounded-xl px-2 py-1.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
         >
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[10px] font-semibold tracking-[0.12em] text-foreground/50">
+              <span className="font-mono text-[9px] font-semibold tracking-[0.12em] text-foreground/50">
                 {s.sym}
               </span>
               <ChangePill pct={s.chgPct} />
             </div>
-            <p className="mt-1 font-mono text-[13px] tabular-nums leading-none text-foreground/90">
+            <p className="mt-0.5 font-mono text-[12px] tabular-nums leading-none text-foreground/90">
               {fmtPrice(s)}
             </p>
           </div>
-          <Sparkline points={s.points} up={s.up} width={84} height={26} />
+          <Sparkline points={s.points} up={s.up} width={64} height={20} />
         </button>
       }
     />
