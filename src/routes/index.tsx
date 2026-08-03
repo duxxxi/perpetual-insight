@@ -336,16 +336,10 @@ function AskPerpetuity() {
 
   return (
     <div className="relative mb-10 group">
-      {/* spectral halo */}
-      <div className="pointer-events-none absolute -inset-6 overflow-hidden rounded-[2.25rem]" aria-hidden>
-        <div className="ai-halo absolute left-1/2 top-1/2 aspect-square w-[130%] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-[46px] transition-opacity duration-700 group-focus-within:opacity-70 group-hover:opacity-60" />
-      </div>
-      <div className="ai-iridescent absolute -inset-[1.5px] rounded-3xl opacity-80 blur-[3px]" aria-hidden />
-      <div className="glass-panel-strong relative rounded-3xl p-4 shadow-[0_20px_60px_-24px_rgba(20,30,60,0.35)]">
-        <div className="ai-iridescent pointer-events-none absolute inset-x-6 top-0 h-px opacity-90" aria-hidden />
+      <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-70 blur-[2px]" aria-hidden />
+      <div className="glass-panel-strong relative rounded-3xl p-4">
         <div className="flex items-center gap-3">
-          <div className="ai-halo size-7 rounded-full ring-1 ring-white/40 shadow-[0_0_16px_-2px_hsl(205_90%_62%/0.6)]" aria-hidden />
-
+          <div className="ai-iridescent size-7 rounded-full ring-1 ring-foreground/5" aria-hidden />
           <input
             type="text"
             value={draft}
