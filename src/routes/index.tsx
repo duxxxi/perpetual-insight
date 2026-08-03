@@ -114,7 +114,7 @@ function DashboardPage() {
 
 
             {/* Trip card — compact */}
-            <div className="glass-panel group mb-5 flex items-center justify-between gap-3 rounded-2xl px-4 py-3">
+            <div className="glass-panel glass-sheen group mb-5 flex items-center justify-between gap-3 overflow-hidden rounded-2xl px-4 py-3 transition-shadow hover:shadow-[0_20px_60px_-30px_var(--glow-accent)]">
               <div className="flex items-center gap-3 min-w-0">
                 <div className="glass-panel-strong flex size-9 items-center justify-center rounded-xl">
                   <Plane className="size-3.5 text-accent" />
