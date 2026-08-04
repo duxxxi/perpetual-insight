@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AssignmentsRouteImport } from './routes/assignments'
 import { Route as ConnectionsRouteImport } from './routes/connections'
 import { Route as ContactsRouteImport } from './routes/contacts'
+import { Route as ContextRouteImport } from './routes/context'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as LandingRouteImport } from './routes/landing'
 import { Route as OpportunitiesRouteImport } from './routes/opportunities'
@@ -38,6 +39,11 @@ const ConnectionsRoute = ConnectionsRouteImport.update({
 const ContactsRoute = ContactsRouteImport.update({
   id: '/contacts',
   path: '/contacts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContextRoute = ContextRouteImport.update({
+  id: '/context',
+  path: '/context',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocumentsRoute = DocumentsRouteImport.update({
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/assignments': typeof AssignmentsRoute
   '/connections': typeof ConnectionsRoute
   '/contacts': typeof ContactsRoute
+  '/context': typeof ContextRoute
   '/documents': typeof DocumentsRoute
   '/landing': typeof LandingRoute
   '/opportunities': typeof OpportunitiesRoute
@@ -88,6 +95,7 @@ export interface FileRoutesByTo {
   '/assignments': typeof AssignmentsRoute
   '/connections': typeof ConnectionsRoute
   '/contacts': typeof ContactsRoute
+  '/context': typeof ContextRoute
   '/documents': typeof DocumentsRoute
   '/landing': typeof LandingRoute
   '/opportunities': typeof OpportunitiesRoute
@@ -101,6 +109,7 @@ export interface FileRoutesById {
   '/assignments': typeof AssignmentsRoute
   '/connections': typeof ConnectionsRoute
   '/contacts': typeof ContactsRoute
+  '/context': typeof ContextRoute
   '/documents': typeof DocumentsRoute
   '/landing': typeof LandingRoute
   '/opportunities': typeof OpportunitiesRoute
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
     | '/assignments'
     | '/connections'
     | '/contacts'
+    | '/context'
     | '/documents'
     | '/landing'
     | '/opportunities'
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/assignments'
     | '/connections'
     | '/contacts'
+    | '/context'
     | '/documents'
     | '/landing'
     | '/opportunities'
@@ -139,6 +150,7 @@ export interface FileRouteTypes {
     | '/assignments'
     | '/connections'
     | '/contacts'
+    | '/context'
     | '/documents'
     | '/landing'
     | '/opportunities'
@@ -152,6 +164,7 @@ export interface RootRouteChildren {
   AssignmentsRoute: typeof AssignmentsRoute
   ConnectionsRoute: typeof ConnectionsRoute
   ContactsRoute: typeof ContactsRoute
+  ContextRoute: typeof ContextRoute
   DocumentsRoute: typeof DocumentsRoute
   LandingRoute: typeof LandingRoute
   OpportunitiesRoute: typeof OpportunitiesRoute
@@ -188,6 +201,13 @@ declare module '@tanstack/react-router' {
       path: '/contacts'
       fullPath: '/contacts'
       preLoaderRoute: typeof ContactsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/context': {
+      id: '/context'
+      path: '/context'
+      fullPath: '/context'
+      preLoaderRoute: typeof ContextRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/documents': {
@@ -240,6 +260,7 @@ const rootRouteChildren: RootRouteChildren = {
   AssignmentsRoute: AssignmentsRoute,
   ConnectionsRoute: ConnectionsRoute,
   ContactsRoute: ContactsRoute,
+  ContextRoute: ContextRoute,
   DocumentsRoute: DocumentsRoute,
   LandingRoute: LandingRoute,
   OpportunitiesRoute: OpportunitiesRoute,
