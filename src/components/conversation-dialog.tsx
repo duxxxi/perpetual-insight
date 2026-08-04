@@ -162,7 +162,7 @@ export function ConversationDialog({
                 <div
                   className={
                     m.role === "user"
-                      ? "max-w-[80%] rounded-2xl rounded-br-md bg-accent/15 px-3.5 py-2 text-[13px] leading-relaxed text-background"
+                      ? "max-w-[80%] rounded-2xl rounded-br-md bg-accent/15 px-3.5 py-2 text-[13px] leading-relaxed text-foreground"
                       : "max-w-[82%] rounded-2xl rounded-bl-md bg-foreground/[0.04] px-3.5 py-2 text-[13px] leading-relaxed text-foreground/85 ring-1 ring-foreground/5"
                   }
                 >
