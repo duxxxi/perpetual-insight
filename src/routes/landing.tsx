@@ -644,3 +644,257 @@ function CallToAction() {
     </section>
   );
 }
+
+/* ---------------- how it works: connect / command / execute ---------------- */
+
+const steps = [
+  {
+    title: "Connect.",
+    body: "Your inbox, contacts, CRM and calendar, in minutes. Perpetuity reads your world once and keeps it warm.",
+  },
+  {
+    title: "Command.",
+    body: "Agents surface the opportunity, draft the outreach, build the plan. Work arrives already half done.",
+  },
+  {
+    title: "Execute.",
+    body: "You approve in one click. Perpetuity does the rest, and never sleeps.",
+  },
+];
+
+type CapTask = { label: string; state: "done" | "active" | "queued" };
+
+const capabilities: { name: string; status: string; tone: string; tasks: CapTask[]; wide?: boolean }[] = [
+  {
+    name: "Opportunity Scout",
+    status: "Live",
+    tone: "text-emerald-500",
+    tasks: [
+      { label: "Scanned 2,847 EU tenders today", state: "done" },
+      { label: "Ranked by relevance score", state: "done" },
+      { label: "Scanning World Bank · 4,210 active", state: "active" },
+      { label: "UN procurement queue loading", state: "queued" },
+    ],
+  },
+  {
+    name: "Market Analyst",
+    status: "Live",
+    tone: "text-emerald-500",
+    tasks: [
+      { label: "35 markets analysed today", state: "done" },
+      { label: "Polymarket signals processed", state: "done" },
+      { label: "Competitor price intelligence", state: "active" },
+      { label: "LME metals feed active", state: "queued" },
+    ],
+  },
+  {
+    name: "Outreach Agent",
+    status: "Live",
+    tone: "text-emerald-500",
+    tasks: [
+      { label: "12 draft emails ready", state: "done" },
+      { label: "Translated to German & Polish", state: "done" },
+      { label: "Awaiting your approval", state: "active" },
+      { label: "Follow-up schedule set", state: "queued" },
+    ],
+  },
+  {
+    name: "Compliance Watch",
+    status: "Live · 1 alert",
+    tone: "text-amber-500",
+    tasks: [
+      { label: "EU sanctions lists monitored", state: "done" },
+      { label: "Export controls checked", state: "done" },
+      { label: "New CBAM regulation detected", state: "active" },
+      { label: "Customs rule updates pending", state: "queued" },
+    ],
+  },
+  {
+    name: "Organiser Agent",
+    status: "Via Telegram",
+    tone: "text-sky-500",
+    wide: true,
+    tasks: [
+      { label: "Invoice #4821 filed and archived", state: "done" },
+      { label: "156 documents organised this month", state: "done" },
+      { label: "Sample room inventory updated from a photo", state: "done" },
+      { label: "Customer correspondence logged", state: "done" },
+      { label: "Customs documentation for DE shipment", state: "active" },
+      { label: "Warehouse inventory sync pending", state: "queued" },
+    ],
+  },
+];
+
+function CapTaskRow({ t }: { t: CapTask }) {
+  const dot =
+    t.state === "done"
+      ? "bg-emerald-500"
+      : t.state === "active"
+        ? "bg-accent animate-pulse"
+        : "bg-foreground/20";
+  const text =
+    t.state === "queued" ? "text-foreground/35" : t.state === "active" ? "text-foreground/75" : "text-foreground/55";
+  return (
+    <li className={`flex items-center gap-2 text-[11.5px] ${text}`}>
+      <span className={`size-1.5 shrink-0 rounded-full ${dot}`} />
+      <span className="truncate">{t.label}</span>
+    </li>
+  );
+}
+
+function HowItWorks() {
+  return (
+    <section className="scroll-mt-24 pt-14">
+      <SectionHead
+        kicker="Always-on intelligence"
+        title="Stop reacting. Start closing."
+        body="Perpetuity monitors markets, suppliers and customers across the globe, drafts the outreach, builds the deal plan and flags the risk."
+      />
+      <div className="grid gap-3 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]">
+        <div className="glass-panel divide-y divide-border/60 rounded-2xl">
+          {steps.map((s) => (
+            <div key={s.title} className="px-4 py-3.5">
+              <p className="text-[13px] font-medium tracking-[-0.01em]">{s.title}</p>
+              <p className="mt-1 text-[11.5px] leading-relaxed text-foreground/50">{s.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid gap-2 sm:grid-cols-2">
+          {capabilities.map((c) => (
+            <div key={c.name} className={`glass-panel rounded-2xl p-3.5 ${c.wide ? "sm:col-span-2" : ""}`}>
+              <div className="mb-2.5 flex items-center justify-between gap-2">
+                <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-foreground/45">
+                  {c.name}
+                </p>
+                <span className={`inline-flex items-center gap-1.5 font-mono text-[8.5px] font-semibold uppercase tracking-[0.14em] ${c.tone}`}>
+                  <span className="size-1 rounded-full bg-current" /> {c.status}
+                </span>
+              </div>
+              <ul className={`space-y-1.5 ${c.wide ? "sm:grid sm:grid-cols-2 sm:gap-x-4 sm:space-y-0 sm:[&>li]:py-0.5" : ""}`}>
+                {c.tasks.map((t) => (
+                  <CapTaskRow key={t.label} t={t} />
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- dark live-intelligence section ---------------- */
+
+const intelPoints = [
+  {
+    title: "Find the opportunity.",
+    body: "Markets, suppliers and customers watched around the clock. The deal you'd have missed, surfaced before it's gone.",
+  },
+  {
+    title: "Do the work.",
+    body: "Outreach drafted, deal plans built, meetings prepped — grounded in your real data, ready for approval.",
+  },
+  {
+    title: "Guard the downside.",
+    body: "Compliance shifts, margin risks and red flags caught early, so nothing slips through.",
+  },
+];
+
+const briefAlerts = [
+  {
+    time: "14:32",
+    tone: "bg-rose-500/[0.07] ring-rose-400/15",
+    label: "ECB Signal:",
+    body: "Emergency rate indicators firing in Frankfurt. Bund yields +18bps. EUR/USD reaction in 30 min — affects export financing costs.",
+  },
+  {
+    time: "13:15",
+    tone: "bg-amber-500/[0.07] ring-amber-400/15",
+    label: "Tender Alert:",
+    body: "Municipal fleet maintenance, Annaberg-Buchholz DE. Relevance score 82/100. Deadline in 14 days.",
+  },
+];
+
+const briefItems = [
+  { dot: "bg-emerald-400", body: "Reuters: German automotive output +4.1% April — component demand strengthening across CEE" },
+  { dot: "bg-amber-400", body: "Handelsblatt (DE): Schaeffler announces Brașov expansion — local supplier search begins Q3" },
+  { dot: "bg-orange-300", body: "中国汽车报 (CN): EV tariff retaliation escalating — EU parts supply-chain implications for CEE exporters" },
+  { dot: "bg-violet-400", body: "Polymarket: ECB June cut probability 71% · EUR/USD pricing signal for export contracts" },
+];
+
+function IntelSection() {
+  return (
+    <section id="intelligence" className="mt-16 scroll-mt-24 border-y border-border/60 bg-[oklch(0.19_0.02_255)] py-14">
+      <div className="mx-auto grid max-w-6xl items-start gap-8 px-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:px-8">
+        <div>
+          <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.26em] text-white/35">
+            A live intelligence terminal
+          </p>
+          <h2 className="mt-2 font-serif text-[30px] font-normal leading-[1.06] tracking-[-0.02em] text-white/90 md:text-[38px]">
+            Designed to notice
+            <br />
+            <span className="italic text-white/45">what others miss.</span>
+          </h2>
+          <p className="mt-4 max-w-md text-[13px] leading-relaxed text-white/50">
+            Bloomberg tells you what happened. We tell you what it means for your business — and then handle it.
+            While you're away. While you're busy. While you rest.
+          </p>
+
+          <div className="mt-7 space-y-4">
+            {intelPoints.map((p) => (
+              <div key={p.title} className="flex gap-3">
+                <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 ring-1 ring-emerald-400/25">
+                  <svg viewBox="0 0 10 10" className="size-2.5 text-emerald-300" fill="none" stroke="currentColor" strokeWidth="1.6">
+                    <path d="M2 5l2.5 2.5L8 2.5" strokeLinecap="round" />
+                  </svg>
+                </span>
+                <div>
+                  <p className="text-[12.5px] font-medium text-white/80">{p.title}</p>
+                  <p className="mt-0.5 max-w-sm text-[11.5px] leading-relaxed text-white/40">{p.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="overflow-hidden rounded-[20px] bg-white/[0.035] ring-1 ring-white/[0.07]">
+          <div className="flex items-center justify-between gap-3 border-b border-white/[0.06] px-4 py-2.5">
+            <span className="font-mono text-[9.5px] font-medium uppercase tracking-[0.2em] text-white/40">
+              Live intelligence · 17 May 2026
+            </span>
+            <span className="inline-flex items-center gap-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-emerald-300">
+              <span className="size-1 rounded-full bg-emerald-400" /> Streaming
+            </span>
+          </div>
+
+          <div className="space-y-2 p-3.5">
+            {briefAlerts.map((a) => (
+              <div key={a.time} className={`flex items-start gap-2.5 rounded-xl px-3 py-2 ring-1 ${a.tone}`}>
+                <span className="mt-0.5 shrink-0 font-mono text-[9.5px] text-white/35">{a.time}</span>
+                <p className="min-w-0 flex-1 text-[11.5px] leading-relaxed text-white/60">
+                  <span className="font-semibold text-white/85">{a.label}</span> {a.body}
+                </p>
+              </div>
+            ))}
+
+            <div className="my-1 h-px bg-white/[0.06]" />
+
+            <div className="space-y-1.5">
+              {briefItems.map((b) => (
+                <div key={b.body} className="flex items-start gap-2.5 rounded-lg px-2 py-1.5 transition-colors hover:bg-white/[0.03]">
+                  <span className={`mt-1.5 size-1.5 shrink-0 rounded-full ${b.dot}`} />
+                  <p className="min-w-0 flex-1 text-[11.5px] leading-relaxed text-white/50">{b.body}</p>
+                </div>
+              ))}
+            </div>
+
+            <p className="flex items-center gap-1.5 border-t border-white/[0.06] pt-2.5 font-mono text-[9px] uppercase tracking-[0.16em] text-white/25">
+              <Globe className="size-2.5" /> Compiled from 18 sources · 4 languages · updated 14 minutes ago
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
