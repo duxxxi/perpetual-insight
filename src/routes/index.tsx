@@ -44,6 +44,7 @@ import { useTheme } from "@/hooks/use-theme";
 import { AmbientBackground, CommodityTicker, AppSidebar, AppFooter } from "@/components/app-shell";
 import { useUserTasks } from "@/lib/task-store";
 import { ConversationDialog } from "@/components/conversation-dialog";
+import { PerpetuityAsksPill } from "@/components/perpetuity-asks";
 
 
 export const Route = createFileRoute("/")({
