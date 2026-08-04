@@ -187,31 +187,45 @@
     pointer-events: none;
     background:
       /* top sheen */
-      linear-gradient(180deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0) 22%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0) 24%),
       /* diagonal specular highlight */
-      linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0.18) 55%, rgba(255, 255, 255, 0) 100%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.22) 52%, rgba(255, 255, 255, 0) 100%),
+      /* secondary sheen from bottom-right */
+      linear-gradient(225deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 40%),
       /* brushed horizontal grain */
       repeating-linear-gradient(
         to bottom,
-        transparent 0 2px,
-        rgba(0, 0, 0, 0.018) 2px 3px,
-        transparent 3px 5px
+        transparent 0 1.5px,
+        rgba(0, 0, 0, 0.022) 1.5px 2.5px,
+        transparent 2.5px 4.5px
+      ),
+      /* fine noise speckle */
+      repeating-radial-gradient(
+        circle at 50% 50%,
+        rgba(0, 0, 0, 0.015) 0 0.5px,
+        transparent 0.5px 2.5px
       ),
       /* base silver alloy */
-      linear-gradient(160deg, #f4f6f8 0%, #e6eaef 30%, #eef0f3 52%, #dde2e8 100%);
+      linear-gradient(160deg, #f6f8fa 0%, #e4e9ef 28%, #eef1f4 54%, #dadfe6 100%);
   }
 
   .dark body::before {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0) 22%),
-      linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0.05) 55%, rgba(255, 255, 255, 0) 100%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 24%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.06) 52%, rgba(255, 255, 255, 0) 100%),
+      linear-gradient(225deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 40%),
       repeating-linear-gradient(
         to bottom,
-        transparent 0 2px,
-        rgba(255, 255, 255, 0.035) 2px 3px,
-        transparent 3px 5px
+        transparent 0 1.5px,
+        rgba(255, 255, 255, 0.045) 1.5px 2.5px,
+        transparent 2.5px 4.5px
       ),
-      linear-gradient(160deg, #1b1e25 0%, #13151a 30%, #191c22 52%, #0f1116 100%);
+      repeating-radial-gradient(
+        circle at 50% 50%,
+        rgba(255, 255, 255, 0.025) 0 0.5px,
+        transparent 0.5px 2.5px
+      ),
+      linear-gradient(160deg, #1d2028 0%, #13151b 28%, #1a1d23 54%, #0d0f14 100%);
   }
 
   .font-mono, code, kbd, samp, pre { font-variant-numeric: tabular-nums; }
