@@ -248,26 +248,32 @@ function ThreadsPage() {
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
       <AmbientBackground />
       <CommodityTicker />
+      <div className="flex items-center justify-center gap-3 pt-4 pb-2">
+        <span className="font-mono text-[11px] font-medium uppercase tracking-[0.35em] text-foreground/45">
+          Perpetuity
+        </span>
+      </div>
 
       <div className="flex">
         <AppSidebar active="threads" />
 
-        <main className="flex-1 px-5 pt-6 pb-14 lg:pl-24 lg:pr-8">
-          <div className="mx-auto max-w-7xl animate-fade-in-up">
+        <main className="flex-1 px-5 pt-4 pb-14 lg:pl-24 lg:pr-8 xl:pr-12">
+          <div className="mx-auto max-w-6xl animate-fade-in-up">
             {/* Header */}
             <header className="mb-4 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
+                <p className="mb-3 font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-foreground/40">
                   Activity log · 142 threads · 9 open
                 </p>
-                <h1 className="font-sans text-3xl font-semibold tracking-tight md:text-4xl">
-                  <span className="not-italic bg-gradient-to-br from-muted-foreground to-foreground bg-clip-text text-transparent">Threads</span>
+                <h1 className="font-sans text-[26px] font-semibold leading-[1.05] tracking-[-0.03em] md:text-[32px]">
+                  <span className="text-silver-metallic">Threads</span>
                 </h1>
-                <p className="mt-1 text-[12px] text-foreground/55">
+                <p className="mt-2 text-[12px] text-foreground/55">
                   Every conversation, task, and suggestion Perpetuity has handled with you.
                 </p>
               </div>
             </header>
+
 
             {/* Toolbar */}
             <div className="mb-3 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
