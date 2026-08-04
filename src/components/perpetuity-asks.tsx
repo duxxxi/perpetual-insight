@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HelpCircle, ArrowUpRight, Check } from "lucide-react";
+import { Brain, ArrowUpRight, Check, Sparkles } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import {
   Dialog,
@@ -9,6 +9,83 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { contextStore, useContextAsks, type ContextAsk } from "@/lib/context-store";
+
+/** Shared dialog body. */
+function AsksDialogBody({ asks }: { asks: ContextAsk[] }) {
+  return (
+    <DialogContent className="glass-panel-strong max-w-lg rounded-3xl border-foreground/10 bg-background/85 p-0 backdrop-blur-2xl">
+      <DialogHeader className="flex-row items-center gap-3 space-y-0 border-b border-foreground/5 px-5 py-4 text-left">
+        <span className="flex size-9 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 text-white ring-1 ring-white/20">
+          <Brain className="size-4" strokeWidth={2.5} />
+        </span>
+        <div className="flex-1">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/45">
+            Fills your context
+          </p>
+          <DialogTitle className="font-sans text-xl font-semibold">Perpetuity asks</DialogTitle>
+        </div>
+        <Link
+          to="/context"
+          className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-medium text-foreground/60 hover:bg-foreground/5 hover:text-foreground"
+        >
+          Context
+          <ArrowUpRight className="size-3" />
+        </Link>
+      </DialogHeader>
+      <div className="max-h-[60vh] space-y-2 overflow-y-auto p-3">
+        {asks.length === 0 ? (
+          <p className="px-2 py-6 text-center text-sm text-foreground/50">
+            Nothing open. Perpetuity has what it needs for now.
+          </p>
+        ) : (
+          asks.map((a) => <AskCard key={a.id} ask={a} />)
+        )}
+      </div>
+    </DialogContent>
+  );
+}
+
+/** Feature card — the special home for Perpetuity's open questions. */
+export function PerpetuityAsksCard() {
+  const asks = useContextAsks();
+  const open = asks.filter((a) => !a.answer);
+  const next = open[0];
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <button
+          data-pill
+          className="group relative mb-5 block w-full overflow-hidden rounded-2xl text-left"
+        >
+          <span className="ai-iridescent absolute -inset-px rounded-2xl opacity-60 blur-[3px] transition-opacity group-hover:opacity-95" aria-hidden />
+          <span className="glass-panel-strong relative flex items-center gap-3 rounded-2xl px-4 py-3">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 to-blue-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_4px_12px_-4px_rgba(0,0,0,0.35)] ring-1 ring-white/20">
+              <Brain className="size-4" strokeWidth={2.25} />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="flex items-center gap-2">
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+                  Perpetuity asks
+                </span>
+                <span className="glass-chip rounded-full px-1.5 py-0.5 font-mono text-[9px] font-semibold tabular-nums text-foreground/70">
+                  {open.length} open
+                </span>
+              </span>
+              <span className="mt-0.5 block truncate font-sans text-sm font-medium">
+                {next ? next.question : "Nothing open — context is current."}
+              </span>
+            </span>
+            <span className="glass-chip inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium text-foreground/80 transition-colors group-hover:text-foreground">
+              <Sparkles className="size-3" strokeWidth={2} />
+              Answer
+            </span>
+          </span>
+        </button>
+      </DialogTrigger>
+      <AsksDialogBody asks={asks} />
+    </Dialog>
+  );
+}
 
 /** Pill that surfaces the questions Perpetuity needs answered to fill context. */
 export function PerpetuityAsksPill() {
@@ -23,7 +100,7 @@ export function PerpetuityAsksPill() {
         >
           <span className="ai-iridescent absolute -inset-px rounded-full opacity-50 blur-[2px] transition-opacity group-hover:opacity-80" aria-hidden />
           <span className="relative flex size-[22px] items-center justify-center rounded-full bg-gradient-to-br from-sky-400 to-blue-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20">
-            <HelpCircle className="size-3" strokeWidth={2.5} />
+            <Brain className="size-3" strokeWidth={2.5} />
           </span>
           <span className="relative font-mono text-[12px] font-semibold tabular-nums">{open.length}</span>
           <span className="relative text-[12px] text-foreground/70">Perpetuity asks</span>
@@ -32,7 +109,7 @@ export function PerpetuityAsksPill() {
       <DialogContent className="glass-panel-strong max-w-lg rounded-3xl border-foreground/10 bg-background/85 p-0 backdrop-blur-2xl">
         <DialogHeader className="flex-row items-center gap-3 space-y-0 border-b border-foreground/5 px-5 py-4 text-left">
           <span className="flex size-9 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 text-white ring-1 ring-white/20">
-            <HelpCircle className="size-4" strokeWidth={2.5} />
+            <Brain className="size-4" strokeWidth={2.5} />
           </span>
           <div className="flex-1">
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/45">
