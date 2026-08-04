@@ -14,6 +14,7 @@ import { Route as AssignmentsRouteImport } from './routes/assignments'
 import { Route as ConnectionsRouteImport } from './routes/connections'
 import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as DocumentsRouteImport } from './routes/documents'
+import { Route as LandingRouteImport } from './routes/landing'
 import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as SettingsRouteImport } from './routes/settings'
@@ -44,6 +45,11 @@ const DocumentsRoute = DocumentsRouteImport.update({
   path: '/documents',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LandingRoute = LandingRouteImport.update({
+  id: '/landing',
+  path: '/landing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OpportunitiesRoute = OpportunitiesRouteImport.update({
   id: '/opportunities',
   path: '/opportunities',
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/connections': typeof ConnectionsRoute
   '/contacts': typeof ContactsRoute
   '/documents': typeof DocumentsRoute
+  '/landing': typeof LandingRoute
   '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
   '/settings': typeof SettingsRoute
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/connections': typeof ConnectionsRoute
   '/contacts': typeof ContactsRoute
   '/documents': typeof DocumentsRoute
+  '/landing': typeof LandingRoute
   '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
   '/settings': typeof SettingsRoute
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/connections': typeof ConnectionsRoute
   '/contacts': typeof ContactsRoute
   '/documents': typeof DocumentsRoute
+  '/landing': typeof LandingRoute
   '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
   '/settings': typeof SettingsRoute
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/connections'
     | '/contacts'
     | '/documents'
+    | '/landing'
     | '/opportunities'
     | '/outreach'
     | '/settings'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/connections'
     | '/contacts'
     | '/documents'
+    | '/landing'
     | '/opportunities'
     | '/outreach'
     | '/settings'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | '/connections'
     | '/contacts'
     | '/documents'
+    | '/landing'
     | '/opportunities'
     | '/outreach'
     | '/settings'
@@ -141,6 +153,7 @@ export interface RootRouteChildren {
   ConnectionsRoute: typeof ConnectionsRoute
   ContactsRoute: typeof ContactsRoute
   DocumentsRoute: typeof DocumentsRoute
+  LandingRoute: typeof LandingRoute
   OpportunitiesRoute: typeof OpportunitiesRoute
   OutreachRoute: typeof OutreachRoute
   SettingsRoute: typeof SettingsRoute
@@ -184,6 +197,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocumentsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/landing': {
+      id: '/landing'
+      path: '/landing'
+      fullPath: '/landing'
+      preLoaderRoute: typeof LandingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/opportunities': {
       id: '/opportunities'
       path: '/opportunities'
@@ -221,6 +241,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConnectionsRoute: ConnectionsRoute,
   ContactsRoute: ContactsRoute,
   DocumentsRoute: DocumentsRoute,
+  LandingRoute: LandingRoute,
   OpportunitiesRoute: OpportunitiesRoute,
   OutreachRoute: OutreachRoute,
   SettingsRoute: SettingsRoute,
@@ -229,3 +250,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
