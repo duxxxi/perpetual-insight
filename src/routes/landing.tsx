@@ -132,6 +132,36 @@ const pricing = [
 
 /* ---------------- page ---------------- */
 
+const editorial = [
+  { value: "180+", label: "Countries monitored" },
+  { value: "24/7", label: "Surveillance" },
+  { value: "50K+", label: "Active tenders" },
+  { value: "5", label: "AI agents" },
+  { value: "40+", label: "Languages" },
+  { value: "12K+", label: "Buyer contacts" },
+  { value: "24/7", label: "Correspondence" },
+];
+
+const trusted = [
+  "Matador Group",
+  "ROKOSAN",
+  "Chemosvit Fibrochem",
+  "GEVORKYAN",
+  "ESSEL",
+  "InoBat",
+  "Fatra Napajedla",
+  "Continental Matador",
+  "Embraco Slovakia",
+  "Kia Slovakia",
+  "Whirlpool Slovakia",
+  "Slovnaft",
+  "U.S. Steel Košice",
+  "ZKW Group",
+  "Leoni Slovakia",
+];
+
+/* ---------------- page ---------------- */
+
 function LandingPage() {
   useTheme();
   return (
@@ -140,14 +170,18 @@ function LandingPage() {
       <CommodityTicker />
       <TopNav />
 
-      <main className="mx-auto max-w-6xl px-5 pb-24 pt-10 animate-fade-in-up lg:px-8">
-        <Hero />
-        <Terminal />
-        <StatStrip />
-        <Platform />
-        <AgentRoster />
-        <Pricing />
-        <CallToAction />
+      <main className="pb-24 animate-fade-in-up">
+        <div className="mx-auto max-w-6xl px-5 lg:px-8">
+          <HeroSplit />
+        </div>
+        <EditorialStats />
+        <TrustedBy />
+        <div className="mx-auto max-w-6xl px-5 lg:px-8">
+          <Platform />
+          <AgentRoster />
+          <Pricing />
+          <CallToAction />
+        </div>
       </main>
 
       <AppFooter />
@@ -198,48 +232,69 @@ function TopNav() {
   );
 }
 
-function Hero() {
+/* ---------------- hero (split: editorial left, terminal right) ---------------- */
+
+function HeroSplit() {
   return (
-    <section className="pt-10 pb-8 text-center">
-      <div className="glass-chip mx-auto inline-flex items-center gap-2 rounded-full px-3 py-1">
-        <span className="relative flex size-1.5">
-          <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500/60" />
-          <span className="relative inline-flex size-1.5 rounded-full bg-emerald-500" />
-        </span>
-        <span className="font-mono text-[9px] font-medium uppercase tracking-[0.22em] text-foreground/55">
-          Intelligence team operational · monitoring worldwide
-        </span>
+    <section className="grid items-center gap-8 pt-12 pb-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-10">
+      <div>
+        <div className="glass-chip inline-flex items-center gap-2 rounded-full px-3 py-1">
+          <span className="relative flex size-1.5">
+            <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500/60" />
+            <span className="relative inline-flex size-1.5 rounded-full bg-emerald-500" />
+          </span>
+          <span className="font-mono text-[9px] font-medium uppercase tracking-[0.2em] text-foreground/55">
+            Intelligence team operational · monitoring worldwide
+          </span>
+        </div>
+
+        <h1 className="mt-6 text-balance font-serif text-[44px] font-normal leading-[1.02] tracking-[-0.02em] md:text-[62px]">
+          <span className="text-foreground/90">Your Intelligence Team.</span>
+          <br />
+          <span className="text-silver-metallic italic">Always On.</span>
+        </h1>
+
+        <p className="mt-5 max-w-md text-pretty text-[15px] leading-relaxed text-foreground/60">
+          Perpetuity connects your world, then puts agents to work. Opportunities found,
+          outreach drafted, risks flagged, deals planned. You command. It executes.
+        </p>
+
+        <div className="mt-7 flex flex-wrap items-center gap-2">
+          <a
+            href="#cta"
+            className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-[13px] font-semibold text-accent-foreground transition-opacity hover:opacity-90"
+          >
+            Book a demo <ArrowUpRight className="size-3.5" />
+          </a>
+          <a
+            href="#platform"
+            className="glass-chip inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-medium text-foreground/75 transition-colors hover:text-foreground"
+          >
+            <Play className="size-3.5" /> Watch demo
+          </a>
+        </div>
       </div>
 
-      <h1 className="mx-auto mt-6 max-w-3xl text-balance text-[38px] font-semibold leading-[1.03] tracking-[-0.035em] md:text-[58px]">
-        <span className="text-foreground/45">Your intelligence team.</span>{" "}
-        <span className="text-silver-metallic">Always on.</span>
-      </h1>
-
-      <p className="mx-auto mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-foreground/60">
-        Perpetuity connects your world, then puts agents to work. Opportunities found,
-        outreach drafted, risks flagged, deals planned. You command. It executes.
-      </p>
-
-      <div className="mt-7 flex flex-wrap items-center justify-center gap-2">
-        <a
-          href="#cta"
-          className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-[13px] font-semibold text-accent-foreground transition-opacity hover:opacity-90"
-        >
-          Book a demo <ArrowUpRight className="size-3.5" />
-        </a>
-        <a
-          href="#platform"
-          className="glass-chip inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-medium text-foreground/75 transition-colors hover:text-foreground"
-        >
-          <Play className="size-3.5" /> Watch demo
-        </a>
-      </div>
+      <Terminal />
     </section>
   );
 }
 
 const prompt = "Find industrial buyers for rubber components in Germany and Austria";
+
+const sparks: Record<string, { d: string; tone: string }> = {
+  "Opportunity Scout": { d: "M0 14 L10 12 L20 13 L30 8 L40 9 L50 4 L60 2", tone: "text-emerald-400" },
+  "Market Analyst": { d: "M0 12 L10 13 L20 9 L30 11 L40 6 L50 7 L60 3", tone: "text-sky-400" },
+  "Compliance Watch": { d: "M0 6 L10 8 L20 5 L30 10 L40 8 L50 12 L60 9", tone: "text-amber-400" },
+  "Outreach Agent": { d: "M0 15 L10 13 L20 11 L30 9 L40 7 L50 5 L60 2", tone: "text-orange-300" },
+};
+
+const stateTone: Record<string, string> = {
+  SCANNING: "bg-emerald-500/12 text-emerald-300 ring-emerald-400/20",
+  ACTIVE: "bg-sky-500/12 text-sky-300 ring-sky-400/20",
+  "1 ALERT": "bg-rose-500/12 text-rose-300 ring-rose-400/20",
+  "12 READY": "bg-amber-500/12 text-amber-300 ring-amber-400/20",
+};
 
 function Terminal() {
   const [typed, setTyped] = useState("");
@@ -254,86 +309,169 @@ function Terminal() {
   }, []);
 
   return (
-    <section className="relative">
-      <div aria-hidden className="ask-glow pointer-events-none absolute inset-x-8 -top-4 bottom-0 -z-10" />
-      <div className="glass-panel-strong ask-ring overflow-hidden rounded-3xl">
-        {/* head */}
-        <div className="flex items-center justify-between gap-3 border-b border-border/60 px-4 py-2.5">
-          <span className="font-mono text-[9px] font-medium uppercase tracking-[0.24em] text-foreground/45">
+    <div className="relative">
+      <div aria-hidden className="ask-glow pointer-events-none absolute inset-x-6 -top-4 bottom-2 -z-10" />
+      <div className="overflow-hidden rounded-[22px] bg-[oklch(0.19_0.02_255)] shadow-[0_40px_90px_-40px_oklch(0.2_0.03_255/0.65)] ring-1 ring-white/[0.07]">
+        {/* window chrome */}
+        <div className="flex items-center justify-between gap-3 border-b border-white/[0.06] px-4 py-2.5">
+          <div className="flex items-center gap-1.5">
+            <span className="size-2 rounded-full bg-rose-400/70" />
+            <span className="size-2 rounded-full bg-amber-400/70" />
+            <span className="size-2 rounded-full bg-emerald-400/70" />
+          </div>
+          <span className="font-mono text-[9px] font-medium uppercase tracking-[0.24em] text-white/35">
             Perpetuity · intelligence terminal
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-emerald-600 ring-1 ring-emerald-500/20 dark:text-emerald-400">
-            <span className="size-1 rounded-full bg-emerald-500" /> Live
+          <span className="inline-flex items-center gap-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-emerald-300">
+            <span className="size-1 rounded-full bg-emerald-400" /> Live
           </span>
         </div>
 
-        {/* breaking strip */}
-        <div className="flex items-center gap-3 border-b border-border/60 bg-amber-500/[0.06] px-4 py-2">
-          <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400">
-            Breaking
-          </span>
-          <p className="min-w-0 flex-1 truncate text-[12px] text-foreground/65">
-            ECB emergency rate signal detected · Frankfurt Bund yields +18bps · EUR/USD reaction imminent
-          </p>
-          <span className="hidden font-mono text-[10px] text-foreground/35 sm:inline">14:32 CET</span>
-        </div>
+        <div className="space-y-3 p-3.5">
+          {/* breaking strip */}
+          <div className="flex items-start gap-2.5 rounded-xl bg-white/[0.03] px-3 py-2 ring-1 ring-white/[0.05]">
+            <span className="mt-1 size-1.5 shrink-0 rounded-full bg-rose-400" />
+            <p className="min-w-0 flex-1 font-mono text-[11px] leading-relaxed text-white/60">
+              <span className="font-semibold text-white/80">⚡ BREAKING</span> — ECB emergency rate
+              signal detected · Frankfurt Bund yields +18bps · EUR/USD reaction imminent
+            </p>
+            <span className="hidden shrink-0 font-mono text-[9px] text-white/25 sm:inline">14:32 CET</span>
+          </div>
 
-        {/* prompt */}
-        <div className="px-4 py-4">
-          <div className="glass-chip flex items-center gap-2.5 rounded-2xl px-3 py-2.5">
-            <div className="globe-orb size-5 shrink-0" aria-hidden />
-            <span className="min-w-0 flex-1 truncate font-mono text-[12px] text-foreground/75">
+          {/* prompt */}
+          <div className="flex items-center gap-2.5 rounded-xl bg-white/[0.04] px-3 py-2.5 ring-1 ring-white/[0.06]">
+            <div className="globe-orb size-4 shrink-0" aria-hidden />
+            <span className="min-w-0 flex-1 truncate font-mono text-[11.5px] text-white/70">
               {typed}
-              <span className="ml-0.5 inline-block h-3 w-[6px] translate-y-[1px] animate-pulse bg-accent/70" />
+              <span className="ml-0.5 inline-block h-3 w-[6px] translate-y-[1px] animate-pulse bg-white/50" />
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-accent-foreground">
+            <span className="rounded-md bg-orange-500/85 px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-white">
               Run
             </span>
           </div>
 
-          <div className="mt-3 grid gap-2 sm:grid-cols-2">
-            {agents.map((a) => (
-              <div key={a.name} className="glass-chip rounded-2xl px-3 py-2.5">
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex min-w-0 items-center gap-2">
-                    <a.icon className="size-3.5 shrink-0 text-accent" />
-                    <span className="truncate text-[12px] font-medium">{a.name}</span>
+          <p className="px-1 font-mono text-[9px] font-medium uppercase tracking-[0.24em] text-white/25">
+            Agent activity · live
+          </p>
+
+          {/* agent rows */}
+          <div className="space-y-1.5">
+            {agents.map((a) => {
+              const sp = sparks[a.name];
+              return (
+                <div
+                  key={a.name}
+                  className="flex items-center gap-3 rounded-xl bg-white/[0.025] px-3 py-2.5 ring-1 ring-white/[0.05] transition-colors hover:bg-white/[0.05]"
+                >
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-white/[0.06]">
+                    <a.icon className="size-3.5 text-white/60" strokeWidth={1.75} />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-[12px] font-medium text-white/85">{a.name}</p>
+                    <p className="truncate text-[10.5px] text-white/40">{a.line}</p>
                   </div>
-                  <span className="shrink-0 rounded-full bg-secondary/70 px-1.5 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-[0.16em] text-foreground/55">
+                  <div className="hidden shrink-0 text-right sm:block">
+                    <p className="font-mono text-[12px] font-semibold tabular-nums text-white/85">{a.metric}</p>
+                    <p className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/30">{a.unit}</p>
+                  </div>
+                  <span
+                    className={`shrink-0 rounded-md px-1.5 py-0.5 font-mono text-[8px] font-bold uppercase tracking-[0.14em] ring-1 ${
+                      stateTone[a.state] ?? "bg-white/[0.06] text-white/60 ring-white/10"
+                    }`}
+                  >
                     {a.state}
                   </span>
+                  {sp ? (
+                    <svg
+                      viewBox="0 0 60 18"
+                      className={`hidden h-4 w-14 shrink-0 md:block ${sp.tone}`}
+                      fill="none"
+                      aria-hidden
+                    >
+                      <path d={sp.d} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  ) : null}
                 </div>
-                <p className="mt-1 truncate text-[11px] text-foreground/50">{a.line}</p>
-                <p className="mt-1.5 font-mono text-[13px] font-semibold tabular-nums text-foreground/85">
-                  {a.metric}{" "}
-                  <span className="text-[9px] font-medium uppercase tracking-[0.16em] text-foreground/35">
-                    {a.unit}
-                  </span>
-                </p>
+              );
+            })}
+          </div>
+
+          {/* stat grid */}
+          <div className="grid grid-cols-3 gap-1.5 md:grid-cols-6">
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                className="rounded-lg bg-white/[0.03] px-2 py-2 text-center ring-1 ring-white/[0.05]"
+              >
+                <p className="font-mono text-[13px] font-semibold tabular-nums text-white/85">{s.value}</p>
+                <p className="font-mono text-[7.5px] uppercase tracking-[0.14em] text-white/30">{s.label}</p>
+                <p className="font-mono text-[8px] text-emerald-300/80">{s.delta}</p>
               </div>
             ))}
           </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- editorial stat rail ---------------- */
+
+function EditorialStats() {
+  return (
+    <section className="border-y border-border/60 bg-secondary/25">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-y-5 px-5 py-7 sm:grid-cols-4 lg:grid-cols-7 lg:px-8">
+        {editorial.map((e, i) => (
+          <div
+            key={e.label}
+            className={`px-3 ${i > 0 ? "lg:border-l lg:border-border/60" : ""}`}
+          >
+            <p className="font-serif text-[26px] leading-none tracking-[-0.01em] text-foreground/85">
+              {e.value}
+            </p>
+            <p className="mt-1.5 font-mono text-[8.5px] font-medium uppercase tracking-[0.18em] text-foreground/40">
+              {e.label}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- trusted-by marquee ---------------- */
+
+function TrustedRow() {
+  return (
+    <div className="flex shrink-0 items-center">
+      {trusted.map((t) => (
+        <span
+          key={t}
+          className="border-l border-border/50 px-7 font-serif text-[17px] whitespace-nowrap text-foreground/35"
+        >
+          {t}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function TrustedBy() {
+  return (
+    <section className="border-b border-border/60 py-7">
+      <p className="mb-5 text-center font-mono text-[8.5px] font-semibold uppercase tracking-[0.28em] text-foreground/35">
+        Trusted by exporters across CEE, MENA and beyond
+      </p>
+      <div className="ticker-mask overflow-hidden">
+        <div className="animate-ticker flex whitespace-nowrap">
+          <TrustedRow />
+          <TrustedRow />
         </div>
       </div>
     </section>
   );
 }
 
-function StatStrip() {
-  return (
-    <section className="mt-4 grid grid-cols-3 gap-2 md:grid-cols-6">
-      {stats.map((s) => (
-        <div key={s.label} className="glass-panel rounded-2xl px-3 py-2.5">
-          <p className="font-mono text-[15px] font-semibold tabular-nums tracking-tight">{s.value}</p>
-          <div className="mt-0.5 flex items-baseline justify-between gap-1">
-            <span className="text-[10px] uppercase tracking-[0.14em] text-foreground/40">{s.label}</span>
-            <span className="font-mono text-[9px] text-emerald-600 dark:text-emerald-400">{s.delta}</span>
-          </div>
-        </div>
-      ))}
-    </section>
-  );
-}
 
 function SectionHead({ kicker, title, body }: { kicker: string; title: string; body?: string }) {
   return (
