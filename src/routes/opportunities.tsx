@@ -152,7 +152,7 @@ function OpportunitiesPage() {
               key={f}
               onClick={() => setTab(f)}
               className={`rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${
-                tab === f ? "bg-foreground text-background" : "text-foreground/55 hover:text-foreground"
+                tab === f ? "bg-accent/15 text-accent ring-1 ring-accent/25" : "text-foreground/55 hover:text-foreground"
               }`}
             >
               {f}
@@ -184,7 +184,7 @@ function OpportunitiesPage() {
             <button
               type="button"
               onClick={() => openOpp(opps[0])}
-              className="rounded-full bg-foreground px-4 py-2 text-[12px] font-medium text-background hover:opacity-90"
+              className="rounded-full bg-accent/15 px-4 py-2 text-[12px] font-medium text-accent hover:bg-accent/25"
             >
               Build a plan
             </button>

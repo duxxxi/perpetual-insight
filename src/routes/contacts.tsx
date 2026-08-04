@@ -514,7 +514,7 @@ function FilterRow<T extends string>({
             onClick={() => onChange(o)}
             className={`rounded-full px-2.5 py-1 text-[11px] font-medium transition-colors ${
               value === o
-                ? "bg-foreground text-background"
+                ? "bg-accent/15 text-accent ring-1 ring-accent/25"
                 : "text-foreground/55 hover:text-foreground"
             }`}
           >
@@ -595,7 +595,7 @@ function MarketFlags({
         onClick={() => onChange("All")}
         className={`rounded-full px-2.5 py-1 text-[11px] font-medium transition-colors ${
           value === "All"
-            ? "bg-foreground text-background"
+            ? "bg-accent/15 text-accent ring-1 ring-accent/25"
             : "text-foreground/55 hover:text-foreground"
         }`}
       >
@@ -669,7 +669,7 @@ function CompanyDetail({
               ],
             })
           }
-          className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background hover:opacity-90"
+          className="rounded-full bg-accent/15 px-3.5 py-1.5 text-[11px] font-medium text-accent hover:bg-accent/25"
         >
           Open file
         </button>

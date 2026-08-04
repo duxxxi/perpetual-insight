@@ -308,38 +308,41 @@ export function PageShell({
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
       <AmbientBackground />
       <CommodityTicker />
+      {/* Company wordmark under ticker — same as dashboard */}
+      <div className="flex items-center justify-center gap-3 pt-4 pb-2">
+        <span className="font-mono text-[11px] font-medium uppercase tracking-[0.35em] text-foreground/45">
+          Perpetuity
+        </span>
+      </div>
       <div className="flex">
         <AppSidebar active={active} />
-        <main className="flex-1 px-5 pt-6 pb-20 lg:pl-24 lg:pr-8">
-          <div className="mx-auto max-w-7xl animate-fade-in-up">
-            <header className="relative mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+        <main className="flex-1 px-5 pt-4 pb-20 lg:pl-24 lg:pr-8 xl:pr-12">
+          <div className="mx-auto max-w-6xl animate-fade-in-up">
+            <header className="relative mb-5">
               <div
                 aria-hidden
-                className="pointer-events-none absolute -left-10 -top-10 size-48 rounded-full opacity-60 blur-3xl"
+                className="pointer-events-none absolute -left-10 -top-12 size-48 rounded-full opacity-50 blur-3xl"
                 style={{
                   background:
-                    "radial-gradient(circle, hsl(220 20% 55% / 0.18), transparent 70%)",
+                    "radial-gradient(circle, hsl(215 20% 60% / 0.16), transparent 70%)",
                 }}
               />
-              <div className="relative">
-                <p className="mb-2 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/45">
-                  <span className="size-1.5 rounded-full bg-accent shadow-[0_0_8px_currentColor]" />
-                  {eyebrow}
-                </p>
-                <h1 className="font-sans text-3xl font-semibold tracking-tight md:text-4xl">
+              <p className="relative mb-3 font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-foreground/40">
+                {eyebrow}
+              </p>
+              <div className="relative flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                <h1 className="font-sans text-[26px] font-semibold leading-[1.05] tracking-[-0.03em] md:text-[32px]">
                   {accentWord ? (
                     <>
-                      <span className="not-italic bg-gradient-to-br from-muted-foreground to-foreground bg-clip-text text-transparent">
-                        {accentWord}
-                      </span>
-                      {title ? <span className="text-foreground/80"> · {title}</span> : null}
+                      <span className="text-silver-metallic">{accentWord}</span>
+                      {title ? <span className="text-foreground/40"> · {title}</span> : null}
                     </>
                   ) : (
-                    title
+                    <span className="text-silver-metallic">{title}</span>
                   )}
                 </h1>
+                {rightSlot}
               </div>
-              {rightSlot}
             </header>
             {children}
           </div>

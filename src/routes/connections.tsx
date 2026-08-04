@@ -260,7 +260,7 @@ function ConnectionsPage() {
             key={c}
             className={`rounded-full px-3 py-1 text-[11px] font-medium ring-1 transition-colors ${
               i === 0
-                ? "bg-foreground text-background ring-foreground"
+                ? "bg-accent/15 text-accent ring-accent/30"
                 : "bg-foreground/[0.03] text-foreground/65 ring-foreground/10 hover:bg-foreground/[0.06]"
             }`}
           >

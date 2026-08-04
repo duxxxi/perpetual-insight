@@ -129,7 +129,7 @@ export function usePerpetuityPanel() {
                   }}
                   className={
                     a.primary
-                      ? "rounded-full bg-foreground px-3 py-1.5 text-[11px] font-medium text-background hover:opacity-90"
+                      ? "rounded-full bg-accent/15 px-3 py-1.5 text-[11px] font-medium text-accent hover:bg-accent/25"
                       : "rounded-full bg-foreground/5 px-3 py-1.5 text-[11px] font-medium text-foreground/70 hover:bg-foreground/10"
                   }
                 >
