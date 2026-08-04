@@ -1138,3 +1138,199 @@ function LiveSignals() {
 }
 
 
+
+/* ---------- Convergence — synthesis across sources ---------- */
+
+const convergence = [
+  {
+    title: "German automotive restock collides with your rubber capacity",
+    confidence: "high" as const,
+    convergence:
+      "German automotive output +4.1% in April, Schaeffler announces a Brașov expansion, and two of your CEE distributors raised reorder volumes in the last 10 days.",
+    implication:
+      "There is a 4-6 week window to lock Q3 volume before component buyers commit elsewhere. Outreach Agent has 12 drafts ready for DE and AT buyers.",
+    sources: ["Reuters", "Handelsblatt", "HubSpot pipeline", "Gmail threads"],
+  },
+  {
+    title: "ECB cut odds at 71% while your EUR invoices reprice",
+    confidence: "high" as const,
+    convergence:
+      "Polymarket prices a June ECB cut at 71%, Bund yields moved +18bps today, and 63% of your open quotes are EUR-denominated with 30-day validity.",
+    implication:
+      "Shorten quote validity to 14 days on EUR contracts or add an FX clause. Market Analyst can reprice your open quote book on request.",
+    sources: ["Polymarket", "Yahoo Finance", "Quote book"],
+  },
+  {
+    title: "CBAM reporting shift touches three suppliers in your network",
+    confidence: "medium" as const,
+    convergence:
+      "A new CBAM reporting rule was detected this morning; three suppliers in your timber and metals chain sit inside scope, and one has no embedded-emissions data on file.",
+    implication:
+      "Request emissions declarations now to avoid customs friction on Q3 shipments. Compliance Watch has a supplier notice drafted for approval.",
+    sources: ["EU Official Journal", "Supplier records", "Compliance Watch"],
+  },
+];
+
+function Convergence() {
+  return (
+    <section className="mb-6">
+      <SectionLabel kicker="Synthesis · 14:40 UTC" tone="accent">
+        Convergence
+      </SectionLabel>
+      <div className="mt-3 grid gap-2 md:grid-cols-3">
+        {convergence.map((c) => (
+          <ActionDialog
+            key={c.title}
+            kicker={`Convergence · ${c.confidence} confidence`}
+            title={c.title}
+            body={`${c.convergence}\n\n${c.implication}\n\nSources: ${c.sources.join(" · ")}`}
+            actions={[{ label: "Explore this", primary: true }, { label: "Not relevant" }]}
+            trigger={
+              <button
+                data-pill
+                className="glass-panel group relative overflow-hidden rounded-2xl p-3.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
+              >
+                <div className="mb-2 flex items-center justify-between gap-2">
+                  <span className="font-mono text-[8.5px] font-semibold uppercase tracking-[0.18em] text-foreground/35">
+                    {c.sources.length} sources
+                  </span>
+                  <span
+                    className={`rounded-full px-1.5 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-[0.14em] ring-1 ${
+                      c.confidence === "high"
+                        ? "bg-emerald-500/10 text-emerald-600 ring-emerald-500/20 dark:text-emerald-300"
+                        : "bg-amber-500/10 text-amber-600 ring-amber-500/20 dark:text-amber-300"
+                    }`}
+                  >
+                    {c.confidence}
+                  </span>
+                </div>
+                <p className="text-[12.5px] font-medium leading-snug text-foreground/90 group-hover:text-accent">
+                  {c.title}
+                </p>
+                <p className="mt-1.5 line-clamp-2 text-[11px] leading-relaxed text-foreground/50">
+                  {c.implication}
+                </p>
+              </button>
+            }
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ---------- World feed — news grouped by lane ---------- */
+
+const newsLanes: { lane: string; items: { title: string; source: string }[] }[] = [
+  {
+    lane: "Your markets",
+    items: [
+      { title: "German automotive output +4.1% in April — component demand strengthening across CEE", source: "Reuters" },
+      { title: "Schaeffler announces Brașov expansion — local supplier search opens Q3", source: "Handelsblatt (DE)" },
+    ],
+  },
+  {
+    lane: "Trade & policy",
+    items: [
+      { title: "EV tariff retaliation escalating — EU parts supply-chain implications for CEE exporters", source: "中国汽车报 (CN)" },
+      { title: "New CBAM reporting rule published — embedded emissions data required for imports", source: "EU Official Journal" },
+    ],
+  },
+  {
+    lane: "Macro",
+    items: [
+      { title: "ECB June cut priced at 71% — EUR/USD signal for export contract pricing", source: "Polymarket" },
+      { title: "Bund yields +18bps intraday — export financing costs to follow", source: "Bloomberg" },
+    ],
+  },
+];
+
+function NewsLanes() {
+  return (
+    <div className="glass-panel mt-3 space-y-3.5 rounded-2xl px-4 py-3.5">
+      {newsLanes.map((l) => (
+        <div key={l.lane}>
+          <p className="mb-1.5 font-mono text-[8.5px] font-semibold uppercase tracking-[0.18em] text-foreground/35">
+            {l.lane}
+          </p>
+          <div className="space-y-1.5">
+            {l.items.map((n) => (
+              <ActionDialog
+                key={n.title}
+                kicker={n.source}
+                title={n.title}
+                body="Perpetuity read this in its original language, matched it against your pipeline and markets, and will fold it into tomorrow's brief. Ask for a deeper read or turn it into a task."
+                actions={[{ label: "Ask Perpetuity", primary: true }, { label: "Add as task" }]}
+                trigger={
+                  <button
+                    data-pill
+                    className="group flex w-full items-start gap-2 rounded-lg px-1 py-1 text-left transition-colors hover:bg-[var(--glass-surface)]"
+                  >
+                    <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent/50" />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[11.5px] leading-relaxed text-foreground/65 group-hover:text-foreground">
+                        {n.title}
+                      </span>
+                      <span className="mt-0.5 block font-mono text-[8.5px] uppercase tracking-[0.14em] text-foreground/30">
+                        {n.source}
+                      </span>
+                    </span>
+                  </button>
+                }
+              />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ---------- Routines ---------- */
+
+const routines = [
+  {
+    title: "Daily tender sweep",
+    trigger: "Every weekday · 07:00 CET",
+    body: "Scan EU, World Bank and UN procurement sources for your product codes, score relevance and queue the top five as tasks.",
+  },
+  {
+    title: "Weekly buyer follow-up",
+    trigger: "Mondays · 09:00 CET",
+    body: "Draft follow-ups for every quote older than 10 days without a reply, translated to the buyer's language.",
+  },
+  {
+    title: "Compliance watch digest",
+    trigger: "On new regulation",
+    body: "Flag any regulation touching your suppliers or shipping lanes and draft the supplier notice for approval.",
+  },
+];
+
+function RoutineChip({ title, trigger, body }: { title: string; trigger: string; body: string }) {
+  return (
+    <ActionDialog
+      kicker="Routine"
+      title={title}
+      body={`${trigger}\n\n${body}`}
+      actions={[{ label: "Enable routine", primary: true }, { label: "Not now" }]}
+      trigger={
+        <button
+          data-pill
+          className="glass-panel group flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
+        >
+          <span className="min-w-0">
+            <span className="block truncate text-[12px] font-medium text-foreground/85 group-hover:text-accent">
+              {title}
+            </span>
+            <span className="block font-mono text-[8.5px] uppercase tracking-[0.14em] text-foreground/35">
+              {trigger}
+            </span>
+          </span>
+          <span className="shrink-0 rounded-full bg-accent/12 px-2 py-0.5 font-mono text-[8.5px] font-semibold uppercase tracking-[0.14em] text-accent">
+            Enable
+          </span>
+        </button>
+      }
+    />
+  );
+}
