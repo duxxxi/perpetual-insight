@@ -41,9 +41,10 @@ export const Route = createFileRoute("/landing")({
 
 const nav = [
   { label: "Platform", href: "#platform" },
+  { label: "Intelligence", href: "#intelligence" },
   { label: "Intelligence Team", href: "#agents" },
   { label: "Pricing", href: "#pricing" },
-  { label: "About", href: "#about" },
+
 ];
 
 const agents = [
