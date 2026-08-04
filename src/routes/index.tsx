@@ -31,6 +31,7 @@ import {
   AlertOctagon,
   TrendingUp,
   CheckCircle2,
+  RefreshCw,
 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
@@ -44,7 +45,7 @@ import { useTheme } from "@/hooks/use-theme";
 import { AmbientBackground, CommodityTicker, AppSidebar, AppFooter } from "@/components/app-shell";
 import { useUserTasks } from "@/lib/task-store";
 import { ConversationDialog } from "@/components/conversation-dialog";
-import { PerpetuityAsksPill } from "@/components/perpetuity-asks";
+import { PerpetuityAsksCard } from "@/components/perpetuity-asks";
 
 
 export const Route = createFileRoute("/")({
@@ -110,6 +111,7 @@ function DashboardPage() {
                 You have critical payment and deployment issues requiring action today,
                 plus a multi-country trip starting in five days that needs final logistics review.
               </p>
+              <RefreshPill />
             </header>
 
 
@@ -193,8 +195,10 @@ function DashboardPage() {
                 ]}
               />
               <TripPill />
-              <PerpetuityAsksPill />
             </div>
+
+            {/* Perpetuity asks — special place */}
+            <PerpetuityAsksCard />
 
             {/* Convergence — what the world's noise means for you */}
             <Convergence />
@@ -271,6 +275,35 @@ function DashboardPage() {
                     <ScheduleRow time="16:30" title="Compliance check: REACH regulation" sub="Automated check" tone="violet" Icon={Shield} />
                   </div>
                 </div>
+
+                {/* Routines */}
+                <div className="mt-8">
+                  <SectionLabel kicker="Automate" tone="accent">Routines</SectionLabel>
+                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                    {routines.map((r) => (
+                      <RoutineChip key={r.title} {...r} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Suggested */}
+                <div className="mt-8">
+                  <SectionLabel kicker="Optional" tone="accent">Suggested</SectionLabel>
+                  <div className="mt-3 space-y-2.5">
+                    <SuggestedItem
+                      title="Clean up duplicate pitch deck versions in Drive"
+                      body="You have two copies of the full pitch deck in Drive. Consolidate to a single master."
+                    />
+                    <SuggestedItem
+                      title="Q3 timber & paper market outlook: monitor CIS and LATAM"
+                      body="Your target markets (EU, CIS, SEA, LATAM) are heading into Q3. Begin preliminary intel."
+                    />
+                    <SuggestedItem
+                      title="Validate influencer list against brand campaign strategy"
+                      body="You have a '100 INFLUENCERS LIST' in Drive. Clarify whether this supports a B2B narrative."
+                    />
+                  </div>
+                </div>
               </section>
 
               {/* Right rail */}
@@ -316,33 +349,6 @@ function DashboardPage() {
                   <NewsLanes />
                 </div>
 
-                <div>
-                  <SectionLabel kicker="Automate" tone="accent">Routines</SectionLabel>
-                  <div className="mt-3 space-y-2">
-                    {routines.map((r) => (
-                      <RoutineChip key={r.title} {...r} />
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-
-                  <SectionLabel kicker="Optional" tone="accent">Suggested</SectionLabel>
-                  <div className="mt-4 space-y-2.5">
-                    <SuggestedItem
-                      title="Clean up duplicate pitch deck versions in Drive"
-                      body="You have two copies of the full pitch deck in Drive. Consolidate to a single master."
-                    />
-                    <SuggestedItem
-                      title="Q3 timber & paper market outlook: monitor CIS and LATAM"
-                      body="Your target markets (EU, CIS, SEA, LATAM) are heading into Q3. Begin preliminary intel."
-                    />
-                    <SuggestedItem
-                      title="Validate influencer list against brand campaign strategy"
-                      body="You have a '100 INFLUENCERS LIST' in Drive. Clarify whether this supports a B2B narrative."
-                    />
-                  </div>
-                </div>
               </aside>
             </div>
           </div>
@@ -596,6 +602,30 @@ function PillDialogContent({
         ))}
       </div>
     </DialogContent>
+  );
+}
+
+function RefreshPill() {
+  const [spinning, setSpinning] = useState(false);
+  const [stamp, setStamp] = useState("2 min ago");
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        setSpinning(true);
+        setTimeout(() => {
+          setSpinning(false);
+          setStamp("just now");
+        }, 900);
+      }}
+      className="glass-chip mt-3 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-medium text-foreground/70 transition-colors hover:text-foreground"
+    >
+      <RefreshCw className={`size-3 ${spinning ? "animate-spin" : ""}`} strokeWidth={2} />
+      {spinning ? "Refreshing intelligence…" : "Refresh"}
+      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-foreground/40">
+        · updated {stamp}
+      </span>
+    </button>
   );
 }
 
