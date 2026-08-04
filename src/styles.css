@@ -70,35 +70,36 @@
 
 
 .dark {
-  /* Smoked glass over obsidian */
-  --background: hsl(222 12% 7%);
-  --foreground: hsl(220 14% 95%);
-  --card: hsl(222 12% 14% / 0.6);
-  --card-foreground: hsl(220 14% 95%);
-  --popover: hsl(222 12% 13% / 0.88);
-  --popover-foreground: hsl(220 14% 95%);
-  --primary: hsl(220 14% 90%);
-  --primary-foreground: hsl(222 12% 9%);
-  --secondary: hsl(220 10% 20% / 0.6);
-  --secondary-foreground: hsl(220 14% 95%);
-  --muted: hsl(220 10% 20% / 0.55);
-  --muted-foreground: hsl(220 10% 64%);
-  --accent: hsl(210 18% 72%);               /* silver accent */
-  --accent-foreground: hsl(222 12% 9%);
-  --destructive: hsl(6 70% 60%);
-  --destructive-foreground: hsl(220 14% 95%);
-  --border: hsl(220 20% 100% / 0.09);
-  --input: hsl(220 20% 100% / 0.12);
-  --ring: hsl(210 18% 72% / 0.35);
+  /* Metallic glassmorphism — brushed-steel ink over cold blue-black obsidian */
+  --background: hsl(220 16% 6%);
+  --foreground: hsl(215 22% 96%);
+  --card: hsl(219 16% 15% / 0.52);
+  --card-foreground: hsl(215 22% 96%);
+  --popover: hsl(219 18% 11% / 0.86);
+  --popover-foreground: hsl(215 22% 96%);
+  --primary: hsl(214 24% 92%);
+  --primary-foreground: hsl(220 18% 8%);
+  --secondary: hsl(217 14% 22% / 0.55);
+  --secondary-foreground: hsl(215 22% 96%);
+  --muted: hsl(217 14% 22% / 0.48);
+  --muted-foreground: hsl(215 14% 68%);
+  --accent: hsl(211 40% 78%);               /* cool steel-blue sheen */
+  --accent-foreground: hsl(220 18% 8%);
+  --destructive: hsl(6 72% 62%);
+  --destructive-foreground: hsl(215 22% 96%);
+  --border: hsl(210 40% 100% / 0.10);
+  --input: hsl(210 40% 100% / 0.14);
+  --ring: hsl(211 45% 72% / 0.4);
 
-  --glass-surface: rgba(16, 18, 23, 0.45);
-  --glass-surface-strong: rgba(13, 15, 20, 0.62);
-  --glass-border: rgba(255, 255, 255, 0.07);
-  --glass-hairline: rgba(255, 255, 255, 0.05);
-  --glass-inset: rgba(255, 255, 255, 0.05);
-  --glass-inset-strong: rgba(255, 255, 255, 0.07);
-
+  /* Glass layers get a faint blue-steel tint instead of flat grey */
+  --glass-surface: rgba(24, 30, 41, 0.44);
+  --glass-surface-strong: rgba(17, 22, 32, 0.62);
+  --glass-border: rgba(198, 218, 245, 0.10);
+  --glass-hairline: rgba(198, 218, 245, 0.06);
+  --glass-inset: rgba(214, 230, 255, 0.07);
+  --glass-inset-strong: rgba(214, 230, 255, 0.11);
 }
+
 
 
 /* ============================================================
