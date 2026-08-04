@@ -325,3 +325,45 @@
     inset 3px 2px 6px -2px rgba(255, 255, 255, 0.55),
     0 1px 6px -2px rgba(10, 15, 25, 0.4);
 }
+
+/* Soft blue halo around the Ask Perpetuity pill */
+@utility ask-glow {
+  background:
+    radial-gradient(60% 120% at 20% 0%, hsl(212 90% 62% / 0.20), transparent 70%),
+    radial-gradient(70% 130% at 85% 100%, hsl(202 85% 60% / 0.16), transparent 72%);
+  filter: blur(18px);
+}
+
+.dark .ask-glow {
+  background:
+    radial-gradient(60% 120% at 20% 0%, hsl(212 92% 66% / 0.26), transparent 70%),
+    radial-gradient(70% 130% at 85% 100%, hsl(200 88% 62% / 0.20), transparent 72%);
+  filter: blur(22px);
+}
+
+@utility ask-ring {
+  box-shadow:
+    0 0 0 1px hsl(212 70% 60% / 0.16),
+    0 0 24px -8px hsl(212 90% 60% / 0.28),
+    0 18px 60px -28px rgba(10, 15, 25, 0.24),
+    inset 0 1px 0 0 var(--glass-inset-strong);
+}
+
+.dark .ask-ring {
+  box-shadow:
+    0 0 0 1px hsl(212 70% 66% / 0.22),
+    0 0 30px -8px hsl(212 92% 62% / 0.34),
+    0 18px 60px -28px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 0 var(--glass-inset-strong);
+}
+
+/* Metallic sheen on dark glass panels */
+.dark .glass-panel-strong,
+.dark .glass-panel {
+  background-image: linear-gradient(
+    160deg,
+    rgba(214, 230, 255, 0.055) 0%,
+    rgba(214, 230, 255, 0) 42%,
+    rgba(120, 150, 190, 0.035) 100%
+  );
+}
