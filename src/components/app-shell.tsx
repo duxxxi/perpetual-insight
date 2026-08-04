@@ -25,13 +25,12 @@ import {
 export function AmbientBackground() {
   return (
     <>
-      {/* Soft bloom over the brushed-metal canvas; kept faint so the silver grain stays visible */}
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 -z-10 dark:hidden"
         style={{
           background:
-            "radial-gradient(70rem 45rem at 8% -10%, hsl(0 0% 100% / 0.72), transparent 58%), radial-gradient(55rem 36rem at 104% 108%, hsl(215 18% 55% / 0.14), transparent 58%)",
+            "radial-gradient(70rem 45rem at 6% -14%, hsl(0 0% 100% / 0.95), transparent 60%), radial-gradient(60rem 42rem at 100% 106%, hsl(215 22% 55% / 0.22), transparent 62%), radial-gradient(45rem 34rem at 48% 42%, hsl(265 20% 72% / 0.14), transparent 70%)",
         }}
       />
       <div
@@ -39,9 +38,10 @@ export function AmbientBackground() {
         className="pointer-events-none fixed inset-0 -z-10 hidden dark:block"
         style={{
           background:
-            "radial-gradient(70rem 45rem at 8% -12%, hsl(220 20% 80% / 0.08), transparent 62%), radial-gradient(55rem 38rem at 102% 108%, hsl(220 14% 70% / 0.06), transparent 62%), radial-gradient(40rem 30rem at 55% 45%, hsl(265 20% 70% / 0.05), transparent 70%)",
+            "radial-gradient(70rem 45rem at 8% -12%, hsl(220 20% 80% / 0.10), transparent 62%), radial-gradient(55rem 38rem at 102% 108%, hsl(220 14% 70% / 0.07), transparent 62%), radial-gradient(40rem 30rem at 55% 45%, hsl(265 20% 70% / 0.06), transparent 70%)",
         }}
       />
+
     </>
   );
 }
