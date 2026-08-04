@@ -302,15 +302,27 @@ const stateTone: Record<string, string> = {
 
 function Terminal() {
   const [typed, setTyped] = useState("");
+  const [qIdx, setQIdx] = useState(0);
+
   useEffect(() => {
+    const text = queries[qIdx];
+    setTyped("");
     let i = 0;
+    let hold: number | undefined;
     const id = window.setInterval(() => {
       i += 1;
-      setTyped(prompt.slice(0, i));
-      if (i >= prompt.length) window.clearInterval(id);
+      setTyped(text.slice(0, i));
+      if (i >= text.length) {
+        window.clearInterval(id);
+        hold = window.setTimeout(() => setQIdx((n) => (n + 1) % queries.length), 2600);
+      }
     }, 26);
-    return () => window.clearInterval(id);
-  }, []);
+    return () => {
+      window.clearInterval(id);
+      if (hold) window.clearTimeout(hold);
+    };
+  }, [qIdx]);
+
 
   return (
     <div className="relative">
