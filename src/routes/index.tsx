@@ -746,7 +746,7 @@ function ActionDialog({
         </DialogHeader>
         {body && (
           <div className="px-5 py-4">
-            <p className="text-sm leading-relaxed text-foreground/70">{body}</p>
+            <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/70">{body}</p>
           </div>
         )}
         <div className="flex items-center justify-end gap-2 border-t border-foreground/5 px-4 py-3">
