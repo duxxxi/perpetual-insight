@@ -279,6 +279,21 @@ function DashboardPage() {
                 </div>
 
                 <div>
+                  <SectionLabel kicker="18 sources · 4 languages" tone="accent">World feed</SectionLabel>
+                  <NewsLanes />
+                </div>
+
+                <div>
+                  <SectionLabel kicker="Automate" tone="accent">Routines</SectionLabel>
+                  <div className="mt-3 space-y-2">
+                    {routines.map((r) => (
+                      <RoutineChip key={r.title} {...r} />
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+
                   <SectionLabel kicker="Optional" tone="accent">Suggested</SectionLabel>
                   <div className="mt-4 space-y-2.5">
                     <SuggestedItem
