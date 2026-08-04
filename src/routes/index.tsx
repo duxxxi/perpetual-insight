@@ -192,6 +192,7 @@ function DashboardPage() {
                 ]}
               />
               <TripPill />
+              <PerpetuityAsksPill />
             </div>
 
             {/* Convergence — what the world's noise means for you */}
@@ -277,6 +278,37 @@ function DashboardPage() {
                   <SectionLabel kicker="Live · 14:40 UTC" tone="accent">Signals</SectionLabel>
                   <LiveSignals />
                 </div>
+
+                <div>
+                  <SectionLabel kicker="Curated for you" tone="accent">Need to know</SectionLabel>
+                  <div className="glass-panel mt-3 rounded-2xl px-4 py-3">
+                    <IntelItem
+                      time="07:10 CET"
+                      hot
+                      title="EU adds two CIS timber codes to restricted list"
+                      body={"Three suppliers in your network ship under the affected codes.\n\nPerpetuity drafted a customer notice and a substitution list from FSC-certified EU mills. Approve to send."}
+                    />
+                    <Divider />
+                    <IntelItem
+                      time="08:45 CET"
+                      title="German containerboard buyers restocking earlier than usual"
+                      body={"Order books at two of your DE accounts opened Q3 volumes two weeks ahead of last year.\n\nSuggested move: send Q3 availability to EuroMach and Hansa before capacity is committed elsewhere."}
+                    />
+                    <Divider />
+                    <IntelItem
+                      time="10:20 CET"
+                      title="Freight: Adriatic → Northern EU rates soften 3.1%"
+                      body={"Lower Brent and slack capacity are pushing spot rates down.\n\nQuotes issued this week can absorb the drop as margin, or be used to win the Poland railway tender on price."}
+                    />
+                    <Divider />
+                    <IntelItem
+                      time="11:55 CET"
+                      title="Poland railway components tender — clarification round closes Thursday"
+                      body={"Questions must be filed before Thursday 17:00 CET.\n\nPerpetuity prepared three clarification questions on certification and delivery windows."}
+                    />
+                  </div>
+                </div>
+
 
                 <div>
                   <SectionLabel kicker="18 sources · 4 languages" tone="accent">World feed</SectionLabel>
