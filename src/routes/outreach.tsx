@@ -148,7 +148,7 @@ function OutreachPage() {
                 key={t}
                 onClick={() => setTab(t)}
                 className={`rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${
-                  tab === t ? "bg-foreground text-background" : "text-foreground/55 hover:text-foreground"
+                  tab === t ? "bg-accent/15 text-accent ring-1 ring-accent/25" : "text-foreground/55 hover:text-foreground"
                 }`}
               >
                 {t}
@@ -254,7 +254,7 @@ function OutreachPage() {
                     ],
                   })
                 }
-                className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background hover:opacity-90"
+                className="rounded-full bg-accent/15 px-3.5 py-1.5 text-[11px] font-medium text-accent hover:bg-accent/25"
               >
                 Review draft (14)
               </button>
@@ -372,7 +372,7 @@ function OutreachPage() {
                 ],
               })
             }
-            className="ml-auto inline-flex size-8 items-center justify-center rounded-xl bg-foreground text-background hover:opacity-90"
+            className="ml-auto inline-flex size-8 items-center justify-center rounded-xl bg-accent/15 text-accent ring-1 ring-accent/25 hover:opacity-90"
           >
             <Send className="size-3.5" />
           </button>

@@ -162,7 +162,7 @@ export function ConversationDialog({
                 <div
                   className={
                     m.role === "user"
-                      ? "max-w-[80%] rounded-2xl rounded-br-md bg-foreground px-3.5 py-2 text-[13px] leading-relaxed text-background"
+                      ? "max-w-[80%] rounded-2xl rounded-br-md bg-accent/15 px-3.5 py-2 text-[13px] leading-relaxed text-background"
                       : "max-w-[82%] rounded-2xl rounded-bl-md bg-foreground/[0.04] px-3.5 py-2 text-[13px] leading-relaxed text-foreground/85 ring-1 ring-foreground/5"
                   }
                 >
@@ -211,7 +211,7 @@ export function ConversationDialog({
               <button
                 type="submit"
                 disabled={!input.trim() || thinking}
-                className="inline-flex size-8 shrink-0 items-center justify-center rounded-xl bg-foreground text-background transition-transform hover:scale-105 disabled:opacity-40 disabled:hover:scale-100"
+                className="inline-flex size-8 shrink-0 items-center justify-center rounded-xl bg-accent/15 text-accent ring-1 ring-accent/25 transition-transform hover:scale-105 disabled:opacity-40 disabled:hover:scale-100"
               >
                 <ArrowUp className="size-3.5" strokeWidth={2.25} />
               </button>

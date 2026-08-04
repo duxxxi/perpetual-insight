@@ -301,7 +301,7 @@ function DocumentsPage() {
                 <button
                   type="button"
                   onClick={() => docAction("Open", selected)}
-                  className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background hover:opacity-90"
+                  className="rounded-full bg-accent/15 px-3.5 py-1.5 text-[11px] font-medium text-accent hover:bg-accent/25"
                 >
                   Open
                 </button>

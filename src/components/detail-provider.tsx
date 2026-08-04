@@ -84,7 +84,7 @@ export function DetailProvider({ children }: { children: ReactNode }) {
                       e.preventDefault();
                       setDetail(null);
                     }}
-                    className="rounded-full bg-foreground px-3 py-1 text-[11px] font-medium text-background"
+                    className="rounded-full bg-accent/15 px-3 py-1 text-[11px] font-medium text-background"
                   >
                     Got it
                   </button>

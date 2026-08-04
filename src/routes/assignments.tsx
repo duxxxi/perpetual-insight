@@ -253,7 +253,7 @@ function AssignmentsPage() {
                 key={f}
                 onClick={() => setFilter(f)}
                 className={`rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${
-                  filter === f ? "bg-foreground text-background" : "text-foreground/55 hover:text-foreground"
+                  filter === f ? "bg-accent/15 text-accent ring-1 ring-accent/25" : "text-foreground/55 hover:text-foreground"
                 }`}
               >
                 {f}
@@ -288,7 +288,7 @@ function AssignmentsPage() {
               <button
                 type="button"
                 onClick={() => setProposalOpen("promote")}
-                className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background hover:opacity-90"
+                className="rounded-full bg-accent/15 px-3.5 py-1.5 text-[11px] font-medium text-accent hover:bg-accent/25"
               >
                 Promote 3 to assignments
               </button>
@@ -599,7 +599,7 @@ function TaskDetailDialog({
               <button
                 type="button"
                 onClick={onCycle}
-                className="rounded-full bg-foreground px-3 py-1.5 text-[11px] font-medium text-background hover:opacity-90"
+                className="rounded-full bg-accent/15 px-3 py-1.5 text-[11px] font-medium text-accent hover:bg-accent/25"
               >
                 {task.status === "todo" ? "Start working" : task.status === "doing" ? "Mark resolved" : "Reopen"}
               </button>
@@ -685,7 +685,7 @@ function NewAssignmentDialog({
             <button
               type="submit"
               disabled={!title.trim()}
-              className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background hover:opacity-90 disabled:opacity-40"
+              className="rounded-full bg-accent/15 px-3.5 py-1.5 text-[11px] font-medium text-accent hover:bg-accent/25 disabled:opacity-40"
             >
               Create assignment
             </button>
@@ -744,7 +744,7 @@ function ProposalDialog({
             <button
               type="button"
               onClick={onPromote}
-              className="rounded-full bg-foreground px-3.5 py-1.5 text-[11px] font-medium text-background hover:opacity-90"
+              className="rounded-full bg-accent/15 px-3.5 py-1.5 text-[11px] font-medium text-accent hover:bg-accent/25"
             >
               {mode === "promote" ? "Promote all 3" : "Start review"}
             </button>

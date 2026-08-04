@@ -291,7 +291,7 @@ function ThreadsPage() {
                       onClick={() => setKind(c)}
                       className={`rounded-full px-2.5 py-1 text-[11px] font-medium transition-colors ${
                         active
-                          ? "bg-foreground text-background"
+                          ? "bg-accent/15 text-accent ring-1 ring-accent/25"
                           : "text-foreground/55 hover:text-foreground"
                       }`}
                     >
@@ -393,7 +393,7 @@ function ThreadsPage() {
                     <button
                       type="button"
                       onClick={() => setResumeId(selected.id)}
-                      className="inline-flex items-center gap-1.5 rounded-full bg-foreground px-3 py-1.5 text-[11px] font-medium text-background hover:opacity-90"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1.5 text-[11px] font-medium text-accent hover:bg-accent/25"
                     >
                       Resume conversation
                     </button>
@@ -739,7 +739,7 @@ function ThreadDetail({
                   ],
                 })
               }
-              className="inline-flex size-8 items-center justify-center rounded-xl bg-foreground text-background transition-transform hover:scale-105"
+              className="inline-flex size-8 items-center justify-center rounded-xl bg-accent/15 text-accent ring-1 ring-accent/25 transition-transform hover:scale-105"
             >
               <ArrowUp className="size-4" />
             </button>
@@ -872,7 +872,7 @@ function SmartAction({
       onClick={onClick}
       className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium transition-colors ${
         primary
-          ? "bg-foreground text-background hover:bg-foreground/90"
+          ? "bg-accent/15 text-accent ring-1 ring-accent/25 hover:bg-foreground/90"
           : "glass-panel-strong text-foreground/80 hover:text-foreground"
       }`}
     >
