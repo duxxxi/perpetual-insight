@@ -39,8 +39,8 @@
 
 :root {
   --radius: 0.875rem;
-  /* Frosted glass — cool silver canvas, graphite ink, no blue dominance */
-  --background: hsl(218 18% 91%);
+  /* Brushed silver metallic canvas — literal aluminium finish */
+  --background: hsl(220 12% 88%);
   --foreground: hsl(220 14% 12%);
   --card: hsl(0 0% 100% / 0.72);
   --card-foreground: hsl(220 14% 12%);
@@ -60,12 +60,12 @@
   --input: hsl(220 10% 84% / 0.6);
   --ring: hsl(220 12% 40% / 0.35);
 
-  --glass-surface: rgba(255, 255, 255, 0.50);
-  --glass-surface-strong: rgba(255, 255, 255, 0.68);
-  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-surface: rgba(255, 255, 255, 0.58);
+  --glass-surface-strong: rgba(255, 255, 255, 0.76);
+  --glass-border: rgba(255, 255, 255, 0.65);
   --glass-hairline: rgba(15, 20, 30, 0.06);
-  --glass-inset: rgba(255, 255, 255, 0.28);
-  --glass-inset-strong: rgba(255, 255, 255, 0.36);
+  --glass-inset: rgba(255, 255, 255, 0.32);
+  --glass-inset-strong: rgba(255, 255, 255, 0.42);
 }
 
 
@@ -176,6 +176,56 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: -0.011em;
+  }
+
+  /* Literal brushed-metal silver canvas behind the glass layers */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -20;
+    pointer-events: none;
+    background:
+      /* top sheen */
+      linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0) 24%),
+      /* diagonal specular highlight */
+      linear-gradient(135deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.22) 52%, rgba(255, 255, 255, 0) 100%),
+      /* secondary sheen from bottom-right */
+      linear-gradient(225deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 40%),
+      /* brushed horizontal grain */
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0 1.5px,
+        rgba(0, 0, 0, 0.022) 1.5px 2.5px,
+        transparent 2.5px 4.5px
+      ),
+      /* fine noise speckle */
+      repeating-radial-gradient(
+        circle at 50% 50%,
+        rgba(0, 0, 0, 0.015) 0 0.5px,
+        transparent 0.5px 2.5px
+      ),
+      /* base silver alloy */
+      linear-gradient(160deg, #f6f8fa 0%, #e4e9ef 28%, #eef1f4 54%, #dadfe6 100%);
+  }
+
+  .dark body::before {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 24%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.06) 52%, rgba(255, 255, 255, 0) 100%),
+      linear-gradient(225deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 40%),
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0 1.5px,
+        rgba(255, 255, 255, 0.045) 1.5px 2.5px,
+        transparent 2.5px 4.5px
+      ),
+      repeating-radial-gradient(
+        circle at 50% 50%,
+        rgba(255, 255, 255, 0.025) 0 0.5px,
+        transparent 0.5px 2.5px
+      ),
+      linear-gradient(160deg, #1d2028 0%, #13151b 28%, #1a1d23 54%, #0d0f14 100%);
   }
 
   .font-mono, code, kbd, samp, pre { font-variant-numeric: tabular-nums; }
