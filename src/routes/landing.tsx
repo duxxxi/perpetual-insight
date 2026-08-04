@@ -280,7 +280,11 @@ function HeroSplit() {
   );
 }
 
-const prompt = "Find industrial buyers for rubber components in Germany and Austria";
+const queries = [
+  "Find industrial buyers for rubber components in Germany and Austria",
+  "Scan EU tenders for aluminum sheet procurement in CEE",
+  "Alert me if sanctions shifts affect my MENA supply chain",
+];
 
 const sparks: Record<string, { d: string; tone: string }> = {
   "Opportunity Scout": { d: "M0 14 L10 12 L20 13 L30 8 L40 9 L50 4 L60 2", tone: "text-emerald-400" },
