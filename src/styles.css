@@ -39,8 +39,8 @@
 
 :root {
   --radius: 0.875rem;
-  /* Frosted glass — cool silver canvas, graphite ink, no blue dominance */
-  --background: hsl(218 18% 91%);
+  /* Brushed silver metallic canvas — literal aluminium finish */
+  --background: hsl(220 12% 88%);
   --foreground: hsl(220 14% 12%);
   --card: hsl(0 0% 100% / 0.72);
   --card-foreground: hsl(220 14% 12%);
@@ -60,12 +60,12 @@
   --input: hsl(220 10% 84% / 0.6);
   --ring: hsl(220 12% 40% / 0.35);
 
-  --glass-surface: rgba(255, 255, 255, 0.50);
-  --glass-surface-strong: rgba(255, 255, 255, 0.68);
-  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-surface: rgba(255, 255, 255, 0.58);
+  --glass-surface-strong: rgba(255, 255, 255, 0.76);
+  --glass-border: rgba(255, 255, 255, 0.65);
   --glass-hairline: rgba(15, 20, 30, 0.06);
-  --glass-inset: rgba(255, 255, 255, 0.28);
-  --glass-inset-strong: rgba(255, 255, 255, 0.36);
+  --glass-inset: rgba(255, 255, 255, 0.32);
+  --glass-inset-strong: rgba(255, 255, 255, 0.42);
 }
 
 
@@ -176,6 +176,42 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: -0.011em;
+  }
+
+  /* Literal brushed-metal silver canvas behind the glass layers */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -20;
+    pointer-events: none;
+    background:
+      /* top sheen */
+      linear-gradient(180deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0) 22%),
+      /* diagonal specular highlight */
+      linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0.18) 55%, rgba(255, 255, 255, 0) 100%),
+      /* brushed horizontal grain */
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0 2px,
+        rgba(0, 0, 0, 0.018) 2px 3px,
+        transparent 3px 5px
+      ),
+      /* base silver alloy */
+      linear-gradient(160deg, #f4f6f8 0%, #e6eaef 30%, #eef0f3 52%, #dde2e8 100%);
+  }
+
+  .dark body::before {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0) 22%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0.05) 55%, rgba(255, 255, 255, 0) 100%),
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0 2px,
+        rgba(255, 255, 255, 0.035) 2px 3px,
+        transparent 3px 5px
+      ),
+      linear-gradient(160deg, #1b1e25 0%, #13151a 30%, #191c22 52%, #0f1116 100%);
   }
 
   .font-mono, code, kbd, samp, pre { font-variant-numeric: tabular-nums; }
