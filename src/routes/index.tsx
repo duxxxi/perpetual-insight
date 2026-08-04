@@ -337,10 +337,12 @@ function AskPerpetuity() {
 
   return (
     <div className="relative mb-10 group">
+      {/* soft blue halo */}
+      <div className="ask-glow pointer-events-none absolute -inset-3 rounded-[2rem]" aria-hidden />
       <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-70 blur-[2px]" aria-hidden />
-      <div className="glass-panel-strong relative rounded-3xl p-4">
+      <div className="glass-panel-strong ask-ring relative rounded-3xl p-4">
         <div className="flex items-center gap-3">
-          <div className="globe-orb size-7 shrink-0 ring-1 ring-foreground/10" aria-hidden />
+          <div className="globe-orb size-5 shrink-0 ring-1 ring-foreground/10" aria-hidden />
           <input
             type="text"
             value={draft}
