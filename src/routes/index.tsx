@@ -194,6 +194,9 @@ function DashboardPage() {
               <TripPill />
             </div>
 
+            {/* Convergence — what the world's noise means for you */}
+            <Convergence />
+
 
             {/* Two-column workspace */}
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
