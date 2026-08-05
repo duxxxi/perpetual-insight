@@ -165,22 +165,26 @@ function ContextPage() {
               {/* Infobox */}
               {page.infobox ? (
                 <aside className="xl:pt-1">
-                  <div className="glass-panel info-glow overflow-hidden rounded-2xl">
+                  <div className="glass-panel-deep overflow-hidden rounded-2xl">
                     <p className="border-b border-foreground/[0.07] px-4 py-3 text-center text-[13px] font-semibold tracking-[-0.01em]">
                       {page.infobox.title}
                     </p>
                     <PhotoSlot key={page.id} />
                     <div className="px-1 pb-1">
-                      {page.infobox.rows.map((r) => (
+                      {page.infobox.rows.map((r: { label: string; value: string }, i: number) => (
                         <div
                           key={r.label}
-                          data-pill
-                          className="grid cursor-default grid-cols-[80px_minmax(0,1fr)] gap-2 border-t border-foreground/[0.07] px-3 py-2.5 transition-colors hover:bg-foreground/[0.03]"
+                          className="grid grid-cols-[80px_minmax(0,1fr)] gap-2 border-t border-foreground/[0.07] px-3 py-2.5"
                         >
                           <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground/40">
                             {r.label}
                           </span>
-                          <span className="text-[11px] leading-snug text-foreground/75">{r.value}</span>
+                          <EditableText
+                            path={`${page.id}/infobox.${i}`}
+                            value={r.value}
+                            multiline={false}
+                            className="text-[11px] leading-snug text-foreground/75"
+                          />
                         </div>
                       ))}
                     </div>
