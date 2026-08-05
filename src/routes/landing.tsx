@@ -310,45 +310,76 @@ function Terminal() {
 
   return (
     <div className="relative">
-      <div aria-hidden className="ask-glow pointer-events-none absolute inset-x-6 -top-4 bottom-2 -z-10" />
-      <div className="overflow-hidden rounded-[22px] bg-[oklch(0.19_0.02_255)] shadow-[0_40px_90px_-40px_oklch(0.2_0.03_255/0.65)] ring-1 ring-white/[0.07]">
+      {/* ambient colour wash behind the glass */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -inset-8 -z-10 opacity-70 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(38% 46% at 18% 8%, hsl(210 90% 62% / 0.30), transparent 70%), radial-gradient(34% 40% at 88% 22%, hsl(160 70% 55% / 0.20), transparent 72%), radial-gradient(40% 46% at 62% 100%, hsl(275 70% 65% / 0.20), transparent 72%)",
+        }}
+      />
+      <div className="relative overflow-hidden rounded-[24px] border border-white/[0.10] bg-[linear-gradient(160deg,oklch(0.26_0.03_255/0.82)_0%,oklch(0.19_0.025_258/0.90)_45%,oklch(0.16_0.02_260/0.94)_100%)] shadow-[0_50px_110px_-45px_oklch(0.2_0.04_255/0.7)] backdrop-blur-2xl">
+        {/* specular top edge + corner sheen */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/45 to-transparent"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -left-1/4 -top-1/3 size-[70%] rounded-full opacity-60 blur-3xl"
+          style={{ background: "radial-gradient(circle, hsl(0 0% 100% / 0.10), transparent 70%)" }}
+        />
         {/* window chrome */}
-        <div className="flex items-center justify-between gap-3 border-b border-white/[0.06] px-4 py-2.5">
+        <div className="relative flex items-center justify-between gap-3 border-b border-white/[0.07] bg-white/[0.03] px-4 py-2.5">
           <div className="flex items-center gap-1.5">
-            <span className="size-2 rounded-full bg-rose-400/70" />
-            <span className="size-2 rounded-full bg-amber-400/70" />
-            <span className="size-2 rounded-full bg-emerald-400/70" />
+            <span className="size-2 rounded-full bg-rose-400/70 shadow-[0_0_8px_-1px_currentColor]" />
+            <span className="size-2 rounded-full bg-amber-400/70 shadow-[0_0_8px_-1px_currentColor]" />
+            <span className="size-2 rounded-full bg-emerald-400/70 shadow-[0_0_8px_-1px_currentColor]" />
           </div>
-          <span className="font-mono text-[9px] font-medium uppercase tracking-[0.24em] text-white/35">
+          <span className="font-mono text-[9px] font-medium uppercase tracking-[0.24em] text-white/40">
             Perpetuity · intelligence terminal
           </span>
           <span className="inline-flex items-center gap-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-emerald-300">
-            <span className="size-1 rounded-full bg-emerald-400" /> Live
+            <span className="size-1 rounded-full bg-emerald-400 shadow-[0_0_8px_1px_hsl(160_80%_60%/0.6)]" /> Live
           </span>
         </div>
 
-        <div className="space-y-3 p-3.5">
+        <div className="relative space-y-3 p-3.5">
           {/* breaking strip */}
-          <div className="flex items-start gap-2.5 rounded-xl bg-white/[0.03] px-3 py-2 ring-1 ring-white/[0.05]">
-            <span className="mt-1 size-1.5 shrink-0 rounded-full bg-rose-400" />
+          <div className="relative flex items-start gap-2.5 overflow-hidden rounded-xl border border-white/[0.07] bg-white/[0.045] px-3 py-2 backdrop-blur-xl">
+            <span
+              aria-hidden
+              className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-rose-400/70 to-transparent"
+            />
+            <span className="mt-1 size-1.5 shrink-0 rounded-full bg-rose-400 shadow-[0_0_8px_1px_hsl(0_80%_65%/0.5)]" />
             <p className="min-w-0 flex-1 font-mono text-[11px] leading-relaxed text-white/60">
-              <span className="font-semibold text-white/80">⚡ BREAKING</span> — ECB emergency rate
+              <span className="font-semibold text-rose-200/90">⚡ BREAKING</span> — ECB emergency rate
               signal detected · Frankfurt Bund yields +18bps · EUR/USD reaction imminent
             </p>
             <span className="hidden shrink-0 font-mono text-[9px] text-white/25 sm:inline">14:32 CET</span>
           </div>
 
           {/* prompt */}
-          <div className="flex items-center gap-2.5 rounded-xl bg-white/[0.04] px-3 py-2.5 ring-1 ring-white/[0.06]">
-            <div className="globe-orb size-4 shrink-0" aria-hidden />
-            <span className="min-w-0 flex-1 truncate font-mono text-[11.5px] text-white/70">
+          <div className="relative flex items-center gap-2.5 overflow-hidden rounded-xl border border-white/[0.10] bg-white/[0.06] px-3 py-2.5 shadow-[inset_0_1px_0_0_hsl(0_0%_100%/0.10)] backdrop-blur-xl">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-70"
+              style={{
+                background:
+                  "radial-gradient(60% 120% at 0% 50%, hsl(210 90% 65% / 0.16), transparent 70%)",
+              }}
+            />
+            <div className="globe-orb relative size-4 shrink-0" aria-hidden />
+            <span className="relative min-w-0 flex-1 truncate font-mono text-[11.5px] text-white/75">
               {typed}
-              <span className="ml-0.5 inline-block h-3 w-[6px] translate-y-[1px] animate-pulse bg-white/50" />
+              <span className="ml-0.5 inline-block h-3 w-[6px] translate-y-[1px] animate-pulse bg-sky-300/70" />
             </span>
-            <span className="rounded-md bg-orange-500/85 px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-white">
+            <span className="relative rounded-md bg-gradient-to-b from-sky-400/90 to-sky-500/90 px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_0_16px_-4px_hsl(210_90%_60%/0.8)]">
               Run
             </span>
           </div>
+
 
           <p className="px-1 font-mono text-[9px] font-medium uppercase tracking-[0.24em] text-white/25">
             Agent activity · live
