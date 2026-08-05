@@ -618,7 +618,7 @@ function CallToAction() {
             180+ countries · 24/7 surveillance · 50K+ active tenders
           </span>
         </div>
-        <h2 className="mx-auto max-w-lg text-balance text-[26px] font-semibold leading-tight tracking-[-0.03em] md:text-[34px]">
+        <h2 className="mx-auto max-w-lg text-balance font-serif text-[26px] font-normal leading-[1.1] tracking-[-0.015em] md:text-[32px]">
           <span className="text-silver-metallic">Put your intelligence team to work.</span>
         </h2>
         <p className="mx-auto mt-3 max-w-md text-[13px] leading-relaxed text-foreground/55">
