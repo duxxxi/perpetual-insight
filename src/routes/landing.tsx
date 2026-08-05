@@ -354,7 +354,7 @@ function Terminal() {
               className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-rose-400/70 to-transparent"
             />
             <span className="mt-1 size-1.5 shrink-0 rounded-full bg-rose-400 shadow-[0_0_8px_1px_hsl(0_80%_65%/0.5)]" />
-            <p className="min-w-0 flex-1 font-mono text-[11px] leading-relaxed text-white/60">
+            <p className="min-w-0 flex-1 font-mono text-[10.5px] leading-relaxed text-white/60">
               <span className="font-semibold text-rose-200/90">⚡ BREAKING</span> — ECB emergency rate
               signal detected · Frankfurt Bund yields +18bps · EUR/USD reaction imminent
             </p>
@@ -362,7 +362,8 @@ function Terminal() {
           </div>
 
           {/* prompt */}
-          <div className="relative flex items-center gap-2.5 overflow-hidden rounded-xl border border-white/[0.10] bg-white/[0.06] px-3 py-2.5 shadow-[inset_0_1px_0_0_hsl(0_0%_100%/0.10)] backdrop-blur-xl">
+          <div className="relative flex items-center gap-2.5 overflow-hidden rounded-xl border border-white/[0.10] bg-white/[0.06] px-3 py-2 shadow-[inset_0_1px_0_0_hsl(0_0%_100%/0.10)] backdrop-blur-xl">
+
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-70"
