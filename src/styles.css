@@ -205,6 +205,18 @@
     inset 0 1px 0 0 var(--glass-inset-strong);
 }
 
+/* Extra-glassy side panel (context infobox): more blur, less fill */
+@utility glass-panel-deep {
+  backdrop-filter: blur(56px) saturate(180%);
+  background: color-mix(in oklab, var(--glass-surface) 55%, transparent);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 1px 0 0 var(--glass-hairline),
+    0 24px 70px -34px rgba(10, 15, 25, 0.22),
+    inset 0 1px 0 0 var(--glass-inset-strong),
+    inset 0 -1px 0 0 var(--glass-hairline);
+}
+
 /* Glass-on-glass: pills/chips that sit on an existing glass panel */
 @utility glass-chip {
   backdrop-filter: blur(14px) saturate(140%);

@@ -5,7 +5,9 @@ import { PageShell } from "@/components/app-shell";
 import { AskCard } from "@/components/perpetuity-asks";
 import { ContextChat } from "@/components/context-chat";
 import { useContextAsks } from "@/lib/context-store";
-import { backlinks, parseInline, wikiById, wikiPages, type WikiBlock } from "@/lib/wiki";
+import { backlinks, wikiById, wikiPages, type WikiBlock } from "@/lib/wiki";
+import { useMemoryPage } from "@/lib/wiki-store";
+import { EditableText } from "@/components/editable-text";
 
 export const Route = createFileRoute("/context")({
   head: () => ({
@@ -30,7 +32,9 @@ export const Route = createFileRoute("/context")({
 
 function ContextPage() {
   const [pageId, setPageId] = useState("overview");
-  const page = wikiById(pageId) ?? wikiPages[0];
+  const edited = useMemoryPage(pageId);
+  const page = edited?.page ?? wikiById(pageId) ?? wikiPages[0];
+  const editCount = edited?.edits ?? 0;
   const asks = useContextAsks();
   const open = asks.filter((a) => !a.answer);
   const links = backlinks(page.id);
@@ -105,14 +109,23 @@ function ContextPage() {
             </h2>
             <p className="mt-1 flex items-center gap-1.5 font-mono text-[10px] text-foreground/35">
               <Clock className="size-3" /> Last edited {page.edited}
+              <span className="ml-1 rounded-full bg-accent/10 px-1.5 py-0.5 text-[9px] font-semibold text-accent">
+                {editCount > 0 ? `${editCount} of your corrections` : "click any fact to correct it"}
+              </span>
             </p>
-            <p className="mt-2 text-[15px] leading-relaxed text-foreground/55">{page.summary}</p>
+            <EditableText
+              as="p"
+              path={`${page.id}/summary`}
+              value={page.summary}
+              onNavigate={setPageId}
+              className="mt-2 block text-[15px] leading-relaxed text-foreground/55"
+            />
             <div className="my-5 h-px bg-foreground/[0.08]" />
 
             <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_240px]">
               <div className="min-w-0 space-y-4">
-                {page.blocks.map((b, i) => (
-                  <Block key={i} block={b} onNavigate={setPageId} />
+                {page.blocks.map((b: WikiBlock, i: number) => (
+                  <Block key={i} block={b} pageId={page.id} index={i} onNavigate={setPageId} />
                 ))}
 
                 {page.id === "asks" ? (
@@ -152,22 +165,26 @@ function ContextPage() {
               {/* Infobox */}
               {page.infobox ? (
                 <aside className="xl:pt-1">
-                  <div className="glass-panel info-glow overflow-hidden rounded-2xl">
+                  <div className="glass-panel-deep overflow-hidden rounded-2xl">
                     <p className="border-b border-foreground/[0.07] px-4 py-3 text-center text-[13px] font-semibold tracking-[-0.01em]">
                       {page.infobox.title}
                     </p>
                     <PhotoSlot key={page.id} />
                     <div className="px-1 pb-1">
-                      {page.infobox.rows.map((r) => (
+                      {page.infobox.rows.map((r: { label: string; value: string }, i: number) => (
                         <div
                           key={r.label}
-                          data-pill
-                          className="grid cursor-default grid-cols-[80px_minmax(0,1fr)] gap-2 border-t border-foreground/[0.07] px-3 py-2.5 transition-colors hover:bg-foreground/[0.03]"
+                          className="grid grid-cols-[80px_minmax(0,1fr)] gap-2 border-t border-foreground/[0.07] px-3 py-2.5"
                         >
                           <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground/40">
                             {r.label}
                           </span>
-                          <span className="text-[11px] leading-snug text-foreground/75">{r.value}</span>
+                          <EditableText
+                            path={`${page.id}/infobox.${i}`}
+                            value={r.value}
+                            multiline={false}
+                            className="text-[11px] leading-snug text-foreground/75"
+                          />
                         </div>
                       ))}
                     </div>
@@ -247,54 +264,68 @@ function RailItem({
   );
 }
 
-function Inline({ text, onNavigate }: { text: string; onNavigate: (id: string) => void }) {
-  return (
-    <>
-      {parseInline(text).map((part, i) =>
-        part.link ? (
-          <button
-            key={i}
-            onClick={() => onNavigate(part.link!)}
-            className="text-accent underline decoration-accent/30 underline-offset-2 transition-colors hover:decoration-accent"
-          >
-            {part.text}
-          </button>
-        ) : (
-          <span key={i}>{part.text}</span>
-        ),
-      )}
-    </>
-  );
-}
 
-function Block({ block, onNavigate }: { block: WikiBlock; onNavigate: (id: string) => void }) {
+function Block({
+  block,
+  pageId,
+  index,
+  onNavigate,
+}: {
+  block: WikiBlock;
+  pageId: string;
+  index: number;
+  onNavigate: (id: string) => void;
+}) {
+  const p = (suffix: string) => `${pageId}/block.${index}.${suffix}`;
+
   if (block.kind === "h2")
     return (
-      <h3 className="pt-2 text-[15px] font-semibold tracking-[-0.01em] text-foreground/90">{block.text}</h3>
+      <EditableText
+        as="p"
+        path={p("text")}
+        value={block.text}
+        multiline={false}
+        className="block pt-2 text-[15px] font-semibold tracking-[-0.01em] text-foreground/90"
+      />
     );
   if (block.kind === "p")
     return (
-      <p className="text-[13.5px] leading-relaxed text-foreground/70">
-        <Inline text={block.text} onNavigate={onNavigate} />
-      </p>
+      <EditableText
+        as="p"
+        path={p("text")}
+        value={block.text}
+        onNavigate={onNavigate}
+        className="block text-[13.5px] leading-relaxed text-foreground/70"
+      />
     );
   if (block.kind === "ul")
     return (
       <ul className="space-y-1.5 pl-4">
         {block.items.map((it, i) => (
           <li key={i} className="list-disc text-[13.5px] leading-relaxed text-foreground/70 marker:text-foreground/25">
-            <Inline text={it} onNavigate={onNavigate} />
+            <EditableText path={p(`item.${i}`)} value={it} onNavigate={onNavigate} />
           </li>
         ))}
       </ul>
     );
   return (
     <div className="rounded-xl bg-foreground/[0.03] px-4 py-3 ring-1 ring-foreground/[0.06]">
-      <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">{block.title}</p>
-      <p className="text-[13px] leading-relaxed text-foreground/70">
-        <Inline text={block.text} onNavigate={onNavigate} />
-      </p>
+      <EditableText
+        as="p"
+        path={p("title")}
+        value={block.title}
+        multiline={false}
+        className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.18em] text-accent"
+      />
+      <EditableText
+        as="p"
+        path={p("text")}
+        value={block.text}
+        onNavigate={onNavigate}
+        className="block text-[13px] leading-relaxed text-foreground/70"
+      />
     </div>
+
   );
 }
 
