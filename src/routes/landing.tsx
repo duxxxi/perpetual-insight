@@ -583,7 +583,7 @@ function VideoCoda() {
 
           <div className="relative flex min-h-[360px] flex-col items-center justify-start px-6 pb-24 pt-8 text-center md:min-h-[440px] md:pb-32">
             <div className="glass-chip inline-flex items-center gap-1.5 rounded-full px-2.5 py-[3px]">
-              <span className="size-1 rounded-full bg-emerald-400 shadow-[0_0_8px_1px_hsl(160_80%_60%/0.6)]" />
+              <span className="size-1 rounded-full bg-emerald-400" />
               <span className="font-mono text-[8px] font-medium uppercase tracking-[0.2em] text-white/60">
                 Working while you sleep
               </span>
