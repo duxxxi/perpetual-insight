@@ -606,42 +606,44 @@ function VideoCoda() {
           </video>
           <div
             aria-hidden
-            className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,11,18,0.30)_0%,rgba(8,11,18,0.58)_55%,rgba(8,11,18,0.80)_100%)]"
+            className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,11,18,0.62)_0%,rgba(8,11,18,0.42)_45%,rgba(8,11,18,0.22)_100%)]"
           />
 
-          <div className="relative flex min-h-[360px] flex-col items-center justify-end px-6 pb-8 pt-20 text-center md:min-h-[440px]">
-            <div className="glass-chip inline-flex items-center gap-2 rounded-full px-3 py-1">
-              <span className="size-1 rounded-full bg-emerald-400" />
-              <span className="font-mono text-[9px] font-medium uppercase tracking-[0.2em] text-white/60">
+          <div className="relative flex min-h-[360px] flex-col items-center justify-start px-6 pb-24 pt-8 text-center md:min-h-[440px] md:pb-32">
+            <div className="glass-chip inline-flex items-center gap-1.5 rounded-full px-2.5 py-[3px]">
+              <span className="size-1 rounded-full bg-emerald-400 shadow-[0_0_8px_1px_hsl(160_80%_60%/0.6)]" />
+              <span className="font-mono text-[8px] font-medium uppercase tracking-[0.2em] text-white/60">
                 Working while you sleep
               </span>
             </div>
 
-            <h2 className="mt-4 max-w-2xl text-balance font-serif text-[28px] font-normal leading-[1.08] tracking-[-0.015em] text-white/95 md:text-[38px]">
+            <h2 className="mt-3 max-w-2xl text-balance font-serif text-[26px] font-normal leading-[1.08] tracking-[-0.015em] text-white/95 md:text-[34px]">
               Your intelligence team.
               <br />
               <span className="italic text-white/45">Always on, everywhere you trade.</span>
             </h2>
 
-            <p className="mt-3.5 max-w-md text-[13px] leading-relaxed text-white/55">
+            <p className="mt-3 max-w-md text-[12.5px] leading-relaxed text-white/55">
               Tenders, markets, buyers and trade signals — monitored continuously, distilled to
               what actually moves your quarter.
             </p>
 
-            <div className="mt-5 flex flex-wrap justify-center gap-2">
+            <div className="mt-4 flex flex-wrap justify-center gap-1.5">
               <a
                 href="mailto:hello@perpetuity.works"
-                className="inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-[12.5px] font-medium text-[oklch(0.19_0.02_255)] transition-transform hover:scale-[1.02]"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-[11.5px] font-medium text-[oklch(0.19_0.02_255)] transition-transform hover:scale-[1.02]"
               >
-                Book a demo <ArrowUpRight className="size-3.5" />
+                Book a demo <ArrowUpRight className="size-3" />
               </a>
               <Link
                 to="/"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.08] px-4 py-2 text-[12.5px] font-medium text-white/80 backdrop-blur-xl transition-colors hover:text-white"
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/[0.08] px-3 py-1.5 text-[11.5px] font-medium text-white/80 backdrop-blur-xl transition-colors hover:text-white"
               >
-                See the terminal <ArrowRight className="size-3.5" />
+                See the terminal <ArrowRight className="size-3" />
               </Link>
             </div>
+          </div>
+
           </div>
         </div>
       </div>
