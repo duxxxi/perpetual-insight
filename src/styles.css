@@ -405,3 +405,20 @@
 .asks-breathe {
   animation: asks-breathe 2.8s ease-in-out infinite;
 }
+
+/* Soft blue glow around the context infobox side pill */
+@utility info-glow {
+  box-shadow:
+    0 0 0 1px var(--glass-border),
+    0 0 48px -16px hsl(212 80% 60% / 0.24),
+    0 20px 60px -28px rgba(10, 15, 25, 0.20),
+    inset 0 1px 0 0 var(--glass-inset);
+}
+
+.dark .info-glow {
+  box-shadow:
+    0 0 0 1px var(--glass-border),
+    0 0 56px -16px hsl(212 85% 62% / 0.32),
+    0 20px 60px -28px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 0 var(--glass-inset);
+}
