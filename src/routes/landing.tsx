@@ -55,6 +55,9 @@ const agents = [
     metric: "2,847",
     unit: "tenders",
     state: "SCANNING",
+    tone: "emerald",
+    schedule: [0.10, 0.35, 0.60, 0.85],
+    status: "Scanned 2,847 EU tenders · 4 new matches",
   },
   {
     icon: LineChart,
@@ -63,6 +66,9 @@ const agents = [
     metric: "35",
     unit: "markets",
     state: "ACTIVE",
+    tone: "sky",
+    schedule: [0.18, 0.42, 0.65, 0.90],
+    status: "Paper pulp +3.2% · EUR/CZK stable",
   },
   {
     icon: ShieldCheck,
@@ -71,6 +77,9 @@ const agents = [
     metric: "17",
     unit: "updates",
     state: "1 ALERT",
+    tone: "violet",
+    schedule: [0.05, 0.55],
+    status: "CBAM update detected · 1 alert pending",
   },
   {
     icon: Send,
@@ -79,6 +88,35 @@ const agents = [
     metric: "284",
     unit: "drafted",
     state: "12 READY",
+    tone: "amber",
+    schedule: [0.30, 0.75],
+    status: "Draft prepared · awaiting approval",
+  },
+  {
+    icon: Globe,
+    name: "Organiser",
+    line: "156 documents categorised this month",
+    metric: "156",
+    unit: "docs",
+    state: "ACTIVE",
+    tone: "rose",
+    schedule: [0.18],
+    status: "156 documents categorised this month",
+  },
+];
+
+const scheduleCards = [
+  {
+    title: "08:00 daily",
+    body: "Morning brief delivered to your inbox and Telegram before you start work.",
+  },
+  {
+    title: "Every 4-6 hours",
+    body: "Markets and tenders scanned. Only significant changes surface as alerts.",
+  },
+  {
+    title: "On your approval",
+    body: "Outreach drafts, document filings, and flagged risks wait for your sign-off.",
   },
 ];
 
