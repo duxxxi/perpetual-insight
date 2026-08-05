@@ -319,7 +319,7 @@ function Terminal() {
             "radial-gradient(38% 46% at 18% 8%, hsl(210 90% 62% / 0.30), transparent 70%), radial-gradient(34% 40% at 88% 22%, hsl(160 70% 55% / 0.20), transparent 72%), radial-gradient(40% 46% at 62% 100%, hsl(275 70% 65% / 0.20), transparent 72%)",
         }}
       />
-      <div className="relative overflow-hidden rounded-[24px] border border-white/[0.10] bg-[linear-gradient(160deg,oklch(0.26_0.03_255/0.82)_0%,oklch(0.19_0.025_258/0.90)_45%,oklch(0.16_0.02_260/0.94)_100%)] shadow-[0_50px_110px_-45px_oklch(0.2_0.04_255/0.7)] backdrop-blur-2xl">
+      <div className="relative overflow-hidden rounded-[18px] border border-white/[0.09] bg-[linear-gradient(160deg,oklch(0.26_0.03_255/0.82)_0%,oklch(0.19_0.025_258/0.90)_45%,oklch(0.16_0.02_260/0.94)_100%)] shadow-[0_40px_90px_-45px_oklch(0.2_0.04_255/0.7)] backdrop-blur-2xl">
         {/* specular top edge + corner sheen */}
         <div
           aria-hidden
