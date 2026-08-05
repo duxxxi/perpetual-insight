@@ -573,26 +573,18 @@ const toneClasses: Record<string, { dot: string; glow: string; text: string }> =
 
 function AgentTimeline({ agent }: { agent: (typeof agents)[number] }) {
   const tone = toneClasses[agent.tone] ?? toneClasses.emerald;
-  const hours = ["00h", "04h", "08h", "12h", "16h", "20h", "24h"];
   return (
-    <div className="group grid items-center gap-4 py-3 sm:grid-cols-[140px_1fr_220px] sm:py-2">
+    <div className="group grid items-center gap-4 py-2.5 sm:grid-cols-[140px_1fr_220px]">
       <p className="text-[12px] font-medium text-white/70">{agent.name}</p>
 
-      <div className="relative">
-        <div className="flex justify-between pb-1.5 font-mono text-[9px] tracking-[0.12em] text-white/20">
-          {hours.map((h) => (
-            <span key={h}>{h}</span>
-          ))}
-        </div>
-        <div className="relative h-px bg-white/10">
-          {agent.schedule.map((pos, i) => (
-            <span
-              key={i}
-              className={`absolute top-1/2 size-2 -translate-y-1/2 rounded-full ${tone.dot} shadow-[0_0_8px] ${tone.glow}`}
-              style={{ left: `${pos * 100}%` }}
-            />
-          ))}
-        </div>
+      <div className="relative h-px bg-white/10">
+        {agent.schedule.map((pos, i) => (
+          <span
+            key={i}
+            className={`absolute top-1/2 size-2 -translate-y-1/2 rounded-full ${tone.dot} shadow-[0_0_8px] ${tone.glow}`}
+            style={{ left: `${pos * 100}%` }}
+          />
+        ))}
       </div>
 
       <p className="text-[11px] text-white/35 sm:text-right">{agent.status}</p>
@@ -601,6 +593,7 @@ function AgentTimeline({ agent }: { agent: (typeof agents)[number] }) {
 }
 
 function AgentRoster() {
+  const hours = ["00h", "04h", "08h", "12h", "16h", "20h", "24h"];
   return (
     <section id="agents" className="scroll-mt-24 bg-[oklch(0.17_0.02_255)] py-14">
       <div className="mx-auto max-w-6xl px-5 lg:px-8">
@@ -614,10 +607,21 @@ function AgentRoster() {
           Your team runs on a schedule. Every few hours, they wake up, check the world, and surface only what changed.
         </p>
 
-        <div className="mt-8 divide-y divide-white/[0.06]">
-          {agents.map((a) => (
-            <AgentTimeline key={a.name} agent={a} />
-          ))}
+        <div className="mt-8">
+          <div className="grid grid-cols-[140px_1fr_220px] items-center gap-4 pb-2">
+            <span />
+            <div className="flex justify-between font-mono text-[9px] tracking-[0.12em] text-white/20">
+              {hours.map((h) => (
+                <span key={h}>{h}</span>
+              ))}
+            </div>
+            <span />
+          </div>
+          <div className="divide-y divide-white/[0.06]">
+            {agents.map((a) => (
+              <AgentTimeline key={a.name} agent={a} />
+            ))}
+          </div>
         </div>
 
         <div className="mt-8 grid gap-3 sm:grid-cols-3">
