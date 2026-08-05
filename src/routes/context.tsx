@@ -187,17 +187,17 @@ function PhotoSlot() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="border-t border-foreground/[0.07] p-2.5">
+    <div className="flex justify-center border-t border-foreground/[0.07] p-3">
       <button
         onClick={() => inputRef.current?.click()}
-        className="group relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-lg bg-foreground/[0.03] ring-1 ring-foreground/[0.07] transition-colors hover:bg-foreground/[0.05]"
+        className="group relative flex size-20 items-center justify-center overflow-hidden rounded-full bg-foreground/[0.03] ring-1 ring-foreground/[0.07] transition-colors hover:bg-foreground/[0.05]"
       >
         {src ? (
           <img src={src} alt="Context photo" className="size-full object-cover" />
         ) : (
-          <span className="flex flex-col items-center gap-1 text-foreground/35">
-            <ImagePlus className="size-4" />
-            <span className="text-[10px]">Add photo</span>
+          <span className="flex flex-col items-center gap-0.5 text-foreground/35">
+            <ImagePlus className="size-3.5" />
+            <span className="text-[9px]">Photo</span>
           </span>
         )}
       </button>
