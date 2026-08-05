@@ -106,30 +106,6 @@ const platform = [
   },
 ];
 
-const pricing = [
-  {
-    name: "Operator",
-    price: "€490",
-    cadence: "per seat / month",
-    body: "One intelligence team, three connected sources, daily brief and outreach drafting.",
-    features: ["Daily brief", "3 connectors", "Outreach drafting", "Email support"],
-  },
-  {
-    name: "Company",
-    price: "€1,900",
-    cadence: "per month",
-    body: "The full agent roster across your commercial org, with tender scouting and compliance watch.",
-    features: ["All agents", "Unlimited connectors", "Tender scouting", "Compliance watch", "Shared threads"],
-    featured: true,
-  },
-  {
-    name: "Enterprise",
-    price: "Talk to us",
-    cadence: "bespoke",
-    body: "Private deployment, custom agents and integration into your existing intelligence stack.",
-    features: ["Private deployment", "Custom agents", "SSO & audit", "Named engineer"],
-  },
-];
 
 /* ---------------- page ---------------- */
 
