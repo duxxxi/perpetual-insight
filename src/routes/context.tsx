@@ -152,23 +152,25 @@ function ContextPage() {
               {/* Infobox */}
               {page.infobox ? (
                 <aside className="xl:pt-1">
-                  <div className="rounded-xl ring-1 ring-foreground/[0.09]">
-                    <p className="px-3 py-2.5 text-center text-[12px] font-semibold tracking-[-0.01em]">
+                  <div className="glass-panel info-glow overflow-hidden rounded-2xl">
+                    <p className="border-b border-foreground/[0.07] px-4 py-3 text-center text-[13px] font-semibold tracking-[-0.01em]">
                       {page.infobox.title}
                     </p>
                     <PhotoSlot key={page.id} />
-                    {page.infobox.rows.map((r) => (
-                      <div
-                        key={r.label}
-                        data-pill
-                        className="grid cursor-default grid-cols-[84px_minmax(0,1fr)] gap-2 border-t border-foreground/[0.07] px-3 py-2 transition-colors hover:bg-foreground/[0.03]"
-                      >
-                        <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground/40">
-                          {r.label}
-                        </span>
-                        <span className="text-[11px] leading-snug text-foreground/75">{r.value}</span>
-                      </div>
-                    ))}
+                    <div className="px-1 pb-1">
+                      {page.infobox.rows.map((r) => (
+                        <div
+                          key={r.label}
+                          data-pill
+                          className="grid cursor-default grid-cols-[80px_minmax(0,1fr)] gap-2 border-t border-foreground/[0.07] px-3 py-2.5 transition-colors hover:bg-foreground/[0.03]"
+                        >
+                          <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground/40">
+                            {r.label}
+                          </span>
+                          <span className="text-[11px] leading-snug text-foreground/75">{r.value}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </aside>
               ) : null}
