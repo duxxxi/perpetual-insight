@@ -396,3 +396,12 @@
     transform: scale(1.08);
   }
 }
+
+@keyframes asks-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(148 85% 55% / 0.18); }
+  50% { box-shadow: 0 0 18px -4px hsl(148 90% 58% / 0.42); }
+}
+
+.asks-breathe {
+  animation: asks-breathe 2.8s ease-in-out infinite;
+}
