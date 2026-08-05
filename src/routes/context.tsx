@@ -174,7 +174,6 @@ function ContextPage() {
             </div>
 
             <ContextChat pageTitle={page.title} />
-            </div>
           </article>
         </div>
       </div>
