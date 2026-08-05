@@ -280,34 +280,67 @@ function Inline({ text, onNavigate }: { text: string; onNavigate: (id: string) =
   );
 }
 
-function Block({ block, onNavigate }: { block: WikiBlock; onNavigate: (id: string) => void }) {
+function Block({
+  block,
+  pageId,
+  index,
+  onNavigate,
+}: {
+  block: WikiBlock;
+  pageId: string;
+  index: number;
+  onNavigate: (id: string) => void;
+}) {
+  const p = (suffix: string) => `${pageId}/block.${index}.${suffix}`;
+
   if (block.kind === "h2")
     return (
-      <h3 className="pt-2 text-[15px] font-semibold tracking-[-0.01em] text-foreground/90">{block.text}</h3>
+      <EditableText
+        as="p"
+        path={p("text")}
+        value={block.text}
+        multiline={false}
+        className="block pt-2 text-[15px] font-semibold tracking-[-0.01em] text-foreground/90"
+      />
     );
   if (block.kind === "p")
     return (
-      <p className="text-[13.5px] leading-relaxed text-foreground/70">
-        <Inline text={block.text} onNavigate={onNavigate} />
-      </p>
+      <EditableText
+        as="p"
+        path={p("text")}
+        value={block.text}
+        onNavigate={onNavigate}
+        className="block text-[13.5px] leading-relaxed text-foreground/70"
+      />
     );
   if (block.kind === "ul")
     return (
       <ul className="space-y-1.5 pl-4">
         {block.items.map((it, i) => (
           <li key={i} className="list-disc text-[13.5px] leading-relaxed text-foreground/70 marker:text-foreground/25">
-            <Inline text={it} onNavigate={onNavigate} />
+            <EditableText path={p(`item.${i}`)} value={it} onNavigate={onNavigate} />
           </li>
         ))}
       </ul>
     );
   return (
     <div className="rounded-xl bg-foreground/[0.03] px-4 py-3 ring-1 ring-foreground/[0.06]">
-      <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">{block.title}</p>
-      <p className="text-[13px] leading-relaxed text-foreground/70">
-        <Inline text={block.text} onNavigate={onNavigate} />
-      </p>
+      <EditableText
+        as="p"
+        path={p("title")}
+        value={block.title}
+        multiline={false}
+        className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.18em] text-accent"
+      />
+      <EditableText
+        as="p"
+        path={p("text")}
+        value={block.text}
+        onNavigate={onNavigate}
+        className="block text-[13px] leading-relaxed text-foreground/70"
+      />
     </div>
+
   );
 }
 
