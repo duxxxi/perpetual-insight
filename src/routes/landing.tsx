@@ -318,38 +318,19 @@ function Terminal() {
 
   return (
     <div className="relative">
-      {/* ambient colour wash behind the glass */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -inset-8 -z-10 opacity-70 blur-3xl"
-        style={{
-          background:
-            "radial-gradient(38% 46% at 18% 8%, hsl(210 90% 62% / 0.30), transparent 70%), radial-gradient(34% 40% at 88% 22%, hsl(160 70% 55% / 0.20), transparent 72%), radial-gradient(40% 46% at 62% 100%, hsl(275 70% 65% / 0.20), transparent 72%)",
-        }}
-      />
-      <div className="relative overflow-hidden rounded-[18px] border border-white/[0.09] bg-[linear-gradient(160deg,oklch(0.26_0.03_255/0.82)_0%,oklch(0.19_0.025_258/0.90)_45%,oklch(0.16_0.02_260/0.94)_100%)] shadow-[0_40px_90px_-45px_oklch(0.2_0.04_255/0.7)] backdrop-blur-2xl">
-        {/* specular top edge + corner sheen */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/45 to-transparent"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-1/4 -top-1/3 size-[70%] rounded-full opacity-60 blur-3xl"
-          style={{ background: "radial-gradient(circle, hsl(0 0% 100% / 0.10), transparent 70%)" }}
-        />
+      <div className="relative overflow-hidden rounded-[18px] border border-white/[0.10] bg-[oklch(0.18_0.02_260/0.88)] shadow-[0_32px_70px_-40px_oklch(0.15_0.03_255/0.65)] backdrop-blur-2xl">
         {/* window chrome */}
         <div className="relative flex items-center justify-between gap-3 border-b border-white/[0.07] bg-white/[0.03] px-3 py-1.5">
           <div className="flex items-center gap-1.5">
-            <span className="size-2 rounded-full bg-rose-400/70 shadow-[0_0_8px_-1px_currentColor]" />
-            <span className="size-2 rounded-full bg-amber-400/70 shadow-[0_0_8px_-1px_currentColor]" />
-            <span className="size-2 rounded-full bg-emerald-400/70 shadow-[0_0_8px_-1px_currentColor]" />
+            <span className="size-2 rounded-full bg-rose-400/60" />
+            <span className="size-2 rounded-full bg-amber-400/60" />
+            <span className="size-2 rounded-full bg-emerald-400/60" />
           </div>
           <span className="font-mono text-[9px] font-medium uppercase tracking-[0.24em] text-white/40">
             Perpetuity · intelligence terminal
           </span>
           <span className="inline-flex items-center gap-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-emerald-300">
-            <span className="size-1 rounded-full bg-emerald-400 shadow-[0_0_8px_1px_hsl(160_80%_60%/0.6)]" /> Live
+            <span className="size-1 rounded-full bg-emerald-400" /> Live
           </span>
         </div>
 
