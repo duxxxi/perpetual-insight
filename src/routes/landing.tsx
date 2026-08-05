@@ -386,14 +386,15 @@ function Terminal() {
           </p>
 
           {/* agent rows */}
-          <div className="space-y-1.5">
+          <div className="divide-y divide-white/[0.05] overflow-hidden rounded-xl bg-white/[0.03]">
             {agents.map((a) => {
               const sp = sparks[a.name];
               return (
                 <div
                   key={a.name}
-                  className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.035] px-3 py-2.5 shadow-[inset_0_1px_0_0_hsl(0_0%_100%/0.06)] backdrop-blur-xl transition-colors hover:border-white/[0.12] hover:bg-white/[0.07]"
+                  className="flex items-center gap-3 px-3 py-2 transition-colors hover:bg-white/[0.05]"
                 >
+
                   <span className={`flex size-7 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.07] ${sp?.tone ?? "text-white/60"}`}>
                     <a.icon className="size-3.5" strokeWidth={1.75} />
                   </span>
