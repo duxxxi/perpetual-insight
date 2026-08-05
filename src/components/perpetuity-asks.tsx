@@ -45,40 +45,29 @@ function AsksDialogBody({ asks }: { asks: ContextAsk[] }) {
   );
 }
 
-/** Feature card — the special home for Perpetuity's open questions. */
+/** Small neon-green pill — only appears when Perpetuity actually needs something. */
 export function PerpetuityAsksCard() {
   const asks = useContextAsks();
   const open = asks.filter((a) => !a.answer);
   const next = open[0];
+  if (!next) return null;
   return (
     <Dialog>
       <DialogTrigger asChild>
         <button
           data-pill
-          className="group relative mb-5 block w-full overflow-hidden rounded-2xl text-left"
+          className="group relative mb-3 inline-flex max-w-full items-center gap-2 rounded-full text-left"
         >
-          <span className="ai-iridescent absolute -inset-px rounded-2xl opacity-60 blur-[3px] transition-opacity group-hover:opacity-95" aria-hidden />
-          <span className="glass-panel-strong relative flex items-center gap-3 rounded-2xl px-4 py-3">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 to-blue-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_4px_12px_-4px_rgba(0,0,0,0.35)] ring-1 ring-white/20">
-              <Brain className="size-4" strokeWidth={2.25} />
+          <span className="asks-glow absolute -inset-1 rounded-full" aria-hidden />
+          <span className="glass-panel relative inline-flex items-center gap-2 rounded-full py-1 pl-1 pr-2.5 ring-1 ring-emerald-400/30">
+            <span className="flex size-[18px] shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-white ring-1 ring-white/25">
+              <Brain className="size-[11px]" strokeWidth={2.5} />
             </span>
-            <span className="min-w-0 flex-1">
-              <span className="flex items-center gap-2">
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
-                  Perpetuity asks
-                </span>
-                <span className="glass-chip rounded-full px-1.5 py-0.5 font-mono text-[9px] font-semibold tabular-nums text-foreground/70">
-                  {open.length} open
-                </span>
-              </span>
-              <span className="mt-0.5 block truncate font-sans text-sm font-medium">
-                {next ? next.question : "Nothing open — context is current."}
-              </span>
+            <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-emerald-600 dark:text-emerald-400">
+              Perpetuity asks
             </span>
-            <span className="glass-chip inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium text-foreground/80 transition-colors group-hover:text-foreground">
-              <Sparkles className="size-3" strokeWidth={2} />
-              Answer
-            </span>
+            <span className="max-w-[22rem] truncate text-[11px] text-foreground/70">{next.question}</span>
+            <Sparkles className="size-3 shrink-0 text-foreground/40" strokeWidth={2} />
           </span>
         </button>
       </DialogTrigger>
@@ -86,6 +75,7 @@ export function PerpetuityAsksCard() {
     </Dialog>
   );
 }
+
 
 /** Pill that surfaces the questions Perpetuity needs answered to fill context. */
 export function PerpetuityAsksPill() {
