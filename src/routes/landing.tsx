@@ -220,7 +220,7 @@ function TopNav() {
 
 function HeroSplit() {
   return (
-    <section className="grid items-center gap-8 pt-12 pb-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-10">
+    <section className="grid items-center gap-7 pt-9 pb-11 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-9">
       <div>
         <div className="glass-chip inline-flex items-center gap-2 rounded-full px-3 py-1">
           <span className="relative flex size-1.5">
@@ -232,18 +232,18 @@ function HeroSplit() {
           </span>
         </div>
 
-        <h1 className="mt-6 text-balance font-serif text-[38px] font-normal leading-[1.06] tracking-[-0.015em] md:text-[52px]">
+        <h1 className="mt-5 text-balance font-serif text-[36px] font-normal leading-[1.06] tracking-[-0.015em] md:text-[48px]">
           <span className="text-foreground/90">Your Intelligence Team.</span>
           <br />
           <span className="text-silver-metallic italic">Always On.</span>
         </h1>
 
-        <p className="mt-5 max-w-md text-pretty text-[15px] leading-relaxed text-foreground/60">
+        <p className="mt-4 max-w-md text-pretty text-[14.5px] leading-relaxed text-foreground/60">
           Perpetuity connects your world, then puts agents to work. Opportunities found,
           outreach drafted, risks flagged, deals planned. You command. It executes.
         </p>
 
-        <div className="mt-7 flex flex-wrap items-center gap-2">
+        <div className="mt-5 flex flex-wrap items-center gap-2">
           <a
             href="#cta"
             className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-[13px] font-semibold text-accent-foreground transition-opacity hover:opacity-90"
@@ -257,6 +257,14 @@ function HeroSplit() {
             <Play className="size-3.5" /> Watch demo
           </a>
         </div>
+
+        <div className="glass-chip mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1">
+          <Globe className="size-3 text-accent" />
+          <span className="font-mono text-[8.5px] font-semibold uppercase tracking-[0.2em] text-foreground/45">
+            180+ countries · 24/7 surveillance · 50K+ active tenders
+          </span>
+        </div>
+
       </div>
 
       <Terminal />
@@ -319,7 +327,7 @@ function Terminal() {
             "radial-gradient(38% 46% at 18% 8%, hsl(210 90% 62% / 0.30), transparent 70%), radial-gradient(34% 40% at 88% 22%, hsl(160 70% 55% / 0.20), transparent 72%), radial-gradient(40% 46% at 62% 100%, hsl(275 70% 65% / 0.20), transparent 72%)",
         }}
       />
-      <div className="relative overflow-hidden rounded-[24px] border border-white/[0.10] bg-[linear-gradient(160deg,oklch(0.26_0.03_255/0.82)_0%,oklch(0.19_0.025_258/0.90)_45%,oklch(0.16_0.02_260/0.94)_100%)] shadow-[0_50px_110px_-45px_oklch(0.2_0.04_255/0.7)] backdrop-blur-2xl">
+      <div className="relative overflow-hidden rounded-[18px] border border-white/[0.09] bg-[linear-gradient(160deg,oklch(0.26_0.03_255/0.82)_0%,oklch(0.19_0.025_258/0.90)_45%,oklch(0.16_0.02_260/0.94)_100%)] shadow-[0_40px_90px_-45px_oklch(0.2_0.04_255/0.7)] backdrop-blur-2xl">
         {/* specular top edge + corner sheen */}
         <div
           aria-hidden
@@ -331,7 +339,7 @@ function Terminal() {
           style={{ background: "radial-gradient(circle, hsl(0 0% 100% / 0.10), transparent 70%)" }}
         />
         {/* window chrome */}
-        <div className="relative flex items-center justify-between gap-3 border-b border-white/[0.07] bg-white/[0.03] px-4 py-2.5">
+        <div className="relative flex items-center justify-between gap-3 border-b border-white/[0.07] bg-white/[0.03] px-3 py-1.5">
           <div className="flex items-center gap-1.5">
             <span className="size-2 rounded-full bg-rose-400/70 shadow-[0_0_8px_-1px_currentColor]" />
             <span className="size-2 rounded-full bg-amber-400/70 shadow-[0_0_8px_-1px_currentColor]" />
@@ -345,15 +353,16 @@ function Terminal() {
           </span>
         </div>
 
-        <div className="relative space-y-3 p-3.5">
+        <div className="relative space-y-2 p-2.5">
           {/* breaking strip */}
-          <div className="relative flex items-start gap-2.5 overflow-hidden rounded-xl border border-white/[0.07] bg-white/[0.045] px-3 py-2 backdrop-blur-xl">
+          <div className="relative flex items-start gap-2.5 overflow-hidden rounded-xl bg-rose-400/[0.07] px-3 py-1.5">
+
             <span
               aria-hidden
               className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-rose-400/70 to-transparent"
             />
             <span className="mt-1 size-1.5 shrink-0 rounded-full bg-rose-400 shadow-[0_0_8px_1px_hsl(0_80%_65%/0.5)]" />
-            <p className="min-w-0 flex-1 font-mono text-[11px] leading-relaxed text-white/60">
+            <p className="min-w-0 flex-1 font-mono text-[10.5px] leading-relaxed text-white/60">
               <span className="font-semibold text-rose-200/90">⚡ BREAKING</span> — ECB emergency rate
               signal detected · Frankfurt Bund yields +18bps · EUR/USD reaction imminent
             </p>
@@ -361,7 +370,8 @@ function Terminal() {
           </div>
 
           {/* prompt */}
-          <div className="relative flex items-center gap-2.5 overflow-hidden rounded-xl border border-white/[0.10] bg-white/[0.06] px-3 py-2.5 shadow-[inset_0_1px_0_0_hsl(0_0%_100%/0.10)] backdrop-blur-xl">
+          <div className="relative flex items-center gap-2.5 overflow-hidden rounded-xl border border-white/[0.10] bg-white/[0.06] px-3 py-2 shadow-[inset_0_1px_0_0_hsl(0_0%_100%/0.10)] backdrop-blur-xl">
+
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-70"
@@ -386,17 +396,19 @@ function Terminal() {
           </p>
 
           {/* agent rows */}
-          <div className="space-y-1.5">
+          <div className="divide-y divide-white/[0.05] overflow-hidden rounded-xl bg-white/[0.03]">
             {agents.map((a) => {
               const sp = sparks[a.name];
               return (
                 <div
                   key={a.name}
-                  className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.035] px-3 py-2.5 shadow-[inset_0_1px_0_0_hsl(0_0%_100%/0.06)] backdrop-blur-xl transition-colors hover:border-white/[0.12] hover:bg-white/[0.07]"
+                  className="flex items-center gap-3 px-3 py-2 transition-colors hover:bg-white/[0.05]"
                 >
-                  <span className={`flex size-7 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.07] ${sp?.tone ?? "text-white/60"}`}>
-                    <a.icon className="size-3.5" strokeWidth={1.75} />
+
+                  <span className={`flex size-6 shrink-0 items-center justify-center rounded-md bg-white/[0.07] ${sp?.tone ?? "text-white/60"}`}>
+                    <a.icon className="size-3" strokeWidth={1.75} />
                   </span>
+
 
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-[12px] font-medium text-white/85">{a.name}</p>
@@ -429,28 +441,21 @@ function Terminal() {
           </div>
 
           {/* stat grid */}
-          <div className="grid grid-cols-3 gap-1.5 md:grid-cols-6">
+          <div className="grid grid-cols-3 gap-x-3 gap-y-2 rounded-xl bg-white/[0.03] px-3 py-2.5 md:grid-cols-6">
             {stats.map((s, i) => (
-              <div
-                key={s.label}
-                className="relative overflow-hidden rounded-lg border border-white/[0.07] bg-white/[0.045] px-2 py-2 text-center backdrop-blur-xl"
-              >
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"
-                />
+              <div key={s.label} className="text-center">
                 <p
-                  className={`font-mono text-[13px] font-semibold tabular-nums ${
+                  className={`font-mono text-[12px] font-semibold tabular-nums ${
                     ["text-sky-200", "text-emerald-200", "text-white/85", "text-violet-200", "text-white/85", "text-amber-200"][i % 6]
                   }`}
                 >
                   {s.value}
                 </p>
-                <p className="font-mono text-[7.5px] uppercase tracking-[0.14em] text-white/35">{s.label}</p>
-                <p className="font-mono text-[8px] text-emerald-300/80">{s.delta}</p>
+                <p className="font-mono text-[7px] uppercase tracking-[0.14em] text-white/30">{s.label}</p>
               </div>
             ))}
           </div>
+
 
         </div>
       </div>
@@ -654,15 +659,10 @@ function VideoCoda() {
 
 function CallToAction() {
   return (
-    <section id="cta" className="scroll-mt-24 pt-14" >
-      <div className="glass-panel-strong ask-ring relative overflow-hidden rounded-3xl px-6 py-10 text-center">
+    <section id="cta" className="scroll-mt-24 pt-10" >
+      <div className="glass-panel-strong ask-ring relative overflow-hidden rounded-3xl px-6 py-8 text-center">
         <div aria-hidden className="ask-glow pointer-events-none absolute inset-0 -z-10" />
-        <div className="mx-auto mb-4 flex items-center justify-center gap-2">
-          <Globe className="size-3.5 text-accent" />
-          <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.24em] text-foreground/45">
-            180+ countries · 24/7 surveillance · 50K+ active tenders
-          </span>
-        </div>
+
         <h2 className="mx-auto max-w-lg text-balance font-serif text-[26px] font-normal leading-[1.1] tracking-[-0.015em] md:text-[32px]">
           <span className="text-silver-metallic">Put your intelligence team to work.</span>
         </h2>
