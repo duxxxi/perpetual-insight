@@ -155,6 +155,7 @@ function ContextPage() {
                     <p className="px-3 py-2.5 text-center text-[12px] font-semibold tracking-[-0.01em]">
                       {page.infobox.title}
                     </p>
+                    <PhotoSlot key={page.id} />
                     {page.infobox.rows.map((r) => (
                       <div
                         key={r.label}
@@ -170,6 +171,9 @@ function ContextPage() {
                   </div>
                 </aside>
               ) : null}
+            </div>
+
+            <ContextChat pageTitle={page.title} />
             </div>
           </article>
         </div>
