@@ -94,7 +94,9 @@ export function useMemoryPage(id: string) {
     const l = () => force((n) => n + 1);
     listeners.add(l);
     l();
-    return () => listeners.delete(l);
+    return () => {
+      listeners.delete(l);
+    };
   }, []);
 
   const base = wikiById(id);
