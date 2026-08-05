@@ -25,7 +25,7 @@ export const wikiPages: WikiPage[] = [
     id: "overview",
     title: "Overview",
     edited: "Today, 08:12",
-    summary: "What Perpetuity knows about the business — the hub of the context wiki.",
+    summary: "What Perpetuity knows about the business — the hub of your company memory.",
     infobox: {
       title: "Perpetuity",
       rows: [

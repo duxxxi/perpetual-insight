@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Brain, ChevronRight, CornerUpLeft, FileText, Link2, BookOpen, Clock } from "lucide-react";
+import { Brain, ChevronRight, CornerUpLeft, FileText, Link2, BookOpen, Clock, ImagePlus } from "lucide-react";
 import { PageShell } from "@/components/app-shell";
 import { AskCard } from "@/components/perpetuity-asks";
+import { ContextChat } from "@/components/context-chat";
 import { useContextAsks } from "@/lib/context-store";
 import { backlinks, parseInline, wikiById, wikiPages, type WikiBlock } from "@/lib/wiki";
 
@@ -13,7 +14,7 @@ export const Route = createFileRoute("/context")({
       {
         name: "description",
         content:
-          "A living wiki of your business: markets, products, commercial terms, operating patterns and the open questions Perpetuity needs answered.",
+          "A living memory of your business: markets, products, commercial terms, operating patterns and the open questions Perpetuity needs answered.",
       },
       { property: "og:title", content: "Context — What Perpetuity Knows" },
       {
@@ -155,6 +156,7 @@ function ContextPage() {
                     <p className="px-3 py-2.5 text-center text-[12px] font-semibold tracking-[-0.01em]">
                       {page.infobox.title}
                     </p>
+                    <PhotoSlot key={page.id} />
                     {page.infobox.rows.map((r) => (
                       <div
                         key={r.label}
@@ -171,12 +173,48 @@ function ContextPage() {
                 </aside>
               ) : null}
             </div>
+
+            <ContextChat pageTitle={page.title} />
           </article>
         </div>
       </div>
     </PageShell>
   );
 }
+
+function PhotoSlot() {
+  const [src, setSrc] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  return (
+    <div className="border-t border-foreground/[0.07] p-2.5">
+      <button
+        onClick={() => inputRef.current?.click()}
+        className="group relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-lg bg-foreground/[0.03] ring-1 ring-foreground/[0.07] transition-colors hover:bg-foreground/[0.05]"
+      >
+        {src ? (
+          <img src={src} alt="Context photo" className="size-full object-cover" />
+        ) : (
+          <span className="flex flex-col items-center gap-1 text-foreground/35">
+            <ImagePlus className="size-4" />
+            <span className="text-[10px]">Add photo</span>
+          </span>
+        )}
+      </button>
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => {
+          const f = e.target.files?.[0];
+          if (f) setSrc(URL.createObjectURL(f));
+        }}
+      />
+    </div>
+  );
+}
+
 
 function RailItem({
   page,
