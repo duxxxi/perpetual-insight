@@ -232,18 +232,18 @@ function HeroSplit() {
           </span>
         </div>
 
-        <h1 className="mt-6 text-balance font-serif text-[38px] font-normal leading-[1.06] tracking-[-0.015em] md:text-[52px]">
+        <h1 className="mt-5 text-balance font-serif text-[36px] font-normal leading-[1.06] tracking-[-0.015em] md:text-[48px]">
           <span className="text-foreground/90">Your Intelligence Team.</span>
           <br />
           <span className="text-silver-metallic italic">Always On.</span>
         </h1>
 
-        <p className="mt-5 max-w-md text-pretty text-[15px] leading-relaxed text-foreground/60">
+        <p className="mt-4 max-w-md text-pretty text-[14.5px] leading-relaxed text-foreground/60">
           Perpetuity connects your world, then puts agents to work. Opportunities found,
           outreach drafted, risks flagged, deals planned. You command. It executes.
         </p>
 
-        <div className="mt-7 flex flex-wrap items-center gap-2">
+        <div className="mt-5 flex flex-wrap items-center gap-2">
           <a
             href="#cta"
             className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-[13px] font-semibold text-accent-foreground transition-opacity hover:opacity-90"
@@ -257,6 +257,14 @@ function HeroSplit() {
             <Play className="size-3.5" /> Watch demo
           </a>
         </div>
+
+        <div className="glass-chip mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1">
+          <Globe className="size-3 text-accent" />
+          <span className="font-mono text-[8.5px] font-semibold uppercase tracking-[0.2em] text-foreground/45">
+            180+ countries · 24/7 surveillance · 50K+ active tenders
+          </span>
+        </div>
+
       </div>
 
       <Terminal />
