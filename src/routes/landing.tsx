@@ -644,7 +644,7 @@ function VideoCoda() {
             </div>
           </div>
 
-          </div>
+
         </div>
       </div>
     </section>
