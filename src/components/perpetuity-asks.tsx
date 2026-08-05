@@ -59,11 +59,11 @@ export function PerpetuityAsksCard() {
           className="group relative mb-3 inline-flex max-w-full items-center gap-2 rounded-full text-left"
         >
           <span className="asks-glow absolute -inset-1 rounded-full" aria-hidden />
-          <span className="asks-breathe glass-panel relative inline-flex items-center gap-2 rounded-full py-1 pl-1 pr-2.5 ring-1 ring-emerald-400/40 transition-transform duration-200 hover:scale-[1.02]">
-            <span className="flex size-[18px] shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-white ring-1 ring-white/25">
+          <span className="asks-breathe glass-panel relative inline-flex items-center gap-2 rounded-full py-1 pl-1 pr-2.5 ring-1 ring-sky-400/40 transition-transform duration-200 hover:scale-[1.02]">
+            <span className="flex size-[18px] shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-sky-400 to-blue-600 text-white ring-1 ring-white/25">
               <Brain className="size-[11px]" strokeWidth={2.5} />
             </span>
-            <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-emerald-600 dark:text-emerald-400">
+            <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-blue-600 dark:text-sky-300">
               Perpetuity asks
             </span>
             <span className="max-w-[22rem] truncate text-[11px] text-foreground/70">{next.question}</span>
