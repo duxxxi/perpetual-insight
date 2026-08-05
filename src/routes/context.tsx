@@ -109,14 +109,23 @@ function ContextPage() {
             </h2>
             <p className="mt-1 flex items-center gap-1.5 font-mono text-[10px] text-foreground/35">
               <Clock className="size-3" /> Last edited {page.edited}
+              <span className="ml-1 rounded-full bg-accent/10 px-1.5 py-0.5 text-[9px] font-semibold text-accent">
+                {editCount > 0 ? `${editCount} of your corrections` : "click any fact to correct it"}
+              </span>
             </p>
-            <p className="mt-2 text-[15px] leading-relaxed text-foreground/55">{page.summary}</p>
+            <EditableText
+              as="p"
+              path={`${page.id}/summary`}
+              value={page.summary}
+              onNavigate={setPageId}
+              className="mt-2 block text-[15px] leading-relaxed text-foreground/55"
+            />
             <div className="my-5 h-px bg-foreground/[0.08]" />
 
             <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_240px]">
               <div className="min-w-0 space-y-4">
-                {page.blocks.map((b, i) => (
-                  <Block key={i} block={b} onNavigate={setPageId} />
+                {page.blocks.map((b: WikiBlock, i: number) => (
+                  <Block key={i} block={b} pageId={page.id} index={i} onNavigate={setPageId} />
                 ))}
 
                 {page.id === "asks" ? (
