@@ -331,7 +331,7 @@ function Terminal() {
           style={{ background: "radial-gradient(circle, hsl(0 0% 100% / 0.10), transparent 70%)" }}
         />
         {/* window chrome */}
-        <div className="relative flex items-center justify-between gap-3 border-b border-white/[0.07] bg-white/[0.03] px-4 py-2.5">
+        <div className="relative flex items-center justify-between gap-3 border-b border-white/[0.07] bg-white/[0.03] px-3 py-1.5">
           <div className="flex items-center gap-1.5">
             <span className="size-2 rounded-full bg-rose-400/70 shadow-[0_0_8px_-1px_currentColor]" />
             <span className="size-2 rounded-full bg-amber-400/70 shadow-[0_0_8px_-1px_currentColor]" />
