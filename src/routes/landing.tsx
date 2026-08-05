@@ -160,9 +160,9 @@ function LandingPage() {
         <IntelSection />
         <div className="mx-auto max-w-6xl px-5 lg:px-8">
           <AgentRoster />
-          <CallToAction />
         </div>
         <VideoCoda />
+
 
 
 
@@ -593,7 +593,7 @@ function AgentRoster() {
 
 function VideoCoda() {
   return (
-    <section className="mt-14">
+    <section id="cta" className="mt-14 scroll-mt-24">
       <div className="mx-auto max-w-6xl px-5 lg:px-8">
         <div className="glass-panel-strong relative overflow-hidden rounded-[28px]">
           <video
@@ -657,36 +657,6 @@ function VideoCoda() {
 }
 
 
-function CallToAction() {
-  return (
-    <section id="cta" className="scroll-mt-24 pt-10" >
-      <div className="glass-panel-strong ask-ring relative overflow-hidden rounded-3xl px-6 py-8 text-center">
-        <div aria-hidden className="ask-glow pointer-events-none absolute inset-0 -z-10" />
-
-        <h2 className="mx-auto max-w-lg text-balance font-serif text-[26px] font-normal leading-[1.1] tracking-[-0.015em] md:text-[32px]">
-          <span className="text-silver-metallic">Put your intelligence team to work.</span>
-        </h2>
-        <p className="mx-auto mt-3 max-w-md text-[13px] leading-relaxed text-foreground/55">
-          A 30-minute session on your markets, your buyers and your data. You leave with a live brief.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <a
-            href="mailto:hello@perpetuity.works"
-            className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-[13px] font-semibold text-accent-foreground transition-opacity hover:opacity-90"
-          >
-            Book a demo <ArrowUpRight className="size-3.5" />
-          </a>
-          <Link
-            to="/"
-            className="glass-chip inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-medium text-foreground/75 transition-colors hover:text-foreground"
-          >
-            See the terminal
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ---------------- how it works: connect / command / execute ---------------- */
 
