@@ -5,7 +5,7 @@ import { PageShell } from "@/components/app-shell";
 import { AskCard } from "@/components/perpetuity-asks";
 import { ContextChat } from "@/components/context-chat";
 import { useContextAsks } from "@/lib/context-store";
-import { backlinks, parseInline, wikiById, wikiPages, type WikiBlock } from "@/lib/wiki";
+import { backlinks, wikiById, wikiPages, type WikiBlock } from "@/lib/wiki";
 import { useMemoryPage } from "@/lib/wiki-store";
 import { EditableText } from "@/components/editable-text";
 
