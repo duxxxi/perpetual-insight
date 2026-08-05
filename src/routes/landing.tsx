@@ -563,32 +563,76 @@ function Platform() {
   );
 }
 
+const toneClasses: Record<string, { dot: string; glow: string; text: string }> = {
+  emerald: { dot: "bg-emerald-400", glow: "shadow-emerald-400/50", text: "text-emerald-300" },
+  sky: { dot: "bg-sky-400", glow: "shadow-sky-400/50", text: "text-sky-300" },
+  violet: { dot: "bg-violet-400", glow: "shadow-violet-400/50", text: "text-violet-300" },
+  amber: { dot: "bg-amber-400", glow: "shadow-amber-400/50", text: "text-amber-300" },
+  rose: { dot: "bg-rose-400", glow: "shadow-rose-400/50", text: "text-rose-300" },
+};
+
+function AgentTimeline({ agent }: { agent: (typeof agents)[number] }) {
+  const tone = toneClasses[agent.tone] ?? toneClasses.emerald;
+  const hours = ["00h", "04h", "08h", "12h", "16h", "20h", "24h"];
+  return (
+    <div className="group grid items-center gap-4 py-3 sm:grid-cols-[140px_1fr_220px] sm:py-2">
+      <p className="text-[12px] font-medium text-white/70">{agent.name}</p>
+
+      <div className="relative">
+        <div className="flex justify-between pb-1.5 font-mono text-[9px] tracking-[0.12em] text-white/20">
+          {hours.map((h) => (
+            <span key={h}>{h}</span>
+          ))}
+        </div>
+        <div className="relative h-px bg-white/10">
+          {agent.schedule.map((pos, i) => (
+            <span
+              key={i}
+              className={`absolute top-1/2 size-2 -translate-y-1/2 rounded-full ${tone.dot} shadow-[0_0_8px] ${tone.glow}`}
+              style={{ left: `${pos * 100}%` }}
+            />
+          ))}
+        </div>
+      </div>
+
+      <p className="text-[11px] text-white/35 sm:text-right">{agent.status}</p>
+    </div>
+  );
+}
+
 function AgentRoster() {
   return (
-    <section id="agents" className="scroll-mt-24 pt-14">
-      <SectionHead
-        kicker="Intelligence team"
-        title="Agents with a mandate, not a chat window"
-        body="Each agent owns a beat, works continuously and reports in your language."
-      />
-      <div className="glass-panel divide-y divide-border/60 rounded-2xl">
-        {agents.map((a) => (
-          <div key={a.name} className="flex items-center gap-3 px-4 py-3">
-            <div className="glass-chip flex size-8 shrink-0 items-center justify-center rounded-xl">
-              <a.icon className="size-3.5 text-accent" />
+    <section id="agents" className="scroll-mt-24 bg-[oklch(0.17_0.02_255)] py-14">
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.26em] text-white/30">
+          Always on
+        </p>
+        <h2 className="mt-3 font-serif text-[30px] font-normal leading-[1.06] tracking-[-0.02em] text-white/90 md:text-[40px]">
+          Intelligence that never sleeps.
+        </h2>
+        <p className="mt-3 max-w-lg text-[13px] leading-relaxed text-white/45">
+          Your team runs on a schedule. Every few hours, they wake up, check the world, and surface only what changed.
+        </p>
+
+        <div className="mt-8 divide-y divide-white/[0.06]">
+          {agents.map((a) => (
+            <AgentTimeline key={a.name} agent={a} />
+          ))}
+        </div>
+
+        <div className="mt-8 grid gap-3 sm:grid-cols-3">
+          {scheduleCards.map((c) => (
+            <div
+              key={c.title}
+              className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-4 transition-colors hover:bg-white/[0.05]"
+            >
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-white/60">
+                {c.title}
+              </p>
+              <p className="mt-1.5 text-[12px] leading-relaxed text-white/40">{c.body}</p>
             </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-[13px] font-medium">{a.name}</p>
-              <p className="truncate text-[11px] text-foreground/50">{a.line}</p>
-            </div>
-            <span className="hidden font-mono text-[11px] font-semibold tabular-nums text-foreground/70 sm:inline">
-              {a.metric}
-            </span>
-            <span className="rounded-full bg-secondary/70 px-2 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-[0.16em] text-foreground/55">
-              {a.state}
-            </span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
