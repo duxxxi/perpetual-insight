@@ -430,17 +430,28 @@ function Terminal() {
 
           {/* stat grid */}
           <div className="grid grid-cols-3 gap-1.5 md:grid-cols-6">
-            {stats.map((s) => (
+            {stats.map((s, i) => (
               <div
                 key={s.label}
-                className="rounded-lg bg-white/[0.03] px-2 py-2 text-center ring-1 ring-white/[0.05]"
+                className="relative overflow-hidden rounded-lg border border-white/[0.07] bg-white/[0.045] px-2 py-2 text-center backdrop-blur-xl"
               >
-                <p className="font-mono text-[13px] font-semibold tabular-nums text-white/85">{s.value}</p>
-                <p className="font-mono text-[7.5px] uppercase tracking-[0.14em] text-white/30">{s.label}</p>
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                />
+                <p
+                  className={`font-mono text-[13px] font-semibold tabular-nums ${
+                    ["text-sky-200", "text-emerald-200", "text-white/85", "text-violet-200", "text-white/85", "text-amber-200"][i % 6]
+                  }`}
+                >
+                  {s.value}
+                </p>
+                <p className="font-mono text-[7.5px] uppercase tracking-[0.14em] text-white/35">{s.label}</p>
                 <p className="font-mono text-[8px] text-emerald-300/80">{s.delta}</p>
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </div>
