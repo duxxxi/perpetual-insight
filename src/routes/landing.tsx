@@ -345,9 +345,10 @@ function Terminal() {
           </span>
         </div>
 
-        <div className="relative space-y-3 p-3.5">
+        <div className="relative space-y-2 p-2.5">
           {/* breaking strip */}
-          <div className="relative flex items-start gap-2.5 overflow-hidden rounded-xl border border-white/[0.07] bg-white/[0.045] px-3 py-2 backdrop-blur-xl">
+          <div className="relative flex items-start gap-2.5 overflow-hidden rounded-xl bg-rose-400/[0.07] px-3 py-1.5">
+
             <span
               aria-hidden
               className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-rose-400/70 to-transparent"
