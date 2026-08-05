@@ -55,6 +55,9 @@ const agents = [
     metric: "2,847",
     unit: "tenders",
     state: "SCANNING",
+    tone: "emerald",
+    schedule: [0.10, 0.35, 0.60, 0.85],
+    status: "Scanned 2,847 EU tenders · 4 new matches",
   },
   {
     icon: LineChart,
@@ -63,6 +66,9 @@ const agents = [
     metric: "35",
     unit: "markets",
     state: "ACTIVE",
+    tone: "sky",
+    schedule: [0.18, 0.42, 0.65, 0.90],
+    status: "Paper pulp +3.2% · EUR/CZK stable",
   },
   {
     icon: ShieldCheck,
@@ -71,6 +77,9 @@ const agents = [
     metric: "17",
     unit: "updates",
     state: "1 ALERT",
+    tone: "violet",
+    schedule: [0.05, 0.55],
+    status: "CBAM update detected · 1 alert pending",
   },
   {
     icon: Send,
@@ -79,6 +88,35 @@ const agents = [
     metric: "284",
     unit: "drafted",
     state: "12 READY",
+    tone: "amber",
+    schedule: [0.30, 0.75],
+    status: "Draft prepared · awaiting approval",
+  },
+  {
+    icon: Globe,
+    name: "Organiser",
+    line: "156 documents categorised this month",
+    metric: "156",
+    unit: "docs",
+    state: "ACTIVE",
+    tone: "rose",
+    schedule: [0.18],
+    status: "156 documents categorised this month",
+  },
+];
+
+const scheduleCards = [
+  {
+    title: "08:00 daily",
+    body: "Morning brief delivered to your inbox and Telegram before you start work.",
+  },
+  {
+    title: "Every 4-6 hours",
+    body: "Markets and tenders scanned. Only significant changes surface as alerts.",
+  },
+  {
+    title: "On your approval",
+    body: "Outreach drafts, document filings, and flagged risks wait for your sign-off.",
   },
 ];
 
@@ -525,32 +563,80 @@ function Platform() {
   );
 }
 
-function AgentRoster() {
+const toneClasses: Record<string, { dot: string; glow: string; text: string }> = {
+  emerald: { dot: "bg-emerald-400", glow: "shadow-emerald-400/50", text: "text-emerald-300" },
+  sky: { dot: "bg-sky-400", glow: "shadow-sky-400/50", text: "text-sky-300" },
+  violet: { dot: "bg-violet-400", glow: "shadow-violet-400/50", text: "text-violet-300" },
+  amber: { dot: "bg-amber-400", glow: "shadow-amber-400/50", text: "text-amber-300" },
+  rose: { dot: "bg-rose-400", glow: "shadow-rose-400/50", text: "text-rose-300" },
+};
+
+function AgentTimeline({ agent }: { agent: (typeof agents)[number] }) {
+  const tone = toneClasses[agent.tone] ?? toneClasses.emerald;
   return (
-    <section id="agents" className="scroll-mt-24 pt-14">
-      <SectionHead
-        kicker="Intelligence team"
-        title="Agents with a mandate, not a chat window"
-        body="Each agent owns a beat, works continuously and reports in your language."
-      />
-      <div className="glass-panel divide-y divide-border/60 rounded-2xl">
-        {agents.map((a) => (
-          <div key={a.name} className="flex items-center gap-3 px-4 py-3">
-            <div className="glass-chip flex size-8 shrink-0 items-center justify-center rounded-xl">
-              <a.icon className="size-3.5 text-accent" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-[13px] font-medium">{a.name}</p>
-              <p className="truncate text-[11px] text-foreground/50">{a.line}</p>
-            </div>
-            <span className="hidden font-mono text-[11px] font-semibold tabular-nums text-foreground/70 sm:inline">
-              {a.metric}
-            </span>
-            <span className="rounded-full bg-secondary/70 px-2 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-[0.16em] text-foreground/55">
-              {a.state}
-            </span>
-          </div>
+    <div className="group grid items-center gap-4 py-2.5 sm:grid-cols-[140px_1fr_220px]">
+      <p className="text-[12px] font-medium text-white/70">{agent.name}</p>
+
+      <div className="relative h-px bg-white/10">
+        {agent.schedule.map((pos, i) => (
+          <span
+            key={i}
+            className={`absolute top-1/2 size-2 -translate-y-1/2 rounded-full ${tone.dot} shadow-[0_0_8px] ${tone.glow}`}
+            style={{ left: `${pos * 100}%` }}
+          />
         ))}
+      </div>
+
+      <p className="text-[11px] text-white/35 sm:text-right">{agent.status}</p>
+    </div>
+  );
+}
+
+function AgentRoster() {
+  const hours = ["00h", "04h", "08h", "12h", "16h", "20h", "24h"];
+  return (
+    <section id="agents" className="scroll-mt-24 bg-[oklch(0.17_0.02_255)] py-14">
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.26em] text-white/30">
+          Always on
+        </p>
+        <h2 className="mt-3 font-serif text-[30px] font-normal leading-[1.06] tracking-[-0.02em] text-white/90 md:text-[40px]">
+          Intelligence that never sleeps.
+        </h2>
+        <p className="mt-3 max-w-lg text-[13px] leading-relaxed text-white/45">
+          Your team runs on a schedule. Every few hours, they wake up, check the world, and surface only what changed.
+        </p>
+
+        <div className="mt-8">
+          <div className="grid grid-cols-[140px_1fr_220px] items-center gap-4 pb-2">
+            <span />
+            <div className="flex justify-between font-mono text-[9px] tracking-[0.12em] text-white/20">
+              {hours.map((h) => (
+                <span key={h}>{h}</span>
+              ))}
+            </div>
+            <span />
+          </div>
+          <div className="divide-y divide-white/[0.06]">
+            {agents.map((a) => (
+              <AgentTimeline key={a.name} agent={a} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-8 grid gap-3 sm:grid-cols-3">
+          {scheduleCards.map((c) => (
+            <div
+              key={c.title}
+              className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-4 transition-colors hover:bg-white/[0.05]"
+            >
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-white/60">
+                {c.title}
+              </p>
+              <p className="mt-1.5 text-[12px] leading-relaxed text-white/40">{c.body}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
