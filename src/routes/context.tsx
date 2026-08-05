@@ -182,6 +182,40 @@ function ContextPage() {
   );
 }
 
+function PhotoSlot() {
+  const [src, setSrc] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  return (
+    <div className="border-t border-foreground/[0.07] p-2.5">
+      <button
+        onClick={() => inputRef.current?.click()}
+        className="group relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-lg bg-foreground/[0.03] ring-1 ring-foreground/[0.07] transition-colors hover:bg-foreground/[0.05]"
+      >
+        {src ? (
+          <img src={src} alt="Context photo" className="size-full object-cover" />
+        ) : (
+          <span className="flex flex-col items-center gap-1 text-foreground/35">
+            <ImagePlus className="size-4" />
+            <span className="text-[10px]">Add photo</span>
+          </span>
+        )}
+      </button>
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => {
+          const f = e.target.files?.[0];
+          if (f) setSrc(URL.createObjectURL(f));
+        }}
+      />
+    </div>
+  );
+}
+
+
 function RailItem({
   page,
   icon,
