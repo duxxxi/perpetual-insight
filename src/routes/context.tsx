@@ -13,7 +13,7 @@ export const Route = createFileRoute("/context")({
       {
         name: "description",
         content:
-          "A living wiki of your business: markets, products, commercial terms, operating patterns and the open questions Perpetuity needs answered.",
+          "A living memory of your business: markets, products, commercial terms, operating patterns and the open questions Perpetuity needs answered.",
       },
       { property: "og:title", content: "Context — What Perpetuity Knows" },
       {
