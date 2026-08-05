@@ -220,7 +220,7 @@ function TopNav() {
 
 function HeroSplit() {
   return (
-    <section className="grid items-center gap-8 pt-12 pb-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-10">
+    <section className="grid items-center gap-7 pt-9 pb-11 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-9">
       <div>
         <div className="glass-chip inline-flex items-center gap-2 rounded-full px-3 py-1">
           <span className="relative flex size-1.5">
