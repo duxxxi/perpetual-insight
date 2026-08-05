@@ -395,9 +395,10 @@ function Terminal() {
                   className="flex items-center gap-3 px-3 py-2 transition-colors hover:bg-white/[0.05]"
                 >
 
-                  <span className={`flex size-7 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.07] ${sp?.tone ?? "text-white/60"}`}>
-                    <a.icon className="size-3.5" strokeWidth={1.75} />
+                  <span className={`flex size-6 shrink-0 items-center justify-center rounded-md bg-white/[0.07] ${sp?.tone ?? "text-white/60"}`}>
+                    <a.icon className="size-3" strokeWidth={1.75} />
                   </span>
+
 
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-[12px] font-medium text-white/85">{a.name}</p>
