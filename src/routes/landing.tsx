@@ -337,12 +337,7 @@ function Terminal() {
         <div className="relative space-y-2 p-2.5">
           {/* breaking strip */}
           <div className="relative flex items-start gap-2.5 overflow-hidden rounded-xl bg-rose-400/[0.07] px-3 py-1.5">
-
-            <span
-              aria-hidden
-              className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-rose-400/70 to-transparent"
-            />
-            <span className="mt-1 size-1.5 shrink-0 rounded-full bg-rose-400 shadow-[0_0_8px_1px_hsl(0_80%_65%/0.5)]" />
+            <span className="mt-1 size-1.5 shrink-0 rounded-full bg-rose-400" />
             <p className="min-w-0 flex-1 font-mono text-[10.5px] leading-relaxed text-white/60">
               <span className="font-semibold text-rose-200/90">⚡ BREAKING</span> — ECB emergency rate
               signal detected · Frankfurt Bund yields +18bps · EUR/USD reaction imminent
@@ -352,21 +347,12 @@ function Terminal() {
 
           {/* prompt */}
           <div className="relative flex items-center gap-2.5 overflow-hidden rounded-xl border border-white/[0.10] bg-white/[0.06] px-3 py-2 shadow-[inset_0_1px_0_0_hsl(0_0%_100%/0.10)] backdrop-blur-xl">
-
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-70"
-              style={{
-                background:
-                  "radial-gradient(60% 120% at 0% 50%, hsl(210 90% 65% / 0.16), transparent 70%)",
-              }}
-            />
             <div className="globe-orb relative size-4 shrink-0" aria-hidden />
             <span className="relative min-w-0 flex-1 truncate font-mono text-[11.5px] text-white/75">
               {typed}
               <span className="ml-0.5 inline-block h-3 w-[6px] translate-y-[1px] animate-pulse bg-sky-300/70" />
             </span>
-            <span className="relative rounded-md bg-gradient-to-b from-sky-400/90 to-sky-500/90 px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_0_16px_-4px_hsl(210_90%_60%/0.8)]">
+            <span className="relative rounded-md bg-sky-500/90 px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-white">
               Run
             </span>
           </div>
