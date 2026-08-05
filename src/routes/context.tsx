@@ -264,25 +264,6 @@ function RailItem({
   );
 }
 
-function Inline({ text, onNavigate }: { text: string; onNavigate: (id: string) => void }) {
-  return (
-    <>
-      {parseInline(text).map((part, i) =>
-        part.link ? (
-          <button
-            key={i}
-            onClick={() => onNavigate(part.link!)}
-            className="text-accent underline decoration-accent/30 underline-offset-2 transition-colors hover:decoration-accent"
-          >
-            {part.text}
-          </button>
-        ) : (
-          <span key={i}>{part.text}</span>
-        ),
-      )}
-    </>
-  );
-}
 
 function Block({
   block,
