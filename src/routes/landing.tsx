@@ -479,7 +479,7 @@ function SectionHead({ kicker, title, body }: { kicker: string; title: string; b
       <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.26em] text-foreground/35">
         {kicker}
       </p>
-      <h2 className="mt-2 text-[24px] font-semibold leading-tight tracking-[-0.03em] md:text-[30px]">
+      <h2 className="mt-2 font-serif text-[24px] font-normal leading-[1.12] tracking-[-0.015em] md:text-[28px]">
         <span className="text-silver-metallic">{title}</span>
       </h2>
       {body ? <p className="mt-2 max-w-xl text-[13px] leading-relaxed text-foreground/55">{body}</p> : null}
