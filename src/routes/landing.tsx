@@ -233,11 +233,12 @@ function HeroSplit() {
           </span>
         </div>
 
-        <h1 className="mt-6 text-balance font-serif text-[44px] font-normal leading-[1.02] tracking-[-0.02em] md:text-[62px]">
+        <h1 className="mt-6 text-balance text-[40px] font-semibold leading-[1.03] tracking-[-0.035em] md:text-[56px]">
           <span className="text-foreground/90">Your Intelligence Team.</span>
           <br />
-          <span className="text-silver-metallic italic">Always On.</span>
+          <span className="text-silver-metallic font-normal">Always On.</span>
         </h1>
+
 
         <p className="mt-5 max-w-md text-pretty text-[15px] leading-relaxed text-foreground/60">
           Perpetuity connects your world, then puts agents to work. Opportunities found,
