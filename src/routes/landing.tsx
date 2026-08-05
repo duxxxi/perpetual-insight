@@ -428,7 +428,7 @@ function EditorialStats() {
             key={e.label}
             className={`px-3 ${i > 0 ? "lg:border-l lg:border-border/60" : ""}`}
           >
-            <p className="font-serif text-[26px] leading-none tracking-[-0.01em] text-foreground/85">
+            <p className="text-[24px] font-semibold leading-none tracking-[-0.035em] text-foreground/85 tabular-nums">
               {e.value}
             </p>
             <p className="mt-1.5 font-mono text-[8.5px] font-medium uppercase tracking-[0.18em] text-foreground/40">
@@ -449,7 +449,7 @@ function TrustedRow() {
       {trusted.map((t) => (
         <span
           key={t}
-          className="border-l border-border/50 px-7 font-serif text-[17px] whitespace-nowrap text-foreground/35"
+          className="border-l border-border/50 px-7 text-[13px] font-medium tracking-[-0.01em] whitespace-nowrap text-foreground/35"
         >
           {t}
         </span>
@@ -854,10 +854,10 @@ function IntelSection() {
           <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.26em] text-white/35">
             A live intelligence terminal
           </p>
-          <h2 className="mt-2 font-serif text-[30px] font-normal leading-[1.06] tracking-[-0.02em] text-white/90 md:text-[38px]">
+          <h2 className="mt-2 text-[28px] font-semibold leading-[1.06] tracking-[-0.035em] text-white/90 md:text-[36px]">
             Designed to notice
             <br />
-            <span className="italic text-white/45">what others miss.</span>
+            <span className="font-normal text-white/45">what others miss.</span>
           </h2>
           <p className="mt-4 max-w-md text-[13px] leading-relaxed text-white/50">
             Bloomberg tells you what happened. We tell you what it means for your business — and then handle it.
