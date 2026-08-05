@@ -24,7 +24,7 @@ export function ContextChat({ pageTitle }: { pageTitle: string }) {
   };
 
   return (
-    <div className="mt-6 rounded-xl ring-1 ring-foreground/[0.09]">
+    <div className="glass-panel info-glow mt-6 rounded-2xl">
       <div className="flex items-center gap-2 border-b border-foreground/[0.07] px-3.5 py-2.5">
         <Brain className="size-3.5 text-accent" />
         <p className="text-[11.5px] font-semibold tracking-[-0.01em]">Add context</p>
