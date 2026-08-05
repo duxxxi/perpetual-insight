@@ -654,15 +654,10 @@ function VideoCoda() {
 
 function CallToAction() {
   return (
-    <section id="cta" className="scroll-mt-24 pt-14" >
-      <div className="glass-panel-strong ask-ring relative overflow-hidden rounded-3xl px-6 py-10 text-center">
+    <section id="cta" className="scroll-mt-24 pt-10" >
+      <div className="glass-panel-strong ask-ring relative overflow-hidden rounded-3xl px-6 py-8 text-center">
         <div aria-hidden className="ask-glow pointer-events-none absolute inset-0 -z-10" />
-        <div className="mx-auto mb-4 flex items-center justify-center gap-2">
-          <Globe className="size-3.5 text-accent" />
-          <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.24em] text-foreground/45">
-            180+ countries · 24/7 surveillance · 50K+ active tenders
-          </span>
-        </div>
+
         <h2 className="mx-auto max-w-lg text-balance font-serif text-[26px] font-normal leading-[1.1] tracking-[-0.015em] md:text-[32px]">
           <span className="text-silver-metallic">Put your intelligence team to work.</span>
         </h2>
