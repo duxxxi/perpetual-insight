@@ -593,7 +593,7 @@ function AgentRoster() {
 
 function VideoCoda() {
   return (
-    <section className="mt-14">
+    <section id="cta" className="mt-14 scroll-mt-24">
       <div className="mx-auto max-w-6xl px-5 lg:px-8">
         <div className="glass-panel-strong relative overflow-hidden rounded-[28px]">
           <video
