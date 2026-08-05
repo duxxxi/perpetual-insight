@@ -43,9 +43,9 @@ const nav = [
   { label: "Platform", href: "#platform" },
   { label: "Intelligence", href: "#intelligence" },
   { label: "Intelligence Team", href: "#agents" },
-  { label: "About", href: "#cta" },
-];
+  { label: "Pricing", href: "#pricing" },
 
+];
 
 const agents = [
   {
@@ -106,8 +106,30 @@ const platform = [
   },
 ];
 
-
-
+const pricing = [
+  {
+    name: "Operator",
+    price: "€490",
+    cadence: "per seat / month",
+    body: "One intelligence team, three connected sources, daily brief and outreach drafting.",
+    features: ["Daily brief", "3 connectors", "Outreach drafting", "Email support"],
+  },
+  {
+    name: "Company",
+    price: "€1,900",
+    cadence: "per month",
+    body: "The full agent roster across your commercial org, with tender scouting and compliance watch.",
+    features: ["All agents", "Unlimited connectors", "Tender scouting", "Compliance watch", "Shared threads"],
+    featured: true,
+  },
+  {
+    name: "Enterprise",
+    price: "Talk to us",
+    cadence: "bespoke",
+    body: "Private deployment, custom agents and integration into your existing intelligence stack.",
+    features: ["Private deployment", "Custom agents", "SSO & audit", "Named engineer"],
+  },
+];
 
 /* ---------------- page ---------------- */
 
@@ -162,10 +184,9 @@ function LandingPage() {
         <IntelSection />
         <div className="mx-auto max-w-6xl px-5 lg:px-8">
           <AgentRoster />
+          <Pricing />
           <CallToAction />
         </div>
-        <VideoCoda />
-
 
       </main>
 
@@ -233,12 +254,11 @@ function HeroSplit() {
           </span>
         </div>
 
-        <h1 className="mt-6 text-balance text-[40px] font-semibold leading-[1.03] tracking-[-0.035em] md:text-[56px]">
+        <h1 className="mt-6 text-balance font-serif text-[44px] font-normal leading-[1.02] tracking-[-0.02em] md:text-[62px]">
           <span className="text-foreground/90">Your Intelligence Team.</span>
           <br />
-          <span className="text-silver-metallic font-normal">Always On.</span>
+          <span className="text-silver-metallic italic">Always On.</span>
         </h1>
-
 
         <p className="mt-5 max-w-md text-pretty text-[15px] leading-relaxed text-foreground/60">
           Perpetuity connects your world, then puts agents to work. Opportunities found,
@@ -428,7 +448,7 @@ function EditorialStats() {
             key={e.label}
             className={`px-3 ${i > 0 ? "lg:border-l lg:border-border/60" : ""}`}
           >
-            <p className="text-[24px] font-semibold leading-none tracking-[-0.035em] text-foreground/85 tabular-nums">
+            <p className="font-serif text-[26px] leading-none tracking-[-0.01em] text-foreground/85">
               {e.value}
             </p>
             <p className="mt-1.5 font-mono text-[8.5px] font-medium uppercase tracking-[0.18em] text-foreground/40">
@@ -449,7 +469,7 @@ function TrustedRow() {
       {trusted.map((t) => (
         <span
           key={t}
-          className="border-l border-border/50 px-7 text-[13px] font-medium tracking-[-0.01em] whitespace-nowrap text-foreground/35"
+          className="border-l border-border/50 px-7 font-serif text-[17px] whitespace-nowrap text-foreground/35"
         >
           {t}
         </span>
@@ -543,94 +563,52 @@ function AgentRoster() {
   );
 }
 
-/* ---------------- video coda ---------------- */
-
-function VideoCoda() {
+function Pricing() {
   return (
-    <section className="mt-16">
-      <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        <div className="glass-panel-strong relative overflow-hidden rounded-[28px]">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            aria-hidden
-            className="absolute inset-0 size-full object-cover"
-          >
-            <source
-              src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"
-              type="video/mp4"
-            />
-          </video>
+    <section id="pricing" className="scroll-mt-24 pt-14">
+      <SectionHead kicker="Pricing" title="Priced per outcome, not per dashboard" />
+      <div className="grid gap-2 md:grid-cols-3">
+        {pricing.map((p) => (
           <div
-            aria-hidden
-            className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,11,18,0.35)_0%,rgba(8,11,18,0.62)_55%,rgba(8,11,18,0.82)_100%)]"
-          />
-
-          <div className="relative flex min-h-[420px] flex-col items-center justify-end px-6 pb-9 pt-24 text-center md:min-h-[520px]">
-            <div className="glass-chip inline-flex items-center gap-2 rounded-full px-3 py-1">
-              <span className="size-1 rounded-full bg-emerald-400" />
-              <span className="font-mono text-[9px] font-medium uppercase tracking-[0.2em] text-white/65">
-                Working while you sleep
+            key={p.name}
+            className={`rounded-2xl p-4 ${p.featured ? "glass-panel-strong ask-ring" : "glass-panel"}`}
+          >
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.2em] text-foreground/40">
+                {p.name}
               </span>
+              {p.featured ? (
+                <span className="rounded-full bg-accent/12 px-2 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-[0.16em] text-accent">
+                  Most chosen
+                </span>
+              ) : null}
             </div>
-
-            <h2 className="mt-5 max-w-2xl text-balance text-[30px] font-semibold leading-[1.05] tracking-[-0.03em] text-white md:text-[44px]">
-              Your intelligence team.
-              <br />
-              <span className="font-normal text-white/45">Always on, everywhere you trade.</span>
-            </h2>
-
-            <p className="mt-4 max-w-md text-[13px] leading-relaxed text-white/55">
-              Tenders, markets, buyers and trade signals — monitored continuously, distilled to
-              what actually moves your quarter.
-            </p>
-
-            <div className="mt-6 flex flex-wrap justify-center gap-2">
-              <a
-                href="mailto:hello@perpetuity.works"
-                className="inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-[13px] font-semibold text-[oklch(0.19_0.02_255)] transition-transform hover:scale-[1.02]"
-              >
-                Book a demo <ArrowUpRight className="size-3.5" />
-              </a>
-              <Link
-                to="/"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.08] px-4 py-2 text-[13px] font-medium text-white/80 backdrop-blur-xl transition-colors hover:text-white"
-              >
-                See the terminal <ArrowRight className="size-3.5" />
-              </Link>
-            </div>
-
-            <div className="mt-8 grid w-full max-w-3xl gap-2 sm:grid-cols-3">
-              {[
-                { agent: "Opportunity Scout", action: "Matched 4 tenders in Germany", time: "2m ago" },
-                { agent: "Market Analyst", action: "Paper prices up 4–8% in EU", time: "11m ago" },
-                { agent: "Outreach Agent", action: "Draft ready — approval needed", time: "28m ago" },
-              ].map((item) => (
-                <div
-                  key={item.agent}
-                  className="rounded-2xl border border-white/[0.12] bg-white/[0.07] px-3 py-2.5 text-left backdrop-blur-2xl"
-                >
-                  <div className="flex items-center gap-1.5">
-                    <span className="size-1 rounded-full bg-emerald-400" />
-                    <span className="font-mono text-[8.5px] font-medium uppercase tracking-[0.18em] text-white/45">
-                      {item.agent}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-[12px] font-medium leading-snug text-white/85">{item.action}</p>
-                  <p className="mt-0.5 font-mono text-[9px] text-white/35">{item.time}</p>
-                </div>
+            <p className="mt-3 text-[24px] font-semibold tracking-[-0.03em]">{p.price}</p>
+            <p className="text-[10px] uppercase tracking-[0.14em] text-foreground/35">{p.cadence}</p>
+            <p className="mt-3 text-[12px] leading-relaxed text-foreground/55">{p.body}</p>
+            <ul className="mt-3 space-y-1.5">
+              {p.features.map((f) => (
+                <li key={f} className="flex items-center gap-2 text-[12px] text-foreground/65">
+                  <span className="size-1 rounded-full bg-accent" /> {f}
+                </li>
               ))}
-            </div>
+            </ul>
+            <a
+              href="#cta"
+              className={`mt-4 inline-flex w-full items-center justify-center gap-1.5 rounded-full px-3 py-2 text-[12px] font-semibold transition-opacity hover:opacity-90 ${
+                p.featured
+                  ? "bg-accent text-accent-foreground"
+                  : "glass-chip text-foreground/75"
+              }`}
+            >
+              {p.price === "Talk to us" ? "Contact sales" : "Start"} <ArrowRight className="size-3" />
+            </a>
           </div>
-        </div>
+        ))}
       </div>
     </section>
   );
 }
-
-
 
 function CallToAction() {
   return (
@@ -854,10 +832,10 @@ function IntelSection() {
           <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.26em] text-white/35">
             A live intelligence terminal
           </p>
-          <h2 className="mt-2 text-[28px] font-semibold leading-[1.06] tracking-[-0.035em] text-white/90 md:text-[36px]">
+          <h2 className="mt-2 font-serif text-[30px] font-normal leading-[1.06] tracking-[-0.02em] text-white/90 md:text-[38px]">
             Designed to notice
             <br />
-            <span className="font-normal text-white/45">what others miss.</span>
+            <span className="italic text-white/45">what others miss.</span>
           </h2>
           <p className="mt-4 max-w-md text-[13px] leading-relaxed text-white/50">
             Bloomberg tells you what happened. We tell you what it means for your business — and then handle it.
