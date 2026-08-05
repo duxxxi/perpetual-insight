@@ -30,7 +30,9 @@ export const Route = createFileRoute("/context")({
 
 function ContextPage() {
   const [pageId, setPageId] = useState("overview");
-  const page = wikiById(pageId) ?? wikiPages[0];
+  const edited = useMemoryPage(pageId);
+  const page = edited?.page ?? wikiById(pageId) ?? wikiPages[0];
+  const editCount = edited?.edits ?? 0;
   const asks = useContextAsks();
   const open = asks.filter((a) => !a.answer);
   const links = backlinks(page.id);
