@@ -563,52 +563,71 @@ function AgentRoster() {
   );
 }
 
-function Pricing() {
+/* ---------------- video coda ---------------- */
+
+function VideoCoda() {
   return (
-    <section id="pricing" className="scroll-mt-24 pt-14">
-      <SectionHead kicker="Pricing" title="Priced per outcome, not per dashboard" />
-      <div className="grid gap-2 md:grid-cols-3">
-        {pricing.map((p) => (
-          <div
-            key={p.name}
-            className={`rounded-2xl p-4 ${p.featured ? "glass-panel-strong ask-ring" : "glass-panel"}`}
+    <section className="mt-14">
+      <div className="mx-auto max-w-6xl px-5 lg:px-8">
+        <div className="glass-panel-strong relative overflow-hidden rounded-[28px]">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-hidden
+            className="absolute inset-0 size-full object-cover"
           >
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.2em] text-foreground/40">
-                {p.name}
+            <source
+              src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"
+              type="video/mp4"
+            />
+          </video>
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,11,18,0.30)_0%,rgba(8,11,18,0.58)_55%,rgba(8,11,18,0.80)_100%)]"
+          />
+
+          <div className="relative flex min-h-[360px] flex-col items-center justify-end px-6 pb-8 pt-20 text-center md:min-h-[440px]">
+            <div className="glass-chip inline-flex items-center gap-2 rounded-full px-3 py-1">
+              <span className="size-1 rounded-full bg-emerald-400" />
+              <span className="font-mono text-[9px] font-medium uppercase tracking-[0.2em] text-white/60">
+                Working while you sleep
               </span>
-              {p.featured ? (
-                <span className="rounded-full bg-accent/12 px-2 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-[0.16em] text-accent">
-                  Most chosen
-                </span>
-              ) : null}
             </div>
-            <p className="mt-3 text-[24px] font-semibold tracking-[-0.03em]">{p.price}</p>
-            <p className="text-[10px] uppercase tracking-[0.14em] text-foreground/35">{p.cadence}</p>
-            <p className="mt-3 text-[12px] leading-relaxed text-foreground/55">{p.body}</p>
-            <ul className="mt-3 space-y-1.5">
-              {p.features.map((f) => (
-                <li key={f} className="flex items-center gap-2 text-[12px] text-foreground/65">
-                  <span className="size-1 rounded-full bg-accent" /> {f}
-                </li>
-              ))}
-            </ul>
-            <a
-              href="#cta"
-              className={`mt-4 inline-flex w-full items-center justify-center gap-1.5 rounded-full px-3 py-2 text-[12px] font-semibold transition-opacity hover:opacity-90 ${
-                p.featured
-                  ? "bg-accent text-accent-foreground"
-                  : "glass-chip text-foreground/75"
-              }`}
-            >
-              {p.price === "Talk to us" ? "Contact sales" : "Start"} <ArrowRight className="size-3" />
-            </a>
+
+            <h2 className="mt-4 max-w-2xl text-balance font-serif text-[28px] font-normal leading-[1.08] tracking-[-0.015em] text-white/95 md:text-[38px]">
+              Your intelligence team.
+              <br />
+              <span className="italic text-white/45">Always on, everywhere you trade.</span>
+            </h2>
+
+            <p className="mt-3.5 max-w-md text-[13px] leading-relaxed text-white/55">
+              Tenders, markets, buyers and trade signals — monitored continuously, distilled to
+              what actually moves your quarter.
+            </p>
+
+            <div className="mt-5 flex flex-wrap justify-center gap-2">
+              <a
+                href="mailto:hello@perpetuity.works"
+                className="inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-[12.5px] font-medium text-[oklch(0.19_0.02_255)] transition-transform hover:scale-[1.02]"
+              >
+                Book a demo <ArrowUpRight className="size-3.5" />
+              </a>
+              <Link
+                to="/"
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.08] px-4 py-2 text-[12.5px] font-medium text-white/80 backdrop-blur-xl transition-colors hover:text-white"
+              >
+                See the terminal <ArrowRight className="size-3.5" />
+              </Link>
+            </div>
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );
 }
+
 
 function CallToAction() {
   return (
