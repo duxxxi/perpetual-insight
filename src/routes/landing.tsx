@@ -232,7 +232,7 @@ function HeroSplit() {
           </span>
         </div>
 
-        <h1 className="mt-6 text-balance font-serif text-[44px] font-normal leading-[1.02] tracking-[-0.02em] md:text-[62px]">
+        <h1 className="mt-6 text-balance font-serif text-[38px] font-normal leading-[1.06] tracking-[-0.015em] md:text-[52px]">
           <span className="text-foreground/90">Your Intelligence Team.</span>
           <br />
           <span className="text-silver-metallic italic">Always On.</span>
