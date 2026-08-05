@@ -392,11 +392,12 @@ function Terminal() {
               return (
                 <div
                   key={a.name}
-                  className="flex items-center gap-3 rounded-xl bg-white/[0.025] px-3 py-2.5 ring-1 ring-white/[0.05] transition-colors hover:bg-white/[0.05]"
+                  className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.035] px-3 py-2.5 shadow-[inset_0_1px_0_0_hsl(0_0%_100%/0.06)] backdrop-blur-xl transition-colors hover:border-white/[0.12] hover:bg-white/[0.07]"
                 >
-                  <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-white/[0.06]">
-                    <a.icon className="size-3.5 text-white/60" strokeWidth={1.75} />
+                  <span className={`flex size-7 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.07] ${sp?.tone ?? "text-white/60"}`}>
+                    <a.icon className="size-3.5" strokeWidth={1.75} />
                   </span>
+
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-[12px] font-medium text-white/85">{a.name}</p>
                     <p className="truncate text-[10.5px] text-white/40">{a.line}</p>
