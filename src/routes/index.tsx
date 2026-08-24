@@ -683,13 +683,13 @@ function SectionLabel({
     <div className="flex items-end justify-between gap-3 px-1">
       <div>
         {kicker && (
-          <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/35">
+          <p className="mb-0.5 text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/35">
             {kicker}
           </p>
         )}
         <h3 className={`${sizeStyles[tone]} ${toneStyles[tone]} tracking-tight`}>{children}</h3>
       </div>
-      <div className="mb-2 h-px flex-1 bg-foreground/5" />
+      <div className="mb-1.5 h-px flex-1 bg-foreground/5" />
     </div>
   );
 }
@@ -718,14 +718,14 @@ function WorkCard({
 
   return (
     <article
-      className={`relative rounded-3xl p-4 transition-all ${
+      className={`relative rounded-3xl p-3.5 transition-all ${
         urgent ? "glass-panel-strong shadow-[0_8px_40px_-16px_hsl(25_60%_45%/0.2)]" : "glass-panel"
       } hover:bg-[var(--glass-surface-strong)]`}
     >
       {urgent && (
         <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-3xl opacity-25 blur-[2px]" aria-hidden />
       )}
-      <div className="relative flex items-start gap-4">
+      <div className="relative flex items-start gap-3.5">
         <button
           onClick={() => setDone(!done)}
           className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-md border transition-colors ${
@@ -749,12 +749,12 @@ function WorkCard({
             </div>
             <ArrowUpRight className="size-3.5 text-foreground/30" />
           </div>
-          <h4 className={`mt-1.5 font-sans text-[15px] font-medium leading-snug ${done ? "line-through text-foreground/40" : ""}`}>
+          <h4 className={`mt-1 font-sans text-[15px] font-medium leading-snug ${done ? "line-through text-foreground/40" : ""}`}>
             {title}
           </h4>
-          <p className="mt-2 text-xs leading-relaxed text-foreground/55">{body}</p>
+          <p className="mt-1.5 text-xs leading-relaxed text-foreground/55">{body}</p>
           {actions && actions.length > 0 && (
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap gap-2">
               {actions.map((a) => (
                 <ActionDialog
                   key={a.label}
@@ -864,12 +864,12 @@ function IntelItem({
 }
 
 function Divider() {
-  return <div className="my-5 h-px bg-foreground/5" />;
+  return <div className="my-4 h-px bg-foreground/5" />;
 }
 
 function SuggestedItem({ title, body }: { title: string; body: string }) {
   return (
-    <div className="group relative w-full rounded-2xl border border-dashed border-foreground/10 bg-transparent p-4 transition-colors hover:border-foreground/20 hover:bg-[var(--glass-surface)]">
+    <div className="group relative w-full rounded-2xl border border-dashed border-foreground/10 bg-transparent p-3.5 transition-colors hover:border-foreground/20 hover:bg-[var(--glass-surface)]">
       <ActionDialog
         title={title}
         kicker="Suggested"
@@ -924,10 +924,10 @@ function ScheduleRow({
     violet: "bg-violet-500/10 text-violet-700",
   };
   return (
-    <div className="group flex items-center gap-4 rounded-2xl px-4 py-3 transition-colors hover:bg-foreground/[0.03]">
+    <div className="group flex items-center gap-3.5 rounded-2xl px-3.5 py-2.5 transition-colors hover:bg-foreground/[0.03]">
       <span className="font-mono text-xs text-foreground/40 tabular-nums">{time}</span>
-      <div className={`flex size-9 items-center justify-center rounded-xl ${tones[tone]}`}>
-        <Icon className="size-4" />
+      <div className={`flex size-8 items-center justify-center rounded-xl ${tones[tone]}`}>
+        <Icon className="size-3.5" />
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium leading-tight truncate">{title}</p>
@@ -939,7 +939,7 @@ function ScheduleRow({
 }
 
 function ScheduleDivider() {
-  return <div className="mx-4 h-px bg-foreground/5" />;
+  return <div className="mx-3.5 h-px bg-foreground/5" />;
 }
 
 /* ---------- Live Signals (real market data + Polymarket odds) ---------- */
@@ -1148,10 +1148,10 @@ function LiveSignals() {
   const [hero, ...rest] = series;
 
   return (
-    <div className="mt-3 space-y-2">
+    <div className="mt-2.5 space-y-2">
       {hero ? <MarketHero s={hero} /> : null}
 
-      <div className="glass-panel rounded-2xl p-2.5">
+      <div className="glass-panel rounded-2xl p-2">
         <SectionCaption label="Commodities · FX" right={<LiveDot />} />
         {markets.isPending ? (
           <SkeletonRows />
@@ -1168,7 +1168,7 @@ function LiveSignals() {
         )}
       </div>
 
-      <div className="glass-panel rounded-2xl p-2.5">
+      <div className="glass-panel rounded-2xl p-2">
         <SectionCaption
           label="Polymarket odds"
           right={
@@ -1236,11 +1236,11 @@ const convergence = [
 
 function Convergence() {
   return (
-    <section className="mb-6">
+    <section className="mb-5">
       <SectionLabel kicker="Synthesis · 14:40 UTC" tone="accent">
         Convergence
       </SectionLabel>
-      <div className="mt-3 grid gap-2 md:grid-cols-3">
+      <div className="mt-2.5 grid gap-2 md:grid-cols-3">
         {convergence.map((c) => (
           <ActionDialog
             key={c.title}
@@ -1251,9 +1251,9 @@ function Convergence() {
             trigger={
               <button
                 data-pill
-                className="glass-panel group relative overflow-hidden rounded-2xl p-3.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
+                className="glass-panel group relative overflow-hidden rounded-2xl p-3 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
               >
-                <div className="mb-2 flex items-center justify-between gap-2">
+                <div className="mb-1.5 flex items-center justify-between gap-2">
                   <span className="font-mono text-[8.5px] font-semibold uppercase tracking-[0.18em] text-foreground/35">
                     {c.sources.length} sources
                   </span>
@@ -1270,7 +1270,7 @@ function Convergence() {
                 <p className="text-[12.5px] font-medium leading-snug text-foreground/90 group-hover:text-accent">
                   {c.title}
                 </p>
-                <p className="mt-1.5 line-clamp-2 text-[11px] leading-relaxed text-foreground/50">
+                <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-foreground/50">
                   {c.implication}
                 </p>
               </button>
@@ -1310,10 +1310,10 @@ const newsLanes: { lane: string; items: { title: string; source: string }[] }[] 
 
 function NewsLanes() {
   return (
-    <div className="glass-panel mt-3 space-y-3.5 rounded-2xl px-4 py-3.5">
+    <div className="glass-panel mt-2.5 space-y-3 rounded-2xl px-3.5 py-3">
       {newsLanes.map((l) => (
         <div key={l.lane}>
-          <p className="mb-1.5 font-mono text-[8.5px] font-semibold uppercase tracking-[0.18em] text-foreground/35">
+          <p className="mb-1 font-mono text-[8.5px] font-semibold uppercase tracking-[0.18em] text-foreground/35">
             {l.lane}
           </p>
           <div className="space-y-1.5">
