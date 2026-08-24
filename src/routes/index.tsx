@@ -82,7 +82,7 @@ function DashboardPage() {
       <CommodityTicker />
 
       {/* Company name under ticker */}
-      <div className="flex justify-center pt-4 pb-2 gap-3 items-center">
+      <div className="flex justify-center pt-3 pb-1.5 gap-3 items-center">
         <span className="font-mono text-[11px] font-medium tracking-[0.35em] text-foreground/45 uppercase">
           Perpetuity
         </span>
@@ -92,14 +92,14 @@ function DashboardPage() {
         <AppSidebar active="home" />
 
 
-        <main className="flex-1 px-5 pt-6 pb-20 lg:pl-24 lg:pr-8 xl:pr-12">
+        <main className="flex-1 px-5 pt-4 pb-16 lg:pl-24 lg:pr-8 xl:pr-12">
           <div className="mx-auto max-w-6xl animate-fade-in-up">
             {/* Header */}
-            <header className="mb-5">
-              <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
+            <header className="mb-4">
+              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
                 MONDAY, 15 JUNE
               </p>
-              <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                 <h1 className="font-sans text-[34px] font-medium leading-[1.08] tracking-[-0.022em] md:text-[42px]">
                   <span className="text-foreground/50 font-normal">{greeting},</span>{" "}
                   <span className="text-silver-metallic font-semibold">Stevan</span>
@@ -107,7 +107,7 @@ function DashboardPage() {
 
                 <MorningBriefPill />
               </div>
-              <p className="mt-3 max-w-2xl text-pretty text-sm leading-relaxed text-foreground/60">
+              <p className="mt-2.5 max-w-2xl text-pretty text-sm leading-relaxed text-foreground/60">
                 You have critical payment and deployment issues requiring action today,
                 plus a multi-country trip starting in five days that needs final logistics review.
               </p>
@@ -118,7 +118,7 @@ function DashboardPage() {
 
 
             {/* Trip card — compact */}
-            <div className="glass-panel group mb-5 flex items-center justify-between gap-3 rounded-2xl px-4 py-3">
+            <div className="glass-panel group mb-4 flex items-center justify-between gap-3 rounded-2xl px-3.5 py-2.5">
               <div className="flex items-center gap-3 min-w-0">
                 <div className="glass-panel-strong flex size-9 items-center justify-center rounded-xl">
                   <Plane className="size-3.5 text-accent" />
@@ -157,7 +157,7 @@ function DashboardPage() {
             <AskPerpetuity />
 
             {/* Status pills row — under chatbox */}
-            <div className="mb-6 -mt-8 flex flex-wrap items-center gap-2">
+            <div className="mb-5 -mt-6 flex flex-wrap items-center gap-2">
               <StatusPill
                 icon={AlertOctagon}
                 gradient="from-rose-500 to-red-600"
@@ -205,11 +205,11 @@ function DashboardPage() {
 
 
             {/* Two-column workspace */}
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+            <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
               {/* Active Work — primary */}
               <section className="lg:col-span-7">
                 <SectionLabel kicker="Priority" tone="primary">Active Work</SectionLabel>
-                <div className="mt-4 space-y-3">
+                <div className="mt-3 space-y-2.5">
                   {userTasks.map((ut) => (
                     <WorkCard
                       key={ut.id}
@@ -263,9 +263,9 @@ function DashboardPage() {
                 </div>
 
                 {/* Today's schedule */}
-                <div className="mt-8">
+                <div className="mt-6">
                   <SectionLabel kicker="Today" tone="accent">Schedule</SectionLabel>
-                  <div className="glass-panel mt-4 rounded-3xl p-1.5">
+                  <div className="glass-panel mt-3 rounded-3xl p-1">
                     <ScheduleRow time="09:30" title="Buyer call: EuroMach GmbH" sub="Video call" tone="emerald" Icon={Video} />
                     <ScheduleDivider />
                     <ScheduleRow time="11:00" title="Review tender: Railway components – Poland" sub="Internal" tone="accent" Icon={FileText} />
@@ -277,9 +277,9 @@ function DashboardPage() {
                 </div>
 
                 {/* Routines */}
-                <div className="mt-8">
+                <div className="mt-6">
                   <SectionLabel kicker="Automate" tone="accent">Routines</SectionLabel>
-                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  <div className="mt-2.5 grid gap-2 sm:grid-cols-2">
                     {routines.map((r) => (
                       <RoutineChip key={r.title} {...r} />
                     ))}
@@ -287,9 +287,9 @@ function DashboardPage() {
                 </div>
 
                 {/* Suggested */}
-                <div className="mt-8">
+                <div className="mt-6">
                   <SectionLabel kicker="Optional" tone="accent">Suggested</SectionLabel>
-                  <div className="mt-3 space-y-2.5">
+                  <div className="mt-2.5 space-y-2">
                     <SuggestedItem
                       title="Clean up duplicate pitch deck versions in Drive"
                       body="You have two copies of the full pitch deck in Drive. Consolidate to a single master."
@@ -307,7 +307,7 @@ function DashboardPage() {
               </section>
 
               {/* Right rail */}
-              <aside className="space-y-8 lg:col-span-5">
+              <aside className="space-y-6 lg:col-span-5">
                 <div>
                   <SectionLabel kicker="Live · 14:40 UTC" tone="accent">Signals</SectionLabel>
                   <LiveSignals />
@@ -315,7 +315,7 @@ function DashboardPage() {
 
                 <div>
                   <SectionLabel kicker="Curated for you" tone="accent">Need to know</SectionLabel>
-                  <div className="glass-panel mt-3 rounded-2xl px-4 py-3">
+                  <div className="glass-panel mt-2.5 rounded-2xl px-3.5 py-3">
                     <IntelItem
                       time="07:10 CET"
                       hot
@@ -393,11 +393,11 @@ function AskPerpetuity() {
   ];
 
   return (
-    <div className="relative mb-10 group">
+    <div className="relative mb-6 group">
       {/* soft blue halo */}
       <div className="ask-glow pointer-events-none absolute -inset-3 rounded-[2rem]" aria-hidden />
       <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-70 blur-[2px]" aria-hidden />
-      <div className="glass-panel-strong ask-ring relative rounded-3xl p-4">
+      <div className="glass-panel-strong ask-ring relative rounded-3xl p-3.5">
         <div className="flex items-center gap-3">
           <div className="globe-orb size-5 shrink-0 ring-1 ring-foreground/10" aria-hidden />
           <input
@@ -423,7 +423,7 @@ function AskPerpetuity() {
             <ArrowUp className="size-4" />
           </button>
         </div>
-        <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-foreground/5 pt-4">
+        <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-foreground/5 pt-3">
           {/* Add task */}
           <Popover>
             <PopoverTrigger asChild>
@@ -683,13 +683,13 @@ function SectionLabel({
     <div className="flex items-end justify-between gap-3 px-1">
       <div>
         {kicker && (
-          <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/35">
+          <p className="mb-0.5 text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/35">
             {kicker}
           </p>
         )}
         <h3 className={`${sizeStyles[tone]} ${toneStyles[tone]} tracking-tight`}>{children}</h3>
       </div>
-      <div className="mb-2 h-px flex-1 bg-foreground/5" />
+      <div className="mb-1.5 h-px flex-1 bg-foreground/5" />
     </div>
   );
 }
@@ -718,14 +718,14 @@ function WorkCard({
 
   return (
     <article
-      className={`relative rounded-3xl p-4 transition-all ${
+      className={`relative rounded-3xl p-3.5 transition-all ${
         urgent ? "glass-panel-strong shadow-[0_8px_40px_-16px_hsl(25_60%_45%/0.2)]" : "glass-panel"
       } hover:bg-[var(--glass-surface-strong)]`}
     >
       {urgent && (
         <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-3xl opacity-25 blur-[2px]" aria-hidden />
       )}
-      <div className="relative flex items-start gap-4">
+      <div className="relative flex items-start gap-3.5">
         <button
           onClick={() => setDone(!done)}
           className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-md border transition-colors ${
@@ -749,12 +749,12 @@ function WorkCard({
             </div>
             <ArrowUpRight className="size-3.5 text-foreground/30" />
           </div>
-          <h4 className={`mt-1.5 font-sans text-[15px] font-medium leading-snug ${done ? "line-through text-foreground/40" : ""}`}>
+          <h4 className={`mt-1 font-sans text-[15px] font-medium leading-snug ${done ? "line-through text-foreground/40" : ""}`}>
             {title}
           </h4>
-          <p className="mt-2 text-xs leading-relaxed text-foreground/55">{body}</p>
+          <p className="mt-1.5 text-xs leading-relaxed text-foreground/55">{body}</p>
           {actions && actions.length > 0 && (
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap gap-2">
               {actions.map((a) => (
                 <ActionDialog
                   key={a.label}
@@ -864,12 +864,12 @@ function IntelItem({
 }
 
 function Divider() {
-  return <div className="my-5 h-px bg-foreground/5" />;
+  return <div className="my-4 h-px bg-foreground/5" />;
 }
 
 function SuggestedItem({ title, body }: { title: string; body: string }) {
   return (
-    <div className="group relative w-full rounded-2xl border border-dashed border-foreground/10 bg-transparent p-4 transition-colors hover:border-foreground/20 hover:bg-[var(--glass-surface)]">
+    <div className="group relative w-full rounded-2xl border border-dashed border-foreground/10 bg-transparent p-3.5 transition-colors hover:border-foreground/20 hover:bg-[var(--glass-surface)]">
       <ActionDialog
         title={title}
         kicker="Suggested"
@@ -924,10 +924,10 @@ function ScheduleRow({
     violet: "bg-violet-500/10 text-violet-700",
   };
   return (
-    <div className="group flex items-center gap-4 rounded-2xl px-4 py-3 transition-colors hover:bg-foreground/[0.03]">
+    <div className="group flex items-center gap-3.5 rounded-2xl px-3.5 py-2.5 transition-colors hover:bg-foreground/[0.03]">
       <span className="font-mono text-xs text-foreground/40 tabular-nums">{time}</span>
-      <div className={`flex size-9 items-center justify-center rounded-xl ${tones[tone]}`}>
-        <Icon className="size-4" />
+      <div className={`flex size-8 items-center justify-center rounded-xl ${tones[tone]}`}>
+        <Icon className="size-3.5" />
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium leading-tight truncate">{title}</p>
@@ -939,7 +939,7 @@ function ScheduleRow({
 }
 
 function ScheduleDivider() {
-  return <div className="mx-4 h-px bg-foreground/5" />;
+  return <div className="mx-3.5 h-px bg-foreground/5" />;
 }
 
 /* ---------- Live Signals (real market data + Polymarket odds) ---------- */
@@ -1148,10 +1148,10 @@ function LiveSignals() {
   const [hero, ...rest] = series;
 
   return (
-    <div className="mt-3 space-y-2">
+    <div className="mt-2.5 space-y-2">
       {hero ? <MarketHero s={hero} /> : null}
 
-      <div className="glass-panel rounded-2xl p-2.5">
+      <div className="glass-panel rounded-2xl p-2">
         <SectionCaption label="Commodities · FX" right={<LiveDot />} />
         {markets.isPending ? (
           <SkeletonRows />
@@ -1168,7 +1168,7 @@ function LiveSignals() {
         )}
       </div>
 
-      <div className="glass-panel rounded-2xl p-2.5">
+      <div className="glass-panel rounded-2xl p-2">
         <SectionCaption
           label="Polymarket odds"
           right={
@@ -1236,11 +1236,11 @@ const convergence = [
 
 function Convergence() {
   return (
-    <section className="mb-6">
+    <section className="mb-5">
       <SectionLabel kicker="Synthesis · 14:40 UTC" tone="accent">
         Convergence
       </SectionLabel>
-      <div className="mt-3 grid gap-2 md:grid-cols-3">
+      <div className="mt-2.5 grid gap-2 md:grid-cols-3">
         {convergence.map((c) => (
           <ActionDialog
             key={c.title}
@@ -1251,9 +1251,9 @@ function Convergence() {
             trigger={
               <button
                 data-pill
-                className="glass-panel group relative overflow-hidden rounded-2xl p-3.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
+                className="glass-panel group relative overflow-hidden rounded-2xl p-3 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
               >
-                <div className="mb-2 flex items-center justify-between gap-2">
+                <div className="mb-1.5 flex items-center justify-between gap-2">
                   <span className="font-mono text-[8.5px] font-semibold uppercase tracking-[0.18em] text-foreground/35">
                     {c.sources.length} sources
                   </span>
@@ -1270,7 +1270,7 @@ function Convergence() {
                 <p className="text-[12.5px] font-medium leading-snug text-foreground/90 group-hover:text-accent">
                   {c.title}
                 </p>
-                <p className="mt-1.5 line-clamp-2 text-[11px] leading-relaxed text-foreground/50">
+                <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-foreground/50">
                   {c.implication}
                 </p>
               </button>
@@ -1310,10 +1310,10 @@ const newsLanes: { lane: string; items: { title: string; source: string }[] }[] 
 
 function NewsLanes() {
   return (
-    <div className="glass-panel mt-3 space-y-3.5 rounded-2xl px-4 py-3.5">
+    <div className="glass-panel mt-2.5 space-y-3 rounded-2xl px-3.5 py-3">
       {newsLanes.map((l) => (
         <div key={l.lane}>
-          <p className="mb-1.5 font-mono text-[8.5px] font-semibold uppercase tracking-[0.18em] text-foreground/35">
+          <p className="mb-1 font-mono text-[8.5px] font-semibold uppercase tracking-[0.18em] text-foreground/35">
             {l.lane}
           </p>
           <div className="space-y-1.5">
