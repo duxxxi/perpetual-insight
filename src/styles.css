@@ -39,33 +39,33 @@
 
 :root {
   --radius: 0.875rem;
-  /* Frosted glass — cool silver canvas, graphite ink, no blue dominance */
-  --background: hsl(218 18% 91%);
+  /* Warm canvas — soft eggshell/cream, graphite ink, no blue dominance */
+  --background: hsl(42 24% 95%);
   --foreground: hsl(220 14% 12%);
-  --card: hsl(0 0% 100% / 0.72);
+  --card: hsl(40 30% 98% / 0.76);
   --card-foreground: hsl(220 14% 12%);
-  --popover: hsl(0 0% 100% / 0.86);
+  --popover: hsl(40 30% 98% / 0.88);
   --popover-foreground: hsl(220 14% 12%);
   --primary: hsl(220 12% 22%);              /* graphite, not systemBlue */
   --primary-foreground: hsl(220 20% 97%);
-  --secondary: hsl(220 14% 91% / 0.7);
+  --secondary: hsl(38 22% 90% / 0.72);
   --secondary-foreground: hsl(220 14% 12%);
-  --muted: hsl(220 14% 92% / 0.65);
+  --muted: hsl(38 20% 91% / 0.68);
   --muted-foreground: hsl(220 8% 44%);
   --accent: hsl(212 22% 38%);               /* muted slate accent */
   --accent-foreground: hsl(220 20% 97%);
   --destructive: hsl(6 62% 52%);
   --destructive-foreground: hsl(0 0% 100%);
-  --border: hsl(220 14% 100% / 0.55);
-  --input: hsl(220 10% 84% / 0.6);
+  --border: hsl(40 30% 100% / 0.55);
+  --input: hsl(38 18% 82% / 0.62);
   --ring: hsl(220 12% 40% / 0.35);
 
-  --glass-surface: rgba(255, 255, 255, 0.50);
-  --glass-surface-strong: rgba(255, 255, 255, 0.68);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-hairline: rgba(15, 20, 30, 0.06);
-  --glass-inset: rgba(255, 255, 255, 0.28);
-  --glass-inset-strong: rgba(255, 255, 255, 0.36);
+  --glass-surface: rgba(255, 252, 247, 0.54);
+  --glass-surface-strong: rgba(255, 252, 247, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.62);
+  --glass-hairline: rgba(60, 50, 35, 0.05);
+  --glass-inset: rgba(255, 255, 255, 0.30);
+  --glass-inset-strong: rgba(255, 255, 255, 0.38);
 }
 
 

@@ -100,9 +100,9 @@ function DashboardPage() {
                 MONDAY, 15 JUNE
               </p>
               <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                <h1 className="font-sans text-[30px] font-semibold leading-[1.05] tracking-[-0.03em] md:text-[36px]">
-                  <span className="text-foreground/45">{greeting},</span>{" "}
-                  <span className="text-silver-metallic">Stevan</span>
+                <h1 className="font-sans text-[34px] font-medium leading-[1.08] tracking-[-0.022em] md:text-[42px]">
+                  <span className="text-foreground/50 font-normal">{greeting},</span>{" "}
+                  <span className="text-silver-metallic font-semibold">Stevan</span>
                 </h1>
 
                 <MorningBriefPill />
