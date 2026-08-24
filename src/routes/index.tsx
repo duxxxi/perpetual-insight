@@ -82,7 +82,7 @@ function DashboardPage() {
       <CommodityTicker />
 
       {/* Company name under ticker */}
-      <div className="flex justify-center pt-4 pb-2 gap-3 items-center">
+      <div className="flex justify-center pt-3 pb-1.5 gap-3 items-center">
         <span className="font-mono text-[11px] font-medium tracking-[0.35em] text-foreground/45 uppercase">
           Perpetuity
         </span>
@@ -92,14 +92,14 @@ function DashboardPage() {
         <AppSidebar active="home" />
 
 
-        <main className="flex-1 px-5 pt-6 pb-20 lg:pl-24 lg:pr-8 xl:pr-12">
+        <main className="flex-1 px-5 pt-4 pb-16 lg:pl-24 lg:pr-8 xl:pr-12">
           <div className="mx-auto max-w-6xl animate-fade-in-up">
             {/* Header */}
-            <header className="mb-5">
-              <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
+            <header className="mb-4">
+              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
                 MONDAY, 15 JUNE
               </p>
-              <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                 <h1 className="font-sans text-[34px] font-medium leading-[1.08] tracking-[-0.022em] md:text-[42px]">
                   <span className="text-foreground/50 font-normal">{greeting},</span>{" "}
                   <span className="text-silver-metallic font-semibold">Stevan</span>
@@ -107,7 +107,7 @@ function DashboardPage() {
 
                 <MorningBriefPill />
               </div>
-              <p className="mt-3 max-w-2xl text-pretty text-sm leading-relaxed text-foreground/60">
+              <p className="mt-2.5 max-w-2xl text-pretty text-sm leading-relaxed text-foreground/60">
                 You have critical payment and deployment issues requiring action today,
                 plus a multi-country trip starting in five days that needs final logistics review.
               </p>
@@ -118,7 +118,7 @@ function DashboardPage() {
 
 
             {/* Trip card — compact */}
-            <div className="glass-panel group mb-5 flex items-center justify-between gap-3 rounded-2xl px-4 py-3">
+            <div className="glass-panel group mb-4 flex items-center justify-between gap-3 rounded-2xl px-3.5 py-2.5">
               <div className="flex items-center gap-3 min-w-0">
                 <div className="glass-panel-strong flex size-9 items-center justify-center rounded-xl">
                   <Plane className="size-3.5 text-accent" />
@@ -157,7 +157,7 @@ function DashboardPage() {
             <AskPerpetuity />
 
             {/* Status pills row — under chatbox */}
-            <div className="mb-6 -mt-8 flex flex-wrap items-center gap-2">
+            <div className="mb-5 -mt-6 flex flex-wrap items-center gap-2">
               <StatusPill
                 icon={AlertOctagon}
                 gradient="from-rose-500 to-red-600"
@@ -205,11 +205,11 @@ function DashboardPage() {
 
 
             {/* Two-column workspace */}
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+            <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
               {/* Active Work — primary */}
               <section className="lg:col-span-7">
                 <SectionLabel kicker="Priority" tone="primary">Active Work</SectionLabel>
-                <div className="mt-4 space-y-3">
+                <div className="mt-3 space-y-2.5">
                   {userTasks.map((ut) => (
                     <WorkCard
                       key={ut.id}
@@ -263,9 +263,9 @@ function DashboardPage() {
                 </div>
 
                 {/* Today's schedule */}
-                <div className="mt-8">
+                <div className="mt-6">
                   <SectionLabel kicker="Today" tone="accent">Schedule</SectionLabel>
-                  <div className="glass-panel mt-4 rounded-3xl p-1.5">
+                  <div className="glass-panel mt-3 rounded-3xl p-1">
                     <ScheduleRow time="09:30" title="Buyer call: EuroMach GmbH" sub="Video call" tone="emerald" Icon={Video} />
                     <ScheduleDivider />
                     <ScheduleRow time="11:00" title="Review tender: Railway components – Poland" sub="Internal" tone="accent" Icon={FileText} />
@@ -277,9 +277,9 @@ function DashboardPage() {
                 </div>
 
                 {/* Routines */}
-                <div className="mt-8">
+                <div className="mt-6">
                   <SectionLabel kicker="Automate" tone="accent">Routines</SectionLabel>
-                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  <div className="mt-2.5 grid gap-2 sm:grid-cols-2">
                     {routines.map((r) => (
                       <RoutineChip key={r.title} {...r} />
                     ))}
@@ -287,9 +287,9 @@ function DashboardPage() {
                 </div>
 
                 {/* Suggested */}
-                <div className="mt-8">
+                <div className="mt-6">
                   <SectionLabel kicker="Optional" tone="accent">Suggested</SectionLabel>
-                  <div className="mt-3 space-y-2.5">
+                  <div className="mt-2.5 space-y-2">
                     <SuggestedItem
                       title="Clean up duplicate pitch deck versions in Drive"
                       body="You have two copies of the full pitch deck in Drive. Consolidate to a single master."
@@ -307,7 +307,7 @@ function DashboardPage() {
               </section>
 
               {/* Right rail */}
-              <aside className="space-y-8 lg:col-span-5">
+              <aside className="space-y-6 lg:col-span-5">
                 <div>
                   <SectionLabel kicker="Live · 14:40 UTC" tone="accent">Signals</SectionLabel>
                   <LiveSignals />
@@ -315,7 +315,7 @@ function DashboardPage() {
 
                 <div>
                   <SectionLabel kicker="Curated for you" tone="accent">Need to know</SectionLabel>
-                  <div className="glass-panel mt-3 rounded-2xl px-4 py-3">
+                  <div className="glass-panel mt-2.5 rounded-2xl px-3.5 py-3">
                     <IntelItem
                       time="07:10 CET"
                       hot
@@ -393,11 +393,11 @@ function AskPerpetuity() {
   ];
 
   return (
-    <div className="relative mb-10 group">
+    <div className="relative mb-6 group">
       {/* soft blue halo */}
       <div className="ask-glow pointer-events-none absolute -inset-3 rounded-[2rem]" aria-hidden />
       <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-70 blur-[2px]" aria-hidden />
-      <div className="glass-panel-strong ask-ring relative rounded-3xl p-4">
+      <div className="glass-panel-strong ask-ring relative rounded-3xl p-3.5">
         <div className="flex items-center gap-3">
           <div className="globe-orb size-5 shrink-0 ring-1 ring-foreground/10" aria-hidden />
           <input
@@ -423,7 +423,7 @@ function AskPerpetuity() {
             <ArrowUp className="size-4" />
           </button>
         </div>
-        <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-foreground/5 pt-4">
+        <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-foreground/5 pt-3">
           {/* Add task */}
           <Popover>
             <PopoverTrigger asChild>
