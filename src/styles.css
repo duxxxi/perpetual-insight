@@ -31,7 +31,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-serif: "Libre Baskerville", "Instrument Serif", ui-serif, Georgia, serif;
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
   --font-pixel: "JetBrains Mono", ui-monospace, monospace;
@@ -183,7 +183,7 @@
     letter-spacing: -0.011em;
   }
 
-  .dark html, .dark body {
+  html.dark, html.dark body {
     background-image: none;
   }
 
@@ -192,6 +192,12 @@
   ::selection {
     background-color: color-mix(in oklab, var(--color-accent) 15%, transparent);
   }
+}
+
+@utility paper-ambient {
+  background:
+    radial-gradient(70rem 44rem at 6% -12%, color-mix(in oklab, white 54%, transparent), transparent 62%),
+    radial-gradient(58rem 40rem at 100% 108%, color-mix(in oklab, var(--color-accent) 8%, transparent), transparent 65%);
 }
 
 @utility glass-panel {
