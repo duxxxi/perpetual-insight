@@ -28,11 +28,7 @@ export function AmbientBackground() {
     <>
       <div
         aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 dark:hidden"
-        style={{
-          background:
-            "radial-gradient(70rem 45rem at 6% -14%, hsl(0 0% 100% / 0.95), transparent 60%), radial-gradient(60rem 42rem at 100% 106%, hsl(215 22% 55% / 0.22), transparent 62%), radial-gradient(45rem 34rem at 48% 42%, hsl(265 20% 72% / 0.14), transparent 70%)",
-        }}
+        className="paper-ambient pointer-events-none fixed inset-0 -z-10 dark:hidden"
       />
       <div
         aria-hidden
@@ -95,7 +91,7 @@ export function CommodityTicker() {
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
           />
-          <div className="ticker-mask relative overflow-hidden py-1">
+          <div className="ticker-mask relative overflow-hidden py-1.5">
             <div className="animate-ticker flex whitespace-nowrap">
               <TickerRow />
               <TickerRow />
@@ -312,16 +308,16 @@ export function PageShell({
       <AmbientBackground />
       <CommodityTicker />
       {/* Company wordmark under ticker — same as dashboard */}
-      <div className="flex items-center justify-center gap-3 pt-3 pb-1.5">
+      <div className="flex items-center justify-center gap-3 pb-2 pt-4">
         <span className="font-mono text-[11px] font-medium uppercase tracking-[0.35em] text-foreground/45">
           Perpetuity
         </span>
       </div>
       <div className="flex">
         <AppSidebar active={active} />
-        <main className="flex-1 px-5 pt-3 pb-16 lg:pl-24 lg:pr-8 xl:pr-12">
+        <main className="flex-1 px-6 pb-20 pt-6 lg:pl-24 lg:pr-10 xl:pr-14">
           <div className="mx-auto max-w-6xl animate-fade-in-up">
-            <header className="relative mb-4">
+            <header className="relative mb-7">
               <div
                 aria-hidden
                 className="pointer-events-none absolute -left-10 -top-12 size-48 rounded-full opacity-50 blur-3xl"
@@ -330,10 +326,10 @@ export function PageShell({
                     "radial-gradient(circle, hsl(215 20% 60% / 0.16), transparent 70%)",
                 }}
               />
-              <p className="relative mb-2.5 font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-foreground/40">
+              <p className="relative mb-3 font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-foreground/40">
                 {eyebrow}
               </p>
-              <div className="relative flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+              <div className="relative flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                 <h1 className="font-sans text-[26px] font-semibold leading-[1.05] tracking-[-0.03em] md:text-[32px]">
                   {accentWord ? (
                     <>
