@@ -46,6 +46,7 @@ import { AmbientBackground, CommodityTicker, AppSidebar, AppFooter } from "@/com
 import { useUserTasks } from "@/lib/task-store";
 import { ConversationDialog } from "@/components/conversation-dialog";
 import { PerpetuityAsksCard } from "@/components/perpetuity-asks";
+import { MastheadBand } from "@/components/masthead-band";
 
 
 export const Route = createFileRoute("/")({
@@ -81,12 +82,8 @@ function DashboardPage() {
       <AmbientBackground />
       <CommodityTicker />
 
-      {/* Company name under ticker */}
-      <div className="flex items-center justify-center gap-3 pb-2 pt-4">
-        <span className="font-mono text-[11px] font-medium tracking-[0.35em] text-foreground/45 uppercase">
-          Perpetuity
-        </span>
-      </div>
+      {/* Masthead band — clocks · wordmark · daylight */}
+      <MastheadBand />
 
       <div className="flex">
         <AppSidebar active="home" />
