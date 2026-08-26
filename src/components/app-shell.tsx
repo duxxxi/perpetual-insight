@@ -286,6 +286,7 @@ export function AppFooter() {
 
 /* ---------- Shared page shell ---------- */
 import { useTheme } from "@/hooks/use-theme";
+import { MastheadBand } from "@/components/masthead-band";
 
 export function PageShell({
   active,
@@ -307,12 +308,8 @@ export function PageShell({
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
       <AmbientBackground />
       <CommodityTicker />
-      {/* Company wordmark under ticker — same as dashboard */}
-      <div className="flex items-center justify-center gap-3 pb-2 pt-4">
-        <span className="font-mono text-[11px] font-medium uppercase tracking-[0.35em] text-foreground/45">
-          Perpetuity
-        </span>
-      </div>
+      {/* Masthead band — same as dashboard */}
+      <MastheadBand />
       <div className="flex">
         <AppSidebar active={active} />
         <main className="flex-1 px-6 pb-20 pt-6 lg:pl-24 lg:pr-10 xl:pr-14">

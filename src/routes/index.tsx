@@ -46,6 +46,7 @@ import { AmbientBackground, CommodityTicker, AppSidebar, AppFooter } from "@/com
 import { useUserTasks } from "@/lib/task-store";
 import { ConversationDialog } from "@/components/conversation-dialog";
 import { PerpetuityAsksCard } from "@/components/perpetuity-asks";
+import { MastheadBand } from "@/components/masthead-band";
 
 
 export const Route = createFileRoute("/")({
