@@ -104,14 +104,13 @@ const seedTenders: Tender[] = [
     flag: "🇵🇱",
     title: "Digital platform for export promotion — analytics module",
     buyer: "Polska Agencja Inwestycji i Handlu (PAIH)",
-    view: undefined as never,
     cpv: ["72212000", "79300000"],
     why: "Analytics module maps almost one-to-one onto your signals engine; delivery in PL requires a local partner.",
     match: 58,
     value: "PLN 6.8M",
     deadline: "in 34 days",
     posted: "29 Aug",
-  } as Tender,
+  },
 ];
 
 const sources = ["All", "EU", "World Bank", "UN · soon", "National · soon", "Grants · soon"] as const;

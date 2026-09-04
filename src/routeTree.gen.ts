@@ -19,6 +19,7 @@ import { Route as LandingRouteImport } from './routes/landing'
 import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as TendersRouteImport } from './routes/tenders'
 import { Route as ThreadsRouteImport } from './routes/threads'
 
 const IndexRoute = IndexRouteImport.update({
@@ -71,6 +72,11 @@ const SettingsRoute = SettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TendersRoute = TendersRouteImport.update({
+  id: '/tenders',
+  path: '/tenders',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ThreadsRoute = ThreadsRouteImport.update({
   id: '/threads',
   path: '/threads',
@@ -88,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
   '/settings': typeof SettingsRoute
+  '/tenders': typeof TendersRoute
   '/threads': typeof ThreadsRoute
 }
 export interface FileRoutesByTo {
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
   '/settings': typeof SettingsRoute
+  '/tenders': typeof TendersRoute
   '/threads': typeof ThreadsRoute
 }
 export interface FileRoutesById {
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   '/opportunities': typeof OpportunitiesRoute
   '/outreach': typeof OutreachRoute
   '/settings': typeof SettingsRoute
+  '/tenders': typeof TendersRoute
   '/threads': typeof ThreadsRoute
 }
 export interface FileRouteTypes {
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/outreach'
     | '/settings'
+    | '/tenders'
     | '/threads'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/outreach'
     | '/settings'
+    | '/tenders'
     | '/threads'
   id:
     | '__root__'
@@ -156,6 +167,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/outreach'
     | '/settings'
+    | '/tenders'
     | '/threads'
   fileRoutesById: FileRoutesById
 }
@@ -170,6 +182,7 @@ export interface RootRouteChildren {
   OpportunitiesRoute: typeof OpportunitiesRoute
   OutreachRoute: typeof OutreachRoute
   SettingsRoute: typeof SettingsRoute
+  TendersRoute: typeof TendersRoute
   ThreadsRoute: typeof ThreadsRoute
 }
 
@@ -245,6 +258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tenders': {
+      id: '/tenders'
+      path: '/tenders'
+      fullPath: '/tenders'
+      preLoaderRoute: typeof TendersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/threads': {
       id: '/threads'
       path: '/threads'
@@ -266,6 +286,7 @@ const rootRouteChildren: RootRouteChildren = {
   OpportunitiesRoute: OpportunitiesRoute,
   OutreachRoute: OutreachRoute,
   SettingsRoute: SettingsRoute,
+  TendersRoute: TendersRoute,
   ThreadsRoute: ThreadsRoute,
 }
 export const routeTree = rootRouteImport
