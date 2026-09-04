@@ -12,6 +12,14 @@ import {
   Bookmark,
   ArrowRight,
   Layers,
+  Timer,
+  Users,
+  Globe2,
+  Gauge,
+  TrendingUp,
+  Radar,
+  ChevronDown,
+  Languages,
 } from "lucide-react";
 import { PageShell } from "@/components/app-shell";
 import { usePerpetuityPanel } from "@/components/perpetuity-panel";
@@ -50,25 +58,16 @@ type Tender = {
   match: number;
   value: string;
   deadline: string;
+  days: number;
   posted: string;
+  bidders: string;
+  language: string;
+  effort: "Light" | "Medium" | "Heavy";
+  edge: string;
+  trend: number[];
 };
 
 const seedTenders: Tender[] = [
-  {
-    id: "t1",
-    source: "EU",
-    country: "Germany",
-    flag: "🇩🇪",
-    title:
-      "Government services — Konsortialbildung im Rahmen der Exportinitiative Energie 2027, 1. Tranche",
-    buyer: "Bundesamt für Wirtschaft und Ausfuhrkontrolle (BAFA)",
-    why: "Export-initiative consulting scope aligns with your trade intelligence offering and CEE delivery footprint.",
-    cpv: ["75131000", "79411000", "73200000"],
-    match: 72,
-    value: "€1.4M",
-    deadline: "in 19 days",
-    posted: "3 Sept",
-  },
   {
     id: "t2",
     source: "EU",
@@ -81,7 +80,34 @@ const seedTenders: Tender[] = [
     match: 81,
     value: "CZK 22M",
     deadline: "in 11 days",
+    days: 11,
     posted: "2 Sept",
+    bidders: "3–5 expected",
+    language: "Czech + EN annexes",
+    effort: "Medium",
+    edge: "Incumbent has no automated monitoring — your signals engine is the differentiator.",
+    trend: [42, 48, 51, 58, 63, 70, 74, 81],
+  },
+  {
+    id: "t1",
+    source: "EU",
+    country: "Germany",
+    flag: "🇩🇪",
+    title:
+      "Konsortialbildung im Rahmen der Exportinitiative Energie 2027, 1. Tranche",
+    buyer: "Bundesamt für Wirtschaft und Ausfuhrkontrolle (BAFA)",
+    why: "Export-initiative consulting scope aligns with your trade intelligence offering and CEE delivery footprint.",
+    cpv: ["75131000", "79411000", "73200000"],
+    match: 72,
+    value: "€1.4M",
+    deadline: "in 19 days",
+    days: 19,
+    posted: "3 Sept",
+    bidders: "6–9 expected",
+    language: "German only",
+    effort: "Heavy",
+    edge: "Consortium lead is open — a German delivery partner turns this from long-shot to credible.",
+    trend: [30, 34, 41, 44, 52, 58, 65, 72],
   },
   {
     id: "t3",
@@ -95,7 +121,13 @@ const seedTenders: Tender[] = [
     match: 66,
     value: "$480k",
     deadline: "in 27 days",
+    days: 27,
     posted: "1 Sept",
+    bidders: "2–4 expected",
+    language: "English",
+    effort: "Light",
+    edge: "Thin field and a market you already know on the ground.",
+    trend: [22, 28, 33, 39, 45, 52, 60, 66],
   },
   {
     id: "t4",
@@ -109,20 +141,29 @@ const seedTenders: Tender[] = [
     match: 58,
     value: "PLN 6.8M",
     deadline: "in 34 days",
+    days: 34,
     posted: "29 Aug",
+    bidders: "8–12 expected",
+    language: "Polish",
+    effort: "Heavy",
+    edge: "Crowded, but the analytics lot can be bid alone.",
+    trend: [18, 21, 26, 30, 36, 44, 50, 58],
   },
 ];
 
 const sources = ["All", "EU", "World Bank", "UN · soon", "National · soon", "Grants · soon"] as const;
 const sorts = ["Most relevant", "Closing soonest", "Newest"] as const;
+const lenses = ["Everything", "High fit", "Closing < 14d", "Thin field", "Saved"] as const;
 
 function TendersPage() {
   const { open, panel } = usePerpetuityPanel();
   const [query, setQuery] = useState("");
   const [source, setSource] = useState<(typeof sources)[number]>("All");
   const [sort, setSort] = useState<(typeof sorts)[number]>("Most relevant");
+  const [lens, setLens] = useState<(typeof lenses)[number]>("Everything");
   const [saved, setSaved] = useState<Set<string>>(new Set());
   const [dismissed, setDismissed] = useState<Set<string>>(new Set());
+  const [profileOpen, setProfileOpen] = useState(false);
   const [markets, setMarkets] = useState([
     { flag: "🇩🇪", name: "Germany" },
     { flag: "🇦🇹", name: "Austria" },
@@ -139,22 +180,26 @@ function TendersPage() {
     const q = query.trim().toLowerCase();
     let rows = seedTenders.filter((t) => !dismissed.has(t.id));
     if (source === "EU" || source === "World Bank") rows = rows.filter((t) => t.source === source);
+    if (lens === "High fit") rows = rows.filter((t) => t.match >= 70);
+    if (lens === "Closing < 14d") rows = rows.filter((t) => t.days < 14);
+    if (lens === "Thin field") rows = rows.filter((t) => t.bidders.startsWith("2") || t.bidders.startsWith("3"));
+    if (lens === "Saved") rows = rows.filter((t) => saved.has(t.id));
     if (q)
       rows = rows.filter((t) =>
         [t.title, t.buyer, t.why, t.country, ...t.cpv].join(" ").toLowerCase().includes(q),
       );
     if (sort === "Most relevant") rows = [...rows].sort((a, b) => b.match - a.match);
-    if (sort === "Closing soonest")
-      rows = [...rows].sort((a, b) => parseInt(a.deadline.replace(/\D/g, "")) - parseInt(b.deadline.replace(/\D/g, "")));
+    if (sort === "Closing soonest") rows = [...rows].sort((a, b) => a.days - b.days);
     return rows;
-  }, [query, source, sort, dismissed]);
+  }, [query, source, sort, lens, dismissed, saved]);
 
   const openTender = (t: Tender) =>
     open({
       title: t.title,
-      eyebrow: `Tender · ${t.source} · ${t.country} · ${t.match}% match`,
+      eyebrow: `Tender · ${t.source} · ${t.country} · ${t.match}% fit`,
       source: `${t.buyer} · value ${t.value} · closes ${t.deadline} · CPV ${t.cpv.join(", ")}`,
       why: t.why,
+      body: `Field: ${t.bidders} · language: ${t.language} · effort: ${t.effort}\nEdge: ${t.edge}`,
       steps: [
         "Pull the full notice and annexes from the source register",
         "Check eligibility: turnover, references, local presence",
@@ -181,189 +226,105 @@ function TendersPage() {
       title=""
       accentWord="Tenders"
       rightSlot={
-        <button
-          type="button"
-          onClick={() =>
-            setSort((s) => sorts[(sorts.indexOf(s) + 1) % sorts.length])
-          }
-          className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium text-foreground/70 hover:text-foreground"
-        >
-          <ArrowUpDown className="size-3" strokeWidth={1.75} /> {sort}
-        </button>
-      }
-    >
-      {/* Trade profile */}
-      <section className="glass-panel-strong relative mb-4 overflow-hidden rounded-3xl p-5">
-        <div className="ai-iridescent absolute inset-x-6 top-0 h-px opacity-60" aria-hidden />
-        <div className="flex items-center gap-2">
-          <div className="ai-iridescent flex size-7 items-center justify-center rounded-full ring-1 ring-foreground/5">
-            <Layers className="size-3.5 text-foreground/80" strokeWidth={1.75} />
-          </div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground/45">
-            Your trade profile
-          </p>
+        <div className="flex items-center gap-1.5">
           <button
             type="button"
             onClick={() =>
               open({
-                title: "Trade profile drives every match",
-                eyebrow: "Tenders · scoring",
-                why: "Perpetuity scores each notice against your sector, product lines, HS/CPV codes and target markets. Sharpen these and the match quality moves immediately.",
-                steps: [
-                  "Add the HS codes you actually ship under",
-                  "Keep target markets to where you can deliver",
-                  "Product lines are read verbatim from Context memory",
-                ],
+                title: "Watch a CPV family",
+                eyebrow: "Tenders · standing brief",
+                why: "Perpetuity will monitor the register continuously and brief you the morning any matching notice lands.",
+                steps: ["Pick the CPV family", "Choose markets", "Daily or instant briefing"],
+                actions: [{ label: "Set the watch", primary: true }, { label: "Later" }],
               })
             }
-            className="ml-auto text-[11px] text-foreground/50 hover:text-foreground"
+            className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium text-foreground/70 hover:text-foreground"
           >
-            How scoring works ↗
+            <Radar className="size-3" strokeWidth={1.75} /> Watch
+          </button>
+          <button
+            type="button"
+            onClick={() => setSort((s) => sorts[(sorts.indexOf(s) + 1) % sorts.length])}
+            className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium text-foreground/70 hover:text-foreground"
+          >
+            <ArrowUpDown className="size-3" strokeWidth={1.75} /> {sort}
           </button>
         </div>
-
-        <div className="mt-4 grid gap-5 md:grid-cols-2">
-          <div className="space-y-4">
-            <Block label="Sector">
-              <button
-                type="button"
-                onClick={() =>
-                  open({
-                    title: "Sector · Trade intelligence software",
-                    eyebrow: "Trade profile",
-                    why: "Sector narrows the CPV families Perpetuity watches. Yours currently spans consulting, market research and software services.",
-                  })
-                }
-                className="glass-chip inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] text-foreground/80"
-              >
-                Trade intelligence · services
-                <PenLine className="size-2.5 text-foreground/45" strokeWidth={2} />
-              </button>
-            </Block>
-
-            <Block label="HS / CPV codes">
-              <div className="flex flex-wrap items-center gap-1.5">
-                {codes.map((c) => (
-                  <span
-                    key={c}
-                    className="glass-chip inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-mono text-[10px] text-foreground/75"
-                  >
-                    {c}
-                    <button
-                      type="button"
-                      onClick={() => setCodes((cs) => cs.filter((x) => x !== c))}
-                      className="text-foreground/35 hover:text-foreground"
-                    >
-                      <X className="size-2.5" strokeWidth={2.5} />
-                    </button>
-                  </span>
-                ))}
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    const v = codeDraft.trim();
-                    if (v) setCodes((cs) => [...cs, v]);
-                    setCodeDraft("");
-                  }}
-                  className="flex items-center gap-1"
-                >
-                  <input
-                    value={codeDraft}
-                    onChange={(e) => setCodeDraft(e.target.value)}
-                    placeholder="e.g. 4407"
-                    className="w-24 rounded-full bg-foreground/5 px-2.5 py-1 font-mono text-[10px] text-foreground/80 outline-none placeholder:text-foreground/35 focus:ring-1 focus:ring-ring"
-                  />
-                  <button type="submit" className="text-foreground/40 hover:text-foreground">
-                    <Plus className="size-3" strokeWidth={2} />
-                  </button>
-                </form>
+      }
+    >
+      {/* ── Intelligence header: what Perpetuity did overnight ───────── */}
+      <section className="glass-panel-strong relative mb-3 overflow-hidden rounded-3xl">
+        <div className="ai-iridescent absolute inset-x-0 top-0 h-px opacity-70" aria-hidden />
+        <div className="flex flex-col gap-3 p-4 md:flex-row md:items-center">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2">
+              <div className="ai-iridescent flex size-6 items-center justify-center rounded-full ring-1 ring-foreground/5">
+                <Sparkles className="size-3 text-foreground/80" strokeWidth={1.75} />
               </div>
-            </Block>
+              <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-foreground/45">
+                Perpetuity · procurement read
+              </p>
+              <span className="glass-chip inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-foreground/55">
+                14:02 UTC
+              </span>
+            </div>
+            <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/80">
+              Screened <span className="font-mono text-foreground">1,284</span> notices across TED and
+              the World Bank overnight. Four clear your bar — <span className="text-foreground">CzechTrade</span>{" "}
+              is the one to move on: thin field, eleven days, and the incumbent has no monitoring layer.
+            </p>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              <MiniPill
+                icon={Timer}
+                label="1 closing under 14d"
+                onClick={() => setLens("Closing < 14d")}
+              />
+              <MiniPill icon={Gauge} label="2 above 70% fit" onClick={() => setLens("High fit")} />
+              <MiniPill icon={Users} label="2 thin fields" onClick={() => setLens("Thin field")} />
+            </div>
           </div>
 
-          <div className="space-y-4">
-            <Block label="Product lines">
-              <button
-                type="button"
-                onClick={() =>
-                  open({
-                    title: "Product line · read from Context memory",
-                    eyebrow: "Trade profile",
-                    why: "AI-powered trade intelligence: monitoring, opportunity scouting, market analysis and outreach for exporters across CEE, MENA and beyond.",
-                    steps: ["Edit it on the Context page — every agent reads it from there"],
-                  })
-                }
-                className="glass-panel w-full rounded-2xl px-3 py-2.5 text-left text-[12px] leading-relaxed text-foreground/80 hover:bg-foreground/5"
-              >
-                AI-powered trade intelligence — monitoring, opportunity scouting,
-                market analysis and outreach for exporters in CEE, MENA and beyond.
-              </button>
-            </Block>
-
-            <Block label="Target markets">
-              <div className="flex flex-wrap items-center gap-1.5">
-                {markets.map((m) => (
-                  <span
-                    key={m.name}
-                    className="glass-chip inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] text-foreground/80"
-                  >
-                    <span className="text-[11px] leading-none">{m.flag}</span>
-                    {m.name}
-                    <button
-                      type="button"
-                      onClick={() => setMarkets((ms) => ms.filter((x) => x.name !== m.name))}
-                      className="text-foreground/35 hover:text-foreground"
-                    >
-                      <X className="size-2.5" strokeWidth={2.5} />
-                    </button>
-                  </span>
-                ))}
-              </div>
-            </Block>
+          <div className="grid shrink-0 grid-cols-3 gap-2 md:w-[320px]">
+            <Stat
+              value="€3.1M"
+              label="Addressable"
+              onClick={() =>
+                open({
+                  title: "Addressable value in view",
+                  eyebrow: "Tenders · pipeline",
+                  why: "Combined ceiling of every notice currently passing your filters, converted to EUR at today's rate.",
+                })
+              }
+            />
+            <Stat
+              value="81%"
+              label="Best fit"
+              accent
+              onClick={() =>
+                open({
+                  title: "Best fit · CzechTrade framework",
+                  eyebrow: "Tenders · scoring",
+                  why: "Highest scoring notice against your codes, markets and past awards.",
+                })
+              }
+            />
+            <Stat
+              value="4"
+              label="Live matches"
+              onClick={() =>
+                open({
+                  title: "Live matches",
+                  eyebrow: "Tenders · today",
+                  why: "Notices open right now that clear your scoring threshold. Dismissed rows are excluded.",
+                })
+              }
+            />
           </div>
         </div>
       </section>
 
-      {/* Status rows */}
-      <div className="mb-4 grid gap-2.5 md:grid-cols-2">
-        <StatusRow
-          icon={ShieldCheck}
-          label="EU financial sanctions"
-          text="No active concerns across your target markets · 6,234 entities monitored"
-          onClick={() =>
-            open({
-              title: "EU financial sanctions monitoring",
-              eyebrow: "Tenders · compliance",
-              source: "EU consolidated list · refreshed 14:02 UTC",
-              why: "Every buyer, consortium partner and beneficial owner on this page is screened against the EU consolidated list before Perpetuity surfaces the notice.",
-              steps: [
-                "Screen a specific counterparty on demand",
-                "Attach the screening record to a bid file",
-              ],
-              artifacts: [{ kind: "data", label: "Screening log · last 30 days" }],
-            })
-          }
-        />
-        <StatusRow
-          icon={Sparkles}
-          label="Live procurement"
-          text="Real notices from TED and the World Bank, scored against your codes"
-          onClick={() =>
-            open({
-              title: "Where these tenders come from",
-              eyebrow: "Tenders · sources",
-              why: "TED (EU) and World Bank registers are pulled continuously. Nothing here is illustrative — each row links to an open notice.",
-              steps: [
-                "UN, national registers and grants land next",
-                "Ask Perpetuity to watch a CPV family and brief you daily",
-              ],
-            })
-          }
-        />
-      </div>
-
-      {/* Search + sources */}
-      <div className="glass-panel mb-4 rounded-2xl p-2.5">
+      {/* ── Search + lenses + sources ─────────────────────────────────── */}
+      <div className="glass-panel mb-3 rounded-2xl p-2.5">
         <div className="flex items-center gap-2">
           <Search className="ml-1 size-3.5 shrink-0 text-foreground/40" strokeWidth={1.75} />
           <input
@@ -373,49 +334,68 @@ function TendersPage() {
             className="w-full bg-transparent text-[12.5px] text-foreground outline-none placeholder:text-foreground/40"
           />
         </div>
-        <div className="mt-2.5 flex flex-wrap items-center gap-1.5 border-t border-foreground/5 pt-2.5">
-          <span className="mr-1 text-[9px] font-semibold uppercase tracking-[0.2em] text-foreground/40">
-            Source
-          </span>
-          {sources.map((s) => {
-            const soon = s.includes("soon");
-            const active = s === source;
-            return (
+        <div className="mt-2.5 flex flex-wrap items-center gap-2 border-t border-foreground/5 pt-2.5">
+          {/* Apple-style segmented lens control */}
+          <div className="glass-chip flex items-center gap-0.5 rounded-full p-0.5">
+            {lenses.map((l) => (
               <button
-                key={s}
+                key={l}
                 type="button"
-                onClick={() =>
-                  soon
-                    ? open({
-                        title: `${s.split(" ·")[0]} registers · coming next`,
-                        eyebrow: "Tenders · roadmap",
-                        why: "Not connected yet. Perpetuity will fold these notices into the same scoring pipeline once the register feed is live.",
-                      })
-                    : setSource(s)
-                }
-                className={`rounded-full px-2.5 py-1 text-[10.5px] font-medium transition-colors ${
-                  active
-                    ? "bg-accent/15 text-accent ring-1 ring-accent/25"
-                    : soon
-                      ? "bg-foreground/5 text-foreground/35 hover:text-foreground/60"
-                      : "glass-chip text-foreground/70 hover:text-foreground"
+                onClick={() => setLens(l)}
+                className={`rounded-full px-2.5 py-1 text-[10.5px] font-medium transition-all ${
+                  lens === l
+                    ? "bg-background/80 text-foreground shadow-[0_1px_3px_-1px_rgba(10,15,25,0.25)]"
+                    : "text-foreground/50 hover:text-foreground/80"
                 }`}
               >
-                {s}
+                {l}
               </button>
-            );
-          })}
+            ))}
+          </div>
+          <div className="ml-auto flex flex-wrap items-center gap-1.5">
+            {sources.map((s) => {
+              const soon = s.includes("soon");
+              const active = s === source;
+              return (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() =>
+                    soon
+                      ? open({
+                          title: `${s.split(" ·")[0]} registers · coming next`,
+                          eyebrow: "Tenders · roadmap",
+                          why: "Not connected yet. Perpetuity will fold these notices into the same scoring pipeline once the register feed is live.",
+                        })
+                      : setSource(s)
+                  }
+                  className={`rounded-full px-2.5 py-1 text-[10.5px] font-medium transition-colors ${
+                    active
+                      ? "bg-accent/15 text-accent ring-1 ring-accent/25"
+                      : soon
+                        ? "bg-foreground/5 text-foreground/35 hover:text-foreground/60"
+                        : "glass-chip text-foreground/70 hover:text-foreground"
+                  }`}
+                >
+                  {s}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      {/* Tender cards */}
-      <div className="space-y-3">
+      {/* ── Tender cards ──────────────────────────────────────────────── */}
+      <div className="space-y-2.5">
         {list.map((t) => (
           <article
             key={t.id}
             onClick={() => openTender(t)}
-            className="glass-panel-strong group cursor-pointer rounded-3xl p-4 transition-all hover:translate-y-[-1px]"
+            className="glass-panel-strong group relative cursor-pointer overflow-hidden rounded-3xl p-4 transition-all hover:translate-y-[-1px]"
           >
+            {t.days < 14 && (
+              <div className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-amber-500/60 to-transparent" aria-hidden />
+            )}
             <div className="flex items-start gap-4">
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-1.5">
@@ -425,10 +405,20 @@ function TendersPage() {
                   <span className="glass-chip inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-foreground/65">
                     <span className="text-[10px] leading-none">{t.flag}</span> {t.country}
                   </span>
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-foreground/40">
-                    closes {t.deadline} · {t.value}
+                  <span
+                    className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.16em] ${
+                      t.days < 14
+                        ? "bg-amber-500/15 text-amber-600 dark:text-amber-300"
+                        : "glass-chip text-foreground/55"
+                    }`}
+                  >
+                    <Timer className="size-2.5" strokeWidth={2} /> closes {t.deadline}
+                  </span>
+                  <span className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-foreground/45">
+                    {t.value}
                   </span>
                 </div>
+
                 <h3 className="mt-1.5 font-sans text-[15.5px] font-semibold leading-snug tracking-[-0.01em]">
                   {t.title}
                 </h3>
@@ -436,11 +426,22 @@ function TendersPage() {
                   <Building2 className="size-3" strokeWidth={1.75} /> {t.buyer}
                 </p>
 
+                {/* Intelligence strip */}
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  <Signal icon={Users} label={t.bidders} hint="Expected field" onOpen={open} tender={t} />
+                  <Signal icon={Languages} label={t.language} hint="Submission language" onOpen={open} tender={t} />
+                  <Signal icon={Layers} label={`${t.effort} lift`} hint="Effort to bid" onOpen={open} tender={t} />
+                </div>
+
                 <div className="glass-panel mt-2.5 rounded-2xl px-3 py-2">
                   <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-accent/80">
                     Why this matches
                   </p>
                   <p className="mt-0.5 text-[12px] leading-relaxed text-foreground/80">{t.why}</p>
+                  <p className="mt-1.5 flex items-start gap-1.5 text-[11.5px] leading-relaxed text-foreground/60">
+                    <TrendingUp className="mt-0.5 size-3 shrink-0 text-emerald-500" strokeWidth={1.75} />
+                    {t.edge}
+                  </p>
                 </div>
 
                 <div className="mt-2 flex flex-wrap gap-1">
@@ -465,8 +466,9 @@ function TendersPage() {
                 </div>
               </div>
 
-              <div className="flex shrink-0 flex-col items-center gap-1">
+              <div className="flex shrink-0 flex-col items-center gap-1.5">
                 <MatchRing value={t.match} />
+                <Spark data={t.trend} />
                 <button
                   type="button"
                   onClick={(e) => {
@@ -508,7 +510,8 @@ function TendersPage() {
                   e.stopPropagation();
                   setSaved((s) => {
                     const n = new Set(s);
-                    n.has(t.id) ? n.delete(t.id) : n.add(t.id);
+                    if (n.has(t.id)) n.delete(t.id);
+                    else n.add(t.id);
                     return n;
                   });
                 }}
@@ -522,9 +525,32 @@ function TendersPage() {
                 />
                 {saved.has(t.id) ? "Saved" : "Save"}
               </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  open({
+                    title: `Eligibility check · ${t.country}`,
+                    eyebrow: "Tenders · eligibility",
+                    why: "Turnover, references and local-presence requirements read against your Context memory before you spend a day on the annexes.",
+                    steps: [
+                      "Match turnover threshold to last filed accounts",
+                      "Pull two comparable references",
+                      t.language.includes("English") ? "No translation needed" : "Flag translation cost",
+                    ],
+                    actions: [{ label: "Run the check", primary: true }, { label: "Later" }],
+                  });
+                }}
+                className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium text-foreground/70 hover:text-foreground"
+              >
+                <ShieldCheck className="size-3" strokeWidth={1.75} /> Eligibility
+              </button>
               <span className="ml-auto inline-flex items-center gap-1 font-mono text-[9.5px] uppercase tracking-[0.18em] text-foreground/35">
                 posted {t.posted}
-                <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" strokeWidth={1.75} />
+                <ArrowRight
+                  className="size-3 transition-transform group-hover:translate-x-0.5"
+                  strokeWidth={1.75}
+                />
               </span>
             </div>
           </article>
@@ -532,14 +558,13 @@ function TendersPage() {
 
         {list.length === 0 && (
           <div className="glass-panel rounded-3xl px-5 py-8 text-center">
-            <p className="text-[13px] text-foreground/65">
-              No notices match this filter right now.
-            </p>
+            <p className="text-[13px] text-foreground/65">No notices match this filter right now.</p>
             <button
               type="button"
               onClick={() => {
                 setQuery("");
                 setSource("All");
+                setLens("Everything");
                 setDismissed(new Set());
               }}
               className="mt-3 rounded-full bg-accent/15 px-3 py-1.5 text-[11px] font-medium text-accent hover:bg-accent/25"
@@ -550,8 +575,268 @@ function TendersPage() {
         )}
       </div>
 
+      {/* ── Compliance + sources strip ────────────────────────────────── */}
+      <div className="mt-3 grid gap-2.5 md:grid-cols-2">
+        <StatusRow
+          icon={ShieldCheck}
+          label="EU financial sanctions"
+          text="No active concerns · 6,234 entities monitored"
+          onClick={() =>
+            open({
+              title: "EU financial sanctions monitoring",
+              eyebrow: "Tenders · compliance",
+              source: "EU consolidated list · refreshed 14:02 UTC",
+              why: "Every buyer, consortium partner and beneficial owner on this page is screened against the EU consolidated list before Perpetuity surfaces the notice.",
+              steps: ["Screen a specific counterparty on demand", "Attach the screening record to a bid file"],
+              artifacts: [{ kind: "data", label: "Screening log · last 30 days" }],
+            })
+          }
+        />
+        <StatusRow
+          icon={Globe2}
+          label="Connected registers"
+          text="TED (EU) + World Bank · UN and national next"
+          onClick={() =>
+            open({
+              title: "Where these tenders come from",
+              eyebrow: "Tenders · sources",
+              why: "TED (EU) and World Bank registers are pulled continuously. Nothing here is illustrative — each row links to an open notice.",
+              steps: ["UN, national registers and grants land next", "Ask Perpetuity to watch a CPV family"],
+            })
+          }
+        />
+      </div>
+
+      {/* ── Trade profile (collapsed by default) ──────────────────────── */}
+      <section className="glass-panel-strong relative mt-3 overflow-hidden rounded-3xl">
+        <button
+          type="button"
+          onClick={() => setProfileOpen((v) => !v)}
+          className="flex w-full items-center gap-2 px-4 py-3 text-left hover:bg-foreground/[0.03]"
+        >
+          <div className="ai-iridescent flex size-6 items-center justify-center rounded-full ring-1 ring-foreground/5">
+            <Layers className="size-3 text-foreground/80" strokeWidth={1.75} />
+          </div>
+          <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-foreground/45">
+            Scoring profile
+          </p>
+          <span className="glass-chip rounded-full px-2 py-0.5 font-mono text-[9px] text-foreground/55">
+            {codes.length} codes · {markets.length} markets
+          </span>
+          <ChevronDown
+            className={`ml-auto size-3.5 text-foreground/40 transition-transform ${profileOpen ? "rotate-180" : ""}`}
+            strokeWidth={1.75}
+          />
+        </button>
+
+        {profileOpen && (
+          <div className="grid gap-5 border-t border-foreground/5 px-4 py-4 md:grid-cols-2">
+            <div className="space-y-4">
+              <Block label="Sector">
+                <button
+                  type="button"
+                  onClick={() =>
+                    open({
+                      title: "Sector · Trade intelligence software",
+                      eyebrow: "Scoring profile",
+                      why: "Sector narrows the CPV families Perpetuity watches. Yours currently spans consulting, market research and software services.",
+                    })
+                  }
+                  className="glass-chip inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] text-foreground/80"
+                >
+                  Trade intelligence · services
+                  <PenLine className="size-2.5 text-foreground/45" strokeWidth={2} />
+                </button>
+              </Block>
+
+              <Block label="HS / CPV codes">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {codes.map((c) => (
+                    <span
+                      key={c}
+                      className="glass-chip inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-mono text-[10px] text-foreground/75"
+                    >
+                      {c}
+                      <button
+                        type="button"
+                        onClick={() => setCodes((cs) => cs.filter((x) => x !== c))}
+                        className="text-foreground/35 hover:text-foreground"
+                      >
+                        <X className="size-2.5" strokeWidth={2.5} />
+                      </button>
+                    </span>
+                  ))}
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      const v = codeDraft.trim();
+                      if (v) setCodes((cs) => [...cs, v]);
+                      setCodeDraft("");
+                    }}
+                    className="flex items-center gap-1"
+                  >
+                    <input
+                      value={codeDraft}
+                      onChange={(e) => setCodeDraft(e.target.value)}
+                      placeholder="e.g. 4407"
+                      className="w-24 rounded-full bg-foreground/5 px-2.5 py-1 font-mono text-[10px] text-foreground/80 outline-none placeholder:text-foreground/35 focus:ring-1 focus:ring-ring"
+                    />
+                    <button type="submit" className="text-foreground/40 hover:text-foreground">
+                      <Plus className="size-3" strokeWidth={2} />
+                    </button>
+                  </form>
+                </div>
+              </Block>
+            </div>
+
+            <div className="space-y-4">
+              <Block label="Product lines">
+                <button
+                  type="button"
+                  onClick={() =>
+                    open({
+                      title: "Product line · read from Context memory",
+                      eyebrow: "Scoring profile",
+                      why: "AI-powered trade intelligence: monitoring, opportunity scouting, market analysis and outreach for exporters across CEE, MENA and beyond.",
+                      steps: ["Edit it on the Context page — every agent reads it from there"],
+                    })
+                  }
+                  className="glass-panel w-full rounded-2xl px-3 py-2.5 text-left text-[12px] leading-relaxed text-foreground/80 hover:bg-foreground/5"
+                >
+                  AI-powered trade intelligence — monitoring, opportunity scouting, market analysis
+                  and outreach for exporters in CEE, MENA and beyond.
+                </button>
+              </Block>
+
+              <Block label="Target markets">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {markets.map((m) => (
+                    <span
+                      key={m.name}
+                      className="glass-chip inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] text-foreground/80"
+                    >
+                      <span className="text-[11px] leading-none">{m.flag}</span>
+                      {m.name}
+                      <button
+                        type="button"
+                        onClick={() => setMarkets((ms) => ms.filter((x) => x.name !== m.name))}
+                        className="text-foreground/35 hover:text-foreground"
+                      >
+                        <X className="size-2.5" strokeWidth={2.5} />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              </Block>
+            </div>
+          </div>
+        )}
+      </section>
+
       {panel}
     </PageShell>
+  );
+}
+
+function MiniPill({
+  icon: Icon,
+  label,
+  onClick,
+}: {
+  icon: typeof Timer;
+  label: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="glass-chip inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10.5px] font-medium text-foreground/70 hover:text-foreground"
+    >
+      <Icon className="size-3 text-foreground/50" strokeWidth={1.75} />
+      {label}
+    </button>
+  );
+}
+
+function Stat({
+  value,
+  label,
+  accent,
+  onClick,
+}: {
+  value: string;
+  label: string;
+  accent?: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="glass-panel rounded-2xl px-2.5 py-2 text-left transition-colors hover:bg-foreground/5"
+    >
+      <p
+        className={`font-mono text-[15px] font-semibold leading-none ${
+          accent ? "text-accent" : "text-foreground/90"
+        }`}
+      >
+        {value}
+      </p>
+      <p className="mt-1 text-[8.5px] font-semibold uppercase tracking-[0.18em] text-foreground/45">
+        {label}
+      </p>
+    </button>
+  );
+}
+
+function Signal({
+  icon: Icon,
+  label,
+  hint,
+  onOpen,
+  tender,
+}: {
+  icon: typeof Users;
+  label: string;
+  hint: string;
+  onOpen: ReturnType<typeof usePerpetuityPanel>["open"];
+  tender: Tender;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={(e) => {
+        e.stopPropagation();
+        onOpen({
+          title: `${hint} · ${label}`,
+          eyebrow: `Tender signal · ${tender.country}`,
+          why: tender.edge,
+          source: `${tender.buyer} · closes ${tender.deadline}`,
+        });
+      }}
+      className="glass-chip inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] text-foreground/70 hover:text-foreground"
+    >
+      <Icon className="size-2.5 text-foreground/45" strokeWidth={2} />
+      {label}
+    </button>
+  );
+}
+
+function Spark({ data }: { data: number[] }) {
+  const max = Math.max(...data);
+  const min = Math.min(...data);
+  const pts = data
+    .map((v, i) => {
+      const x = (i / (data.length - 1)) * 40;
+      const y = 14 - ((v - min) / Math.max(1, max - min)) * 12;
+      return `${x},${y}`;
+    })
+    .join(" ");
+  return (
+    <svg viewBox="0 0 40 16" className="h-3.5 w-10 text-accent/70" aria-hidden>
+      <polyline points={pts} fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
   );
 }
 
@@ -581,7 +866,7 @@ function StatusRow({
     <button
       type="button"
       onClick={onClick}
-      className="glass-panel group flex w-full items-center gap-3 rounded-2xl px-3.5 py-3 text-left transition-colors hover:bg-foreground/5"
+      className="glass-panel group flex w-full items-center gap-3 rounded-2xl px-3.5 py-2.5 text-left transition-colors hover:bg-foreground/5"
     >
       <div className="glass-chip flex size-7 shrink-0 items-center justify-center rounded-full">
         <Icon className="size-3.5 text-foreground/70" strokeWidth={1.75} />
@@ -590,7 +875,7 @@ function StatusRow({
         <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-foreground/45">
           {label}
         </p>
-        <p className="mt-0.5 truncate text-[12px] text-foreground/78">{text}</p>
+        <p className="mt-0.5 truncate text-[12px] text-foreground/75">{text}</p>
       </div>
       <ArrowRight
         className="size-3.5 shrink-0 text-foreground/30 transition-transform group-hover:translate-x-0.5"
@@ -606,7 +891,7 @@ function MatchRing({ value }: { value: number }) {
   return (
     <div className="relative flex size-11 items-center justify-center">
       <svg viewBox="0 0 36 36" className="absolute inset-0 size-full -rotate-90">
-        <circle cx="18" cy="18" r={r} fill="none" stroke="currentColor" strokeWidth="2" className="text-foreground/8" />
+        <circle cx="18" cy="18" r={r} fill="none" stroke="currentColor" strokeWidth="2" className="text-foreground/10" />
         <circle
           cx="18"
           cy="18"
