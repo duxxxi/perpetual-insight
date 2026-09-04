@@ -7,6 +7,7 @@ import {
   Send,
   Users,
   FileText,
+  FileSearch,
   Compass,
   Brain,
   Plug,
@@ -112,6 +113,7 @@ type SidebarKey =
   | "contacts"
   | "documents"
   | "opportunities"
+  | "tenders"
   | "context"
   | "connections"
   | "settings";
@@ -125,6 +127,7 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
     { key: "contacts", icon: Users, label: "Contacts", to: "/contacts" },
     { key: "documents", icon: FileText, label: "Documents", to: "/documents" },
     { key: "opportunities", icon: Compass, label: "Opportunities", to: "/opportunities" },
+    { key: "tenders", icon: FileSearch, label: "Tenders", to: "/tenders" },
     { key: "context", icon: Brain, label: "Context", to: "/context" },
     { key: "connections", icon: Plug, label: "Connections", to: "/connections" },
     { key: "settings", icon: Settings, label: "Settings", to: "/settings" },
