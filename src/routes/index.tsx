@@ -47,6 +47,14 @@ import { useUserTasks } from "@/lib/task-store";
 import { ConversationDialog } from "@/components/conversation-dialog";
 import { PerpetuityAsksCard } from "@/components/perpetuity-asks";
 import { MastheadBand } from "@/components/masthead-band";
+import {
+  PromptInput,
+  PromptInputFooter,
+  PromptInputSubmit,
+  PromptInputTextarea,
+  PromptInputTools,
+} from "@/components/ai-elements/prompt-input";
+import { Button } from "@/components/ui/button";
 
 
 export const Route = createFileRoute("/")({
@@ -366,8 +374,8 @@ function AskPerpetuity() {
   const [convOpen, setConvOpen] = useState(false);
   const [pending, setPending] = useState<string | null>(null);
 
-  const launch = () => {
-    const v = draft.trim();
+  const launch = (message = draft) => {
+    const v = message.trim();
     if (!v) return;
     setPending(v);
     setDraft("");
@@ -390,101 +398,110 @@ function AskPerpetuity() {
   ];
 
   return (
-    <div className="relative mb-8 group">
-      {/* soft blue halo */}
-      <div className="ask-glow pointer-events-none absolute -inset-3 rounded-[2rem]" aria-hidden />
-      <div className="ai-iridescent absolute -inset-px rounded-3xl opacity-70 blur-[2px]" aria-hidden />
-      <div className="glass-panel-strong ask-ring relative rounded-3xl p-4">
-        <div className="flex items-center gap-3">
-          <div className="globe-orb size-5 shrink-0 ring-1 ring-foreground/10" aria-hidden />
-          <input
-            type="text"
+    <section className="ask-stage group relative mb-8" aria-label="Ask Perpetuity">
+      <div className="ask-stage-glow pointer-events-none absolute -inset-5" aria-hidden />
+      <div className="ask-stage-shell relative overflow-hidden rounded-[1.75rem] px-4 pb-4 pt-4 sm:px-5 sm:pb-5 sm:pt-5">
+        <div className="ask-stage-sheen pointer-events-none absolute inset-x-10 top-0 h-px" aria-hidden />
+        <div className="mb-4 flex items-center justify-between gap-4 px-1">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="ask-stage-orbit relative flex size-10 shrink-0 items-center justify-center rounded-full">
+              <div className="globe-orb size-5 ring-1 ring-foreground/10" aria-hidden />
+            </div>
+            <div className="min-w-0">
+              <p className="font-command text-[15px] font-semibold text-foreground">Ask Perpetuity</p>
+              <p className="mt-0.5 truncate text-[11px] text-foreground/48">One conversation across your work</p>
+            </div>
+          </div>
+          <div className="ask-status-pill hidden items-center gap-2 rounded-full px-3 py-1.5 text-[10px] text-foreground/55 sm:flex">
+            <span className="relative flex size-1.5">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent/50" />
+              <span className="relative inline-flex size-1.5 rounded-full bg-accent" />
+            </span>
+            Intelligence ready
+          </div>
+        </div>
+
+        <PromptInput
+          onSubmit={({ text }) => launch(text)}
+          className="ask-composer"
+        >
+          <PromptInputTextarea
+            name="message"
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                launch();
-              }
-            }}
-            placeholder="Ask Perpetuity anything…"
-            className="flex-1 bg-transparent text-sm font-medium placeholder:text-foreground/40 focus:outline-none"
+            placeholder="Ask anything. Plan, investigate, draft, or act…"
+            className="min-h-[76px] px-4 pb-2 pt-4 font-command text-[16px] leading-relaxed text-foreground placeholder:text-foreground/32 sm:text-[17px]"
           />
-          <button
-            type="button"
-            onClick={launch}
-            disabled={!draft.trim()}
-            data-pill
-            className="inline-flex size-9 items-center justify-center rounded-2xl bg-accent/90 text-accent-foreground shadow-[0_0_16px_-4px_rgba(10,15,25,0.35)] transition-all hover:scale-105 hover:bg-accent hover:shadow-[0_0_20px_-4px_rgba(10,15,25,0.35)] disabled:opacity-40 disabled:hover:scale-100 disabled:hover:shadow-none"
-          >
-            <ArrowUp className="size-4" />
-          </button>
-        </div>
-        <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-foreground/5 pt-3">
-          {/* Add task */}
-          <Popover>
-            <PopoverTrigger asChild>
-              <button data-pill className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] text-foreground/55 transition-colors hover:bg-foreground/5 hover:text-foreground">
-                <Plus className="size-3.5" />
-                Add task
-              </button>
-            </PopoverTrigger>
-            <PopoverContent align="start" className="w-60 rounded-2xl border-foreground/10 bg-background/85 p-1.5 backdrop-blur-2xl">
-              <button data-pill className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors hover:bg-foreground/5">
-                <Paperclip className="size-4 text-foreground/60" />
-                <span>Upload files</span>
-              </button>
-              <div className="my-1 h-px bg-foreground/5" />
-              {addTaskItems.slice(1).map((it) => (
-                <button data-pill key={it.label} className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors hover:bg-foreground/5">
-                  <it.icon className="size-4 text-foreground/60" />
-                  <span>{it.label}</span>
-                </button>
-              ))}
-            </PopoverContent>
-          </Popover>
+          <PromptInputFooter className="px-2.5 pb-2.5 pt-1">
+            <PromptInputTools className="gap-1.5">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="ghost" size="sm" data-pill className="ask-tool-pill h-8 rounded-full px-3 text-[11px] text-foreground/60">
+                    <Plus className="size-3.5" />
+                    Add task
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent align="start" className="w-60 rounded-2xl border-foreground/10 bg-background/85 p-1.5 backdrop-blur-2xl">
+                  {addTaskItems.map((it) => (
+                    <Button variant="ghost" data-pill key={it.label} className="h-9 w-full justify-start rounded-xl px-3 text-sm font-normal">
+                      <it.icon className="size-4 text-foreground/60" />
+                      <span>{it.label}</span>
+                    </Button>
+                  ))}
+                </PopoverContent>
+              </Popover>
 
-          {/* Permissions */}
-          <Popover>
-            <PopoverTrigger asChild>
-              <button data-pill className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] text-foreground/55 transition-colors hover:bg-foreground/5 hover:text-foreground">
-                <Shield className="size-3.5" />
-                Permissions
-              </button>
-            </PopoverTrigger>
-            <PopoverContent align="start" className="w-80 rounded-2xl border-foreground/10 bg-background/85 p-0 backdrop-blur-2xl">
-              <div className="border-b border-foreground/5 px-4 py-3">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/45">Permission</p>
-              </div>
-              <div className="p-1.5">
-                {permissions.map((p) => (
-                  <button
-                    key={p.id}
-                    onClick={() => setPermission(p.id)}
-                    className="flex w-full items-start gap-3 rounded-xl px-3 py-2.5 text-left transition-colors hover:bg-foreground/5"
-                  >
-                    <div className="mt-0.5 flex size-4 shrink-0 items-center justify-center">
-                      {permission === p.id && <Check className="size-3.5 text-accent" />}
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium leading-tight">{p.label}</p>
-                      <p className="mt-0.5 text-xs text-foreground/45">{p.sub}</p>
-                    </div>
-                  </button>
-                ))}
-              </div>
-              <div className="border-t border-foreground/5 px-4 py-2.5">
-                <button data-pill className="inline-flex items-center gap-1 text-xs font-medium text-foreground/70 hover:text-foreground">
-                  Learn more
-                  <ArrowUpRight className="size-3" />
-                </button>
-              </div>
-            </PopoverContent>
-          </Popover>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="ghost" size="sm" data-pill className="ask-tool-pill h-8 rounded-full px-3 text-[11px] text-foreground/60">
+                    <Shield className="size-3.5" />
+                    Permissions
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent align="start" className="w-80 rounded-2xl border-foreground/10 bg-background/85 p-0 backdrop-blur-2xl">
+                  <div className="border-b border-foreground/5 px-4 py-3">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/45">Permission</p>
+                  </div>
+                  <div className="p-1.5">
+                    {permissions.map((p) => (
+                      <Button
+                        variant="ghost"
+                        key={p.id}
+                        onClick={() => setPermission(p.id)}
+                        className="h-auto w-full items-start justify-start gap-3 rounded-xl px-3 py-2.5 text-left"
+                      >
+                        <div className="mt-0.5 flex size-4 shrink-0 items-center justify-center">
+                          {permission === p.id && <Check className="size-3.5 text-accent" />}
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium leading-tight">{p.label}</p>
+                          <p className="mt-0.5 text-xs font-normal text-foreground/45">{p.sub}</p>
+                        </div>
+                      </Button>
+                    ))}
+                  </div>
+                  <div className="border-t border-foreground/5 px-4 py-2.5">
+                    <Button variant="ghost" size="sm" data-pill className="h-7 rounded-full px-2 text-xs text-foreground/70">
+                      Learn more
+                      <ArrowUpRight className="size-3" />
+                    </Button>
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </PromptInputTools>
+            <PromptInputSubmit
+              disabled={!draft.trim()}
+              className="ask-submit size-10 rounded-full"
+            >
+              <ArrowUp className="size-4" strokeWidth={2.4} />
+            </PromptInputSubmit>
+          </PromptInputFooter>
+        </PromptInput>
 
-          <div className="ml-auto flex items-center gap-2 text-[10px] text-foreground/35">
-            <span className="size-1 rounded-full bg-accent animate-pulse" />
-            Intelligence agents on standby
+        <div className="mt-3 flex items-center justify-between px-1 sm:hidden">
+          <div className="flex items-center gap-2 text-[10px] text-foreground/45">
+            <span className="size-1.5 rounded-full bg-accent" />
+            Intelligence ready
           </div>
         </div>
       </div>
@@ -494,7 +511,7 @@ function AskPerpetuity() {
         initialMessage={pending}
         conversationId={null}
       />
-    </div>
+    </section>
   );
 }
 
