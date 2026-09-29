@@ -43,7 +43,7 @@ const nav = [
   { label: "Platform", href: "#platform" },
   { label: "Intelligence", href: "#intelligence" },
   { label: "Intelligence Team", href: "#agents" },
-  { label: "About", href: "#cta" },
+  { label: "About", href: "/about" },
 
 ];
 
@@ -185,15 +185,25 @@ function TopNav() {
         </div>
 
         <div className="hidden items-center gap-1 md:flex">
-          {nav.map((n) => (
-            <a
-              key={n.label}
-              href={n.href}
-              className="rounded-full px-3 py-1.5 text-[12px] font-medium text-foreground/60 transition-colors hover:bg-secondary/60 hover:text-foreground"
-            >
-              {n.label}
-            </a>
-          ))}
+          {nav.map((n) =>
+            n.href.startsWith("/") ? (
+              <Link
+                key={n.label}
+                to={n.href}
+                className="rounded-full px-3 py-1.5 text-[12px] font-medium text-foreground/60 transition-colors hover:bg-secondary/60 hover:text-foreground"
+              >
+                {n.label}
+              </Link>
+            ) : (
+              <a
+                key={n.label}
+                href={n.href}
+                className="rounded-full px-3 py-1.5 text-[12px] font-medium text-foreground/60 transition-colors hover:bg-secondary/60 hover:text-foreground"
+              >
+                {n.label}
+              </a>
+            ),
+          )}
         </div>
 
         <div className="flex items-center gap-1.5">
