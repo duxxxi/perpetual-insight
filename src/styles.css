@@ -533,10 +533,27 @@
   background: color-mix(in oklab, var(--glass-surface-strong) 76%, transparent);
 }
 
+.about-signal-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--color-accent) 52%, transparent),
+    transparent
+  );
+  animation: about-signal 5s ease-in-out infinite;
+}
+
+@keyframes about-signal {
+  0%, 100% { opacity: 0.35; transform: scaleX(0.72); }
+  50% { opacity: 0.9; transform: scaleX(1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ask-stage-glow,
-  .ask-submit {
+  .ask-submit,
+  .about-signal-line {
     transition: none;
+    animation: none;
   }
 }
 
