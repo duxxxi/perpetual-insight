@@ -567,34 +567,61 @@
 
 /* Painted public storytelling; tokens are scoped to avoid changing workspace themes. */
 .about-painted {
-  --background: oklch(0.985 0.006 100);
-  --foreground: oklch(0.27 0.055 158);
-  --card: oklch(0.985 0.008 210 / 0.92);
-  --primary: oklch(0.29 0.065 157);
-  --primary-foreground: oklch(0.99 0.005 100);
-  --muted-foreground: oklch(0.46 0.025 163);
-  --accent: oklch(0.46 0.075 155);
-  --accent-foreground: oklch(0.99 0.005 100);
-  --border: oklch(0.35 0.04 155 / 0.14);
-  --ring: oklch(0.46 0.075 155 / 0.4);
-  --about-nav-fill: oklch(0.84 0.015 190 / 0.62);
-  --about-window-fill: oklch(0.98 0.006 210 / 0.87);
-  --about-shadow: 0 18px 60px oklch(0.3 0.025 180 / 0.12), inset 0 0 0 1px oklch(1 0 0 / 0.8);
+  --background: oklch(0.965 0.012 90);
+  --foreground: oklch(0.24 0.014 255);
+  --card: oklch(0.985 0.007 90 / 0.76);
+  --primary: oklch(0.32 0.018 255);
+  --primary-foreground: oklch(0.98 0.007 90);
+  --muted-foreground: oklch(0.42 0.022 255);
+  --accent: oklch(0.49 0.06 250);
+  --accent-foreground: var(--primary-foreground);
+  --border: oklch(0.35 0.02 255 / 0.13);
+  --ring: oklch(0.49 0.06 250 / 0.4);
+  --about-nav-fill: oklch(0.985 0.007 90 / 0.65);
+  --about-window-fill: oklch(0.985 0.007 90 / 0.75);
+  --about-veil: oklch(0.98 0.01 90 / 0.36);
+  --about-shadow: 0 18px 60px oklch(0.24 0.025 255 / 0.12), inset 0 1px 0 oklch(1 0 0 / 0.65);
   letter-spacing: 0;
 }
-.about-painted-hero { min-height: 760px; }
-.about-wordmark { font-family: "Instrument Serif", Georgia, serif; font-size: 30px; line-height: 1; }
-.about-nav, .about-lenses { background: var(--about-nav-fill); backdrop-filter: blur(18px); }
-.about-eyebrow { font-size: 10px; font-weight: 500; color: var(--muted-foreground); }
-.about-headline { font-family: "Instrument Serif", Georgia, serif; font-size: 64px; font-weight: 400; line-height: 1; }
-.about-headline > span { font-size: 54px; line-height: 1.05; }
-.about-work-window { background: var(--about-window-fill); border: 1px solid var(--card); box-shadow: var(--about-shadow); backdrop-filter: blur(24px); }
-.about-section-title { font-family: "Instrument Serif", Georgia, serif; font-size: 46px; font-weight: 400; line-height: 1.1; }
+.about-painted[data-period="night"] {
+  --background: oklch(0.17 0.015 255);
+  --foreground: oklch(0.96 0.008 250);
+  --card: oklch(0.23 0.02 255 / 0.7);
+  --primary: oklch(0.89 0.018 250);
+  --primary-foreground: oklch(0.2 0.015 255);
+  --muted-foreground: oklch(0.83 0.018 250);
+  --accent: oklch(0.78 0.055 250);
+  --border: oklch(0.89 0.018 250 / 0.16);
+  --about-nav-fill: oklch(0.2 0.025 255 / 0.6);
+  --about-window-fill: oklch(0.2 0.025 255 / 0.68);
+  --about-veil: oklch(0.13 0.02 255 / 0.28);
+  --about-shadow: 0 18px 60px oklch(0.1 0.01 255 / 0.3), inset 0 1px 0 oklch(0.89 0.018 250 / 0.15);
+}
+.about-painted { transition: background-color 1.8s ease, color 1.8s ease; }
+.about-painted-hero { overflow: hidden; }
+.about-wordmark { font-family: var(--font-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; line-height: 1; }
+.about-nav, .about-lenses { background: var(--about-nav-fill); border: 1px solid var(--border); box-shadow: var(--about-shadow); backdrop-filter: blur(18px); }
+.about-eyebrow { font-family: var(--font-mono); font-size: 9px; font-weight: 500; text-transform: uppercase; color: var(--muted-foreground); }
+.about-headline { font-family: var(--font-serif); font-size: 42px; font-weight: 400; line-height: 1.12; }
+.about-headline > span { font-size: 32px; line-height: 1.2; }
+.about-work-window { background: var(--about-window-fill); border: 1px solid var(--border); box-shadow: var(--about-shadow); backdrop-filter: blur(24px); }
+.about-section-title { font-family: var(--font-serif); font-size: 30px; font-weight: 400; line-height: 1.3; }
 .about-principles { background: color-mix(in oklab, var(--card) 75%, var(--about-nav-fill)); }
+.about-painted-coda { overflow: hidden; }
+.about-business-backdrop { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+.about-business-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; transform: scale(1.035); animation: about-city-drift 32s ease-in-out infinite alternate; transition: opacity 1.8s ease; }
+.about-business-night { opacity: 0; }
+.about-painted[data-period="night"] .about-business-day { opacity: 0; }
+.about-painted[data-period="night"] .about-business-night { opacity: 1; }
+.about-business-veil { position: absolute; inset: 0; background: var(--about-veil); transition: background 1.8s ease; }
+@keyframes about-city-drift { from { transform: scale(1.035) translateX(-0.5%); } to { transform: scale(1.065) translateX(0.5%); } }
 @media (max-width: 639px) {
-  .about-painted-hero { min-height: 0; }
-  .about-headline { font-size: 48px; }
-  .about-headline > span { font-size: 40px; }
-  .about-section-title { font-size: 36px; }
-  .about-wordmark { font-size: 26px; }
+  .about-headline { font-size: 34px; }
+  .about-headline > span { font-size: 26px; }
+  .about-section-title { font-size: 25px; }
+  .about-wordmark { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-business-image, .about-business-veil, .about-painted { animation: none; transition: none; }
+  .about-painted .globe-orb { animation: none; }
 }

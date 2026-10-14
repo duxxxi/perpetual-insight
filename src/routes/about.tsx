@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, BookOpen, CircleGauge, Fingerprint, ShieldCheck, Globe2, Check, ArrowDown } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import paintedLandscape from "@/assets/about-painted-landscape.jpg";
+import businessDay from "@/assets/about-business-day.png.asset.json";
+import businessNight from "@/assets/about-business-night.png.asset.json";
+import { dayPeriod } from "@/lib/day-period";
 import aleksandarPortrait from "@/assets/team/placeholder-aleksandar.jpg";
 import elenaPortrait from "@/assets/team/placeholder-elena.jpg";
 import martinPortrait from "@/assets/team/placeholder-martin.jpg";
@@ -84,28 +86,41 @@ const team = [
 
 function AboutPage() {
   const [active, setActive] = useState(0);
+  const [period, setPeriod] = useState<"day" | "night">("day");
+  useEffect(() => {
+    const update = () => setPeriod(dayPeriod(new Date()));
+    update();
+    const timer = window.setInterval(update, 30_000);
+    document.addEventListener("visibilitychange", update);
+    return () => {
+      window.clearInterval(timer);
+      document.removeEventListener("visibilitychange", update);
+    };
+  }, []);
   const selected = operatingModel[active] ?? operatingModel[0];
 
   return (
-    <div className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div data-period={period} className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
       <section className="about-painted-hero relative isolate">
-        <img src={paintedLandscape} alt="Painted blue sky over open hills" width={1920} height={1088} fetchPriority="high" className="absolute inset-0 -z-10 size-full object-cover" />
-        <header className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-5 py-5 md:px-10">
-          <Link to="/landing" className="about-wordmark">Perpetuity</Link>
-          <nav aria-label="About page navigation" className="about-nav hidden items-center gap-1 rounded-full p-1 sm:flex">
+        <BusinessBackdrop />
+        <header className="mx-auto max-w-6xl px-5 pt-3 lg:px-8">
+          <div className="about-nav flex items-center justify-between gap-3 rounded-2xl px-3 py-2">
+          <Link to="/landing" className="flex items-center gap-2.5"><span className="globe-orb size-5" aria-hidden /><span className="about-wordmark">Perpetuity</span></Link>
+          <nav aria-label="About page navigation" className="hidden items-center gap-1 md:flex">
             <Button asChild size="sm" className="rounded-full bg-card text-foreground shadow-none hover:bg-card"><a href="#story">About</a></Button>
             <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#principles">Our thinking</a></Button>
             <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#team">People</a></Button>
           </nav>
-          <Button asChild size="sm" className="rounded-full px-4"><Link to="/">Open workspace <ArrowUpRight /></Link></Button>
+          <Button asChild size="sm" className="h-8 rounded-full px-3 text-[11px]"><Link to="/">Open workspace <ArrowUpRight /></Link></Button>
+          </div>
         </header>
 
-        <div id="story" className="mx-auto max-w-3xl px-5 pb-12 pt-14 text-center md:pt-20">
+        <div id="story" className="mx-auto max-w-3xl px-5 pb-8 pt-10 text-center md:pt-12">
           <p className="about-eyebrow">The company behind the system</p>
-          <h1 className="about-headline mt-5">Perpetuity<span className="mt-2 block">Intelligence that<br className="hidden sm:block" /> keeps working.</span></h1>
-          <p className="mx-auto mt-6 max-w-lg text-[14px] leading-[1.8] md:text-[16px]">An always-on intelligence team for companies trading across borders. You command. It executes.</p>
-          <Button asChild className="mt-7 h-11 rounded-full px-6"><a href="mailto:hello@perpetuity.works">Start a conversation <ArrowUpRight /></a></Button>
-          <p className="mt-4 text-[11px] text-muted-foreground">Context. Intelligence. Approved action.</p>
+          <h1 className="about-headline mt-4">Perpetuity<span className="mt-3 block italic">Your Intelligence Team.<br />Always On.</span></h1>
+          <p className="mx-auto mt-4 max-w-lg text-[14px] leading-[1.8] text-muted-foreground">An always-on intelligence team for companies trading across borders. You command. It executes.</p>
+          <Button asChild className="mt-5 h-9 rounded-full px-4 text-[12px]"><a href="mailto:hello@perpetuity.works">Start a conversation <ArrowUpRight /></a></Button>
+          <p className="mt-3 text-[10px] text-muted-foreground">Context. Intelligence. Approved action.</p>
         </div>
 
         <div className="mx-auto max-w-3xl px-5 pb-10">
@@ -153,13 +168,23 @@ function AboutPage() {
         </section>
 
         <section className="about-painted-coda relative isolate px-5 py-20 text-center md:py-24">
-          <img src={paintedLandscape} alt="" loading="lazy" width={1920} height={1088} className="absolute inset-0 -z-10 size-full object-cover object-top" />
+          <BusinessBackdrop />
           <p className="about-eyebrow">Keep the world in view</p><h2 className="about-section-title mx-auto mt-5 max-w-2xl">Build the company that<br />never stops noticing.</h2>
           <p className="mx-auto mt-5 max-w-md text-[13px] leading-relaxed">Tell us what your team needs to see, remember and move on next.</p>
           <Button asChild className="mt-7 rounded-full px-6"><a href="mailto:hello@perpetuity.works">hello@perpetuity.works <ArrowUpRight /></a></Button>
         </section>
       </main>
       <footer className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-5 px-5 py-8 text-[11px] text-muted-foreground"><Link to="/landing" className="about-wordmark text-foreground">Perpetuity</Link><span>Intelligence for international trade.</span><Button asChild variant="link" size="sm"><Link to="/landing">See the platform <ArrowRight /></Link></Button></footer>
+    </div>
+  );
+}
+
+function BusinessBackdrop() {
+  return (
+    <div className="about-business-backdrop" aria-hidden="true">
+      <img src={businessDay.url} alt="" width={1342} height={768} className="about-business-image about-business-day" />
+      <img src={businessNight.url} alt="" width={1342} height={768} className="about-business-image about-business-night" />
+      <div className="about-business-veil" />
     </div>
   );
 }
