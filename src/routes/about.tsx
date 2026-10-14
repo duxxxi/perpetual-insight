@@ -1,19 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowLeft,
-  ArrowRight,
-  ArrowUpRight,
-  BookOpen,
-  CircleGauge,
-  Fingerprint,
-  Globe2,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
-import { AmbientBackground, AppFooter, CommodityTicker } from "@/components/app-shell";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { ArrowRight, ArrowUpRight, BookOpen, CircleGauge, Fingerprint, ShieldCheck, Globe2, Check, ArrowDown } from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "@/hooks/use-theme";
+import paintedLandscape from "@/assets/about-painted-landscape.jpg";
 import aleksandarPortrait from "@/assets/team/placeholder-aleksandar.jpg";
 import elenaPortrait from "@/assets/team/placeholder-elena.jpg";
 import martinPortrait from "@/assets/team/placeholder-martin.jpg";
@@ -94,166 +83,83 @@ const team = [
 ];
 
 function AboutPage() {
-  useTheme();
+  const [active, setActive] = useState(0);
+  const selected = operatingModel[active] ?? operatingModel[0];
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
-      <AmbientBackground />
-      <CommodityTicker />
-      <AboutNav />
+    <div className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
+      <section className="about-painted-hero relative isolate">
+        <img src={paintedLandscape} alt="Painted blue sky over open hills" width={1920} height={1088} fetchPriority="high" className="absolute inset-0 -z-10 size-full object-cover" />
+        <header className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-5 py-5 md:px-10">
+          <Link to="/landing" className="about-wordmark">Perpetuity</Link>
+          <nav aria-label="About page navigation" className="about-nav hidden items-center gap-1 rounded-full p-1 sm:flex">
+            <Button asChild size="sm" className="rounded-full bg-card text-foreground shadow-none hover:bg-card"><a href="#story">About</a></Button>
+            <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#principles">Our thinking</a></Button>
+            <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#team">People</a></Button>
+          </nav>
+          <Button asChild size="sm" className="rounded-full px-4"><Link to="/">Open workspace <ArrowUpRight /></Link></Button>
+        </header>
 
-      <main className="pb-20">
-        <section className="mx-auto grid min-h-[calc(100vh-9rem)] max-w-6xl content-center gap-12 px-5 pb-16 pt-14 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:px-8">
-          <div className="flex flex-col justify-between gap-12">
-            <div className="inline-flex w-fit items-center gap-2 font-mono text-[9px] font-semibold uppercase tracking-[0.24em] text-foreground/45">
-              <span className="size-1.5 rounded-full bg-accent shadow-[0_0_14px_color-mix(in_oklab,var(--color-accent)_65%,transparent)]" />
-              The company behind the system
+        <div id="story" className="mx-auto max-w-3xl px-5 pb-12 pt-14 text-center md:pt-20">
+          <p className="about-eyebrow">The company behind the system</p>
+          <h1 className="about-headline mt-5">Perpetuity<span className="mt-2 block">Intelligence that<br className="hidden sm:block" /> keeps working.</span></h1>
+          <p className="mx-auto mt-6 max-w-lg text-[14px] leading-[1.8] md:text-[16px]">An always-on intelligence team for companies trading across borders. You command. It executes.</p>
+          <Button asChild className="mt-7 h-11 rounded-full px-6"><a href="mailto:hello@perpetuity.works">Start a conversation <ArrowUpRight /></a></Button>
+          <p className="mt-4 text-[11px] text-muted-foreground">Context. Intelligence. Approved action.</p>
+        </div>
+
+        <div className="mx-auto max-w-3xl px-5 pb-10">
+          <div className="mb-4 flex justify-center">
+            <div className="about-lenses flex max-w-full gap-1 rounded-full p-1" role="tablist" aria-label="Operating model">
+              {["Connect", "Notice", "Act"].map((label, index) => <Button key={label} role="tab" id={`model-tab-${index}`} aria-controls="model-panel" aria-selected={active === index} variant="ghost" size="sm" onClick={() => setActive(index)} className={active === index ? "rounded-full bg-card text-foreground shadow-sm hover:bg-card" : "rounded-full text-muted-foreground"}>{label}</Button>)}
             </div>
-            <p className="max-w-xs text-[12px] leading-relaxed text-foreground/45">
-              Built for exporters, manufacturers, distributors and trading companies operating across borders.
-            </p>
           </div>
+          <div id="model-panel" role="tabpanel" aria-labelledby={`model-tab-${active}`} className="about-work-window overflow-hidden rounded-lg">
+            <div className="flex items-center justify-between gap-3 border-b border-border px-5 py-3">
+              <span className="flex items-center gap-2 text-[11px] font-medium"><Globe2 className="size-3.5" /> Perpetuity intelligence</span>
+              <span className="flex items-center gap-1.5 text-[10px] text-muted-foreground"><span className="size-1.5 rounded-full bg-accent" /> Always on</span>
+            </div>
+            <div className="grid gap-5 p-6 sm:grid-cols-[1fr_1.6fr] sm:p-8">
+              <div><p className="about-eyebrow">{selected.number} / Operating model</p><h2 className="mt-3 text-[20px] font-medium leading-snug">{selected.title}</h2></div>
+              <div><p className="text-[13px] leading-[1.8] text-muted-foreground">{selected.body}</p><p className="mt-5 flex items-center gap-2 text-[11px]"><Check className="size-3.5 text-accent" /> You keep the judgment and the final word.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          <div>
-            <h1 className="max-w-4xl text-balance font-serif text-[40px] font-normal leading-[1.08] md:text-[58px] lg:text-[66px]">
-              Intelligence should keep working
-              <span className="text-silver-metallic italic"> when you cannot.</span>
-            </h1>
-            <p className="mt-6 max-w-2xl text-pretty text-[15px] leading-[1.8] text-foreground/58 md:text-[17px]">
-              Perpetuity connects your world, then puts specialist agents to work — finding opportunities, drafting outreach, flagging risks and planning deals. You command. It executes.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-2">
-              <Button asChild className="rounded-full px-5">
-                <a href="mailto:hello@perpetuity.works">Start a conversation <ArrowUpRight /></a>
-              </Button>
-              <Button asChild variant="outline" className="glass-chip rounded-full px-5">
-                <Link to="/landing">See the platform <ArrowRight /></Link>
-              </Button>
+      <main>
+        <section className="mx-auto max-w-5xl px-5 py-16 text-center md:py-24">
+          <p className="about-eyebrow">A wider perspective</p>
+          <h2 className="about-section-title mx-auto mt-5 max-w-2xl">Your world is connected.<br />Your intelligence should be, too.</h2>
+          <p className="mx-auto mt-6 max-w-xl text-[14px] leading-[1.9] text-muted-foreground">Perpetuity connects your world, then puts specialist agents to work — finding opportunities, drafting outreach, flagging risks and planning deals.</p>
+          <div className="mt-9 flex flex-wrap justify-center gap-x-7 gap-y-3 text-[12px] text-muted-foreground">{["Exporters", "Manufacturers", "Distributors", "Trading companies"].map(label => <span key={label}>{label}</span>)}</div>
+          <ArrowDown className="mx-auto mt-10 size-4 text-accent" />
+        </section>
+
+        <section id="principles" className="about-principles scroll-mt-6 border-y border-border">
+          <div className="mx-auto max-w-5xl px-5 py-16 md:py-24">
+            <div className="text-center"><p className="about-eyebrow">Our thinking</p><h2 className="about-section-title mt-5">Technology, with judgment.</h2></div>
+            <div className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+              {principles.map(principle => <article key={principle.title} className="border-t border-border pt-6"><principle.icon className="size-5 text-accent" strokeWidth={1.4} /><h3 className="mt-5 text-[17px] font-medium">{principle.title}</h3><p className="mt-3 max-w-md text-[13px] leading-[1.85] text-muted-foreground">{principle.body}</p></article>)}
             </div>
           </div>
         </section>
 
-        <section className="border-y border-foreground/8 bg-foreground/[0.025]">
-          <div className="mx-auto max-w-6xl px-5 py-16 lg:px-8 lg:py-20">
-            <SectionLabel number="01" label="Operating model" />
-            <div className="mt-10 divide-y divide-foreground/10 border-y border-foreground/10">
-              {operatingModel.map((item) => (
-                <article key={item.number} className="grid gap-4 py-7 md:grid-cols-[5rem_minmax(0,0.8fr)_minmax(0,1.1fr)] md:items-start">
-                  <span className="font-mono text-[10px] text-foreground/35">{item.number}</span>
-                  <h2 className="text-[18px] font-medium leading-snug md:text-[21px]">{item.title}</h2>
-                  <p className="max-w-xl text-[13px] leading-[1.75] text-foreground/52">{item.body}</p>
-                </article>
-              ))}
-            </div>
+        <section id="team" className="mx-auto max-w-6xl scroll-mt-6 px-5 py-16 md:px-8 md:py-24">
+          <div className="text-center"><p className="about-eyebrow">People</p><h2 className="about-section-title mt-5">The intelligence team.</h2><p className="mx-auto mt-5 max-w-lg text-[11px] leading-relaxed text-muted-foreground">Concept team · placeholder content. Names, roles, biographies and portraits are fictional until replaced with the real team.</p></div>
+          <div className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            {team.map(person => <article key={person.name}><div className="group aspect-[4/5] overflow-hidden rounded-lg"><img src={person.image} alt={`Concept portrait for ${person.name}`} loading="lazy" width={896} height={1120} className="size-full object-cover transition-transform duration-700 motion-safe:group-hover:scale-[1.025]" /></div><h3 className="mt-5 text-[15px] font-medium">{person.name}</h3><p className="mt-2 text-[10px] text-accent">{person.role}</p><p className="mt-3 text-[12px] leading-[1.8] text-muted-foreground">{person.bio}</p></article>)}
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-5 py-20 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
-            <div>
-              <SectionLabel number="02" label="Operating principles" />
-              <h2 className="mt-5 max-w-md font-serif text-[30px] font-normal leading-[1.15] md:text-[40px]">
-                Technology with judgment built around it.
-              </h2>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {principles.map((principle) => (
-                <article key={principle.title} className="glass-panel min-h-44 rounded-2xl p-5">
-                  <principle.icon className="size-4 text-accent" strokeWidth={1.5} />
-                  <h3 className="mt-8 text-[14px] font-semibold">{principle.title}</h3>
-                  <p className="mt-2 text-[12px] leading-relaxed text-foreground/48">{principle.body}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="border-y border-foreground/8 bg-foreground/[0.025]">
-          <div className="mx-auto max-w-6xl px-5 py-20 lg:px-8">
-            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-              <div>
-                <SectionLabel number="03" label="People" />
-                <h2 className="mt-5 font-serif text-[34px] font-normal md:text-[46px]">The intelligence team.</h2>
-              </div>
-              <div className="max-w-sm rounded-xl border border-accent/20 bg-accent/[0.05] px-3 py-2.5">
-                <p className="font-mono text-[8px] font-semibold uppercase tracking-[0.18em] text-accent">Concept team · placeholder content</p>
-                <p className="mt-1 text-[10px] leading-relaxed text-foreground/45">Names, roles, biographies and portraits are fictional until replaced with the real team.</p>
-              </div>
-            </div>
-
-            <div className="mt-10 grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-              {team.map((person, index) => (
-                <article key={person.name} className={index % 2 ? "lg:mt-14" : ""}>
-                  <div className="glass-panel group relative aspect-[4/5] overflow-hidden rounded-2xl p-1.5">
-                    <img
-                      src={person.image}
-                      alt={`Concept portrait for ${person.name}`}
-                      loading="lazy"
-                      width={896}
-                      height={1120}
-                      className="size-full rounded-xl object-cover grayscale-[0.12] transition duration-700 group-hover:scale-[1.025] group-hover:grayscale-0"
-                    />
-                    <div className="pointer-events-none absolute inset-x-4 bottom-3 h-px bg-gradient-to-r from-transparent via-accent/45 to-transparent" />
-                  </div>
-                  <div className="px-1 pt-4">
-                    <p className="text-[15px] font-semibold">{person.name}</p>
-                    <p className="mt-1 font-mono text-[8.5px] font-medium uppercase tracking-[0.16em] text-accent">{person.role}</p>
-                    <p className="mt-3 text-[11.5px] leading-relaxed text-foreground/48">{person.bio}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-6xl px-5 py-20 lg:px-8">
-          <div className="glass-panel-strong relative overflow-hidden rounded-3xl px-6 py-12 text-center md:px-12 md:py-16">
-            <div className="about-signal-line absolute inset-x-0 top-0 h-px" aria-hidden />
-            <Globe2 className="mx-auto size-5 text-accent" strokeWidth={1.4} />
-            <h2 className="mx-auto mt-5 max-w-2xl text-balance font-serif text-[31px] font-normal leading-tight md:text-[43px]">
-              Build the company that never stops noticing.
-            </h2>
-            <p className="mx-auto mt-4 max-w-lg text-[13px] leading-relaxed text-foreground/50">Tell us what your team needs to see, remember and move on next.</p>
-            <Button asChild className="mt-7 rounded-full px-5">
-              <a href="mailto:hello@perpetuity.works">hello@perpetuity.works <ArrowUpRight /></a>
-            </Button>
-          </div>
+        <section className="about-painted-coda relative isolate px-5 py-20 text-center md:py-24">
+          <img src={paintedLandscape} alt="" loading="lazy" width={1920} height={1088} className="absolute inset-0 -z-10 size-full object-cover object-top" />
+          <p className="about-eyebrow">Keep the world in view</p><h2 className="about-section-title mx-auto mt-5 max-w-2xl">Build the company that<br />never stops noticing.</h2>
+          <p className="mx-auto mt-5 max-w-md text-[13px] leading-relaxed">Tell us what your team needs to see, remember and move on next.</p>
+          <Button asChild className="mt-7 rounded-full px-6"><a href="mailto:hello@perpetuity.works">hello@perpetuity.works <ArrowUpRight /></a></Button>
         </section>
       </main>
-
-      <AppFooter />
+      <footer className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-5 px-5 py-8 text-[11px] text-muted-foreground"><Link to="/landing" className="about-wordmark text-foreground">Perpetuity</Link><span>Intelligence for international trade.</span><Button asChild variant="link" size="sm"><Link to="/landing">See the platform <ArrowRight /></Link></Button></footer>
     </div>
-  );
-}
-
-function AboutNav() {
-  return (
-    <header className="sticky top-0 z-40 px-5 pt-3 lg:px-8">
-      <nav className="glass-panel mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-2xl px-3 py-2">
-        <Link to="/landing" className="flex items-center gap-2.5 text-foreground/70 transition-colors hover:text-foreground">
-          <div className="globe-orb size-5" aria-hidden />
-          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.28em]">Perpetuity</span>
-        </Link>
-        <div className="flex items-center gap-1.5">
-          <ThemeToggle />
-          <Button asChild variant="ghost" size="sm" className="hidden rounded-full sm:inline-flex">
-            <Link to="/landing"><ArrowLeft /> Platform</Link>
-          </Button>
-          <Button asChild size="sm" className="rounded-full">
-            <a href="mailto:hello@perpetuity.works">Book a demo <ArrowUpRight /></a>
-          </Button>
-        </div>
-      </nav>
-    </header>
-  );
-}
-
-function SectionLabel({ number, label }: { number: string; label: string }) {
-  return (
-    <p className="flex items-center gap-3 font-mono text-[9px] font-semibold uppercase tracking-[0.24em] text-foreground/40">
-      <span>{number}</span>
-      <span className="h-px w-8 bg-foreground/15" />
-      {label}
-    </p>
   );
 }
