@@ -564,3 +564,37 @@
     0 20px 60px -28px rgba(0, 0, 0, 0.45),
     inset 0 1px 0 0 var(--glass-inset);
 }
+
+/* Painted public storytelling; tokens are scoped to avoid changing workspace themes. */
+.about-painted {
+  --background: oklch(0.985 0.006 100);
+  --foreground: oklch(0.27 0.055 158);
+  --card: oklch(0.985 0.008 210 / 0.92);
+  --primary: oklch(0.29 0.065 157);
+  --primary-foreground: oklch(0.99 0.005 100);
+  --muted-foreground: oklch(0.46 0.025 163);
+  --accent: oklch(0.46 0.075 155);
+  --accent-foreground: oklch(0.99 0.005 100);
+  --border: oklch(0.35 0.04 155 / 0.14);
+  --ring: oklch(0.46 0.075 155 / 0.4);
+  --about-nav-fill: oklch(0.84 0.015 190 / 0.62);
+  --about-window-fill: oklch(0.98 0.006 210 / 0.87);
+  --about-shadow: 0 18px 60px oklch(0.3 0.025 180 / 0.12), inset 0 0 0 1px oklch(1 0 0 / 0.8);
+  letter-spacing: 0;
+}
+.about-painted-hero { min-height: 760px; }
+.about-wordmark { font-family: "Instrument Serif", Georgia, serif; font-size: 30px; line-height: 1; }
+.about-nav, .about-lenses { background: var(--about-nav-fill); backdrop-filter: blur(18px); }
+.about-eyebrow { font-size: 10px; font-weight: 500; color: var(--muted-foreground); }
+.about-headline { font-family: "Instrument Serif", Georgia, serif; font-size: 64px; font-weight: 400; line-height: 1; }
+.about-headline > span { font-size: 54px; line-height: 1.05; }
+.about-work-window { background: var(--about-window-fill); border: 1px solid var(--card); box-shadow: var(--about-shadow); backdrop-filter: blur(24px); }
+.about-section-title { font-family: "Instrument Serif", Georgia, serif; font-size: 46px; font-weight: 400; line-height: 1.1; }
+.about-principles { background: color-mix(in oklab, var(--card) 75%, var(--about-nav-fill)); }
+@media (max-width: 639px) {
+  .about-painted-hero { min-height: 0; }
+  .about-headline { font-size: 48px; }
+  .about-headline > span { font-size: 40px; }
+  .about-section-title { font-size: 36px; }
+  .about-wordmark { font-size: 26px; }
+}
