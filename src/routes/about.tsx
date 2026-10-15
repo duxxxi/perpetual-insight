@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, BookOpen, CircleGauge, Fingerprint, ShieldCheck, Globe2, Check, ArrowDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import businessDay from "@/assets/about-business-day.png.asset.json";
+import businessDay from "@/assets/about-business-skyline-trial.png.asset.json";
 import businessNight from "@/assets/about-business-night.png.asset.json";
 import { dayPeriod } from "@/lib/day-period";
 import aleksandarPortrait from "@/assets/team/placeholder-aleksandar.jpg";
@@ -178,7 +178,7 @@ function AboutPage() {
 function BusinessBackdrop() {
   return (
     <div className="about-business-backdrop" aria-hidden="true">
-      <img src={businessDay.url} alt="" width={1342} height={768} className="about-business-image about-business-day" />
+      <img src={businessDay.url} alt="" width={1536} height={768} className="about-business-image about-business-day" />
       <img src={businessNight.url} alt="" width={1342} height={768} className="about-business-image about-business-night" />
       <div className="about-business-veil" />
     </div>
