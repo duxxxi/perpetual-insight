@@ -107,7 +107,11 @@ function AboutPage() {
     };
   }, []);
   const selected = operatingModel[active] ?? operatingModel[0];
-  const appearance = { "--about-night-opacity": now ? nightBlend(now) : 0 } as CSSProperties;
+  const blend = now ? nightBlend(now) : 0;
+  const appearance = {
+    "--about-night-opacity": blend,
+    "--about-night-weight": blend >= 0.5 ? "100%" : "0%",
+  } as CSSProperties;
 
   return (
     <div data-period={period} style={appearance} className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
