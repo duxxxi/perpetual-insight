@@ -743,7 +743,7 @@
   .about-trusted-track { animation: none; }
   .about-video-coda video { display: none; }
   .about-video-coda { background: var(--background); }
-  .about-headline-on { animation: none; }
+  .about-headline-on, .about-headline-dot { animation: none; }
 }
 
 /* Bottom-docked workspace conversation, independent of public painted pages. */
