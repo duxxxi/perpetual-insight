@@ -784,3 +784,4 @@
 .perpetuity-chat-sheet { translate: none; }
 .latest-dashboard > .flex { min-width: 0; }
 .latest-dashboard main { min-width: 0; }
+.latest-dashboard { overflow-x: clip; }

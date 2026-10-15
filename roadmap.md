@@ -1,7 +1,7 @@
 # Roadmap
 
-- [ ] Bring the latest export-analytica dashboard into this project without modifying the source repository.
-- [ ] Preview an always-visible glass Ask Perpetuity dock and bottom-up conversation sheet; verify desktop/mobile interactions.
+- [x] Adapt the latest export-analytica dashboard header, spacing and shared section headings without modifying the source repository; retain preview rows, not source account data.
+- [x] Preview an always-visible glass Ask Perpetuity dock and bottom-up conversation sheet; verify send, minimize, resume, task readback and desktop/mobile sheet positioning.
 
 - [x] Compare original/current day and night backgrounds side by side and shrink yellow cursors; verify selection and imagery.
 
