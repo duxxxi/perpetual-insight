@@ -30,7 +30,7 @@ export function AboutBackgroundComparison({ selection, onChange }: {
           <Button variant={selection[period] === version ? "secondary" : "outline"} size="sm" aria-pressed={selection[period] === version} onClick={() => onChange({ ...selection, [period]: version })} className="mt-2 w-full text-[11px]" aria-label={`Use ${version} ${period} background`}>
             {selection[period] === version && <Check className="size-3" />}{selection[period] === version ? "Selected" : `Use ${period}`}
           </Button>
-        </div>)))}
+        </div>))}
       </div>
       <div className="flex justify-end"><Button size="sm" onClick={() => setOpen(false)}>Done</Button></div>
     </DialogContent>
