@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Tighten the spacing between About's dictionary lines and set the tagline in the headword's metallic uppercase face; verify day, night and phone layouts.
+
 - [x] Rebuild About's hero as a dictionary entry (headword, pronunciation, Oxford definition, tagline) and remove the yellow night cursor; verify contrast in day and night.
 
 - [x] Make About's commodity ticker a dark glass band with light text so it stays readable over the painted backgrounds; keep the dashboard ticker light.
