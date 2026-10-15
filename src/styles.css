@@ -634,6 +634,21 @@
   0%, 100% { opacity: .9; text-shadow: 0 0 10px var(--about-on-glow), 0 0 26px color-mix(in oklab, var(--about-on-bright) 16%, transparent); }
   50% { opacity: 1; text-shadow: 0 0 20px color-mix(in oklab, var(--about-on-bright) 55%, transparent), 0 0 52px color-mix(in oklab, var(--about-on-bright) 34%, transparent); }
 }
+.about-headline-dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  margin-left: 7px;
+  vertical-align: middle;
+  border-radius: 50%;
+  background: var(--about-on-bright);
+  box-shadow: 0 0 8px 2px var(--about-on-glow), 0 0 22px color-mix(in oklab, var(--about-on-bright) 30%, transparent);
+  animation: about-dot-breathe 2.6s ease-in-out infinite;
+}
+@keyframes about-dot-breathe {
+  0%, 100% { transform: scale(.84); opacity: .82; box-shadow: 0 0 6px 1px var(--about-on-glow), 0 0 14px color-mix(in oklab, var(--about-on-bright) 20%, transparent); }
+  50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 16px 5px color-mix(in oklab, var(--about-on-bright) 55%, transparent), 0 0 38px color-mix(in oklab, var(--about-on-bright) 38%, transparent); }
+}
 .about-work-window { background: var(--about-window-fill); border: 1px solid var(--border); box-shadow: var(--about-shadow); backdrop-filter: blur(24px); }
 .about-section-title { font-family: var(--font-serif); font-size: 30px; font-weight: 400; line-height: 1.3; }
 .about-principles { background: color-mix(in oklab, var(--card) 75%, var(--about-nav-fill)); }
@@ -684,12 +699,6 @@
 .about-time-band .about-horizon { padding: 9px 12px; }
 .about-time-band .about-horizon-dial { height: 52px; }
 .about-time-band .about-always-on { margin-top: 5px; padding-top: 5px; }
-@media (pointer: fine) and (hover: hover) {
-  .about-painted[data-period="night"] { --about-cursor: url("/cursors/yellow-arrow.png") 5 4, default; --about-pointer: url("/cursors/yellow-hand.png") 10 4, pointer; cursor: var(--about-cursor); }
-  .about-painted[data-period="night"] :where(a, button, [role="button"], [role="tab"], summary, label[for]) { cursor: var(--about-pointer); }
-  .about-painted[data-period="night"] :where(input, textarea, [contenteditable="true"]) { cursor: text; }
-  .about-painted[data-period="night"] :where(button:disabled, [aria-disabled="true"]) { cursor: not-allowed; }
-}
 @media (min-width: 1100px) {
   .about-time-band { position: absolute; top: 101px; left: 0; right: 0; margin: 0 auto; pointer-events: none; }
   .about-exchanges, .about-horizon { pointer-events: auto; }
@@ -729,6 +738,7 @@
   .about-video-coda video { display: none; }
   .about-video-coda { background: var(--background); }
   .about-headline-on { animation: none; }
+  .about-headline-dot { animation: none; }
 }
 
 /* Bottom-docked workspace conversation, independent of public painted pages. */
