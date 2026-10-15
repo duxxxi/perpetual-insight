@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Flatten the top clocks/horizon, tint sidebar glass, distinguish pills and match opened workspace panels to the metallic canvas; verify across pages.
+- [x] Flatten the top clocks/horizon, tint sidebar glass, distinguish pills and match opened workspace panels to the metallic canvas; verify across pages.
 
 - [x] Refine chat translucency and lift; add dashboard clocks/horizon and blue greeting name; verify layout and chat interaction.
 
