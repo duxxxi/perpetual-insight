@@ -47,6 +47,7 @@ import { useUserTasks } from "@/lib/task-store";
 import { PerpetuityAsksCard } from "@/components/perpetuity-asks";
 import { SectionLabel } from "@/components/ui/section-label";
 import { AboutTimeBand } from "@/components/about-time-band";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -100,18 +101,13 @@ function DashboardPage() {
       <AmbientBackground />
       <CommodityTicker />
 
-      <div className="flex justify-center pt-4 pb-2">
-        <span className="font-mono text-[11px] font-medium uppercase tracking-[0.35em] text-foreground/45">
-          Perpetuity
-        </span>
-      </div>
-
       <div className="flex">
         <AppSidebar active="home" />
 
-        <main className="flex-1 px-5 pb-36 pt-6 lg:pl-20 lg:pr-8 xl:pr-12">
+        <main className="flex-1 px-5 pb-36 pt-2 lg:pl-20 lg:pr-8 xl:pr-12">
           <div className="mx-auto max-w-7xl animate-fade-in-up">
             <div className="dashboard-time-band">
+              <span className="dashboard-wordmark font-mono text-[10px] font-medium uppercase text-muted-foreground">PERPETUITY</span>
               <AboutTimeBand now={now} />
             </div>
             {/* Header */}
@@ -439,8 +435,9 @@ function StatusPill({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button
+        <Button variant="ghost"
           data-pill
+          data-tone={label === "Urgent" ? "attention" : label === "Updates" ? "success" : "approval"}
           className="glass-panel group inline-flex h-7 items-center gap-1.5 rounded-full pl-0.5 pr-2.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
         >
           <span
@@ -450,7 +447,7 @@ function StatusPill({
           </span>
           <span className="font-mono text-[12px] font-semibold tabular-nums">{count}</span>
           <span className="text-[12px] text-foreground/70">{label}</span>
-        </button>
+        </Button>
       </DialogTrigger>
       <PillDialogContent
         title={label}
@@ -473,8 +470,9 @@ function TripPill() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button
+        <Button variant="ghost"
           data-pill
+          data-tone="travel"
           className="glass-panel group inline-flex h-7 items-center gap-1.5 rounded-full pl-0.5 pr-2.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
         >
           <span className="flex size-[22px] items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20">
@@ -482,7 +480,7 @@ function TripPill() {
           </span>
           <span className="font-mono text-[12px] font-semibold tabular-nums">5d</span>
           <span className="text-[12px] text-foreground/70">Bratislava</span>
-        </button>
+        </Button>
       </DialogTrigger>
       <PillDialogContent
         title="Trip to Bratislava"
@@ -547,7 +545,7 @@ function RefreshPill() {
   const [spinning, setSpinning] = useState(false);
   const [stamp, setStamp] = useState("2 min ago");
   return (
-    <button
+    <Button variant="ghost" data-tone="neutral"
       type="button"
       onClick={() => {
         setSpinning(true);
@@ -563,7 +561,7 @@ function RefreshPill() {
       <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-foreground/40">
         · updated {stamp}
       </span>
-    </button>
+    </Button>
   );
 }
 
@@ -575,7 +573,7 @@ function MorningBriefPill() {
       body="3 urgent items, 7 updates, and 2 approvals are waiting. Open the brief for a guided walkthrough."
       actions={[{ label: "Open brief", primary: true }, { label: "Read later" }]}
       trigger={
-        <button
+        <Button variant="ghost" data-tone="brief"
           data-pill
           className="group relative inline-flex shrink-0 items-center gap-2.5 self-start rounded-full md:self-end"
         >
@@ -592,7 +590,7 @@ function MorningBriefPill() {
             </span>
             <ArrowUpRight className="size-3.5 text-foreground/40 transition-colors group-hover:text-foreground" />
           </span>
-        </button>
+        </Button>
       }
     />
   );

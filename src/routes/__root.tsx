@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -105,12 +106,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const isWorkspace = pathname !== "/landing" && pathname !== "/about";
   return (
     <html lang="en">
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className={isWorkspace ? "workspace-canvas" : undefined}>
         {children}
         <Scripts />
       </body>
