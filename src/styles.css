@@ -830,7 +830,7 @@
   --chat-action-foreground: oklch(0.99 0 0);
   --chat-user: oklch(0.94 0.026 250);
   --chat-user-foreground: oklch(0.28 0.028 252);
-  --chat-fill: oklch(0.99 0.004 250 / 0.46);
+  --chat-fill: oklch(0.99 0.004 250 / 0.3);
   --chat-sheen: linear-gradient(135deg, oklch(1 0 0 / 0.32), oklch(1 0 0 / 0.04) 45%, oklch(0.83 0.035 250 / 0.12));
   --greeting-blue: oklch(0.57 0.13 250);
   --chat-rim: oklch(1 0 0 / 0.88);
@@ -840,7 +840,7 @@
 .dark {
   --chat-user: oklch(0.32 0.055 252);
   --chat-user-foreground: oklch(0.96 0.012 250);
-  --chat-fill: oklch(0.19 0.018 255 / 0.52);
+  --chat-fill: oklch(0.3 0.016 252 / 0.4);
   --chat-sheen: linear-gradient(135deg, oklch(0.9 0.015 250 / 0.1), oklch(0.9 0.015 250 / 0.015) 45%, oklch(0.5 0.04 250 / 0.08));
   --greeting-blue: oklch(0.78 0.085 250);
   --chat-rim: oklch(0.91 0.014 250 / 0.18);
@@ -855,7 +855,7 @@
 .perpetuity-dock-wrap { position: fixed; left: 50%; bottom: 58px; transform: translateX(-50%); z-index: 45; width: min(600px, calc(100% - 36px)); color: var(--foreground); letter-spacing: 0; }
 .perpetuity-dock-status { display: flex; justify-content: center; align-items: center; gap: 6px; width: fit-content; margin: 0 auto 9px; padding: 4px 10px; border-radius: 20px; background: color-mix(in oklab, var(--background) 78%, transparent); backdrop-filter: blur(16px); font-size: 10px; }
 .perpetuity-on-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--chat-on); box-shadow: 0 0 6px color-mix(in oklab, var(--chat-on) 30%, transparent); flex-shrink: 0; }
-.perpetuity-dock { display: flex; align-items: center; gap: 5px; height: 60px; padding: 7px 9px; background: var(--chat-sheen), var(--chat-fill); border: 1px solid var(--chat-rim); border-radius: 34px; backdrop-filter: blur(24px) saturate(165%); box-shadow: var(--chat-shadow), 0 0 0 1px color-mix(in oklab, var(--chat-action) 13%, transparent); }
+.perpetuity-dock { display: flex; align-items: center; gap: 5px; height: 60px; padding: 7px 9px; background: var(--chat-sheen), var(--chat-fill); border: 1px solid var(--chat-rim); border-radius: 34px; backdrop-filter: blur(40px) saturate(190%) brightness(1.04); box-shadow: var(--chat-shadow), 0 0 0 1px color-mix(in oklab, var(--chat-action) 13%, transparent); }
 .perpetuity-dock .dock-launch { flex: 1; min-width: 0; justify-content: flex-start; gap: 12px; color: var(--muted-foreground); font-size: 13px; font-weight: 400; border-radius: 24px; padding: 0 4px; background: transparent; }
 .dock-launch span:last-child { overflow: hidden; text-overflow: ellipsis; }
 .dock-plus, .dock-history { color: var(--muted-foreground); border-radius: 50%; flex-shrink: 0; }
@@ -1002,8 +1002,13 @@
   --input: oklch(0.8 0.016 250 / 0.18);
   --glass-surface: oklch(0.22 0.015 250 / 0.52);
   --glass-surface-strong: oklch(0.24 0.015 250 / 0.78);
-  --dashboard-canvas: linear-gradient(125deg, oklch(0.16 0.008 250), oklch(0.19 0.008 250), oklch(0.14 0.008 250));
-  --sidebar-fill: oklch(0.27 0.025 250 / 0.7);
+  --background: oklch(0.235 0.012 255);
+  --card: oklch(0.29 0.014 252 / 0.78);
+  --glass-surface: oklch(0.3 0.014 252 / 0.52);
+  --glass-surface-strong: oklch(0.32 0.014 252 / 0.76);
+  --border: oklch(0.85 0.016 250 / 0.16);
+  --dashboard-canvas: radial-gradient(120% 70% at 50% -10%, oklch(0.36 0.014 250 / 0.55), transparent 60%), linear-gradient(135deg, oklch(0.25 0.01 250), oklch(0.29 0.012 248) 45%, oklch(0.22 0.01 255));
+  --sidebar-fill: oklch(0.32 0.022 250 / 0.62);
   --sidebar-rim: oklch(0.75 0.04 250 / 0.2);
   --clock-fill: oklch(0.3 0.015 250);
   --clock-outline: oklch(0.8 0.02 250 / 0.5);
@@ -1029,3 +1034,6 @@
 .workspace-canvas :where(button, a).rounded-full:where(.glass-chip, .glass-panel, .glass-panel-strong):not([data-tone]):has(.lucide-sparkles, .lucide-chart-no-axes-combined, .lucide-list-filter) { --pill-tone: var(--pill-approval); }
 .workspace-canvas .morning-brief-pill { background: color-mix(in oklab, var(--brief-pink) 10%, var(--glass-surface-strong)); border: 1px solid color-mix(in oklab, var(--brief-pink) 24%, var(--glass-border)); box-shadow: var(--brief-glow), inset 0 1px 0 var(--glass-inset-strong); backdrop-filter: blur(20px) saturate(145%); }
 .workspace-canvas .morning-brief-pill:hover { background: color-mix(in oklab, var(--brief-pink) 17%, var(--glass-surface-strong)); }
+
+/* Soft progressive blur where content scrolls beneath the Ask dock */
+.workspace-canvas::after { content: ""; position: fixed; inset: auto 0 0 0; height: 150px; z-index: 40; pointer-events: none; backdrop-filter: blur(10px); mask-image: linear-gradient(to top, black 35%, transparent); background: linear-gradient(to top, color-mix(in oklab, var(--background) 55%, transparent), transparent); }
