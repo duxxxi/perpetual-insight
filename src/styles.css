@@ -811,38 +811,44 @@
 .dashboard-time-band .about-time-band { --about-time-width: 290px; --about-time-height: 64px; position: static; inset: auto; pointer-events: auto; max-width: none; margin: 0; padding: 0; align-items: center; }
 .dashboard-time-band .about-exchanges, .dashboard-time-band .about-horizon { background: var(--chat-sheen), var(--about-time-fill); border-radius: 10px; padding: 6px 10px; }
 .dashboard-time-band .about-exchange-row { gap: 10px; justify-content: space-between; }
-.dashboard-time-band .about-exchange { display: grid; grid-template-columns: 22px 1fr; width: auto; gap: 0 4px; }
-.dashboard-time-band .about-clock-face { grid-row: 1 / 3; width: 22px; height: 22px; margin: 0; }
-.dashboard-time-band .about-clock-status { grid-column: 1 / -1; justify-content: center; }
-.dashboard-time-band .about-markets-label { margin-bottom: 3px; font-size: 8px; }
-.dashboard-time-band .about-clock-city { font-size: 9px; }
-.dashboard-time-band .about-clock-time { font-size: 9px; }
+.dashboard-time-band .about-exchange { display: grid; grid-template-columns: 34px 1fr; width: auto; gap: 0 5px; }
+.dashboard-time-band .about-clock-face { grid-row: 1 / 4; width: 34px; height: 34px; margin: 0; color: var(--foreground); }
+.dashboard-time-band .about-clock-rim { fill: var(--clock-fill); stroke: var(--clock-outline); }
+.dashboard-time-band .about-clock-tick { stroke: var(--foreground); opacity: 0.75; }
+.dashboard-time-band .about-clock-hour { stroke-width: 2.2; }
+.dashboard-time-band .about-clock-minute { stroke-width: 1.5; }
+.dashboard-time-band .about-clock-status { grid-column: 2; justify-content: flex-start; }
+.dashboard-time-band .about-markets-label { margin-bottom: 3px; font-size: 9px; }
+.dashboard-time-band .about-clock-city { font-size: 10px; color: var(--foreground); }
+.dashboard-time-band .about-clock-time { font-size: 10px; color: var(--foreground); }
 .dashboard-time-band .about-clock-status { font-size: 7px; }
-.dashboard-time-band .about-horizon { flex-basis: 240px; width: 240px; display: grid; grid-template-columns: 1fr 100px; grid-template-rows: 14px 1fr; gap: 2px 8px; }
-.dashboard-time-band .about-horizon-label { grid-column: 1; font-size: 8px; }
-.dashboard-time-band .about-horizon-dial { grid-column: 2; grid-row: 1 / 3; width: 100px; height: 40px; margin: 0; align-self: center; }
+.dashboard-time-band .about-horizon { flex-basis: 160px; width: 160px; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 12px 38px 14px; gap: 0; padding: 0; background: none; border: 0; box-shadow: none; backdrop-filter: none; border-radius: 0; }
+.dashboard-time-band .about-horizon-label { grid-column: 1; font-size: 10px; color: var(--foreground); }
+.dashboard-time-band .about-horizon-dial { grid-column: 1; grid-row: 2; width: 100%; height: 38px; margin: 0; align-self: center; }
 .dashboard-time-band .about-horizon-times { display: none; }
-.dashboard-time-band .about-always-on { grid-column: 1; margin: 0; padding-top: 3px; font-size: 8px; align-self: end; }
+.dashboard-time-band .about-always-on { grid-column: 1; grid-row: 3; margin: 0; padding: 0; border: 0; font-size: 10px; align-self: end; }
 @media (max-width: 1000px) { .dashboard-wordmark { display: none; } }
 @media (max-width: 639px) {
   .dashboard-time-band .about-time-band { gap: 8px; flex-direction: row; }
-  .dashboard-time-band .about-exchanges { flex: 1 1 58%; min-width: 0; width: auto; padding-inline: 6px; }
-  .dashboard-time-band .about-horizon { flex: 1 1 42%; min-width: 0; width: auto; padding-inline: 6px; grid-template-columns: minmax(0, 1fr) 30px; gap: 2px 3px; }
+  .dashboard-time-band .about-exchanges { flex: 1 1 66%; min-width: 0; width: auto; padding: 3px 6px; }
+  .dashboard-time-band .about-horizon { flex: 1 1 34%; min-width: 0; width: auto; padding: 0; }
   .dashboard-time-band .about-exchange-row { gap: 2px; }
   .dashboard-time-band .about-exchange { display: flex; width: auto; min-width: 0; gap: 1px; }
-  .dashboard-time-band .about-clock-face { display: none; }
+  .dashboard-time-band .about-clock-face { display: block; width: 26px; height: 26px; }
   .dashboard-time-band .about-clock-city { font-size: 9px; }
-  .dashboard-time-band .about-clock-status { font-size: 6px; gap: 2px; }
-  .dashboard-time-band .about-horizon-dial { width: 30px; height: 36px; }
-  .dashboard-time-band .about-always-on, .dashboard-time-band .about-horizon-label { gap: 2px; font-size: 7px; }
+  .dashboard-time-band .about-clock-time { font-size: 9px; line-height: 10px; }
+  .dashboard-time-band .about-clock-city { line-height: 10px; }
+  .dashboard-time-band .about-clock-status { display: none; }
+  .dashboard-time-band .about-markets-label { margin-bottom: 0; font-size: 8px; line-height: 10px; }
+  .dashboard-time-band .about-always-on, .dashboard-time-band .about-horizon-label { gap: 2px; font-size: 9px; }
   .dashboard-time-band .about-on-state { gap: 3px; font-size: 7px; }
 }
 
 /* Workspace tokens live on body so dialog/menu portals receive them too. */
 .workspace-canvas {
-  --background: oklch(0.985 0.002 250);
+  --background: oklch(0.947 0.004 250);
   --card: oklch(0.995 0.002 250 / 0.8);
-  --popover: oklch(0.985 0.002 250 / 0.96);
+  --popover: oklch(0.947 0.004 250 / 0.96);
   --secondary: oklch(0.945 0.012 245 / 0.74);
   --muted: oklch(0.95 0.005 250 / 0.7);
   --border: oklch(0.88 0.009 250 / 0.48);
@@ -850,10 +856,14 @@
   --glass-surface: oklch(1 0 0 / 0.52);
   --glass-surface-strong: oklch(0.995 0.002 250 / 0.78);
   --glass-hairline: oklch(0.45 0.012 250 / 0.06);
-  --dashboard-canvas: linear-gradient(125deg, oklch(0.997 0.001 250), oklch(0.963 0.005 250) 48%, oklch(0.991 0.001 250) 78%, oklch(0.972 0.004 250));
-  --sidebar-fill: oklch(0.92 0.033 195 / 0.66);
-  --sidebar-rim: oklch(0.83 0.045 195 / 0.4);
-  --sidebar-shadow: 0 8px 30px -16px oklch(0.45 0.06 195 / 0.32);
+  --dashboard-canvas: linear-gradient(125deg, oklch(0.965 0.003 250), oklch(0.925 0.005 250) 48%, oklch(0.954 0.003 250) 78%, oklch(0.935 0.004 250));
+  --sidebar-fill: oklch(0.94 0.022 250 / 0.7);
+  --sidebar-rim: oklch(0.8 0.035 250 / 0.36);
+  --sidebar-shadow: 0 8px 30px -16px oklch(0.45 0.04 250 / 0.26);
+  --clock-fill: oklch(0.94 0.01 250);
+  --clock-outline: oklch(0.55 0.02 250 / 0.5);
+  --brief-pink: oklch(0.78 0.09 355);
+  --brief-glow: 0 0 22px -5px oklch(0.78 0.09 355 / 0.45);
   --pill-attention: oklch(0.67 0.13 15);
   --pill-success: oklch(0.66 0.11 170);
   --pill-approval: oklch(0.65 0.09 300);
@@ -874,8 +884,10 @@
   --glass-surface: oklch(0.22 0.015 250 / 0.52);
   --glass-surface-strong: oklch(0.24 0.015 250 / 0.78);
   --dashboard-canvas: linear-gradient(125deg, oklch(0.16 0.008 250), oklch(0.19 0.008 250), oklch(0.14 0.008 250));
-  --sidebar-fill: oklch(0.27 0.035 195 / 0.7);
-  --sidebar-rim: oklch(0.75 0.055 195 / 0.2);
+  --sidebar-fill: oklch(0.27 0.025 250 / 0.7);
+  --sidebar-rim: oklch(0.75 0.04 250 / 0.2);
+  --clock-fill: oklch(0.3 0.015 250);
+  --clock-outline: oklch(0.8 0.02 250 / 0.5);
 }
 .workspace-canvas .min-h-screen { background: var(--dashboard-canvas); }
 .workspace-canvas .paper-ambient { display: none; }
@@ -896,3 +908,5 @@
 .workspace-canvas :where(button, a).rounded-full:where(.glass-chip, .glass-panel, .glass-panel-strong):not([data-tone]):has(.lucide-plane, .lucide-clock, .lucide-calendar) { --pill-tone: var(--pill-travel); }
 .workspace-canvas :where(button, a).rounded-full:where(.glass-chip, .glass-panel, .glass-panel-strong):not([data-tone]):has(.lucide-trash-2, .lucide-circle-alert) { --pill-tone: var(--pill-attention); }
 .workspace-canvas :where(button, a).rounded-full:where(.glass-chip, .glass-panel, .glass-panel-strong):not([data-tone]):has(.lucide-sparkles, .lucide-chart-no-axes-combined, .lucide-list-filter) { --pill-tone: var(--pill-approval); }
+.workspace-canvas .morning-brief-pill { background: color-mix(in oklab, var(--brief-pink) 10%, var(--glass-surface-strong)); border: 1px solid color-mix(in oklab, var(--brief-pink) 24%, var(--glass-border)); box-shadow: var(--brief-glow), inset 0 1px 0 var(--glass-inset-strong); backdrop-filter: blur(20px) saturate(145%); }
+.workspace-canvas .morning-brief-pill:hover { background: color-mix(in oklab, var(--brief-pink) 17%, var(--glass-surface-strong)); }
