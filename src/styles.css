@@ -697,7 +697,8 @@
   font-family: var(--font-serif);
   font-size: 10px;
   font-style: italic;
-  opacity: 0.86;
+  color: color-mix(in oklab, var(--muted-foreground) 26%, var(--foreground));
+  opacity: 1;
 }
 .about-entry-tagline {
   margin-top: 36px;
