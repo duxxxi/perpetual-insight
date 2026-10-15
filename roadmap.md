@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Refine World markets label and horizon geometry; synchronize evening moon, new night skyline and all page controls.
+
 - [x] Add About exchange clocks and a local-time sun/moon horizon in liquid glass; verify time states and narrow layouts.
 
 - [x] Redesign Ask Perpetuity as the dashboard hero chat experience.
