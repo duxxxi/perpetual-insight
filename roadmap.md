@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Compare original/current day and night backgrounds side by side and shrink yellow cursors; verify selection and imagery.
+
 - [x] Match About time-window dimensions and replace the trailing glow with a native yellow glowing cursor; verify layout and interactions.
 
 - [x] Smooth About's local dawn/dusk transitions; add Perpetuity ON and a subtle nighttime cursor glow; verify time states and interactions.

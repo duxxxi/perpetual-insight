@@ -2,8 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, BookOpen, CircleGauge, Fingerprint, ShieldCheck, Globe2, Check, ArrowDown } from "lucide-react";
 import { useEffect, useState, type CSSProperties } from "react";
 import { Button } from "@/components/ui/button";
-import businessDay from "@/assets/about-business-skyline-trial.png.asset.json";
-import businessNight from "@/assets/about-business-night-refined.png.asset.json";
 import { dayPeriod, nightBlend } from "@/lib/day-period";
 import aleksandarPortrait from "@/assets/team/placeholder-aleksandar.jpg";
 import elenaPortrait from "@/assets/team/placeholder-elena.jpg";
@@ -12,6 +10,7 @@ import leilaPortrait from "@/assets/team/placeholder-leila.jpg";
 import { PaintedTerminal, PaintedLandingFeatures, PaintedVideoCoda } from "@/components/painted-landing-features";
 import { CommodityTicker } from "@/components/app-shell";
 import { AboutTimeBand } from "@/components/about-time-band";
+import { AboutBackgroundComparison, backgroundOptions, type BackgroundSelection } from "@/components/about-background-comparison";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -89,6 +88,7 @@ const team = [
 
 function AboutPage() {
   const [active, setActive] = useState(0);
+  const [backgrounds, setBackgrounds] = useState<BackgroundSelection>({ day: "original", night: "original" });
   const [period, setPeriod] = useState<"day" | "night">("day");
   const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
@@ -116,7 +116,7 @@ function AboutPage() {
     <div data-period={period} style={appearance} className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
       <CommodityTicker />
       <section className="about-painted-hero relative isolate">
-        <BusinessBackdrop />
+        <BusinessBackdrop selection={backgrounds} />
         <header className="mx-auto max-w-6xl px-5 pt-3 lg:px-8">
           <div className="about-nav flex items-center justify-between gap-3 rounded-2xl px-3 py-2">
           <Link to="/landing" className="flex items-center gap-2.5"><span className="globe-orb size-5" aria-hidden /><span className="about-wordmark">Perpetuity</span></Link>
@@ -126,7 +126,7 @@ function AboutPage() {
             <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#agents">Intelligence team</a></Button>
             <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#team">People</a></Button>
           </nav>
-          <Button asChild size="sm" className="h-8 rounded-full px-3 text-[11px]"><Link to="/">Open workspace <ArrowUpRight /></Link></Button>
+          <div className="flex items-center gap-2"><AboutBackgroundComparison selection={backgrounds} onChange={setBackgrounds} /><Button asChild size="sm" className="h-8 rounded-full px-3 text-[11px]"><Link to="/">Open workspace <ArrowUpRight /></Link></Button></div>
           </div>
         </header>
 
@@ -188,11 +188,11 @@ function AboutPage() {
   );
 }
 
-function BusinessBackdrop() {
+function BusinessBackdrop({ selection }: { selection: BackgroundSelection }) {
   return (
     <div className="about-business-backdrop" aria-hidden="true">
-      <img src={businessDay.url} alt="" width={1536} height={768} className="about-business-image about-business-day" />
-      <img src={businessNight.url} alt="" width={1536} height={768} className="about-business-image about-business-night" />
+      <img src={backgroundOptions.day[selection.day]} alt="" width={1536} height={768} className="about-business-image about-business-day" />
+      <img src={backgroundOptions.night[selection.night]} alt="" width={1536} height={768} className="about-business-image about-business-night" />
       <div className="about-business-veil" />
     </div>
   );
