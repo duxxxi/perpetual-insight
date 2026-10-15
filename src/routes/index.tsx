@@ -590,6 +590,13 @@ function MorningBriefPill() {
   );
 }
 
+const tagTones: Record<string, string> = {
+  Payment: "text-destructive",
+  Engineering: "text-status-progress",
+  Treasury: "text-status-done",
+  Compliance: "text-accent",
+};
+
 function WorkCard({
   tag,
   title,

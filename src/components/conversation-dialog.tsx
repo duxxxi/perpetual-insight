@@ -86,7 +86,8 @@ export function ConversationDialog({
   }, [open, conversationId, initialMessage]);
   useEffect(() => {
     if (!id) return;
-    return conversationStore.subscribe(() => setConv(conversationStore.get(id) ?? null));
+    const unsubscribe = conversationStore.subscribe(() => setConv(conversationStore.get(id) ?? null));
+    return () => { unsubscribe(); };
   }, [id]);
   useEffect(
     () => () => {
