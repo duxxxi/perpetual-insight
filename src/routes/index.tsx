@@ -107,12 +107,14 @@ function DashboardPage() {
         <main className="flex-1 px-5 pb-36 pt-2 lg:pl-20 lg:pr-8 xl:pr-12">
           <div className="mx-auto max-w-7xl animate-fade-in-up">
             <div className="dashboard-time-band">
+              <span className="dashboard-wordmark">PERPETUITY</span>
               <AboutTimeBand now={now} workspace />
             </div>
             {/* Header */}
             <header className="mb-5">
-              <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
-                {today}
+              <p className="dashboard-date-line mb-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-semibold uppercase text-foreground/40">
+                <span>{today}</span>
+                <span>Local time <time>{now ? new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(now) : "—:—"}</time></span>
               </p>
               <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                 <h1 className="font-sans text-[30px] font-semibold leading-[1.05] tracking-normal md:text-[36px]">

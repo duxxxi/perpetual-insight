@@ -807,15 +807,13 @@
   position: relative;
   margin: 0 0 22px;
 }
-.workspace-clock-header { display: flex; justify-content: space-between; align-items: center; gap: 14px; }
-.workspace-local-clock { flex: 0 0 auto; display: flex; flex-direction: column; gap: 4px; }
-.workspace-local-label { font-size: 9px; color: var(--muted-foreground); }
-.workspace-local-time { font-family: var(--font-mono); font-size: 18px; font-variant-numeric: tabular-nums; color: var(--foreground); }
-.workspace-markets { width: 350px; min-width: 0; }
-.dashboard-time-band .about-exchanges { width: 100%; height: auto; background: var(--chat-sheen), var(--about-time-fill); border-radius: 10px; padding: 7px 10px; }
+.dashboard-wordmark { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-family: var(--font-mono); font-size: 10px; font-weight: 500; color: var(--muted-foreground); }
+.workspace-clock-header { display: flex; justify-content: flex-end; align-items: center; }
+.workspace-markets { width: 260px; min-width: 0; }
+.dashboard-time-band .about-exchanges { width: 100%; height: auto; flex: none; background: none; border: 0; border-radius: 0; box-shadow: none; backdrop-filter: none; padding: 0; }
 .dashboard-time-band .about-exchange-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
 .dashboard-time-band .about-exchange { display: flex; flex-direction: column; align-items: center; width: auto; min-width: 0; gap: 1px; text-align: center; }
-.dashboard-time-band .about-clock-face { width: 34px; height: 34px; margin: 0 0 2px; color: var(--foreground); }
+.dashboard-time-band .about-clock-face { width: 28px; height: 28px; margin: 0 0 2px; color: var(--foreground); }
 .dashboard-time-band .about-clock-rim { fill: var(--clock-fill); stroke: var(--clock-outline); }
 .dashboard-time-band .about-clock-tick { stroke: var(--foreground); opacity: 0.75; }
 .dashboard-time-band .about-clock-hour { stroke-width: 2.2; }
@@ -825,11 +823,14 @@
 .dashboard-time-band .about-clock-city { font-size: 10px; color: var(--foreground); }
 .dashboard-time-band .about-clock-time { font-size: 10px; color: var(--foreground); }
 .dashboard-time-band .about-clock-status { font-size: 8px; }
-.dashboard-time-band .about-always-on { margin: 1px 0 0; padding: 0; border: 0; font-size: 10px; gap: 7px; }
+.dashboard-date-line time { font-variant-numeric: tabular-nums; }
+@media (max-width: 1100px) {
+  .dashboard-wordmark { left: 0; transform: translateY(-50%); width: calc(100% - 280px); text-align: center; }
+}
 @media (max-width: 639px) {
-  .workspace-clock-header { gap: 8px; }
-  .workspace-markets { width: 290px; }
-  .dashboard-time-band .about-exchanges { padding: 6px 4px; }
+  .dashboard-wordmark { position: static; display: block; width: 100%; transform: none; text-align: center; margin-bottom: 9px; }
+  .workspace-markets { width: 250px; }
+  .dashboard-time-band .about-exchanges { padding: 0; }
   .dashboard-time-band .about-exchange-row { gap: 2px; }
   .dashboard-time-band .about-clock-face { width: 28px; height: 28px; }
   .dashboard-time-band .about-clock-city { font-size: 9px; }
@@ -837,8 +838,6 @@
   .dashboard-time-band .about-clock-city { line-height: 10px; }
   .dashboard-time-band .about-clock-status { font-size: 7px; gap: 2px; }
   .dashboard-time-band .about-markets-label { font-size: 9px; }
-  .dashboard-time-band .about-always-on { gap: 4px; font-size: 9px; }
-  .dashboard-time-band .about-on-state { gap: 3px; font-size: 7px; }
 }
 
 /* Workspace tokens live on body so dialog/menu portals receive them too. */

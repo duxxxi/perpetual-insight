@@ -21,11 +21,6 @@ export function AboutTimeBand({ now, workspace = false }: { now: Date | null; wo
   const label = now ? timeOfDay(now) : "Day";
   const localTime = now ? new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(now) : "—:—";
   if (workspace) return <div className="workspace-clock-header">
-    <div className="workspace-local-clock">
-      <span className="workspace-local-label">Local time</span>
-      <time className="workspace-local-time">{localTime}</time>
-      <div className="about-always-on"><span>Perpetuity</span><span className="about-on-state"><span className="about-on-light" aria-hidden="true" />ON</span></div>
-    </div>
     <div className="workspace-markets">
       <p className="about-markets-label">World markets</p>
       <div className="about-exchanges" aria-label="Stock exchange clocks">
