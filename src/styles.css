@@ -789,21 +789,38 @@
 .latest-dashboard > .flex { min-width: 0; }
 .latest-dashboard main { min-width: 0; }
 .latest-dashboard { overflow-x: clip; }
-.dashboard-greeting-name { color: var(--greeting-blue); }
+.dashboard-greeting-name {
+  --greeting-glow: color-mix(in oklab, var(--greeting-blue) 23%, transparent);
+  color: var(--greeting-blue);
+  text-shadow: 0 0 18px var(--greeting-glow), 0 1px 0 var(--glass-inset);
+}
 .dashboard-time-band {
   --about-time-fill: var(--glass-surface);
   --about-time-highlight: var(--glass-border);
-  --about-time-shadow: var(--chat-shadow);
+  --about-time-shadow: 0 6px 20px color-mix(in oklab, var(--foreground) 5%, transparent);
   --about-sun: oklch(0.73 0.12 75);
   --about-moon: var(--greeting-blue);
   --about-session: var(--chat-on);
   --about-on-glow: color-mix(in oklab, var(--chat-on) 35%, transparent);
-  margin: 24px 0;
+  margin: 0 0 24px;
 }
-.dashboard-time-band .about-time-band { max-width: none; margin: 0; padding: 0; align-items: center; }
-.dashboard-time-band .about-exchanges, .dashboard-time-band .about-horizon { background: var(--chat-sheen), var(--about-time-fill); }
+.dashboard-time-band .about-time-band { --about-time-width: 224px; --about-time-height: 118px; max-width: none; margin: 0; padding: 0; align-items: center; }
+.dashboard-time-band .about-exchanges, .dashboard-time-band .about-horizon { background: var(--chat-sheen), var(--about-time-fill); border-radius: 16px; padding: 9px 12px; }
+.dashboard-time-band .about-exchange-row { gap: 8px; justify-content: space-between; }
+.dashboard-time-band .about-exchange { width: 58px; gap: 2px; }
+.dashboard-time-band .about-clock-face { width: 32px; height: 32px; margin-bottom: 1px; }
+.dashboard-time-band .about-markets-label { margin-bottom: 5px; }
+.dashboard-time-band .about-clock-time { font-size: 10px; }
+.dashboard-time-band .about-horizon-dial { height: 44px; margin: 0; }
+.dashboard-time-band .about-always-on { margin-top: 5px; padding-top: 5px; }
 @media (max-width: 639px) {
-  .dashboard-time-band .about-time-band { flex-wrap: wrap; justify-content: flex-start; gap: 12px; }
-  .dashboard-time-band .about-exchanges, .dashboard-time-band .about-horizon { flex: 1 1 268px; width: 100%; max-width: none; }
-  .dashboard-time-band .about-exchange-row { justify-content: space-around; }
+  .dashboard-time-band .about-time-band { gap: 8px; flex-direction: row; }
+  .dashboard-time-band .about-exchanges { flex: 1 1 56%; min-width: 0; width: auto; padding-inline: 8px; }
+  .dashboard-time-band .about-horizon { flex: 1 1 44%; min-width: 0; width: auto; padding-inline: 8px; }
+  .dashboard-time-band .about-exchange-row { gap: 2px; }
+  .dashboard-time-band .about-exchange { width: auto; min-width: 0; }
+  .dashboard-time-band .about-clock-face { width: 27px; height: 27px; }
+  .dashboard-time-band .about-clock-city { font-size: 9px; }
+  .dashboard-time-band .about-clock-status { font-size: 7px; gap: 2px; }
+  .dashboard-time-band .about-horizon-times { font-size: 7px; }
 }
