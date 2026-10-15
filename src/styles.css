@@ -694,17 +694,8 @@
   line-height: 1.6;
   color: color-mix(in oklab, var(--muted-foreground) 92%, var(--foreground));
 }
-.about-entry-source {
-  display: block;
-  margin-top: 5px;
-  font-family: var(--font-serif);
-  font-size: 10px;
-  font-style: italic;
-  color: color-mix(in oklab, var(--muted-foreground) 84%, var(--foreground));
-  opacity: 1;
-}
 .about-entry-tagline {
-  margin-top: 42px;
+  margin-top: 32px;
   font-size: 21px;
   line-height: 1.5;
   letter-spacing: 0.2em;
