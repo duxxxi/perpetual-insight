@@ -16,11 +16,14 @@ import cityVideo from "@/assets/about-city.mp4.asset.json";
 import parkPoster from "@/assets/about-central_park-poster.jpg.asset.json";
 import streetPoster from "@/assets/about-272512-poster.jpg.asset.json";
 import cityPoster from "@/assets/about-city-poster.jpg.asset.json";
+import parkWebm from "@/assets/about-central_park.webm.asset.json";
+import streetWebm from "@/assets/about-272512.webm.asset.json";
+import cityWebm from "@/assets/about-city.webm.asset.json";
 
 const videoOptions = {
-  park: { url: parkVideo.url, poster: parkPoster.url },
-  street: { url: streetVideo.url, poster: streetPoster.url },
-  skyline: { url: cityVideo.url, poster: cityPoster.url },
+  park: { url: parkVideo.url, webm: parkWebm.url, poster: parkPoster.url },
+  street: { url: streetVideo.url, webm: streetWebm.url, poster: streetPoster.url },
+  skyline: { url: cityVideo.url, webm: cityWebm.url, poster: cityPoster.url },
 };
 
 export const backgroundOptions = {
@@ -54,7 +57,7 @@ export function AboutBackgroundMedia({ version, period, active }: { version: Bac
   }, [active, version]);
   const className = `about-business-image about-business-${period}`;
   return video
-    ? <video key={version} ref={ref} src={video.url} poster={video.poster} loop muted playsInline preload="metadata" aria-hidden className={`${className} about-business-video`} />
+    ? <video key={version} ref={ref} poster={video.poster} loop muted playsInline preload="metadata" aria-hidden className={`${className} about-business-video`}><source src={video.webm} type="video/webm" /><source src={video.url} type="video/mp4" /></video>
     : <img src={backgroundOptions[period][version]} alt="" width={1536} height={768} className={className} />;
 }
 
