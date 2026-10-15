@@ -695,9 +695,9 @@
   color: color-mix(in oklab, var(--muted-foreground) 92%, var(--foreground));
 }
 .about-entry-tagline {
-  margin-top: 32px;
+  margin-top: 58px;
   font-size: 21px;
-  line-height: 1.5;
+  line-height: 1.4;
   letter-spacing: 0.2em;
   text-indent: 0.2em;
 }
@@ -797,7 +797,7 @@
 @media (max-width: 639px) {
   .about-time-band { --about-time-width: calc((100vw - 50px) / 2); }
   .about-entry-word { font-size: 21px; letter-spacing: 0.2em; }
-  .about-entry-tagline { font-size: 15px; letter-spacing: 0.16em; }
+  .about-entry-tagline { font-size: 15px; letter-spacing: 0.16em; margin-top: 40px; }
   .about-section-title { font-size: 25px; }
   .about-wordmark { font-size: 10px; }
 }
