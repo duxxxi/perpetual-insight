@@ -57,7 +57,10 @@ const ticker = [
   { sym: "ALU", price: "$2,241", chg: "+0.80%", dir: "up" as const },
 ];
 
-function TickerRow() {
+type TickerTone = "light" | "dark";
+
+function TickerRow({ tone }: { tone: TickerTone }) {
+  const dark = tone === "dark";
   return (
     <div className="flex shrink-0 gap-2 px-4">
       {ticker.map((t, i) => {
@@ -67,13 +70,27 @@ function TickerRow() {
             key={i}
             className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] ring-1 backdrop-blur-sm ${
               up
-                ? "bg-emerald-500/[0.06] ring-emerald-500/15"
-                : "bg-rose-500/[0.06] ring-rose-500/15"
+                ? dark
+                  ? "bg-emerald-400/10 ring-emerald-300/25"
+                  : "bg-emerald-500/[0.06] ring-emerald-500/15"
+                : dark
+                  ? "bg-rose-400/10 ring-rose-300/25"
+                  : "bg-rose-500/[0.06] ring-rose-500/15"
             }`}
           >
-            <span className="text-foreground/55">{t.sym}</span>
+            <span className={dark ? "text-foreground/75" : "text-foreground/55"}>{t.sym}</span>
             <span className="font-semibold text-foreground/90">{t.price}</span>
-            <span className={up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}>
+            <span
+              className={
+                up
+                  ? dark
+                    ? "text-emerald-300"
+                    : "text-emerald-600 dark:text-emerald-400"
+                  : dark
+                    ? "text-rose-300"
+                    : "text-rose-600 dark:text-rose-400"
+              }
+            >
               {t.chg}
             </span>
           </span>
@@ -83,11 +100,12 @@ function TickerRow() {
   );
 }
 
-export function CommodityTicker() {
+export function CommodityTicker({ tone = "light" }: { tone?: TickerTone }) {
+  const dark = tone === "dark";
   return (
-    <div className="sticky top-0 z-40">
+    <div className={`commodity-ticker sticky top-0 z-40${dark ? " commodity-ticker--dark" : ""}`}>
       <div className="relative overflow-hidden">
-        <div className="ai-iridescent absolute -inset-px rounded-2xl opacity-40 blur-[2px]" aria-hidden />
+        <div className={`ai-iridescent absolute -inset-px rounded-2xl blur-[2px]${dark ? " opacity-60" : " opacity-40"}`} aria-hidden />
         <div className="glass-panel-strong relative overflow-hidden rounded-2xl border border-foreground/5">
           <div
             aria-hidden
@@ -95,8 +113,8 @@ export function CommodityTicker() {
           />
           <div className="ticker-mask relative overflow-hidden py-1.5">
             <div className="animate-ticker flex whitespace-nowrap">
-              <TickerRow />
-              <TickerRow />
+              <TickerRow tone={tone} />
+              <TickerRow tone={tone} />
             </div>
           </div>
         </div>
