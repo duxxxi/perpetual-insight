@@ -17,6 +17,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { openPerpetuityDock } from "@/components/ask-perpetuity-dock";
 import {
   Dialog,
   DialogContent,
@@ -194,7 +195,7 @@ function AskPerpetuityButton() {
       <button
         type="button"
         title="New conversation or task"
-        onClick={() => setOpen(true)}
+        onClick={openPerpetuityDock}
         className="group relative mt-1 flex size-8 items-center justify-center rounded-full glass-chip text-foreground/80 transition-all hover:text-foreground hover:shadow-[0_0_22px_-8px_rgba(10,15,25,0.4)]"
       >
         <Plus className="size-[16px]" strokeWidth={2} />

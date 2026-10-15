@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { DetailProvider } from "../components/detail-provider";
+import { AskPerpetuityDock } from "../components/ask-perpetuity-dock";
 
 function NotFoundComponent() {
   return (
@@ -125,6 +126,7 @@ function RootComponent() {
       <DetailProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
+        <AskPerpetuityDock />
       </DetailProvider>
     </QueryClientProvider>
   );

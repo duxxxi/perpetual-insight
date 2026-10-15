@@ -44,33 +44,28 @@ import {
 import { useTheme } from "@/hooks/use-theme";
 import { AmbientBackground, CommodityTicker, AppSidebar, AppFooter } from "@/components/app-shell";
 import { useUserTasks } from "@/lib/task-store";
-import { ConversationDialog } from "@/components/conversation-dialog";
 import { PerpetuityAsksCard } from "@/components/perpetuity-asks";
-import { MastheadBand } from "@/components/masthead-band";
-import {
-  PromptInput,
-  PromptInputFooter,
-  PromptInputSubmit,
-  PromptInputTextarea,
-  PromptInputTools,
-} from "@/components/ai-elements/prompt-input";
-import { Button } from "@/components/ui/button";
-
+import { SectionLabel } from "@/components/ui/section-label";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Daily Brief — Perpetuity" },
-      { name: "description", content: "Your continuous commercial intelligence for international trade." },
+      {
+        name: "description",
+        content: "Your continuous commercial intelligence for international trade.",
+      },
       { property: "og:title", content: "Daily Brief — Perpetuity" },
-      { property: "og:description", content: "Your continuous commercial intelligence for international trade." },
+      {
+        property: "og:description",
+        content: "Your continuous commercial intelligence for international trade.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: DashboardPage,
 });
-
 
 function useGreeting() {
   const [greeting, setGreeting] = useState("Good morning");
@@ -87,42 +82,49 @@ function DashboardPage() {
   useTheme();
   const userTasks = useUserTasks();
   const greeting = useGreeting();
+  const [today, setToday] = useState("");
+  useEffect(() => {
+    setToday(
+      new Date()
+        .toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" })
+        .toUpperCase(),
+    );
+  }, []);
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
+    <div className="latest-dashboard min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
       <AmbientBackground />
       <CommodityTicker />
 
-      {/* Masthead band — clocks · wordmark · daylight */}
-      <MastheadBand />
+      <div className="flex justify-center pt-4 pb-2">
+        <span className="font-mono text-[11px] font-medium uppercase tracking-[0.35em] text-foreground/45">
+          Perpetuity
+        </span>
+      </div>
 
       <div className="flex">
         <AppSidebar active="home" />
 
-
-        <main className="flex-1 px-6 pb-20 pt-7 lg:pl-24 lg:pr-10 xl:pr-14">
-          <div className="mx-auto max-w-6xl animate-fade-in-up">
+        <main className="flex-1 px-5 pb-36 pt-6 lg:pl-20 lg:pr-8 xl:pr-12">
+          <div className="mx-auto max-w-7xl animate-fade-in-up">
             {/* Header */}
-            <header className="mb-7">
+            <header className="mb-5">
               <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
-                MONDAY, 15 JUNE
+                {today}
               </p>
               <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                <h1 className="font-serif text-[35px] font-normal leading-[1.18] md:text-[43px]">
-                  <span className="text-foreground/72">{greeting},</span>{" "}
-                  <span className="italic text-foreground">Stevan</span>
+                <h1 className="font-sans text-[30px] font-semibold leading-[1.05] tracking-normal md:text-[36px]">
+                  <span className="text-foreground/60">{greeting},</span>{" "}
+                  <span className="text-silver-metallic">Stevan</span>
                 </h1>
 
                 <MorningBriefPill />
               </div>
               <p className="mt-4 max-w-2xl text-pretty text-sm leading-relaxed text-foreground/60">
-                You have critical payment and deployment issues requiring action today,
-                plus a multi-country trip starting in five days that needs final logistics review.
+                You have critical payment and deployment issues requiring action today, plus a
+                multi-country trip starting in five days that needs final logistics review.
               </p>
               <RefreshPill />
             </header>
-
-
-
 
             {/* Trip card — compact */}
             <div className="glass-panel group mb-6 flex items-center justify-between gap-4 rounded-2xl px-4 py-3.5">
@@ -146,32 +148,31 @@ function DashboardPage() {
                 title="Prepare Bratislava briefing"
                 kicker="Trip · Jun 19 → 20"
                 body="Compile flight, hotel, buyer notes, and market context into a single briefing pack."
-                actions={[
-                  { label: "Generate briefing", primary: true },
-                  { label: "Later" },
-                ]}
+                actions={[{ label: "Generate briefing", primary: true }, { label: "Later" }]}
                 trigger={
-                  <button data-pill className="glass-panel-strong inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors hover:text-accent">
+                  <button
+                    data-pill
+                    className="glass-panel-strong inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors hover:text-accent"
+                  >
                     Prepare briefing
                     <ArrowUpRight className="size-3" />
                   </button>
                 }
               />
-
             </div>
 
-            {/* Ask Perpetuity */}
-            <AskPerpetuity />
-
             {/* Status pills row — under chatbox */}
-            <div className="mb-7 -mt-4 flex flex-wrap items-center gap-2.5">
+            <div className="mb-6 flex flex-wrap items-center gap-2">
               <StatusPill
                 icon={AlertOctagon}
                 gradient="from-rose-500 to-red-600"
                 count="3"
                 label="Urgent"
                 items={[
-                  { title: "Stripe payment failed ($8.00)", sub: "Recurring charge — acct_1ika5ja3kz32dpo1" },
+                  {
+                    title: "Stripe payment failed ($8.00)",
+                    sub: "Recurring charge — acct_1ika5ja3kz32dpo1",
+                  },
                   { title: "Railway build failure", sub: "@export-analytica/web — 19:38 UTC" },
                   { title: "EU timber restrictions — CIS", sub: "3 suppliers affected" },
                 ]}
@@ -210,19 +211,22 @@ function DashboardPage() {
             {/* Convergence — what the world's noise means for you */}
             <Convergence />
 
-
             {/* Two-column workspace */}
-            <div className="grid grid-cols-1 gap-7 lg:grid-cols-12">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
               {/* Active Work — primary */}
               <section className="lg:col-span-7">
-                <SectionLabel kicker="Priority" tone="primary">Active Work</SectionLabel>
+                <SectionLabel kicker="Priority" tone="primary">
+                  Active Work
+                </SectionLabel>
                 <div className="mt-4 space-y-3">
                   {userTasks.map((ut) => (
                     <WorkCard
                       key={ut.id}
                       tag={ut.tag}
                       title={ut.title}
-                      body={ut.body ?? "Created from Ask Perpetuity. Open in Assignments to add detail."}
+                      body={
+                        ut.body ?? "Created from Ask Perpetuity. Open in Assignments to add detail."
+                      }
                       actions={[
                         { icon: PenLine, label: "Open in Assignments" },
                         { icon: Reply, label: "Add detail" },
@@ -271,21 +275,49 @@ function DashboardPage() {
 
                 {/* Today's schedule */}
                 <div className="mt-8">
-                  <SectionLabel kicker="Today" tone="accent">Schedule</SectionLabel>
+                  <SectionLabel kicker="Today" tone="accent">
+                    Schedule
+                  </SectionLabel>
                   <div className="glass-panel mt-4 rounded-3xl p-1.5">
-                    <ScheduleRow time="09:30" title="Buyer call: EuroMach GmbH" sub="Video call" tone="emerald" Icon={Video} />
+                    <ScheduleRow
+                      time="09:30"
+                      title="Buyer call: EuroMach GmbH"
+                      sub="Video call"
+                      tone="emerald"
+                      Icon={Video}
+                    />
                     <ScheduleDivider />
-                    <ScheduleRow time="11:00" title="Review tender: Railway components – Poland" sub="Internal" tone="accent" Icon={FileText} />
+                    <ScheduleRow
+                      time="11:00"
+                      title="Review tender: Railway components – Poland"
+                      sub="Internal"
+                      tone="accent"
+                      Icon={FileText}
+                    />
                     <ScheduleDivider />
-                    <ScheduleRow time="14:00" title="Follow up: Global Trade Solutions" sub="Email follow-up" tone="blue" Icon={Mail} />
+                    <ScheduleRow
+                      time="14:00"
+                      title="Follow up: Global Trade Solutions"
+                      sub="Email follow-up"
+                      tone="blue"
+                      Icon={Mail}
+                    />
                     <ScheduleDivider />
-                    <ScheduleRow time="16:30" title="Compliance check: REACH regulation" sub="Automated check" tone="violet" Icon={Shield} />
+                    <ScheduleRow
+                      time="16:30"
+                      title="Compliance check: REACH regulation"
+                      sub="Automated check"
+                      tone="violet"
+                      Icon={Shield}
+                    />
                   </div>
                 </div>
 
                 {/* Routines */}
                 <div className="mt-8">
-                  <SectionLabel kicker="Automate" tone="accent">Routines</SectionLabel>
+                  <SectionLabel kicker="Automate" tone="accent">
+                    Routines
+                  </SectionLabel>
                   <div className="mt-3 grid gap-3 sm:grid-cols-2">
                     {routines.map((r) => (
                       <RoutineChip key={r.title} {...r} />
@@ -295,7 +327,9 @@ function DashboardPage() {
 
                 {/* Suggested */}
                 <div className="mt-8">
-                  <SectionLabel kicker="Optional" tone="accent">Suggested</SectionLabel>
+                  <SectionLabel kicker="Optional" tone="accent">
+                    Suggested
+                  </SectionLabel>
                   <div className="mt-3 space-y-3">
                     <SuggestedItem
                       title="Clean up duplicate pitch deck versions in Drive"
@@ -316,46 +350,58 @@ function DashboardPage() {
               {/* Right rail */}
               <aside className="space-y-8 lg:col-span-5">
                 <div>
-                  <SectionLabel kicker="Live · 14:40 UTC" tone="accent">Signals</SectionLabel>
+                  <SectionLabel kicker="Live · 14:40 UTC" tone="accent">
+                    Signals
+                  </SectionLabel>
                   <LiveSignals />
                 </div>
 
                 <div>
-                  <SectionLabel kicker="Curated for you" tone="accent">Need to know</SectionLabel>
+                  <SectionLabel kicker="Curated for you" tone="accent">
+                    Need to know
+                  </SectionLabel>
                   <div className="glass-panel mt-3 rounded-2xl px-4 py-4">
                     <IntelItem
                       time="07:10 CET"
                       hot
                       title="EU adds two CIS timber codes to restricted list"
-                      body={"Three suppliers in your network ship under the affected codes.\n\nPerpetuity drafted a customer notice and a substitution list from FSC-certified EU mills. Approve to send."}
+                      body={
+                        "Three suppliers in your network ship under the affected codes.\n\nPerpetuity drafted a customer notice and a substitution list from FSC-certified EU mills. Approve to send."
+                      }
                     />
                     <Divider />
                     <IntelItem
                       time="08:45 CET"
                       title="German containerboard buyers restocking earlier than usual"
-                      body={"Order books at two of your DE accounts opened Q3 volumes two weeks ahead of last year.\n\nSuggested move: send Q3 availability to EuroMach and Hansa before capacity is committed elsewhere."}
+                      body={
+                        "Order books at two of your DE accounts opened Q3 volumes two weeks ahead of last year.\n\nSuggested move: send Q3 availability to EuroMach and Hansa before capacity is committed elsewhere."
+                      }
                     />
                     <Divider />
                     <IntelItem
                       time="10:20 CET"
                       title="Freight: Adriatic → Northern EU rates soften 3.1%"
-                      body={"Lower Brent and slack capacity are pushing spot rates down.\n\nQuotes issued this week can absorb the drop as margin, or be used to win the Poland railway tender on price."}
+                      body={
+                        "Lower Brent and slack capacity are pushing spot rates down.\n\nQuotes issued this week can absorb the drop as margin, or be used to win the Poland railway tender on price."
+                      }
                     />
                     <Divider />
                     <IntelItem
                       time="11:55 CET"
                       title="Poland railway components tender — clarification round closes Thursday"
-                      body={"Questions must be filed before Thursday 17:00 CET.\n\nPerpetuity prepared three clarification questions on certification and delivery windows."}
+                      body={
+                        "Questions must be filed before Thursday 17:00 CET.\n\nPerpetuity prepared three clarification questions on certification and delivery windows."
+                      }
                     />
                   </div>
                 </div>
 
-
                 <div>
-                  <SectionLabel kicker="18 sources · 4 languages" tone="accent">World feed</SectionLabel>
+                  <SectionLabel kicker="18 sources · 4 languages" tone="accent">
+                    World feed
+                  </SectionLabel>
                   <NewsLanes />
                 </div>
-
               </aside>
             </div>
           </div>
@@ -363,157 +409,7 @@ function DashboardPage() {
       </div>
 
       <AppFooter />
-
     </div>
-  );
-}
-
-/* ---------- Ask Perpetuity ---------- */
-
-function AskPerpetuity() {
-  const [permission, setPermission] = useState("ask");
-  const [draft, setDraft] = useState("");
-  const [convOpen, setConvOpen] = useState(false);
-  const [pending, setPending] = useState<string | null>(null);
-
-  const launch = (message = draft) => {
-    const v = message.trim();
-    if (!v) return;
-    setPending(v);
-    setDraft("");
-    setConvOpen(true);
-  };
-
-  const permissions = [
-    { id: "ask", label: "Ask before any write actions", sub: "Default" },
-    { id: "safe", label: "Always allow safe actions", sub: "Low-risk actions only" },
-    { id: "all", label: "Allow all actions", sub: "Take any action in this session" },
-  ];
-
-  const addTaskItems = [
-    { icon: Paperclip, label: "Upload files" },
-    { icon: FileText, label: "Document" },
-    { icon: Presentation, label: "Deck" },
-    { icon: ImageIcon, label: "Image" },
-    { icon: ScanFace, label: "Research person" },
-    { icon: Mic, label: "Recording" },
-  ];
-
-  return (
-    <section className="ask-stage group relative mb-8" aria-label="Ask Perpetuity">
-      <div className="ask-stage-glow pointer-events-none absolute -inset-5" aria-hidden />
-      <div className="ask-stage-shell relative overflow-hidden rounded-[1.75rem] px-4 pb-4 pt-4 sm:px-5 sm:pb-5 sm:pt-5">
-        <div className="ask-stage-sheen pointer-events-none absolute inset-x-10 top-0 h-px" aria-hidden />
-        <div className="mb-4 flex items-center justify-between gap-4 px-1">
-          <div className="flex min-w-0 items-center gap-3">
-            <div className="ask-stage-orbit relative flex size-10 shrink-0 items-center justify-center rounded-full">
-              <div className="globe-orb size-5 ring-1 ring-foreground/10" aria-hidden />
-            </div>
-            <div className="min-w-0">
-              <p className="font-command text-[15px] font-semibold text-foreground">Ask Perpetuity</p>
-              <p className="mt-0.5 truncate text-[11px] text-foreground/48">One conversation across your work</p>
-            </div>
-          </div>
-          <div className="ask-status-pill hidden items-center gap-2 rounded-full px-3 py-1.5 text-[10px] text-foreground/55 sm:flex">
-            <span className="relative flex size-1.5">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent/50" />
-              <span className="relative inline-flex size-1.5 rounded-full bg-accent" />
-            </span>
-            Intelligence ready
-          </div>
-        </div>
-
-        <PromptInput
-          onSubmit={({ text }) => launch(text)}
-          className="ask-composer"
-        >
-          <PromptInputTextarea
-            name="message"
-            value={draft}
-            onChange={(e) => setDraft(e.target.value)}
-            placeholder="Ask anything. Plan, investigate, draft, or act…"
-            className="min-h-[76px] px-4 pb-2 pt-4 font-command text-[16px] leading-relaxed text-foreground placeholder:text-foreground/32 sm:text-[17px]"
-          />
-          <PromptInputFooter className="px-2.5 pb-2.5 pt-1">
-            <PromptInputTools className="gap-1.5">
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant="ghost" size="sm" data-pill className="ask-tool-pill h-8 rounded-full px-3 text-[11px] text-foreground/60">
-                    <Plus className="size-3.5" />
-                    Add task
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent align="start" className="w-60 rounded-2xl border-foreground/10 bg-background/85 p-1.5 backdrop-blur-2xl">
-                  {addTaskItems.map((it) => (
-                    <Button variant="ghost" data-pill key={it.label} className="h-9 w-full justify-start rounded-xl px-3 text-sm font-normal">
-                      <it.icon className="size-4 text-foreground/60" />
-                      <span>{it.label}</span>
-                    </Button>
-                  ))}
-                </PopoverContent>
-              </Popover>
-
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant="ghost" size="sm" data-pill className="ask-tool-pill h-8 rounded-full px-3 text-[11px] text-foreground/60">
-                    <Shield className="size-3.5" />
-                    Permissions
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent align="start" className="w-80 rounded-2xl border-foreground/10 bg-background/85 p-0 backdrop-blur-2xl">
-                  <div className="border-b border-foreground/5 px-4 py-3">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/45">Permission</p>
-                  </div>
-                  <div className="p-1.5">
-                    {permissions.map((p) => (
-                      <Button
-                        variant="ghost"
-                        key={p.id}
-                        onClick={() => setPermission(p.id)}
-                        className="h-auto w-full items-start justify-start gap-3 rounded-xl px-3 py-2.5 text-left"
-                      >
-                        <div className="mt-0.5 flex size-4 shrink-0 items-center justify-center">
-                          {permission === p.id && <Check className="size-3.5 text-accent" />}
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium leading-tight">{p.label}</p>
-                          <p className="mt-0.5 text-xs font-normal text-foreground/45">{p.sub}</p>
-                        </div>
-                      </Button>
-                    ))}
-                  </div>
-                  <div className="border-t border-foreground/5 px-4 py-2.5">
-                    <Button variant="ghost" size="sm" data-pill className="h-7 rounded-full px-2 text-xs text-foreground/70">
-                      Learn more
-                      <ArrowUpRight className="size-3" />
-                    </Button>
-                  </div>
-                </PopoverContent>
-              </Popover>
-            </PromptInputTools>
-            <PromptInputSubmit
-              disabled={!draft.trim()}
-              className="ask-submit size-10 rounded-full"
-            >
-              <ArrowUp className="size-4" strokeWidth={2.4} />
-            </PromptInputSubmit>
-          </PromptInputFooter>
-        </PromptInput>
-
-        <div className="mt-3 flex items-center justify-between px-1 sm:hidden">
-          <div className="flex items-center gap-2 text-[10px] text-foreground/45">
-            <span className="size-1.5 rounded-full bg-accent" />
-            Intelligence ready
-          </div>
-        </div>
-      </div>
-      <ConversationDialog
-        open={convOpen}
-        onOpenChange={setConvOpen}
-        initialMessage={pending}
-        conversationId={null}
-      />
-    </section>
   );
 }
 
@@ -535,7 +431,10 @@ function StatusPill({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button data-pill className="glass-panel group inline-flex h-7 items-center gap-1.5 rounded-full pl-0.5 pr-2.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
+        <button
+          data-pill
+          className="glass-panel group inline-flex h-7 items-center gap-1.5 rounded-full pl-0.5 pr-2.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
+        >
           <span
             className={`flex size-[22px] items-center justify-center rounded-full bg-gradient-to-br ${gradient} text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20`}
           >
@@ -545,7 +444,13 @@ function StatusPill({
           <span className="text-[12px] text-foreground/70">{label}</span>
         </button>
       </DialogTrigger>
-      <PillDialogContent title={label} count={count} gradient={gradient} Icon={Icon} items={items} />
+      <PillDialogContent
+        title={label}
+        count={count}
+        gradient={gradient}
+        Icon={Icon}
+        items={items}
+      />
     </Dialog>
   );
 }
@@ -560,7 +465,10 @@ function TripPill() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button data-pill className="glass-panel group inline-flex h-7 items-center gap-1.5 rounded-full pl-0.5 pr-2.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]">
+        <button
+          data-pill
+          className="glass-panel group inline-flex h-7 items-center gap-1.5 rounded-full pl-0.5 pr-2.5 text-left transition-colors hover:bg-[var(--glass-surface-strong)]"
+        >
           <span className="flex size-[22px] items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-600 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.25)] ring-1 ring-white/20">
             <Plane className="size-3" strokeWidth={2.5} />
           </span>
@@ -568,11 +476,16 @@ function TripPill() {
           <span className="text-[12px] text-foreground/70">Bratislava</span>
         </button>
       </DialogTrigger>
-      <PillDialogContent title="Trip to Bratislava" count="5d" gradient="from-amber-400 to-orange-600" Icon={Plane} items={items} />
+      <PillDialogContent
+        title="Trip to Bratislava"
+        count="5d"
+        gradient="from-amber-400 to-orange-600"
+        Icon={Plane}
+        items={items}
+      />
     </Dialog>
   );
 }
-
 
 function PillDialogContent({
   title,
@@ -604,7 +517,8 @@ function PillDialogContent({
       </DialogHeader>
       <div className="max-h-[60vh] overflow-y-auto p-2">
         {items.map((it, i) => (
-          <button data-pill
+          <button
+            data-pill
             key={i}
             className="flex w-full items-start gap-3 rounded-2xl p-3 text-left transition-colors hover:bg-foreground/[0.04]"
           >
@@ -651,18 +565,23 @@ function MorningBriefPill() {
       title="Your Morning Brief"
       kicker="Monday, 15 June"
       body="3 urgent items, 7 updates, and 2 approvals are waiting. Open the brief for a guided walkthrough."
-      actions={[
-        { label: "Open brief", primary: true },
-        { label: "Read later" },
-      ]}
+      actions={[{ label: "Open brief", primary: true }, { label: "Read later" }]}
       trigger={
-        <button data-pill className="group relative inline-flex shrink-0 items-center gap-2.5 self-start rounded-full md:self-end">
-          <span className="ai-iridescent absolute -inset-px rounded-full opacity-60 blur-[2px] transition-opacity group-hover:opacity-90" aria-hidden />
+        <button
+          data-pill
+          className="group relative inline-flex shrink-0 items-center gap-2.5 self-start rounded-full md:self-end"
+        >
+          <span
+            className="ai-iridescent absolute -inset-px rounded-full opacity-60 blur-[2px] transition-opacity group-hover:opacity-90"
+            aria-hidden
+          />
           <span className="glass-panel-strong relative inline-flex items-center gap-2.5 rounded-full py-1.5 pl-1.5 pr-4">
             <span className="ai-iridescent flex size-7 items-center justify-center rounded-full ring-1 ring-foreground/5">
               <FileText className="size-3.5 text-foreground/80" />
             </span>
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Morning Brief</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+              Morning Brief
+            </span>
             <ArrowUpRight className="size-3.5 text-foreground/40 transition-colors group-hover:text-foreground" />
           </span>
         </button>
@@ -670,52 +589,6 @@ function MorningBriefPill() {
     />
   );
 }
-
-
-
-
-function SectionLabel({
-  children,
-  kicker,
-  tone = "primary",
-}: {
-  children: React.ReactNode;
-  kicker?: string;
-  tone?: "primary" | "accent" | "muted" | "quiet";
-}) {
-  const toneStyles: Record<string, string> = {
-    primary: "text-foreground",
-    accent: "text-accent",
-    muted: "text-foreground/45",
-    quiet: "text-foreground/55",
-  };
-  const sizeStyles: Record<string, string> = {
-    primary: "font-sans text-lg font-medium tracking-tight",
-    accent: "font-sans text-base font-medium tracking-tight",
-    muted: "font-sans text-base font-medium tracking-tight",
-    quiet: "font-sans text-base font-medium tracking-tight",
-  };
-  return (
-    <div className="flex items-end justify-between gap-3 px-1">
-      <div>
-        {kicker && (
-          <p className="mb-0.5 text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/35">
-            {kicker}
-          </p>
-        )}
-        <h3 className={`${sizeStyles[tone]} ${toneStyles[tone]} tracking-tight`}>{children}</h3>
-      </div>
-      <div className="mb-1.5 h-px flex-1 bg-foreground/5" />
-    </div>
-  );
-}
-
-const tagTones: Record<string, string> = {
-  Payment: "text-rose-700/80",
-  Engineering: "text-blue-700/80",
-  Treasury: "text-amber-700/80",
-  Compliance: "text-violet-700/80",
-};
 
 function WorkCard({
   tag,
@@ -739,7 +612,10 @@ function WorkCard({
       } hover:bg-[var(--glass-surface-strong)]`}
     >
       {urgent && (
-        <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-3xl opacity-25 blur-[2px]" aria-hidden />
+        <div
+          className="ai-iridescent pointer-events-none absolute -inset-px rounded-3xl opacity-25 blur-[2px]"
+          aria-hidden
+        />
       )}
       <div className="relative flex items-start gap-3.5">
         <button
@@ -756,7 +632,11 @@ function WorkCard({
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <span className={`text-[10px] font-bold uppercase tracking-[0.18em] ${tagTones[tag] ?? "text-accent"}`}>{tag}</span>
+              <span
+                className={`text-[10px] font-bold uppercase tracking-[0.18em] ${tagTones[tag] ?? "text-accent"}`}
+              >
+                {tag}
+              </span>
               {urgent && (
                 <span className="inline-flex items-center gap-1 rounded-full bg-destructive/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-destructive">
                   <CircleDot className="size-2" /> Urgent
@@ -765,7 +645,9 @@ function WorkCard({
             </div>
             <ArrowUpRight className="size-3.5 text-foreground/30" />
           </div>
-          <h4 className={`mt-1 font-sans text-[15px] font-medium leading-snug ${done ? "line-through text-foreground/40" : ""}`}>
+          <h4
+            className={`mt-1 font-sans text-[15px] font-medium leading-snug ${done ? "line-through text-foreground/40" : ""}`}
+          >
             {title}
           </h4>
           <p className="mt-1.5 text-xs leading-relaxed text-foreground/55">{body}</p>
@@ -778,7 +660,10 @@ function WorkCard({
                   kicker={tag}
                   body={`${a.label} for: ${title}`}
                   trigger={
-                    <button data-pill className="inline-flex items-center gap-1.5 rounded-full border border-accent/15 bg-accent/5 px-3 py-1.5 text-[11px] font-medium text-accent transition-colors hover:bg-accent hover:text-accent-foreground">
+                    <button
+                      data-pill
+                      className="inline-flex items-center gap-1.5 rounded-full border border-accent/15 bg-accent/5 px-3 py-1.5 text-[11px] font-medium text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
+                    >
                       <a.icon className="size-3" />
                       {a.label}
                     </button>
@@ -787,7 +672,6 @@ function WorkCard({
               ))}
             </div>
           )}
-
         </div>
       </div>
     </article>
@@ -807,10 +691,7 @@ function ActionDialog({
   body?: string;
   actions?: { label: string; primary?: boolean }[];
 }) {
-  const acts = actions ?? [
-    { label: "Take action", primary: true },
-    { label: "Dismiss" },
-  ];
+  const acts = actions ?? [{ label: "Take action", primary: true }, { label: "Dismiss" }];
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
@@ -830,7 +711,8 @@ function ActionDialog({
         )}
         <div className="flex items-center justify-end gap-2 border-t border-foreground/5 px-4 py-3">
           {acts.map((a) => (
-            <button data-pill
+            <button
+              data-pill
               key={a.label}
               className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
                 a.primary
@@ -890,25 +772,26 @@ function SuggestedItem({ title, body }: { title: string; body: string }) {
         title={title}
         kicker="Suggested"
         body={body}
-        actions={[
-          { label: "Add as task", primary: true },
-          { label: "Dismiss" },
-        ]}
+        actions={[{ label: "Add as task", primary: true }, { label: "Dismiss" }]}
         trigger={
           <button data-pill className="block w-full pr-16 text-left">
-            <p className="text-sm leading-snug text-foreground/75 group-hover:text-foreground">{title}</p>
+            <p className="text-sm leading-snug text-foreground/75 group-hover:text-foreground">
+              {title}
+            </p>
             <p className="mt-1 text-xs leading-relaxed text-foreground/45">{body}</p>
           </button>
         }
       />
       <div className="absolute right-3 top-3 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-        <button data-pill
+        <button
+          data-pill
           aria-label="Add as task"
           className="inline-flex size-6 items-center justify-center rounded-full bg-accent/10 text-accent hover:bg-accent hover:text-accent-foreground"
         >
           <Plus className="size-3" strokeWidth={2.5} />
         </button>
-        <button data-pill
+        <button
+          data-pill
           aria-label="Dismiss"
           className="inline-flex size-6 items-center justify-center rounded-full bg-foreground/5 text-foreground/60 hover:bg-destructive/10 hover:text-destructive"
         >
@@ -918,7 +801,6 @@ function SuggestedItem({ title, body }: { title: string; body: string }) {
     </div>
   );
 }
-
 
 function ScheduleRow({
   time,
@@ -981,12 +863,19 @@ function Sparkline({
     const y = height - ((p - min) / range) * height;
     return [x, y] as const;
   });
-  const line = coords.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+  const line = coords
+    .map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`)
+    .join(" ");
   const area = `${line} L${width},${height} L0,${height} Z`;
   const last = coords[coords.length - 1];
   const color = up ? "text-emerald-500" : "text-rose-500";
   return (
-    <svg viewBox={`0 0 ${width} ${height}`} width={width} height={height} className={`sparkline ${color}`}>
+    <svg
+      viewBox={`0 0 ${width} ${height}`}
+      width={width}
+      height={height}
+      className={`sparkline ${color}`}
+    >
       <path className="area" d={area} />
       <path className="line" d={line} />
       <circle cx={last[0]} cy={last[1]} r="1.8" />
@@ -1023,7 +912,9 @@ function ChangePill({ pct }: { pct: number }) {
 function SectionCaption({ label, right }: { label: string; right?: React.ReactNode }) {
   return (
     <div className="mb-2 flex items-center justify-between px-1">
-      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/55">{label}</p>
+      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/55">
+        {label}
+      </p>
       {right}
     </div>
   );
@@ -1071,10 +962,15 @@ function MarketRow({ s }: { s: MarketSeries }) {
 function MarketHero({ s }: { s: MarketSeries }) {
   return (
     <div className="glass-panel relative overflow-hidden rounded-2xl p-3">
-      <div className="ai-iridescent pointer-events-none absolute -inset-px rounded-2xl opacity-20 blur-[2px]" aria-hidden />
+      <div
+        className="ai-iridescent pointer-events-none absolute -inset-px rounded-2xl opacity-20 blur-[2px]"
+        aria-hidden
+      />
       <div className="relative flex items-end justify-between gap-3">
         <div className="min-w-0">
-          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/40">{s.sym}</p>
+          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/40">
+            {s.sym}
+          </p>
           <p className="mt-1 font-mono text-[20px] leading-none tabular-nums">
             <span className="text-silver-metallic">{fmtPrice(s)}</span>
           </p>
@@ -1110,7 +1006,9 @@ function OddsRow({ m }: { m: PolyOdds }) {
           ) : null}
         </div>
         <div className="flex shrink-0 items-baseline gap-1.5">
-          <span className="font-mono text-[16px] leading-none tabular-nums text-foreground">{m.prob}%</span>
+          <span className="font-mono text-[16px] leading-none tabular-nums text-foreground">
+            {m.prob}%
+          </span>
           {m.chg24h !== null ? (
             <span
               className={`font-mono text-[8px] font-semibold tabular-nums ${
@@ -1216,8 +1114,6 @@ function LiveSignals() {
   );
 }
 
-
-
 /* ---------- Convergence — synthesis across sources ---------- */
 
 const convergence = [
@@ -1304,22 +1200,42 @@ const newsLanes: { lane: string; items: { title: string; source: string }[] }[] 
   {
     lane: "Your markets",
     items: [
-      { title: "German automotive output +4.1% in April — component demand strengthening across CEE", source: "Reuters" },
-      { title: "Schaeffler announces Brașov expansion — local supplier search opens Q3", source: "Handelsblatt (DE)" },
+      {
+        title:
+          "German automotive output +4.1% in April — component demand strengthening across CEE",
+        source: "Reuters",
+      },
+      {
+        title: "Schaeffler announces Brașov expansion — local supplier search opens Q3",
+        source: "Handelsblatt (DE)",
+      },
     ],
   },
   {
     lane: "Trade & policy",
     items: [
-      { title: "EV tariff retaliation escalating — EU parts supply-chain implications for CEE exporters", source: "中国汽车报 (CN)" },
-      { title: "New CBAM reporting rule published — embedded emissions data required for imports", source: "EU Official Journal" },
+      {
+        title:
+          "EV tariff retaliation escalating — EU parts supply-chain implications for CEE exporters",
+        source: "中国汽车报 (CN)",
+      },
+      {
+        title: "New CBAM reporting rule published — embedded emissions data required for imports",
+        source: "EU Official Journal",
+      },
     ],
   },
   {
     lane: "Macro",
     items: [
-      { title: "ECB June cut priced at 71% — EUR/USD signal for export contract pricing", source: "Polymarket" },
-      { title: "Bund yields +18bps intraday — export financing costs to follow", source: "Bloomberg" },
+      {
+        title: "ECB June cut priced at 71% — EUR/USD signal for export contract pricing",
+        source: "Polymarket",
+      },
+      {
+        title: "Bund yields +18bps intraday — export financing costs to follow",
+        source: "Bloomberg",
+      },
     ],
   },
 ];

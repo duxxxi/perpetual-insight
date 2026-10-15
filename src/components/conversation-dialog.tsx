@@ -1,225 +1,285 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowUp, Sparkles, X } from "lucide-react";
 import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { conversationStore, type Conversation } from "@/lib/conversation-store";
+  ArrowUp,
+  ChevronDown,
+  Maximize2,
+  Minimize2,
+  Plus,
+  ListChecks,
+  MessageSquare,
+  ShieldCheck,
+} from "lucide-react";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from "@/components/ai-elements/conversation";
+import { Message, MessageContent, MessageResponse } from "@/components/ai-elements/message";
+import {
+  PromptInput,
+  PromptInputTextarea,
+  PromptInputFooter,
+  PromptInputSubmit,
+} from "@/components/ai-elements/prompt-input";
+import { Shimmer } from "@/components/ai-elements/shimmer";
+import {
+  conversationStore,
+  type Conversation as StoredConversation,
+} from "@/lib/conversation-store";
+import { taskStore } from "@/lib/task-store";
 
 type Props = {
-  /** Open with an existing conversation id, or pass `initialMessage` to start a new one. */
   conversationId?: string | null;
   initialMessage?: string | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onConversationCreated?: (id: string) => void;
 };
-
-function fakeReply(userText: string): string {
-  const t = userText.trim().toLowerCase();
-  if (!t) return "I'm here — what would you like to dig into?";
-  if (t.endsWith("?"))
-    return "Good question. Pulling context from your stack now — I'll flag anything that needs your call.";
-  if (t.length < 24)
-    return "Noted. Want me to take this further, or just keep it in the thread for later?";
-  return "Got it. I've added this to the working thread and will surface the next step here as it firms up.";
-}
 
 export function ConversationDialog({
   conversationId,
   initialMessage,
   open,
   onOpenChange,
+  onConversationCreated,
 }: Props) {
   const [id, setId] = useState<string | null>(null);
-  const [conv, setConv] = useState<Conversation | null>(null);
+  const [conv, setConv] = useState<StoredConversation | null>(null);
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const [expanded, setExpanded] = useState(false);
+  const [mode, setMode] = useState<"chat" | "task">("chat");
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const createdCallback = useRef(onConversationCreated);
+  createdCallback.current = onConversationCreated;
 
-  // Initialize on open
-  useEffect(() => {
-    if (!open) return;
-    if (conversationId) {
-      setId(conversationId);
-      setConv(conversationStore.get(conversationId) ?? null);
-    } else if (initialMessage && initialMessage.trim()) {
-      const created = conversationStore.start(initialMessage.trim());
-      setId(created.id);
-      setConv(created);
-      // queue assistant reply
-      setThinking(true);
-      window.setTimeout(() => {
-        conversationStore.append(created.id, {
-          role: "assistant",
-          text: fakeReply(initialMessage),
-          at: Date.now(),
-        });
-        setConv(conversationStore.get(created.id) ?? null);
-        setThinking(false);
-      }, 650);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
-
-  // Subscribe so external updates reflect
-  useEffect(() => {
-    if (!id) return;
-    const unsub = conversationStore.subscribe(() => {
-      setConv(conversationStore.get(id) ?? null);
-    });
-    return () => {
-      unsub();
-    };
-  }, [id]);
-
-  // Auto-scroll & focus
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [conv?.messages.length, thinking]);
-
-  useEffect(() => {
-    if (open) {
-      setTimeout(() => inputRef.current?.focus(), 80);
-    } else {
-      setInput("");
-      setThinking(false);
-    }
-  }, [open]);
-
-  const send = () => {
-    if (!id || !input.trim() || thinking) return;
-    const text = input.trim();
-    conversationStore.append(id, { role: "user", text, at: Date.now() });
-    setInput("");
+  const reply = (threadId: string) => {
     setThinking(true);
-    window.setTimeout(() => {
-      conversationStore.append(id, {
+    timer.current = setTimeout(() => {
+      conversationStore.append(threadId, {
         role: "assistant",
-        text: fakeReply(text),
+        text: "This is a design preview, so I haven’t run any agents or accessed your connected accounts. Your message is kept in this preview’s Threads, and you can continue the conversation here.",
         at: Date.now(),
       });
       setThinking(false);
-    }, 700);
+    }, 600);
+  };
+  useEffect(() => {
+    if (!open) return;
+    setMode("chat");
+    const existing = conversationId ? conversationStore.get(conversationId) : undefined;
+    if (existing) {
+      setId(existing.id);
+      setConv(existing);
+    } else if (initialMessage?.trim()) {
+      const created = conversationStore.start(initialMessage.trim());
+      setId(created.id);
+      setConv(created);
+      createdCallback.current?.(created.id);
+      reply(created.id);
+    } else {
+      setId(null);
+      setConv(null);
+    }
+  }, [open, conversationId, initialMessage]);
+  useEffect(() => {
+    if (!id) return;
+    return conversationStore.subscribe(() => setConv(conversationStore.get(id) ?? null));
+  }, [id]);
+  useEffect(
+    () => () => {
+      if (timer.current) clearTimeout(timer.current);
+    },
+    [],
+  );
+
+  const send = (text: string) => {
+    if (!text.trim() || thinking) return;
+    const value = text.trim();
+    const thread = id ? conversationStore.get(id) : undefined;
+    const active = thread ?? conversationStore.start(value);
+    if (thread) conversationStore.append(thread.id, { role: "user", text: value, at: Date.now() });
+    setId(active.id);
+    setConv(conversationStore.get(active.id) ?? active);
+    createdCallback.current?.(active.id);
+    setInput("");
+    if (mode === "task") {
+      taskStore.add({ title: value, tag: "New" });
+      conversationStore.append(active.id, {
+        role: "assistant",
+        text: "Added to Active Work and Assignments in this preview. No live task or external action was created.",
+        at: Date.now(),
+      });
+      setConv(conversationStore.get(active.id) ?? active);
+    } else reply(active.id);
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        className="max-w-2xl gap-0 border-foreground/10 bg-background/80 p-0 backdrop-blur-2xl sm:rounded-3xl overflow-hidden [&>button[type=button]:last-of-type]:hidden"
+        className={`perpetuity-chat-sheet ${expanded ? "is-expanded" : ""}`}
+        aria-describedby="chat-preview-description"
       >
-        <DialogTitle className="sr-only">
-          {conv?.title ?? "Ask Perpetuity"}
-        </DialogTitle>
-        <div className="relative flex h-[78vh] max-h-[680px] flex-col">
-          <div
-            className="ai-iridescent absolute inset-x-0 top-0 h-px opacity-70"
-            aria-hidden
-          />
-
-          {/* Header */}
-          <div className="flex items-center gap-3 border-b border-foreground/5 px-5 py-3">
-            <span className="ai-iridescent inline-flex size-7 items-center justify-center rounded-full ring-1 ring-foreground/5">
-              <Sparkles className="size-3.5 text-foreground/80" strokeWidth={1.75} />
-            </span>
-            <div className="min-w-0 flex-1">
-              <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-foreground/45">
-                Perpetuity · conversation
-              </p>
-              <p className="truncate text-[13px] font-medium text-foreground">
-                {conv?.title ?? "New conversation"}
-              </p>
+        <div className="chat-drag-handle" aria-hidden />
+        <header className="chat-sheet-header">
+          <span className="chat-globe">
+            <span className="globe-orb size-5" aria-hidden />
+          </span>
+          <div className="min-w-0 flex-1">
+            <DialogTitle className="text-[14px] font-semibold tracking-normal">
+              Ask Perpetuity
+            </DialogTitle>
+            <div className="mt-1 flex items-center gap-1.5 text-[10px] text-muted-foreground">
+              <span className="perpetuity-on-dot" /> One conversation across your work
             </div>
-            <button
-              type="button"
-              onClick={() => onOpenChange(false)}
-              className="rounded-full bg-foreground/5 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-foreground/55 hover:bg-foreground/10"
-              title="Close — conversation saved in Threads"
-            >
-              <span className="hidden sm:inline">Save & close</span>
-              <X className="size-3.5 sm:hidden" />
-            </button>
           </div>
-
-          {/* Messages */}
-          <div
-            ref={scrollRef}
-            className="flex-1 space-y-3 overflow-y-auto px-5 py-4"
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            aria-label={expanded ? "Restore chat size" : "Expand chat"}
+            title={expanded ? "Restore size" : "Expand"}
+            onClick={() => setExpanded(!expanded)}
           >
-            {conv?.messages.map((m, i) => (
-              <div
-                key={i}
-                className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
-              >
-                {m.role === "assistant" && (
-                  <span className="ai-iridescent mr-2 mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full ring-1 ring-foreground/5">
-                    <Sparkles className="size-2.5 text-foreground/75" strokeWidth={1.75} />
-                  </span>
-                )}
-                <div
-                  className={
-                    m.role === "user"
-                      ? "max-w-[80%] rounded-2xl rounded-br-md bg-accent/15 px-3.5 py-2 text-[13px] leading-relaxed text-foreground"
-                      : "max-w-[82%] rounded-2xl rounded-bl-md bg-foreground/[0.04] px-3.5 py-2 text-[13px] leading-relaxed text-foreground/85 ring-1 ring-foreground/5"
-                  }
-                >
-                  {m.text}
-                </div>
-              </div>
-            ))}
-            {thinking && (
-              <div className="flex justify-start">
-                <span className="ai-iridescent mr-2 mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full ring-1 ring-foreground/5">
-                  <Sparkles className="size-2.5 text-foreground/75" strokeWidth={1.75} />
+            {expanded ? <Minimize2 /> : <Maximize2 />}
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            aria-label="Minimize conversation"
+            title="Minimize"
+            onClick={() => onOpenChange(false)}
+          >
+            <ChevronDown />
+          </Button>
+        </header>
+        <DialogDescription id="chat-preview-description" className="chat-preview-caption">
+          Design preview · No live agents connected
+        </DialogDescription>
+        <Conversation className="min-h-0 flex-1">
+          <ConversationContent className="chat-transcript">
+            {!conv?.messages.length && (
+              <div className="chat-empty-state">
+                <span className="chat-empty-globe">
+                  <span className="globe-orb size-9" aria-hidden />
                 </span>
-                <div className="flex items-center gap-1 rounded-2xl rounded-bl-md bg-foreground/[0.04] px-3 py-2 ring-1 ring-foreground/5">
-                  <span className="size-1.5 animate-pulse rounded-full bg-foreground/40" />
-                  <span className="size-1.5 animate-pulse rounded-full bg-foreground/40 [animation-delay:120ms]" />
-                  <span className="size-1.5 animate-pulse rounded-full bg-foreground/40 [animation-delay:240ms]" />
+                <p className="mb-2 text-[22px] font-medium text-foreground">What’s on your mind?</p>
+                <p className="text-[13px] text-muted-foreground">
+                  Your work. Your context. One conversation.
+                </p>
+                <div className="chat-starters">
+                  {[
+                    {
+                      icon: ListChecks,
+                      label: "Review my active work",
+                      prompt: "Help me review my active work and decide what to prioritize.",
+                    },
+                    {
+                      icon: MessageSquare,
+                      label: "Prepare a meeting brief",
+                      prompt: "Prepare a brief for my Bratislava meetings.",
+                    },
+                  ].map((item) => (
+                    <Button
+                      key={item.label}
+                      variant="ghost"
+                      onClick={() => setInput(item.prompt)}
+                      className="chat-starter"
+                    >
+                      <item.icon />
+                      <span>{item.label}</span>
+                      <ArrowUp className="ml-auto size-3 rotate-45" />
+                    </Button>
+                  ))}
                 </div>
               </div>
             )}
-          </div>
-
-          {/* Composer */}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              send();
-            }}
-            className="border-t border-foreground/5 bg-foreground/[0.015] px-4 py-3"
-          >
-            <div className="glass-panel flex items-end gap-2 rounded-2xl px-3 py-2">
-              <textarea
-                ref={inputRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && !e.shiftKey) {
-                    e.preventDefault();
-                    send();
+            {conv?.messages.map((message, index) => (
+              <Message key={`${index}-${message.at}`} from={message.role} className="max-w-full">
+                <MessageContent
+                  className={
+                    message.role === "user" ? "chat-user-message" : "chat-assistant-message"
                   }
-                }}
-                rows={1}
-                placeholder="Continue the conversation…"
-                className="flex-1 resize-none bg-transparent text-[13px] leading-relaxed text-foreground placeholder:text-foreground/35 focus:outline-none"
-                style={{ maxHeight: 140 }}
-              />
-              <button
-                type="submit"
+                >
+                  <MessageResponse>{message.text}</MessageResponse>
+                </MessageContent>
+              </Message>
+            ))}
+            {thinking && (
+              <Message from="assistant">
+                <MessageContent>
+                  <Shimmer>Thinking…</Shimmer>
+                </MessageContent>
+              </Message>
+            )}
+          </ConversationContent>
+          <ConversationScrollButton />
+        </Conversation>
+        <div className="chat-compose-area">
+          <PromptInput onSubmit={({ text }) => send(text)} className="chat-sheet-composer">
+            <PromptInputTextarea
+              autoFocus
+              name="message"
+              aria-label="Message Perpetuity"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder={
+                mode === "task" ? "What needs to get done?" : "Ask anything, or give me a task…"
+              }
+            />
+            <PromptInputFooter>
+              <div className="flex min-w-0 items-center gap-1">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon-sm"
+                  title="New conversation"
+                  aria-label="New conversation"
+                  onClick={() => {
+                    setId(null);
+                    setConv(null);
+                    setInput("");
+                  }}
+                >
+                  <Plus />
+                </Button>
+                <div className="chat-mode-control" role="group" aria-label="Conversation mode">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    aria-pressed={mode === "chat"}
+                    onClick={() => setMode("chat")}
+                  >
+                    <MessageSquare />
+                    <span>Chat</span>
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    aria-pressed={mode === "task"}
+                    onClick={() => setMode("task")}
+                  >
+                    <ListChecks />
+                    <span>Task</span>
+                  </Button>
+                </div>
+              </div>
+              <PromptInputSubmit
+                aria-label="Send message"
+                status={thinking ? "submitted" : "ready"}
                 disabled={!input.trim() || thinking}
-                className="inline-flex size-8 shrink-0 items-center justify-center rounded-xl bg-accent/15 text-accent ring-1 ring-accent/25 transition-transform hover:scale-105 disabled:opacity-40 disabled:hover:scale-100"
+                className="dock-send size-9 rounded-full"
               >
-                <ArrowUp className="size-3.5" strokeWidth={2.25} />
-              </button>
-            </div>
-            <p className="mt-1.5 px-1 text-[10px] uppercase tracking-[0.16em] text-foreground/35">
-              ⏎ send · ⇧⏎ newline · closing saves to Threads
-            </p>
-          </form>
+                <ArrowUp />
+              </PromptInputSubmit>
+            </PromptInputFooter>
+          </PromptInput>
+          <div className="chat-bottom-note">
+            <ShieldCheck className="size-3" /> No external actions in this preview
+          </div>
         </div>
       </DialogContent>
     </Dialog>
