@@ -676,10 +676,10 @@
   .about-exchange { width: 58px; }
 }
 @media (max-width: 479px) {
-  .about-time-band { --about-time-width: 165px; --about-time-height: 136px; padding: 0 20px; gap: 10px; }
+  .about-time-band { --about-time-width: calc((100vw - 50px) / 2); --about-time-height: 136px; padding: 0 20px; gap: 10px; }
   .about-exchanges { padding: 10px 8px; }
   .about-exchange-row { gap: 6px; }
-  .about-exchange { width: 49px; }
+  .about-exchange { width: calc((var(--about-time-width) - 30px) / 3); }
   .about-clock-face { width: 36px; height: 36px; }
   .about-clock-city { font-size: 9px; }
   .about-clock-status { font-size: 7px; gap: 3px; }
@@ -689,6 +689,7 @@
 }
 @keyframes about-city-drift { from { transform: scale(1.035) translateX(-0.5%); } to { transform: scale(1.065) translateX(0.5%); } }
 @media (max-width: 639px) {
+  .about-time-band { --about-time-width: calc((100vw - 50px) / 2); }
   .about-headline { font-size: 34px; }
   .about-headline > span { font-size: 26px; }
   .about-section-title { font-size: 25px; }
