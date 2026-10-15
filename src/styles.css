@@ -595,8 +595,6 @@
   --about-session: color-mix(in oklab, oklch(0.57 0.09 165), oklch(0.76 0.09 165) var(--about-night-weight));
   --about-on-glow: oklch(0.76 0.13 155 / 0.35);
   --about-on-bright: oklch(0.75 0.19 152);
-  --about-cursor-center: oklch(0.87 0.1 85 / 0.24);
-  --about-cursor-edge: oklch(0.87 0.1 85 / 0);
   --about-time-shadow: 0 8px 26px oklch(0.24 0.025 255 / 0.045);
   letter-spacing: 0;
 }
@@ -642,8 +640,55 @@
 .about-wordmark { font-family: var(--font-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; line-height: 1; }
 .about-nav, .about-lenses { background: var(--about-nav-fill); border: 1px solid var(--border); box-shadow: var(--about-shadow); backdrop-filter: blur(18px); }
 .about-eyebrow { font-family: var(--font-mono); font-size: 9px; font-weight: 500; text-transform: uppercase; color: var(--muted-foreground); }
-.about-headline { font-family: var(--font-serif); font-size: 42px; font-weight: 400; line-height: 1.12; }
-.about-headline > span { font-size: 32px; line-height: 1.2; }
+/* Dictionary-entry hero: headword, pronunciation, definition, then the tagline. */
+.about-entry { display: flex; flex-direction: column; align-items: center; }
+.about-entry-word {
+  font-family: var(--font-command);
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.26em;
+  text-indent: 0.26em;
+  text-transform: uppercase;
+}
+.about-entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 9px;
+  margin-top: 13px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: var(--muted-foreground);
+}
+.about-entry-pos { font-style: italic; }
+.about-entry-sep { opacity: 0.38; }
+.about-entry-def {
+  max-width: 30rem;
+  margin-top: 15px;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--muted-foreground);
+}
+.about-entry-source {
+  display: block;
+  margin-top: 7px;
+  font-family: var(--font-serif);
+  font-size: 10px;
+  font-style: italic;
+  opacity: 0.72;
+}
+.about-entry-tagline {
+  margin-top: 30px;
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--foreground);
+}
 .about-headline-on {
   color: var(--about-on-bright);
   text-shadow: 0 0 14px var(--about-on-glow), 0 0 38px color-mix(in oklab, var(--about-on-bright) 22%, transparent);
@@ -683,7 +728,6 @@
 .about-exchanges { padding: 12px 16px; }
 .about-exchange-row { display: flex; gap: 18px; }
 .about-markets-label { margin: 0 0 8px; font-size: 9px; color: var(--muted-foreground); }
-.about-painted[data-period="night"] .about-headline { color: var(--foreground); }
 .about-exchange { display: flex; flex-direction: column; align-items: center; width: 66px; gap: 3px; }
 .about-clock-face { width: 44px; height: 44px; color: var(--foreground); margin-bottom: 3px; }
 .about-clock-rim { fill: var(--about-time-fill); stroke: var(--border); stroke-width: 0.8; }
@@ -718,12 +762,6 @@
 .about-time-band .about-horizon { padding: 9px 12px; }
 .about-time-band .about-horizon-dial { height: 52px; }
 .about-time-band .about-always-on { margin-top: 5px; padding-top: 5px; }
-@media (pointer: fine) and (hover: hover) {
-  .about-painted[data-period="night"] { --about-cursor: url("/cursors/yellow-arrow.png") 5 4, default; --about-pointer: url("/cursors/yellow-hand.png") 10 4, pointer; cursor: var(--about-cursor); }
-  .about-painted[data-period="night"] :where(a, button, [role="button"], [role="tab"], summary, label[for]) { cursor: var(--about-pointer); }
-  .about-painted[data-period="night"] :where(input, textarea, [contenteditable="true"]) { cursor: text; }
-  .about-painted[data-period="night"] :where(button:disabled, [aria-disabled="true"]) { cursor: not-allowed; }
-}
 @media (min-width: 1100px) {
   .about-time-band { position: absolute; top: 101px; left: 0; right: 0; margin: 0 auto; pointer-events: none; }
   .about-exchanges, .about-horizon { pointer-events: auto; }
@@ -746,8 +784,8 @@
 @keyframes about-city-drift { from { transform: scale(1.035) translateX(-0.5%); } to { transform: scale(1.065) translateX(0.5%); } }
 @media (max-width: 639px) {
   .about-time-band { --about-time-width: calc((100vw - 50px) / 2); }
-  .about-headline { font-size: 34px; }
-  .about-headline > span { font-size: 26px; }
+  .about-entry-word { font-size: 21px; letter-spacing: 0.2em; }
+  .about-entry-tagline { font-size: 24px; }
   .about-section-title { font-size: 25px; }
   .about-wordmark { font-size: 10px; }
 }
