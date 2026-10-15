@@ -36,3 +36,4 @@
 - [x] Restyle the About page with Sauna-inspired painted imagery and editorial layout; verify navigation and layout.
 - [x] Restore About's landing-page character with business skyline backgrounds, local day/night switching and restrained animation; verify both time states and controls.
 - [x] Restore the full existing landing feature presentation on About with a restrained painted/glass refresh; verify content, controls and day/night layouts.
+- [x] Drop the dictionary source credit from About's hero and close the gap between the tagline and the intro paragraph; verify spacing and contrast.
