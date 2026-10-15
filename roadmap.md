@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Refine chat translucency and lift; add dashboard clocks/horizon and blue greeting name; verify layout and chat interaction.
+
 - [x] Adapt the latest export-analytica dashboard header, spacing and shared section headings without modifying the source repository; retain preview rows, not source account data.
 - [x] Preview an always-visible glass Ask Perpetuity dock and bottom-up conversation sheet; verify send, minimize, resume, task readback and desktop/mobile sheet positioning.
 

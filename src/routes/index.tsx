@@ -46,6 +46,7 @@ import { AmbientBackground, CommodityTicker, AppSidebar, AppFooter } from "@/com
 import { useUserTasks } from "@/lib/task-store";
 import { PerpetuityAsksCard } from "@/components/perpetuity-asks";
 import { SectionLabel } from "@/components/ui/section-label";
+import { AboutTimeBand } from "@/components/about-time-band";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -82,13 +83,17 @@ function DashboardPage() {
   useTheme();
   const userTasks = useUserTasks();
   const greeting = useGreeting();
+  const [now, setNow] = useState<Date | null>(null);
   const [today, setToday] = useState("");
   useEffect(() => {
+    setNow(new Date());
+    const timer = window.setInterval(() => setNow(new Date()), 30_000);
     setToday(
       new Date()
         .toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" })
         .toUpperCase(),
     );
+    return () => window.clearInterval(timer);
   }, []);
   return (
     <div className="latest-dashboard min-h-screen bg-background text-foreground font-sans selection:bg-accent/15">
@@ -114,7 +119,7 @@ function DashboardPage() {
               <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                 <h1 className="font-sans text-[30px] font-semibold leading-[1.05] tracking-normal md:text-[36px]">
                   <span className="text-foreground/60">{greeting},</span>{" "}
-                  <span className="text-silver-metallic">Stevan</span>
+                  <span className="dashboard-greeting-name">Stevan</span>
                 </h1>
 
                 <MorningBriefPill />
@@ -125,6 +130,10 @@ function DashboardPage() {
               </p>
               <RefreshPill />
             </header>
+
+            <div className="dashboard-time-band">
+              <AboutTimeBand now={now} />
+            </div>
 
             {/* Trip card — compact */}
             <div className="glass-panel group mb-6 flex items-center justify-between gap-4 rounded-2xl px-4 py-3.5">
