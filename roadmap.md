@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Flatten the top clocks/horizon, tint sidebar glass, distinguish pills and match opened workspace panels to the metallic canvas; verify across pages.
+
 - [x] Refine chat translucency and lift; add dashboard clocks/horizon and blue greeting name; verify layout and chat interaction.
 
 - [x] Adapt the latest export-analytica dashboard header, spacing and shared section headings without modifying the source repository; retain preview rows, not source account data.
