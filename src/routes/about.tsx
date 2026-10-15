@@ -137,7 +137,6 @@ function AboutPage() {
           <h1 className="about-entry mt-4">
             <span className="about-entry-word">Perpetuity</span>
             <span className="about-entry-meta" aria-hidden="true"><span>perpetuity</span><span className="about-entry-sep">|</span><span>/ˌpɜːpəˈtjuːəti/</span><span className="about-entry-sep">|</span><span className="about-entry-pos">noun</span></span>
-            <span className="about-entry-def" aria-hidden="true">the quality of being eternal or lasting; infinite and uninterrupted continuity.</span>
             <span className="about-entry-tagline">Your Intelligence Team.<br />Always <span className="about-headline-on">On</span><span className="about-headline-dot" aria-hidden="true" /></span>
           </h1>
           <p className="mx-auto mt-1 max-w-[42rem] text-[14.3px] leading-[1.7] text-muted-foreground">Perpetuity connects your world, then puts agents to work. Opportunities found, outreach drafted, risks flagged, deals planned. You command. It executes.</p>
