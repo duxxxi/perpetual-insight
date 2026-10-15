@@ -98,7 +98,7 @@ function AboutPage() {
       setPeriod(dayPeriod(date));
     };
     update();
-    const timer = window.setInterval(update, 30_000);
+    const timer = window.setInterval(update, 1_000);
     document.addEventListener("visibilitychange", update);
     return () => {
       window.clearInterval(timer);

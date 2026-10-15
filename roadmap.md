@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Compact About's four-market clocks and horizon, verify time-driven marker motion, and add uploaded and newly generated day/night pairs to comparison.
+
 - [x] Simplify dashboard time header: local time/ON left, centered four-market clocks right with external label; verify layout and sessions.
 
 - [x] Flatten the top clocks/horizon, tint sidebar glass, distinguish pills and match opened workspace panels to the metallic canvas; verify across pages.
