@@ -595,8 +595,6 @@
   --about-session: color-mix(in oklab, oklch(0.57 0.09 165), oklch(0.76 0.09 165) var(--about-night-weight));
   --about-on-glow: oklch(0.76 0.13 155 / 0.35);
   --about-on-bright: oklch(0.75 0.19 152);
-  --about-cursor-center: oklch(0.87 0.1 85 / 0.24);
-  --about-cursor-edge: oklch(0.87 0.1 85 / 0);
   --about-time-shadow: 0 8px 26px oklch(0.24 0.025 255 / 0.045);
   letter-spacing: 0;
 }
