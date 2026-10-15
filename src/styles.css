@@ -567,50 +567,40 @@
 
 /* Painted public storytelling; tokens are scoped to avoid changing workspace themes. */
 .about-painted {
-  --background: oklch(0.965 0.012 90);
-  --foreground: oklch(0.24 0.014 255);
-  --card: oklch(0.985 0.007 90 / 0.76);
-  --primary: oklch(0.32 0.018 255);
-  --primary-foreground: oklch(0.98 0.007 90);
-  --muted-foreground: oklch(0.42 0.022 255);
-  --accent: oklch(0.49 0.06 250);
+  --about-night-opacity: 0;
+  --about-night-weight: calc(var(--about-night-opacity) * 100%);
+  --background: color-mix(in oklab, oklch(0.965 0.012 90), oklch(0.17 0.015 255) var(--about-night-weight));
+  --foreground: color-mix(in oklab, oklch(0.24 0.014 255), oklch(0.96 0.008 250) var(--about-night-weight));
+  --card: color-mix(in oklab, oklch(0.985 0.007 90 / 0.76), oklch(0.23 0.02 255 / 0.7) var(--about-night-weight));
+  --primary: color-mix(in oklab, oklch(0.32 0.018 255), oklch(0.89 0.018 250) var(--about-night-weight));
+  --primary-foreground: color-mix(in oklab, oklch(0.98 0.007 90), oklch(0.2 0.015 255) var(--about-night-weight));
+  --muted-foreground: color-mix(in oklab, oklch(0.42 0.022 255), oklch(0.83 0.018 250) var(--about-night-weight));
+  --accent: color-mix(in oklab, oklch(0.49 0.06 250), oklch(0.78 0.055 250) var(--about-night-weight));
   --accent-foreground: var(--primary-foreground);
-  --border: oklch(0.35 0.02 255 / 0.13);
+  --border: color-mix(in oklab, oklch(0.35 0.02 255 / 0.13), oklch(0.89 0.018 250 / 0.16) var(--about-night-weight));
   --input: var(--border);
   --secondary: var(--card);
   --secondary-foreground: var(--foreground);
   --muted: var(--card);
-  --accent-foreground: oklch(0.98 0.007 90);
+  --accent-foreground: var(--primary-foreground);
   --ring: oklch(0.49 0.06 250 / 0.4);
-  --about-nav-fill: oklch(0.985 0.007 90 / 0.65);
-  --about-window-fill: oklch(0.985 0.007 90 / 0.75);
-  --about-veil: oklch(0.98 0.01 90 / 0.36);
+  --about-nav-fill: color-mix(in oklab, oklch(0.985 0.007 90 / 0.65), oklch(0.2 0.025 255 / 0.6) var(--about-night-weight));
+  --about-window-fill: color-mix(in oklab, oklch(0.985 0.007 90 / 0.75), oklch(0.2 0.025 255 / 0.68) var(--about-night-weight));
+  --about-veil: color-mix(in oklab, oklch(0.98 0.01 90 / 0.36), oklch(0.13 0.02 255 / 0.28) var(--about-night-weight));
   --about-shadow: 0 18px 60px oklch(0.24 0.025 255 / 0.12), inset 0 1px 0 oklch(1 0 0 / 0.65);
-  --about-time-fill: oklch(0.99 0.004 90 / 0.38);
-  --about-time-highlight: oklch(1 0 0 / 0.8);
+  --about-time-fill: color-mix(in oklab, oklch(0.99 0.004 90 / 0.38), oklch(0.23 0.015 255 / 0.32) var(--about-night-weight));
+  --about-time-highlight: color-mix(in oklab, oklch(1 0 0 / 0.8), oklch(0.93 0.01 250 / 0.18) var(--about-night-weight));
   --about-sun: oklch(0.73 0.12 75);
   --about-moon: oklch(0.91 0.025 240);
-  --about-session: oklch(0.57 0.09 165);
+  --about-session: color-mix(in oklab, oklch(0.57 0.09 165), oklch(0.76 0.09 165) var(--about-night-weight));
+  --about-on-glow: oklch(0.76 0.13 155 / 0.35);
+  --about-cursor-center: oklch(0.87 0.1 85 / 0.24);
+  --about-cursor-edge: oklch(0.87 0.1 85 / 0);
   --about-time-shadow: 0 8px 26px oklch(0.24 0.025 255 / 0.045);
   letter-spacing: 0;
 }
 .about-painted[data-period="night"] {
-  --background: oklch(0.17 0.015 255);
-  --foreground: oklch(0.96 0.008 250);
-  --card: oklch(0.23 0.02 255 / 0.7);
-  --primary: oklch(0.89 0.018 250);
-  --primary-foreground: oklch(0.2 0.015 255);
-  --muted-foreground: oklch(0.83 0.018 250);
-  --accent: oklch(0.78 0.055 250);
-  --accent-foreground: oklch(0.2 0.015 255);
-  --border: oklch(0.89 0.018 250 / 0.16);
-  --about-nav-fill: oklch(0.2 0.025 255 / 0.6);
-  --about-window-fill: oklch(0.2 0.025 255 / 0.68);
-  --about-veil: oklch(0.13 0.02 255 / 0.28);
   --about-shadow: 0 18px 60px oklch(0.1 0.01 255 / 0.3), inset 0 1px 0 oklch(0.89 0.018 250 / 0.15);
-  --about-time-fill: oklch(0.23 0.015 255 / 0.32);
-  --about-time-highlight: oklch(0.93 0.01 250 / 0.18);
-  --about-session: oklch(0.76 0.09 165);
 }
 .about-painted { transition: background-color 1.8s ease, color 1.8s ease; }
 .about-painted :where(h1, h2, h3, p, span, a, button) { letter-spacing: 0; }
@@ -640,9 +630,8 @@
 .about-painted-coda { overflow: hidden; }
 .about-business-backdrop { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
 .about-business-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; transform: scale(1.035); animation: about-city-drift 32s ease-in-out infinite alternate; transition: opacity 1.8s ease; }
-.about-business-night { opacity: 0; }
-.about-painted[data-period="night"] .about-business-day { opacity: 0; }
-.about-painted[data-period="night"] .about-business-night { opacity: 1; }
+.about-business-day { opacity: 1; }
+.about-business-night { opacity: var(--about-night-opacity); }
 .about-business-veil { position: absolute; inset: 0; background: var(--about-veil); transition: background 1.8s ease; }
 .about-time-band { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; max-width: 1152px; margin: 20px auto -16px; padding: 0 24px; }
 .about-exchanges, .about-horizon { background: var(--about-time-fill); border: 1px solid var(--border); border-top-color: var(--about-time-highlight); box-shadow: var(--about-time-shadow), inset 0 1px 0 var(--about-time-highlight); backdrop-filter: blur(18px) saturate(125%); border-radius: 18px; }
@@ -670,6 +659,14 @@
 .about-sun { color: var(--about-sun); filter: drop-shadow(0 0 4px var(--about-sun)); }
 .about-moon { color: var(--about-moon); filter: drop-shadow(0 0 4px var(--about-moon)); }
 .about-horizon-times { font-size: 8px; }
+.about-always-on { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 9px; padding-top: 8px; border-top: 1px solid var(--border); font-size: 9px; font-weight: 500; color: var(--foreground); }
+.about-on-state { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 8px; color: var(--about-session); }
+.about-on-light { width: 5px; height: 5px; border-radius: 50%; background: var(--about-session); box-shadow: 0 0 7px 2px var(--about-on-glow); }
+.about-cursor-glow { position: fixed; top: 0; left: 0; width: 0; height: 0; pointer-events: none; z-index: 80; opacity: 0; transition: opacity 180ms ease; }
+.about-cursor-glow::before { content: ""; position: absolute; width: 64px; height: 64px; left: -32px; top: -32px; border-radius: 50%; background: radial-gradient(circle, var(--about-cursor-center), var(--about-cursor-edge) 70%); }
+@media (pointer: fine) and (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .about-painted[data-period="night"] .about-cursor-glow[data-visible="true"] { opacity: 1; }
+}
 @media (min-width: 1100px) {
   .about-time-band { position: absolute; top: 101px; left: 0; right: 0; margin: 0 auto; pointer-events: none; }
   .about-exchanges, .about-horizon { pointer-events: auto; }
