@@ -112,7 +112,7 @@ function DashboardPage() {
             </div>
             {/* Header */}
             <header className="mb-5">
-              <p className="dashboard-date-line mb-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-semibold uppercase text-foreground/40">
+              <p className="dashboard-date-line mb-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-semibold uppercase text-foreground/40">
                 <span>{today}</span>
                 <span>Local time <time>{now ? new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(now) : "—:—"}</time></span>
               </p>
