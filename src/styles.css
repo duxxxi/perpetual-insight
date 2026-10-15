@@ -806,7 +806,7 @@
 @media (max-width: 639px) {
   .about-time-band { --about-time-width: calc((100vw - 50px) / 2); }
   .about-entry-word { font-size: 21px; letter-spacing: 0.2em; }
-  .about-entry-tagline { font-size: 24px; }
+  .about-entry-tagline { font-size: 15px; letter-spacing: 0.16em; }
   .about-section-title { font-size: 25px; }
   .about-wordmark { font-size: 10px; }
 }
