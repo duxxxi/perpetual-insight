@@ -11,6 +11,7 @@ import martinPortrait from "@/assets/team/placeholder-martin.jpg";
 import leilaPortrait from "@/assets/team/placeholder-leila.jpg";
 import { PaintedTerminal, PaintedLandingFeatures, PaintedVideoCoda } from "@/components/painted-landing-features";
 import { CommodityTicker } from "@/components/app-shell";
+import { AboutTimeBand } from "@/components/about-time-band";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -89,8 +90,13 @@ const team = [
 function AboutPage() {
   const [active, setActive] = useState(0);
   const [period, setPeriod] = useState<"day" | "night">("day");
+  const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
-    const update = () => setPeriod(dayPeriod(new Date()));
+    const update = () => {
+      const date = new Date();
+      setNow(date);
+      setPeriod(dayPeriod(date));
+    };
     update();
     const timer = window.setInterval(update, 30_000);
     document.addEventListener("visibilitychange", update);
@@ -118,6 +124,8 @@ function AboutPage() {
           <Button asChild size="sm" className="h-8 rounded-full px-3 text-[11px]"><Link to="/">Open workspace <ArrowUpRight /></Link></Button>
           </div>
         </header>
+
+        <AboutTimeBand now={now} />
 
         <div id="story" className="mx-auto max-w-3xl px-5 pb-8 pt-10 text-center md:pt-12">
           <p className="about-eyebrow">Intelligence team operational · monitoring worldwide</p>
