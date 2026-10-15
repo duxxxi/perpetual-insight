@@ -3,7 +3,7 @@ import { ArrowRight, ArrowUpRight, BookOpen, CircleGauge, Fingerprint, ShieldChe
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import businessDay from "@/assets/about-business-skyline-trial.png.asset.json";
-import businessNight from "@/assets/about-business-night.png.asset.json";
+import businessNight from "@/assets/about-business-night-refined.png.asset.json";
 import { dayPeriod } from "@/lib/day-period";
 import aleksandarPortrait from "@/assets/team/placeholder-aleksandar.jpg";
 import elenaPortrait from "@/assets/team/placeholder-elena.jpg";
@@ -187,7 +187,7 @@ function BusinessBackdrop() {
   return (
     <div className="about-business-backdrop" aria-hidden="true">
       <img src={businessDay.url} alt="" width={1536} height={768} className="about-business-image about-business-day" />
-      <img src={businessNight.url} alt="" width={1342} height={768} className="about-business-image about-business-night" />
+      <img src={businessNight.url} alt="" width={1536} height={768} className="about-business-image about-business-night" />
       <div className="about-business-veil" />
     </div>
   );

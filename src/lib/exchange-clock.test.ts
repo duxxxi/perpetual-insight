@@ -1,6 +1,6 @@
 import { describe, test } from "node:test";
 import { strictEqual } from "node:assert";
-import { EXCHANGES, exchangeClock, horizonProgress } from "./exchange-clock";
+import { EXCHANGES, exchangeClock, horizonProgress, horizonPoint } from "./exchange-clock";
 
 describe("regular exchange sessions", () => {
   test("New York opens 09:30 and closes 16:00 local", () => {
@@ -24,9 +24,16 @@ describe("regular exchange sessions", () => {
     strictEqual(exchangeClock(new Date("2026-12-15T14:30:00Z"), EXCHANGES[0]).label, "09:30");
   });
 });
-test("horizon resets at the same 07:00 and 19:00 boundaries as the background", () => {
+test("horizon resets at the same 07:00 and 17:00 boundaries as the background", () => {
   strictEqual(horizonProgress(new Date(2026, 9, 15, 7)), 0);
-  strictEqual(horizonProgress(new Date(2026, 9, 15, 13)), 0.5);
-  strictEqual(horizonProgress(new Date(2026, 9, 15, 19)), 0);
-  strictEqual(horizonProgress(new Date(2026, 9, 16, 1)), 0.5);
+  strictEqual(horizonProgress(new Date(2026, 9, 15, 12)), 0.5);
+  strictEqual(horizonProgress(new Date(2026, 9, 15, 17)), 0);
+  strictEqual(horizonProgress(new Date(2026, 9, 16, 0)), 0.5);
+});
+test("sun and moon sit on the symmetric quadratic arc", () => {
+  strictEqual(horizonPoint(0).y, 49);
+  strictEqual(horizonPoint(1).y, 49);
+  strictEqual(horizonPoint(0.5).x, 80);
+  strictEqual(horizonPoint(0.5).y, 12);
+  strictEqual(horizonPoint(0.25).y, horizonPoint(0.75).y);
 });

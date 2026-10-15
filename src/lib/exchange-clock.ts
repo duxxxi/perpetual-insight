@@ -24,6 +24,11 @@ export function exchangeClock(date: Date, exchange: typeof EXCHANGES[number]) {
 /** Visual day/night cycle, not an astronomical sunrise forecast. */
 export function horizonProgress(date: Date) {
   const mins = date.getHours() * 60 + date.getMinutes() + date.getSeconds() / 60;
-  const day = mins >= 420 && mins < 1140;
-  return day ? (mins - 420) / 720 : ((mins - 1140 + 1440) % 1440) / 720;
+  const day = mins >= 420 && mins < 1020;
+  return day ? (mins - 420) / 600 : ((mins - 1020 + 1440) % 1440) / 840;
+}
+
+/** Exact point on M14 49 Q80 -25 146 49, shared by marker and arc. */
+export function horizonPoint(t: number) {
+  return { x: 14 + 132 * t, y: 49 - 148 * t * (1 - t) };
 }
