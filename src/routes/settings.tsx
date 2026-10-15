@@ -11,6 +11,8 @@ export const Route = createFileRoute("/settings")({
       { name: "description", content: "Tune Perpetuity to your taste." },
       { property: "og:title", content: "Settings — Perpetuity" },
       { property: "og:description", content: "Tune Perpetuity to your taste." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: SettingsPage,

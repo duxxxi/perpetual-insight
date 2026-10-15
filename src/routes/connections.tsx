@@ -10,6 +10,8 @@ export const Route = createFileRoute("/connections")({
       { name: "description", content: "The systems Perpetuity reads and writes for you." },
       { property: "og:title", content: "Connections — Perpetuity" },
       { property: "og:description", content: "The systems Perpetuity reads and writes for you." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ConnectionsPage,

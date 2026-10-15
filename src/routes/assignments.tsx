@@ -30,6 +30,8 @@ export const Route = createFileRoute("/assignments")({
       { name: "description", content: "Every commitment Perpetuity is tracking on your behalf." },
       { property: "og:title", content: "Assignments — Perpetuity" },
       { property: "og:description", content: "Every commitment Perpetuity is tracking on your behalf." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: AssignmentsPage,

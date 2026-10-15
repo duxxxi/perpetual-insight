@@ -22,6 +22,8 @@ export const Route = createFileRoute("/documents")({
       { name: "description", content: "Every contract, BL, and brief — searchable and summarized." },
       { property: "og:title", content: "Documents — Perpetuity" },
       { property: "og:description", content: "Every contract, BL, and brief — searchable and summarized." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: DocumentsPage,

@@ -20,6 +20,8 @@ export const Route = createFileRoute("/opportunities")({
       { name: "description", content: "Asymmetric trades surfaced by Perpetuity." },
       { property: "og:title", content: "Opportunities — Perpetuity" },
       { property: "og:description", content: "Asymmetric trades surfaced by Perpetuity." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: OpportunitiesPage,
