@@ -687,13 +687,6 @@
 }
 .about-entry-pos { font-style: italic; }
 .about-entry-sep { opacity: 0.3; }
-.about-entry-def {
-  max-width: 30rem;
-  margin-top: 9px;
-  font-size: 13px;
-  line-height: 1.6;
-  color: color-mix(in oklab, var(--muted-foreground) 92%, var(--foreground));
-}
 .about-entry-tagline {
   margin-top: 58px;
   font-size: 21px;
