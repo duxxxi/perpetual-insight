@@ -78,7 +78,7 @@ function TickerRow({ tone }: { tone: TickerTone }) {
                   : "bg-rose-500/[0.06] ring-rose-500/15"
             }`}
           >
-            <span className={dark ? "text-foreground/60" : "text-foreground/55"}>{t.sym}</span>
+            <span className={dark ? "text-foreground/75" : "text-foreground/55"}>{t.sym}</span>
             <span className="font-semibold text-foreground/90">{t.price}</span>
             <span
               className={
