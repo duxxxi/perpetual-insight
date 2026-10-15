@@ -35,9 +35,9 @@ export function AboutTimeBand({ now }: { now: Date | null }) {
       })}
       </div>
     </div>
-    <div className="about-horizon" role="img" aria-label={`Local ${label.toLowerCase()} ${period === "day" ? "sun" : "moon"} horizon, ${localTime}. Day 07:00–17:00; evening starts 17:00; night starts 21:00.`} title="Your local time · evening begins at 17:00">
+    <div className="about-horizon" title="Your local time · gentle dusk 16:30–17:00 · evening 17:00 · night 21:00">
       <div className="about-horizon-label"><span>{label}</span><time>{localTime}</time></div>
-      <svg viewBox="0 0 160 64" className="about-horizon-dial" aria-hidden="true">
+      <svg viewBox="0 0 160 64" className="about-horizon-dial" role="img" aria-label={`Local ${label.toLowerCase()} ${period === "day" ? "sun" : "moon"} horizon, ${localTime}`}>
         <path d="M14 49 Q80 -25 146 49" className="about-horizon-track" />
         <path d="M4 49 H156" className="about-horizon-line" />
         <g transform={`translate(${x} ${y})`} className={period === "day" ? "about-sun" : "about-moon"}>
@@ -45,6 +45,7 @@ export function AboutTimeBand({ now }: { now: Date | null }) {
         </g>
       </svg>
       <div className="about-horizon-times"><span>{period === "day" ? "07:00" : "17:00"}</span><span>Local time</span><span>{period === "day" ? "17:00" : "07:00"}</span></div>
+      <div className="about-always-on" aria-label="Perpetuity always on"><span>Perpetuity</span><span className="about-on-state"><span className="about-on-light" aria-hidden="true" />ON</span></div>
     </div>
   </div>;
 }

@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, BookOpen, CircleGauge, Fingerprint, ShieldCheck, Globe2, Check, ArrowDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { Button } from "@/components/ui/button";
 import businessDay from "@/assets/about-business-skyline-trial.png.asset.json";
 import businessNight from "@/assets/about-business-night-refined.png.asset.json";
-import { dayPeriod } from "@/lib/day-period";
+import { dayPeriod, nightBlend } from "@/lib/day-period";
 import aleksandarPortrait from "@/assets/team/placeholder-aleksandar.jpg";
 import elenaPortrait from "@/assets/team/placeholder-elena.jpg";
 import martinPortrait from "@/assets/team/placeholder-martin.jpg";
@@ -12,6 +12,7 @@ import leilaPortrait from "@/assets/team/placeholder-leila.jpg";
 import { PaintedTerminal, PaintedLandingFeatures, PaintedVideoCoda } from "@/components/painted-landing-features";
 import { CommodityTicker } from "@/components/app-shell";
 import { AboutTimeBand } from "@/components/about-time-band";
+import { AboutCursorGlow } from "@/components/about-cursor-glow";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -106,9 +107,11 @@ function AboutPage() {
     };
   }, []);
   const selected = operatingModel[active] ?? operatingModel[0];
+  const appearance = { "--about-night-opacity": now ? nightBlend(now) : 0 } as CSSProperties;
 
   return (
-    <div data-period={period} className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div data-period={period} style={appearance} className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
+      <AboutCursorGlow enabled={period === "night"} />
       <CommodityTicker />
       <section className="about-painted-hero relative isolate">
         <BusinessBackdrop />
