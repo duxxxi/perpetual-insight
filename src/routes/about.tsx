@@ -9,6 +9,8 @@ import aleksandarPortrait from "@/assets/team/placeholder-aleksandar.jpg";
 import elenaPortrait from "@/assets/team/placeholder-elena.jpg";
 import martinPortrait from "@/assets/team/placeholder-martin.jpg";
 import leilaPortrait from "@/assets/team/placeholder-leila.jpg";
+import { PaintedTerminal, PaintedLandingFeatures, PaintedVideoCoda } from "@/components/painted-landing-features";
+import { CommodityTicker } from "@/components/app-shell";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -101,14 +103,16 @@ function AboutPage() {
 
   return (
     <div data-period={period} className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
+      <CommodityTicker />
       <section className="about-painted-hero relative isolate">
         <BusinessBackdrop />
         <header className="mx-auto max-w-6xl px-5 pt-3 lg:px-8">
           <div className="about-nav flex items-center justify-between gap-3 rounded-2xl px-3 py-2">
           <Link to="/landing" className="flex items-center gap-2.5"><span className="globe-orb size-5" aria-hidden /><span className="about-wordmark">Perpetuity</span></Link>
           <nav aria-label="About page navigation" className="hidden items-center gap-1 md:flex">
-            <Button asChild size="sm" className="rounded-full bg-card text-foreground shadow-none hover:bg-card"><a href="#story">About</a></Button>
-            <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#principles">Our thinking</a></Button>
+            <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#platform">Platform</a></Button>
+            <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#intelligence">Intelligence</a></Button>
+            <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#agents">Intelligence team</a></Button>
             <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#team">People</a></Button>
           </nav>
           <Button asChild size="sm" className="h-8 rounded-full px-3 text-[11px]"><Link to="/">Open workspace <ArrowUpRight /></Link></Button>
@@ -116,14 +120,21 @@ function AboutPage() {
         </header>
 
         <div id="story" className="mx-auto max-w-3xl px-5 pb-8 pt-10 text-center md:pt-12">
-          <p className="about-eyebrow">The company behind the system</p>
+          <p className="about-eyebrow">Intelligence team operational · monitoring worldwide</p>
           <h1 className="about-headline mt-4">Perpetuity<span className="mt-3 block italic">Your Intelligence Team.<br />Always On.</span></h1>
-          <p className="mx-auto mt-4 max-w-lg text-[14px] leading-[1.8] text-muted-foreground">An always-on intelligence team for companies trading across borders. You command. It executes.</p>
-          <Button asChild className="mt-5 h-9 rounded-full px-4 text-[12px]"><a href="mailto:hello@perpetuity.works">Start a conversation <ArrowUpRight /></a></Button>
-          <p className="mt-3 text-[10px] text-muted-foreground">Context. Intelligence. Approved action.</p>
+          <p className="mx-auto mt-4 max-w-lg text-[14px] leading-[1.8] text-muted-foreground">Perpetuity connects your world, then puts agents to work. Opportunities found, outreach drafted, risks flagged, deals planned. You command. It executes.</p>
+          <div className="mt-5 flex justify-center gap-2"><Button asChild className="h-9 rounded-full px-4 text-[12px]"><a href="mailto:hello@perpetuity.works">Book a demo <ArrowUpRight /></a></Button><Button asChild variant="outline" className="h-9 rounded-full bg-card px-4 text-[12px]"><a href="#platform">See the platform <ArrowDown /></a></Button></div>
+          <p className="mt-3 text-[10px] text-muted-foreground">180+ countries · 24/7 surveillance · 50K+ active tenders</p>
         </div>
 
         <div className="mx-auto max-w-3xl px-5 pb-10">
+          <PaintedTerminal />
+        </div>
+      </section>
+
+      <main>
+        <PaintedLandingFeatures />
+        <section className="mx-auto max-w-3xl px-5 py-12">
           <div className="mb-4 flex justify-center">
             <div className="about-lenses flex max-w-full gap-1 rounded-full p-1" role="tablist" aria-label="Operating model">
               {["Connect", "Notice", "Act"].map((label, index) => <Button key={label} role="tab" id={`model-tab-${index}`} aria-controls="model-panel" aria-selected={active === index} variant="ghost" size="sm" onClick={() => setActive(index)} className={active === index ? "rounded-full bg-card text-foreground shadow-sm hover:bg-card" : "rounded-full text-muted-foreground"}>{label}</Button>)}
@@ -139,16 +150,6 @@ function AboutPage() {
               <div><p className="text-[13px] leading-[1.8] text-muted-foreground">{selected.body}</p><p className="mt-5 flex items-center gap-2 text-[11px]"><Check className="size-3.5 text-accent" /> You keep the judgment and the final word.</p></div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <main>
-        <section className="mx-auto max-w-5xl px-5 py-16 text-center md:py-24">
-          <p className="about-eyebrow">A wider perspective</p>
-          <h2 className="about-section-title mx-auto mt-5 max-w-2xl">Your world is connected.<br />Your intelligence should be, too.</h2>
-          <p className="mx-auto mt-6 max-w-xl text-[14px] leading-[1.9] text-muted-foreground">Perpetuity connects your world, then puts specialist agents to work — finding opportunities, drafting outreach, flagging risks and planning deals.</p>
-          <div className="mt-9 flex flex-wrap justify-center gap-x-7 gap-y-3 text-[12px] text-muted-foreground">{["Exporters", "Manufacturers", "Distributors", "Trading companies"].map(label => <span key={label}>{label}</span>)}</div>
-          <ArrowDown className="mx-auto mt-10 size-4 text-accent" />
         </section>
 
         <section id="principles" className="about-principles scroll-mt-6 border-y border-border">
@@ -167,12 +168,7 @@ function AboutPage() {
           </div>
         </section>
 
-        <section className="about-painted-coda relative isolate px-5 py-20 text-center md:py-24">
-          <BusinessBackdrop />
-          <p className="about-eyebrow">Keep the world in view</p><h2 className="about-section-title mx-auto mt-5 max-w-2xl">Build the company that<br />never stops noticing.</h2>
-          <p className="mx-auto mt-5 max-w-md text-[13px] leading-relaxed">Tell us what your team needs to see, remember and move on next.</p>
-          <Button asChild className="mt-7 rounded-full px-6"><a href="mailto:hello@perpetuity.works">hello@perpetuity.works <ArrowUpRight /></a></Button>
-        </section>
+        <PaintedVideoCoda />
       </main>
       <footer className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-5 px-5 py-8 text-[11px] text-muted-foreground"><Link to="/landing" className="about-wordmark text-foreground">Perpetuity</Link><span>Intelligence for international trade.</span><Button asChild variant="link" size="sm"><Link to="/landing">See the platform <ArrowRight /></Link></Button></footer>
     </div>

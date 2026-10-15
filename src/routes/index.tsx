@@ -64,6 +64,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Your continuous commercial intelligence for international trade." },
       { property: "og:title", content: "Daily Brief — Perpetuity" },
       { property: "og:description", content: "Your continuous commercial intelligence for international trade." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: DashboardPage,

@@ -27,6 +27,8 @@ export const Route = createFileRoute("/contacts")({
       { name: "description", content: "Every relationship, kept warm." },
       { property: "og:title", content: "Contacts — Perpetuity" },
       { property: "og:description", content: "Every relationship, kept warm." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ContactsPage,

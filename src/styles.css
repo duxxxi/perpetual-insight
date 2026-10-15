@@ -598,6 +598,21 @@
   --about-shadow: 0 18px 60px oklch(0.1 0.01 255 / 0.3), inset 0 1px 0 oklch(0.89 0.018 250 / 0.15);
 }
 .about-painted { transition: background-color 1.8s ease, color 1.8s ease; }
+.about-painted :where(h1, h2, h3, p, span, a, button) { letter-spacing: 0; }
+.about-trusted-track { animation: ticker-scroll 65s linear infinite; }
+.about-video-coda {
+  --background: oklch(0.17 0.015 255);
+  --foreground: oklch(0.98 0.008 250);
+  --muted-foreground: oklch(0.88 0.015 250);
+  --card: oklch(0.23 0.02 255 / 0.6);
+  --primary: oklch(0.96 0.008 250);
+  --primary-foreground: oklch(0.2 0.015 255);
+  --border: oklch(0.96 0.008 250 / 0.2);
+  --about-video-overlay: linear-gradient(180deg, oklch(0.12 0.015 255 / 0.74), oklch(0.12 0.015 255 / 0.2));
+  color: var(--foreground);
+}
+.about-video-veil { background: var(--about-video-overlay); }
+.about-video-coda .about-eyebrow { color: var(--muted-foreground); }
 .about-painted-hero { overflow: hidden; }
 .about-wordmark { font-family: var(--font-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; line-height: 1; }
 .about-nav, .about-lenses { background: var(--about-nav-fill); border: 1px solid var(--border); box-shadow: var(--about-shadow); backdrop-filter: blur(18px); }
@@ -624,4 +639,7 @@
 @media (prefers-reduced-motion: reduce) {
   .about-business-image, .about-business-veil, .about-painted { animation: none; transition: none; }
   .about-painted .globe-orb { animation: none; }
+  .about-trusted-track { animation: none; }
+  .about-video-coda video { display: none; }
+  .about-video-coda { background: var(--background); }
 }

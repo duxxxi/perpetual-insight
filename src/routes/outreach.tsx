@@ -19,6 +19,8 @@ export const Route = createFileRoute("/outreach")({
       { name: "description", content: "Sequences, follow-ups, and warm reactivations." },
       { property: "og:title", content: "Outreach — Perpetuity" },
       { property: "og:description", content: "Sequences, follow-ups, and warm reactivations." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: OutreachPage,

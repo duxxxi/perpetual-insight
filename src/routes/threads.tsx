@@ -38,6 +38,8 @@ export const Route = createFileRoute("/threads")({
       { name: "description", content: "Every conversation, task, and suggestion in one place." },
       { property: "og:title", content: "Threads — Perpetuity" },
       { property: "og:description", content: "Every conversation, task, and suggestion in one place." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ThreadsPage,
