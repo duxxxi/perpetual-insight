@@ -645,9 +645,9 @@
 .about-entry::before {
   content: "";
   position: absolute;
-  inset: -26px -70px;
+  inset: -30px -92px;
   z-index: -1;
-  background: radial-gradient(62% 66% at 50% 50%, color-mix(in oklab, var(--background) 78%, transparent), transparent 80%);
+  background: radial-gradient(62% 66% at 50% 50%, color-mix(in oklab, var(--background) 84%, transparent), transparent 82%);
   filter: blur(10px);
   pointer-events: none;
 }
@@ -680,7 +680,7 @@
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.02em;
-  color: var(--muted-foreground);
+  color: color-mix(in oklab, var(--muted-foreground) 52%, var(--foreground));
 }
 .about-entry-pos { font-style: italic; }
 .about-entry-sep { opacity: 0.38; }
@@ -689,7 +689,7 @@
   margin-top: 15px;
   font-size: 13px;
   line-height: 1.75;
-  color: var(--muted-foreground);
+  color: color-mix(in oklab, var(--muted-foreground) 55%, var(--foreground));
 }
 .about-entry-source {
   display: block;
@@ -697,10 +697,10 @@
   font-family: var(--font-serif);
   font-size: 10px;
   font-style: italic;
-  opacity: 0.72;
+  opacity: 0.86;
 }
 .about-entry-tagline {
-  margin-top: 30px;
+  margin-top: 36px;
   font-family: var(--font-serif);
   font-size: 32px;
   font-style: italic;
