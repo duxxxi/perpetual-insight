@@ -19,7 +19,7 @@ export function AboutBackgroundComparison({ selection, onChange }: {
 }) {
   const [open, setOpen] = useState(false);
   return <Dialog open={open} onOpenChange={setOpen}>
-    <DialogTrigger asChild><Button variant="outline" size="sm" className="h-8 rounded-full bg-card px-3 text-[11px]"><Images className="size-3.5" /><span className="hidden sm:inline">Compare backgrounds</span><span className="sm:hidden">Backgrounds</span></Button></DialogTrigger>
+    <DialogTrigger asChild><Button variant="outline" size="sm" aria-label="Compare backgrounds" title="Compare backgrounds" className="h-8 rounded-full bg-card px-3 text-[11px]"><Images className="size-3.5" /><span className="hidden sm:inline">Compare backgrounds</span></Button></DialogTrigger>
     <DialogContent className="max-h-[90dvh] w-[calc(100%-24px)] max-w-4xl overflow-y-auto rounded-lg p-4 sm:p-6" aria-describedby={undefined}>
       <DialogTitle className="text-base">Background comparison</DialogTitle>
       <div className="grid grid-cols-2 gap-3">
