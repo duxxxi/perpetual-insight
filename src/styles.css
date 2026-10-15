@@ -633,7 +633,7 @@
 .about-business-day { opacity: 1; }
 .about-business-night { opacity: var(--about-night-opacity); }
 .about-business-veil { position: absolute; inset: 0; background: var(--about-veil); transition: background 1.8s ease; }
-.about-time-band { --about-time-width: 268px; --about-time-height: 150px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; max-width: 1152px; margin: 20px auto -16px; padding: 0 24px; }
+.about-time-band { --about-time-width: 244px; --about-time-height: 128px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; max-width: 1152px; margin: 20px auto -16px; padding: 0 24px; }
 .about-exchanges, .about-horizon { width: var(--about-time-width); height: var(--about-time-height); flex: 0 0 var(--about-time-width); background: var(--about-time-fill); border: 1px solid var(--border); border-top-color: var(--about-time-highlight); box-shadow: var(--about-time-shadow), inset 0 1px 0 var(--about-time-highlight); backdrop-filter: blur(18px) saturate(125%); border-radius: 18px; }
 .about-exchanges { padding: 12px 16px; }
 .about-exchange-row { display: flex; gap: 18px; }
@@ -662,6 +662,17 @@
 .about-always-on { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 9px; padding-top: 8px; border-top: 1px solid var(--border); font-size: 9px; font-weight: 500; color: var(--foreground); }
 .about-on-state { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 8px; color: var(--about-session); }
 .about-on-light { width: 5px; height: 5px; border-radius: 50%; background: var(--about-session); box-shadow: 0 0 7px 2px var(--about-on-glow); }
+.about-time-band .about-exchanges { padding: 9px 10px; }
+.about-time-band .about-exchange-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+.about-time-band .about-exchange { width: auto; gap: 2px; }
+.about-time-band .about-clock-face { width: 32px; height: 32px; margin-bottom: 1px; }
+.about-time-band .about-clock-city { font-size: 9px; }
+.about-time-band .about-clock-time { font-size: 10px; }
+.about-time-band .about-clock-status { font-size: 7px; gap: 2px; }
+.about-time-band .about-markets-label { margin-bottom: 5px; }
+.about-time-band .about-horizon { padding: 9px 12px; }
+.about-time-band .about-horizon-dial { height: 52px; }
+.about-time-band .about-always-on { margin-top: 5px; padding-top: 5px; }
 @media (pointer: fine) and (hover: hover) {
   .about-painted[data-period="night"] { --about-cursor: url("/cursors/yellow-arrow.png") 5 4, default; --about-pointer: url("/cursors/yellow-hand.png") 10 4, pointer; cursor: var(--about-cursor); }
   .about-painted[data-period="night"] :where(a, button, [role="button"], [role="tab"], summary, label[for]) { cursor: var(--about-pointer); }
@@ -669,14 +680,14 @@
   .about-painted[data-period="night"] :where(button:disabled, [aria-disabled="true"]) { cursor: not-allowed; }
 }
 @media (min-width: 1100px) {
-  .about-time-band { --about-time-width: 216px; position: absolute; top: 101px; left: 0; right: 0; margin: 0 auto; pointer-events: none; }
+  .about-time-band { position: absolute; top: 101px; left: 0; right: 0; margin: 0 auto; pointer-events: none; }
   .about-exchanges, .about-horizon { pointer-events: auto; }
   .about-exchanges { padding: 12px; }
   .about-exchange-row { gap: 8px; }
   .about-exchange { width: 58px; }
 }
 @media (max-width: 479px) {
-  .about-time-band { --about-time-width: calc((100vw - 50px) / 2); --about-time-height: 136px; padding: 0 20px; gap: 10px; }
+  .about-time-band { --about-time-width: 100%; --about-time-height: 128px; display: grid; grid-template-columns: 1fr; padding: 0 20px; gap: 10px; }
   .about-exchanges { padding: 10px 8px; }
   .about-exchange-row { gap: 6px; }
   .about-exchange { width: calc((var(--about-time-width) - 30px) / 3); }

@@ -46,3 +46,14 @@ test("sun and moon sit on the symmetric quadratic arc", () => {
   strictEqual(horizonPoint(0.5).y, 12);
   strictEqual(horizonPoint(0.25).y, horizonPoint(0.75).y);
 });
+test("sun and moon advance along the arc as local time advances", () => {
+  const sunEarly = horizonPoint(horizonProgress(new Date(2026, 9, 15, 8)));
+  const sunLater = horizonPoint(horizonProgress(new Date(2026, 9, 15, 10)));
+  strictEqual(sunLater.x > sunEarly.x, true);
+  strictEqual(sunLater.y < sunEarly.y, true);
+  const moonEarly = horizonPoint(horizonProgress(new Date(2026, 9, 15, 18)));
+  const moonLater = horizonPoint(horizonProgress(new Date(2026, 9, 15, 20)));
+  strictEqual(moonLater.x > moonEarly.x, true);
+  strictEqual(moonLater.y < moonEarly.y, true);
+  strictEqual(horizonProgress(new Date(2026, 9, 15, 12, 0, 1)) > horizonProgress(new Date(2026, 9, 15, 12, 0, 0)), true);
+});

@@ -1,4 +1,4 @@
-import { EXCHANGES, WORKSPACE_EXCHANGES, exchangeClock, horizonProgress, horizonPoint } from "@/lib/exchange-clock";
+import { WORKSPACE_EXCHANGES, exchangeClock, horizonProgress, horizonPoint } from "@/lib/exchange-clock";
 import { dayPeriod, timeOfDay } from "@/lib/day-period";
 
 function ClockFace({ hour, minute }: { hour: number; minute: number }) {
@@ -41,7 +41,7 @@ export function AboutTimeBand({ now, workspace = false }: { now: Date | null; wo
     <div className="about-exchanges" aria-label="Stock exchange clocks">
       <p className="about-markets-label">World markets</p>
       <div className="about-exchange-row">
-      {EXCHANGES.map(exchange => {
+      {WORKSPACE_EXCHANGES.map(exchange => {
         const clock = now ? exchangeClock(now, exchange) : null;
         return <div key={exchange.code} className="about-exchange" title={`${exchange.code} · regular weekday schedule, excluding exchange holidays. Hours shown in exchange-local time.`}>
           <ClockFace hour={clock?.hour ?? 12} minute={clock?.minute ?? 0} />
