@@ -662,7 +662,7 @@
 .about-moon { color: var(--about-moon); filter: drop-shadow(0 0 4px var(--about-moon)); }
 .about-horizon-times { font-size: 8px; }
 @media (min-width: 1100px) {
-  .about-time-band { position: absolute; top: 101px; left: 0; right: 0; margin: 0; pointer-events: none; }
+  .about-time-band { position: absolute; top: 101px; left: 0; right: 0; margin: 0 auto; pointer-events: none; }
   .about-exchanges, .about-horizon { pointer-events: auto; }
   .about-exchanges { gap: 8px; padding: 12px; }
   .about-exchange { width: 58px; }
