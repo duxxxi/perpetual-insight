@@ -1,8 +1,17 @@
 import { describe, test } from "node:test";
 import { strictEqual } from "node:assert";
-import { EXCHANGES, exchangeClock, horizonProgress, horizonPoint } from "./exchange-clock";
+import { EXCHANGES, WORKSPACE_EXCHANGES, exchangeClock, horizonProgress, horizonPoint } from "./exchange-clock";
 
 describe("regular exchange sessions", () => {
+  test("Shanghai follows 09:30–11:30 and 13:00–15:00 local sessions", () => {
+    const shanghai = WORKSPACE_EXCHANGES[3];
+    strictEqual(exchangeClock(new Date("2026-10-15T01:29:00Z"), shanghai).open, false);
+    strictEqual(exchangeClock(new Date("2026-10-15T01:30:00Z"), shanghai).open, true);
+    strictEqual(exchangeClock(new Date("2026-10-15T03:30:00Z"), shanghai).status, "Opens 13:00");
+    strictEqual(exchangeClock(new Date("2026-10-15T05:00:00Z"), shanghai).open, true);
+    strictEqual(exchangeClock(new Date("2026-10-15T07:00:00Z"), shanghai).status, "Closed");
+    strictEqual(exchangeClock(new Date("2026-10-17T02:00:00Z"), shanghai).open, false);
+  });
   test("New York opens 09:30 and closes 16:00 local", () => {
     strictEqual(exchangeClock(new Date("2026-10-15T13:29:00Z"), EXCHANGES[0]).open, false);
     strictEqual(exchangeClock(new Date("2026-10-15T13:30:00Z"), EXCHANGES[0]).open, true);

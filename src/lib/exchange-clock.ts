@@ -4,7 +4,14 @@ export const EXCHANGES = [
   { city: "Tokyo", code: "TSE", zone: "Asia/Tokyo", sessions: [[540, 690], [750, 930]] },
 ] as const;
 
-export function exchangeClock(date: Date, exchange: typeof EXCHANGES[number]) {
+export const WORKSPACE_EXCHANGES = [
+  ...EXCHANGES,
+  { city: "Shanghai", code: "SSE", zone: "Asia/Shanghai", sessions: [[570, 690], [780, 900]] },
+] as const;
+
+type Exchange = typeof WORKSPACE_EXCHANGES[number];
+
+export function exchangeClock(date: Date, exchange: Exchange) {
   const parts = new Intl.DateTimeFormat("en-GB", {
     timeZone: exchange.zone, hour: "2-digit", minute: "2-digit", weekday: "short", hourCycle: "h23",
   }).formatToParts(date);

@@ -3,7 +3,7 @@
 - Adapt external dashboard presentation to TanStack without importing Next.js or its authenticated API stack; source account data and live actions must not be represented as copied.
 - Mount the workspace Ask Perpetuity dock once in the root, excluding public storytelling pages; reuse the bottom-sheet conversation surface for existing Threads entry points.
 - Compose the preview conversation with AI Elements and existing local preview stores; clearly distinguish simulated replies from live agent execution.
-- Reuse the public clock/horizon display in the dashboard with workspace-scoped visual tokens and one hydrated clock; keep workspace theme independent of local day/night.
+- Reuse exchange-clock logic with distinct public and workspace presentations and one hydrated clock per page; keep workspace theme independent of local day/night and its exchange list separate from About's.
 - Apply workspace canvas tokens on the root body by route so portalled dialogs inherit the same theme as all operational pages; keep public storytelling palettes independent. Use semantic pill tones to distinguish action categories without changing behavior.
 
 - Public company storytelling lives on dedicated routes linked from `/landing`; keep the operational sidebar focused on workspace tools.
