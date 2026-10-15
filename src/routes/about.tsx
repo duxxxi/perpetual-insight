@@ -12,7 +12,6 @@ import leilaPortrait from "@/assets/team/placeholder-leila.jpg";
 import { PaintedTerminal, PaintedLandingFeatures, PaintedVideoCoda } from "@/components/painted-landing-features";
 import { CommodityTicker } from "@/components/app-shell";
 import { AboutTimeBand } from "@/components/about-time-band";
-import { AboutCursorGlow } from "@/components/about-cursor-glow";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -115,7 +114,6 @@ function AboutPage() {
 
   return (
     <div data-period={period} style={appearance} className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
-      <AboutCursorGlow enabled={period === "night"} />
       <CommodityTicker />
       <section className="about-painted-hero relative isolate">
         <BusinessBackdrop />
