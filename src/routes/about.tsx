@@ -120,7 +120,7 @@ function AboutPage() {
         <header className="mx-auto max-w-6xl px-5 pt-3 lg:px-8">
           <div className="about-nav flex items-center justify-between gap-3 rounded-2xl px-3 py-2">
           <Link to="/landing" className="flex items-center gap-2.5"><span className="globe-orb size-5" aria-hidden /><span className="about-wordmark">Perpetuity</span></Link>
-          <nav aria-label="About page navigation" className="hidden items-center gap-1 md:flex">
+          <nav aria-label="About page navigation" className="hidden items-center gap-1 lg:flex">
             <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#platform">Platform</a></Button>
             <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#intelligence">Intelligence</a></Button>
             <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#agents">Intelligence team</a></Button>
