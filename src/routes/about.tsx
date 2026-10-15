@@ -140,7 +140,7 @@ function AboutPage() {
             <span className="about-entry-def" aria-hidden="true">the quality of being eternal or lasting; infinite and uninterrupted continuity.</span>
             <span className="about-entry-tagline">Your Intelligence Team.<br />Always <span className="about-headline-on">On</span><span className="about-headline-dot" aria-hidden="true" /></span>
           </h1>
-          <p className="mx-auto mt-4 max-w-[40rem] text-[13px] leading-[1.75] text-muted-foreground">Perpetuity connects your world, then puts agents to work. Opportunities found, outreach drafted, risks flagged, deals planned. You command. It executes.</p>
+          <p className="mx-auto mt-1 max-w-[40rem] text-[13px] leading-[1.75] text-muted-foreground">Perpetuity connects your world, then puts agents to work. Opportunities found, outreach drafted, risks flagged, deals planned. You command. It executes.</p>
           <div className="mt-5 flex justify-center gap-2"><Button asChild className="h-9 rounded-full px-4 text-[12px]"><a href="mailto:hello@perpetuity.works">Book a demo <ArrowUpRight /></a></Button><Button asChild variant="outline" className="h-9 rounded-full bg-card px-4 text-[12px]"><a href="#platform">See the platform <ArrowDown /></a></Button></div>
           <p className="mt-3 text-[10px] text-muted-foreground">180+ countries · 24/7 surveillance · 50K+ active tenders</p>
         </div>
