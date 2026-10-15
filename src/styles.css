@@ -781,3 +781,4 @@
   --color-status-progress: var(--chat-action);
   --color-status-attention: var(--destructive);
 }
+.perpetuity-chat-sheet { translate: none; }
