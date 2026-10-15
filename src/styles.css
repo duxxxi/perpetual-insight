@@ -663,7 +663,7 @@
 .about-on-state { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 8px; color: var(--about-session); }
 .about-on-light { width: 5px; height: 5px; border-radius: 50%; background: var(--about-session); box-shadow: 0 0 7px 2px var(--about-on-glow); }
 @media (pointer: fine) and (hover: hover) {
-  .about-painted[data-period="night"] { --about-cursor: url("/cursors/yellow-arrow.png") 6 5, default; --about-pointer: url("/cursors/yellow-hand.png") 13 5, pointer; cursor: var(--about-cursor); }
+  .about-painted[data-period="night"] { --about-cursor: url("/cursors/yellow-arrow.png") 5 4, default; --about-pointer: url("/cursors/yellow-hand.png") 10 4, pointer; cursor: var(--about-cursor); }
   .about-painted[data-period="night"] :where(a, button, [role="button"], [role="tab"], summary, label[for]) { cursor: var(--about-pointer); }
   .about-painted[data-period="night"] :where(input, textarea, [contenteditable="true"]) { cursor: text; }
   .about-painted[data-period="night"] :where(button:disabled, [aria-disabled="true"]) { cursor: not-allowed; }
