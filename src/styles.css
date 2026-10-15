@@ -641,7 +641,16 @@
 .about-nav, .about-lenses { background: var(--about-nav-fill); border: 1px solid var(--border); box-shadow: var(--about-shadow); backdrop-filter: blur(18px); }
 .about-eyebrow { font-family: var(--font-mono); font-size: 9px; font-weight: 500; text-transform: uppercase; color: var(--muted-foreground); }
 /* Dictionary-entry hero: headword, pronunciation, definition, then the tagline. */
-.about-entry { display: flex; flex-direction: column; align-items: center; }
+.about-entry { position: relative; isolation: isolate; display: flex; flex-direction: column; align-items: center; }
+.about-entry::before {
+  content: "";
+  position: absolute;
+  inset: -26px -70px;
+  z-index: -1;
+  background: radial-gradient(62% 66% at 50% 50%, color-mix(in oklab, var(--background) 78%, transparent), transparent 80%);
+  filter: blur(10px);
+  pointer-events: none;
+}
 .about-entry-word {
   font-family: var(--font-command);
   font-size: 34px;
@@ -650,6 +659,16 @@
   letter-spacing: 0.26em;
   text-indent: 0.26em;
   text-transform: uppercase;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--foreground) 96%, transparent) 0%,
+    color-mix(in oklab, var(--foreground) 58%, transparent) 40%,
+    color-mix(in oklab, var(--foreground) 92%, transparent) 70%,
+    color-mix(in oklab, var(--foreground) 64%, transparent) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 .about-entry-meta {
   display: flex;

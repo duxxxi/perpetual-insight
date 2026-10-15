@@ -135,7 +135,7 @@ function AboutPage() {
         <div id="story" className="mx-auto max-w-3xl px-5 pb-8 pt-10 text-center md:pt-12">
           <p className="about-eyebrow">Intelligence team operational · monitoring worldwide</p>
           <h1 className="about-entry mt-4">
-            <span className="about-entry-word text-silver-metallic">Perpetuity</span>
+            <span className="about-entry-word">Perpetuity</span>
             <span className="about-entry-meta" aria-hidden="true"><span>perpetuity</span><span className="about-entry-sep">|</span><span>/ˌpɜːpəˈtjuːəti/</span><span className="about-entry-sep">|</span><span className="about-entry-pos">noun</span></span>
             <span className="about-entry-def" aria-hidden="true">the quality of being eternal or lasting; infinite and uninterrupted continuity.<span className="about-entry-source">Oxford Dictionary of English</span></span>
             <span className="about-entry-tagline">Your Intelligence Team.<br />Always <span className="about-headline-on">On</span><span className="about-headline-dot" aria-hidden="true" /></span>
