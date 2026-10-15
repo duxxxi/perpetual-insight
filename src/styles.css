@@ -680,8 +680,8 @@
 .about-horizon-label, .about-horizon-times { display: flex; justify-content: space-between; align-items: center; font-size: 9px; color: var(--muted-foreground); }
 .about-horizon-label time { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .about-horizon-dial { display: block; width: 100%; height: 64px; margin: 2px 0; overflow: visible; }
-.about-horizon-track { fill: none; stroke: var(--muted-foreground); stroke-width: 0.6; stroke-dasharray: 1.5 4; opacity: 0.5; }
-.about-horizon-line { fill: none; stroke: var(--muted-foreground); stroke-width: 0.7; opacity: 0.6; }
+.about-horizon-track { fill: none; stroke: var(--muted-foreground); stroke-width: 1.1; stroke-linecap: round; stroke-dasharray: 3 3.5; opacity: 0.85; }
+.about-horizon-line { fill: none; stroke: var(--muted-foreground); stroke-width: 1.1; stroke-linecap: round; opacity: 0.85; }
 .about-sun { color: var(--about-sun); filter: drop-shadow(0 0 4px var(--about-sun)); }
 .about-moon { color: var(--about-moon); filter: drop-shadow(0 0 4px var(--about-moon)); }
 .about-horizon-times { font-size: 8px; }
