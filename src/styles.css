@@ -634,6 +634,21 @@
   0%, 100% { opacity: .9; text-shadow: 0 0 10px var(--about-on-glow), 0 0 26px color-mix(in oklab, var(--about-on-bright) 16%, transparent); }
   50% { opacity: 1; text-shadow: 0 0 20px color-mix(in oklab, var(--about-on-bright) 55%, transparent), 0 0 52px color-mix(in oklab, var(--about-on-bright) 34%, transparent); }
 }
+.about-headline-dot {
+  display: inline-block;
+  width: .17em;
+  height: .17em;
+  margin-left: .16em;
+  border-radius: 50%;
+  background: var(--about-on-bright);
+  vertical-align: .17em;
+  box-shadow: 0 0 10px 2px var(--about-on-glow), 0 0 26px color-mix(in oklab, var(--about-on-bright) 30%, transparent);
+  animation: about-dot-breathe 3.4s ease-in-out infinite;
+}
+@keyframes about-dot-breathe {
+  0%, 100% { opacity: .82; transform: scale(.88); box-shadow: 0 0 7px 1px var(--about-on-glow), 0 0 18px color-mix(in oklab, var(--about-on-bright) 18%, transparent); }
+  50% { opacity: 1; transform: scale(1.12); box-shadow: 0 0 16px 4px color-mix(in oklab, var(--about-on-bright) 55%, transparent), 0 0 46px color-mix(in oklab, var(--about-on-bright) 34%, transparent); }
+}
 .about-work-window { background: var(--about-window-fill); border: 1px solid var(--border); box-shadow: var(--about-shadow); backdrop-filter: blur(24px); }
 .about-section-title { font-family: var(--font-serif); font-size: 30px; font-weight: 400; line-height: 1.3; }
 .about-principles { background: color-mix(in oklab, var(--card) 75%, var(--about-nav-fill)); }

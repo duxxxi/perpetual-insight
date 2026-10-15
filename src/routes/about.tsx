@@ -134,7 +134,7 @@ function AboutPage() {
 
         <div id="story" className="mx-auto max-w-3xl px-5 pb-8 pt-10 text-center md:pt-12">
           <p className="about-eyebrow">Intelligence team operational · monitoring worldwide</p>
-          <h1 className="about-headline mt-4">Perpetuity<span className="mt-3 block italic">Your Intelligence Team.<br />Always <span className="about-headline-on">On</span>.</span></h1>
+          <h1 className="about-headline mt-4">Perpetuity<span className="mt-3 block italic">Your Intelligence Team.<br />Always <span className="about-headline-on">On</span><span className="about-headline-dot" aria-hidden="true" /></span></h1>
           <p className="mx-auto mt-4 max-w-lg text-[14px] leading-[1.8] text-muted-foreground">Perpetuity connects your world, then puts agents to work. Opportunities found, outreach drafted, risks flagged, deals planned. You command. It executes.</p>
           <div className="mt-5 flex justify-center gap-2"><Button asChild className="h-9 rounded-full px-4 text-[12px]"><a href="mailto:hello@perpetuity.works">Book a demo <ArrowUpRight /></a></Button><Button asChild variant="outline" className="h-9 rounded-full bg-card px-4 text-[12px]"><a href="#platform">See the platform <ArrowDown /></a></Button></div>
           <p className="mt-3 text-[10px] text-muted-foreground">180+ countries · 24/7 surveillance · 50K+ active tenders</p>
