@@ -88,7 +88,7 @@ const team = [
 
 function AboutPage() {
   const [active, setActive] = useState(0);
-  const [backgrounds, setBackgrounds] = useState<BackgroundSelection>({ day: "park", night: "skyline" });
+  const [backgrounds, setBackgrounds] = useState<BackgroundSelection>("skyline");
   const [period, setPeriod] = useState<"day" | "night">("day");
   const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
@@ -116,7 +116,7 @@ function AboutPage() {
     <div data-period={period} style={appearance} className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
       <CommodityTicker tone="dark" />
       <section className="about-painted-hero relative isolate">
-        <BusinessBackdrop selection={backgrounds} blend={blend} />
+        <BusinessBackdrop selection={backgrounds} />
         <header className="mx-auto max-w-6xl px-5 pt-3 lg:px-8">
           <div className="about-nav flex items-center justify-between gap-3 rounded-2xl px-3 py-2">
           <Link to="/landing" className="flex items-center gap-2.5"><span className="globe-orb size-5" aria-hidden /><span className="about-wordmark">Perpetuity</span></Link>
@@ -192,11 +192,10 @@ function AboutPage() {
   );
 }
 
-function BusinessBackdrop({ selection, blend }: { selection: BackgroundSelection; blend: number }) {
+function BusinessBackdrop({ selection }: { selection: BackgroundSelection }) {
   return (
     <div className="about-business-backdrop" aria-hidden="true">
-      <AboutBackgroundMedia version={selection.day} period="day" active={blend < 1} />
-      <AboutBackgroundMedia version={selection.night} period="night" active={blend > 0} />
+      <AboutBackgroundMedia version={selection} period="day" active />
       <div className="about-business-veil" />
     </div>
   );
