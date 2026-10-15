@@ -111,6 +111,9 @@ function DashboardPage() {
 
         <main className="flex-1 px-5 pb-36 pt-6 lg:pl-20 lg:pr-8 xl:pr-12">
           <div className="mx-auto max-w-7xl animate-fade-in-up">
+            <div className="dashboard-time-band">
+              <AboutTimeBand now={now} />
+            </div>
             {/* Header */}
             <header className="mb-5">
               <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/40">
@@ -130,10 +133,6 @@ function DashboardPage() {
               </p>
               <RefreshPill />
             </header>
-
-            <div className="dashboard-time-band">
-              <AboutTimeBand now={now} />
-            </div>
 
             {/* Trip card — compact */}
             <div className="glass-panel group mb-6 flex items-center justify-between gap-4 rounded-2xl px-4 py-3.5">
