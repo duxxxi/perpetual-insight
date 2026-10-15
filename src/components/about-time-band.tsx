@@ -22,7 +22,6 @@ export function AboutTimeBand({ now, workspace = false }: { now: Date | null; wo
   const localTime = now ? new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(now) : "—:—";
   if (workspace) return <div className="workspace-clock-header">
     <div className="workspace-markets">
-      <p className="about-markets-label">World markets</p>
       <div className="about-exchanges" aria-label="Stock exchange clocks">
         <div className="about-exchange-row">
           {WORKSPACE_EXCHANGES.map(exchange => {

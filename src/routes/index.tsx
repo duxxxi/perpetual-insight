@@ -104,7 +104,7 @@ function DashboardPage() {
       <div className="flex">
         <AppSidebar active="home" />
 
-        <main className="flex-1 px-5 pb-36 pt-2 lg:pl-20 lg:pr-8 xl:pr-12">
+        <main className="flex-1 px-5 pb-36 pt-1 lg:pl-20 lg:pr-8 xl:pr-12">
           <div className="mx-auto max-w-7xl animate-fade-in-up">
             <div className="dashboard-time-band">
               <span className="dashboard-wordmark">PERPETUITY</span>
