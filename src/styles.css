@@ -726,7 +726,20 @@
   --chat-on: oklch(0.75 0.13 162);
   --chat-shadow: 0 16px 56px -18px oklch(0.06 0 0 / 0.65), inset 0 1px 0 var(--chat-rim);
 }
-.latest-dashboard { --background: oklch(0.963 0.007 85); letter-spacing: 0; }
+.latest-dashboard {
+  --background: oklch(0.985 0.002 250);
+  --glass-surface: oklch(1 0 0 / 0.52);
+  --glass-surface-strong: oklch(1 0 0 / 0.72);
+  --glass-hairline: oklch(0.45 0.012 250 / 0.06);
+  --dashboard-canvas: linear-gradient(125deg, oklch(0.997 0.001 250), oklch(0.963 0.005 250) 48%, oklch(0.991 0.001 250) 78%, oklch(0.972 0.004 250));
+  background: var(--dashboard-canvas);
+  letter-spacing: 0;
+}
+.dark .latest-dashboard {
+  --glass-surface: oklch(0.22 0.015 250 / 0.52);
+  --glass-surface-strong: oklch(0.24 0.015 250 / 0.72);
+  --dashboard-canvas: linear-gradient(125deg, oklch(0.16 0.008 250), oklch(0.19 0.008 250), oklch(0.14 0.008 250));
+}
 .dark .latest-dashboard { --background: oklch(0.16 0.012 255); }
 .latest-dashboard :where(h1, p, button) { letter-spacing: 0; }
 .perpetuity-dock-wrap { position: fixed; left: 50%; bottom: 58px; transform: translateX(-50%); z-index: 45; width: min(600px, calc(100% - 36px)); color: var(--foreground); letter-spacing: 0; }
@@ -804,15 +817,17 @@
   --about-on-glow: color-mix(in oklab, var(--chat-on) 35%, transparent);
   margin: 0 0 24px;
 }
-.dashboard-time-band .about-time-band { --about-time-width: 224px; --about-time-height: 118px; max-width: none; margin: 0; padding: 0; align-items: center; }
-.dashboard-time-band .about-exchanges, .dashboard-time-band .about-horizon { background: var(--chat-sheen), var(--about-time-fill); border-radius: 16px; padding: 9px 12px; }
+.dashboard-time-band .about-time-band { --about-time-width: 190px; --about-time-height: 100px; position: static; inset: auto; pointer-events: auto; max-width: none; margin: 0; padding: 0; align-items: center; }
+.dashboard-time-band .about-exchanges, .dashboard-time-band .about-horizon { background: var(--chat-sheen), var(--about-time-fill); border-radius: 12px; padding: 7px 10px; }
 .dashboard-time-band .about-exchange-row { gap: 8px; justify-content: space-between; }
-.dashboard-time-band .about-exchange { width: 58px; gap: 2px; }
-.dashboard-time-band .about-clock-face { width: 32px; height: 32px; margin-bottom: 1px; }
-.dashboard-time-band .about-markets-label { margin-bottom: 5px; }
-.dashboard-time-band .about-clock-time { font-size: 10px; }
-.dashboard-time-band .about-horizon-dial { height: 44px; margin: 0; }
-.dashboard-time-band .about-always-on { margin-top: 5px; padding-top: 5px; }
+.dashboard-time-band .about-exchange { width: 50px; gap: 1px; }
+.dashboard-time-band .about-clock-face { width: 25px; height: 25px; margin-bottom: 1px; }
+.dashboard-time-band .about-markets-label { margin-bottom: 4px; }
+.dashboard-time-band .about-clock-city { font-size: 9px; }
+.dashboard-time-band .about-clock-time { font-size: 9px; }
+.dashboard-time-band .about-clock-status { font-size: 7px; }
+.dashboard-time-band .about-horizon-dial { height: 32px; margin: 0; }
+.dashboard-time-band .about-always-on { margin-top: 4px; padding-top: 4px; font-size: 8px; }
 @media (max-width: 639px) {
   .dashboard-time-band .about-time-band { gap: 8px; flex-direction: row; }
   .dashboard-time-band .about-exchanges { flex: 1 1 56%; min-width: 0; width: auto; padding-inline: 8px; }
