@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Smooth About's local dawn/dusk transitions; add Perpetuity ON and a subtle nighttime cursor glow; verify time states and interactions.
+- [x] Smooth About's local dawn/dusk transitions; add Perpetuity ON and a subtle nighttime cursor glow; verify time states and interactions.
 
 - [x] Refine World markets label and horizon geometry; synchronize evening moon, new night skyline and all page controls.
 
