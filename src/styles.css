@@ -706,6 +706,11 @@
   .about-section-title { font-size: 25px; }
   .about-wordmark { font-size: 10px; }
 }
+@media (max-width: 479px) {
+  .about-time-band { --about-time-width: 100%; }
+  .about-time-band .about-clock-city { font-size: 10px; }
+  .about-time-band .about-clock-status { font-size: 8px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .about-business-image, .about-business-veil, .about-painted { animation: none; transition: none; }
   .about-painted .globe-orb { animation: none; }

@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Compact About's four-market clocks and horizon, verify time-driven marker motion, and add the uploaded day/night pair to comparison.
+- [x] Compact About's four-market clocks and horizon, verify time-driven marker motion, and add uploaded and newly generated day/night pairs to comparison.
 
 - [x] Simplify dashboard time header: local time/ON left, centered four-market clocks right with external label; verify layout and sessions.
 
