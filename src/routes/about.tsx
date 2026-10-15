@@ -10,6 +10,7 @@ import elenaPortrait from "@/assets/team/placeholder-elena.jpg";
 import martinPortrait from "@/assets/team/placeholder-martin.jpg";
 import leilaPortrait from "@/assets/team/placeholder-leila.jpg";
 import { PaintedTerminal, PaintedLandingFeatures, PaintedVideoCoda } from "@/components/painted-landing-features";
+import { CommodityTicker } from "@/components/app-shell";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -102,6 +103,7 @@ function AboutPage() {
 
   return (
     <div data-period={period} className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
+      <CommodityTicker />
       <section className="about-painted-hero relative isolate">
         <BusinessBackdrop />
         <header className="mx-auto max-w-6xl px-5 pt-3 lg:px-8">
