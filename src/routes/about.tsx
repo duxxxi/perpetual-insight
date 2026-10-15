@@ -10,7 +10,7 @@ import leilaPortrait from "@/assets/team/placeholder-leila.jpg";
 import { PaintedTerminal, PaintedLandingFeatures, PaintedVideoCoda } from "@/components/painted-landing-features";
 import { CommodityTicker } from "@/components/app-shell";
 import { AboutTimeBand } from "@/components/about-time-band";
-import { AboutBackgroundComparison, backgroundOptions, type BackgroundSelection } from "@/components/about-background-comparison";
+import { AboutBackgroundComparison, AboutBackgroundMedia, type BackgroundSelection } from "@/components/about-background-comparison";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -88,7 +88,7 @@ const team = [
 
 function AboutPage() {
   const [active, setActive] = useState(0);
-  const [backgrounds, setBackgrounds] = useState<BackgroundSelection>({ day: "original", night: "original" });
+  const [backgrounds, setBackgrounds] = useState<BackgroundSelection>({ day: "park", night: "skyline" });
   const [period, setPeriod] = useState<"day" | "night">("day");
   const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
@@ -116,7 +116,7 @@ function AboutPage() {
     <div data-period={period} style={appearance} className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
       <CommodityTicker />
       <section className="about-painted-hero relative isolate">
-        <BusinessBackdrop selection={backgrounds} />
+        <BusinessBackdrop selection={backgrounds} blend={blend} />
         <header className="mx-auto max-w-6xl px-5 pt-3 lg:px-8">
           <div className="about-nav flex items-center justify-between gap-3 rounded-2xl px-3 py-2">
           <Link to="/landing" className="flex items-center gap-2.5"><span className="globe-orb size-5" aria-hidden /><span className="about-wordmark">Perpetuity</span></Link>
@@ -134,7 +134,7 @@ function AboutPage() {
 
         <div id="story" className="mx-auto max-w-3xl px-5 pb-8 pt-10 text-center md:pt-12">
           <p className="about-eyebrow">Intelligence team operational · monitoring worldwide</p>
-          <h1 className="about-headline mt-4">Perpetuity<span className="mt-3 block italic">Your Intelligence Team.<br />Always On.</span></h1>
+          <h1 className="about-headline mt-4">Perpetuity<span className="mt-3 block italic">Your Intelligence Team.<br />Always <span className="about-headline-on">On</span>.</span></h1>
           <p className="mx-auto mt-4 max-w-lg text-[14px] leading-[1.8] text-muted-foreground">Perpetuity connects your world, then puts agents to work. Opportunities found, outreach drafted, risks flagged, deals planned. You command. It executes.</p>
           <div className="mt-5 flex justify-center gap-2"><Button asChild className="h-9 rounded-full px-4 text-[12px]"><a href="mailto:hello@perpetuity.works">Book a demo <ArrowUpRight /></a></Button><Button asChild variant="outline" className="h-9 rounded-full bg-card px-4 text-[12px]"><a href="#platform">See the platform <ArrowDown /></a></Button></div>
           <p className="mt-3 text-[10px] text-muted-foreground">180+ countries · 24/7 surveillance · 50K+ active tenders</p>
@@ -188,11 +188,11 @@ function AboutPage() {
   );
 }
 
-function BusinessBackdrop({ selection }: { selection: BackgroundSelection }) {
+function BusinessBackdrop({ selection, blend }: { selection: BackgroundSelection; blend: number }) {
   return (
     <div className="about-business-backdrop" aria-hidden="true">
-      <img src={backgroundOptions.day[selection.day]} alt="" width={1536} height={768} className="about-business-image about-business-day" />
-      <img src={backgroundOptions.night[selection.night]} alt="" width={1536} height={768} className="about-business-image about-business-night" />
+      <AboutBackgroundMedia version={selection.day} period="day" active={blend < 1} />
+      <AboutBackgroundMedia version={selection.night} period="night" active={blend > 0} />
       <div className="about-business-veil" />
     </div>
   );

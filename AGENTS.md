@@ -12,4 +12,4 @@
 - Feed About's four exchange clocks and horizon from the same second-updating hydrated page clock as its background; use timezone-aware regular-session schedules, not claims of live holiday-aware exchange status, so the marker advances with local time.
 - Drive About's skyline and semantic palette blend from one browser-safe local-time function; use page-scoped native cursor assets for fine pointers with standard cursor fallbacks to avoid tracking lag and preserve interaction cues.
 - Share public landing feature copy and demonstration data through a browser-safe content module; this keeps the original landing and painted presentation aligned without duplicating claims.
-- Keep About background comparison choices in page-session state with independently selectable day/night assets; comparison must not override its local-time clock or alter the original landing page.
+- Keep About background comparison choices in page-session state with independently selectable day/night image or CDN video assets; share media rendering, pause hidden/reduced-motion videos, and preserve the local-time clock and original landing page.
