@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Rebuild About's hero as a dictionary entry (headword, pronunciation, Oxford definition, tagline) and remove the yellow night cursor; verify contrast in day and night.
+
 - [x] Make About's commodity ticker a dark glass band with light text so it stays readable over the painted backgrounds; keep the dashboard ticker light.
 
 - [x] Add uploaded looping hero videos to About's background comparison and make headline “On” green; verify playback and selection.
