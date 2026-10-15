@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Quiet About's dictionary lines to grey, widen the gaps around the tagline, and wrap the intro paragraph to two lines; verify day, night and phone.
+
 - [x] Tighten the spacing between About's dictionary lines and set the tagline in the headword's metallic uppercase face; verify day, night and phone layouts.
 
 - [x] Rebuild About's hero as a dictionary entry (headword, pronunciation, Oxford definition, tagline) and remove the yellow night cursor; verify contrast in day and night.
