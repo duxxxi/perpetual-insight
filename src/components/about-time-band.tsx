@@ -1,4 +1,4 @@
-import { EXCHANGES, exchangeClock, horizonProgress, horizonPoint } from "@/lib/exchange-clock";
+import { EXCHANGES, WORKSPACE_EXCHANGES, exchangeClock, horizonProgress, horizonPoint } from "@/lib/exchange-clock";
 import { dayPeriod, timeOfDay } from "@/lib/day-period";
 
 function ClockFace({ hour, minute }: { hour: number; minute: number }) {
@@ -14,12 +14,35 @@ function ClockFace({ hour, minute }: { hour: number; minute: number }) {
   </svg>;
 }
 
-export function AboutTimeBand({ now }: { now: Date | null }) {
+export function AboutTimeBand({ now, workspace = false }: { now: Date | null; workspace?: boolean }) {
   const period = now ? dayPeriod(now) : "day";
   const t = now ? horizonProgress(now) : 0.5;
   const { x, y } = horizonPoint(t);
   const label = now ? timeOfDay(now) : "Day";
   const localTime = now ? new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(now) : "—:—";
+  if (workspace) return <div className="workspace-clock-header">
+    <div className="workspace-local-clock">
+      <span className="workspace-local-label">Local time</span>
+      <time className="workspace-local-time">{localTime}</time>
+      <div className="about-always-on"><span>Perpetuity</span><span className="about-on-state"><span className="about-on-light" aria-hidden="true" />ON</span></div>
+    </div>
+    <div className="workspace-markets">
+      <p className="about-markets-label">World markets</p>
+      <div className="about-exchanges" aria-label="Stock exchange clocks">
+        <div className="about-exchange-row">
+          {WORKSPACE_EXCHANGES.map(exchange => {
+            const clock = now ? exchangeClock(now, exchange) : null;
+            return <div key={exchange.code} className="about-exchange" title={`${exchange.code} · regular weekday schedule, excluding exchange holidays. Hours shown in exchange-local time.`}>
+              <ClockFace hour={clock?.hour ?? 12} minute={clock?.minute ?? 0} />
+              <span className="about-clock-city">{exchange.city}</span>
+              <time className="about-clock-time">{clock?.label ?? "—:—"}</time>
+              <span className="about-clock-status"><span className="about-session-dot" data-open={clock?.open ?? false} />{clock?.status ?? exchange.code}</span>
+            </div>;
+          })}
+        </div>
+      </div>
+    </div>
+  </div>;
   return <div className="about-time-band">
     <div className="about-exchanges" aria-label="Stock exchange clocks">
       <p className="about-markets-label">World markets</p>
