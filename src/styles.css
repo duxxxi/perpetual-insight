@@ -824,9 +824,6 @@
 .dashboard-time-band .about-clock-time { font-size: 10px; color: var(--foreground); }
 .dashboard-time-band .about-clock-status { font-size: 8px; }
 .dashboard-date-line time { font-variant-numeric: tabular-nums; }
-@media (max-width: 1100px) {
-  .dashboard-wordmark { left: 0; transform: translateY(-50%); width: calc(100% - 280px); text-align: center; }
-}
 @media (max-width: 639px) {
   .dashboard-wordmark { position: static; display: block; width: 100%; transform: none; text-align: center; margin-bottom: 9px; }
   .workspace-markets { width: 250px; }
