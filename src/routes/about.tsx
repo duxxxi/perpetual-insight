@@ -88,7 +88,7 @@ const team = [
 
 function AboutPage() {
   const [active, setActive] = useState(0);
-  const [backgrounds, setBackgrounds] = useState<BackgroundSelection>({ day: "park", night: "skyline" });
+  const [backgrounds, setBackgrounds] = useState<BackgroundSelection>("skyline");
   const [period, setPeriod] = useState<"day" | "night">("day");
   const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
@@ -192,11 +192,10 @@ function AboutPage() {
   );
 }
 
-function BusinessBackdrop({ selection, blend }: { selection: BackgroundSelection; blend: number }) {
+function BusinessBackdrop({ selection }: { selection: BackgroundSelection }) {
   return (
     <div className="about-business-backdrop" aria-hidden="true">
-      <AboutBackgroundMedia version={selection.day} period="day" active={blend < 1} />
-      <AboutBackgroundMedia version={selection.night} period="night" active={blend > 0} />
+      <AboutBackgroundMedia version={selection} period="day" active />
       <div className="about-business-veil" />
     </div>
   );
