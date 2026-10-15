@@ -624,6 +624,7 @@
 .about-eyebrow { font-family: var(--font-mono); font-size: 9px; font-weight: 500; text-transform: uppercase; color: var(--muted-foreground); }
 .about-headline { font-family: var(--font-serif); font-size: 42px; font-weight: 400; line-height: 1.12; }
 .about-headline > span { font-size: 32px; line-height: 1.2; }
+.about-headline-on { color: var(--about-session); }
 .about-work-window { background: var(--about-window-fill); border: 1px solid var(--border); box-shadow: var(--about-shadow); backdrop-filter: blur(24px); }
 .about-section-title { font-family: var(--font-serif); font-size: 30px; font-weight: 400; line-height: 1.3; }
 .about-principles { background: color-mix(in oklab, var(--card) 75%, var(--about-nav-fill)); }
@@ -631,6 +632,7 @@
 .about-business-backdrop { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
 .about-business-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; transform: scale(1.035); animation: about-city-drift 32s ease-in-out infinite alternate; transition: opacity 1.8s ease; }
 .about-business-day { opacity: 1; }
+.about-business-video { animation: none; transform: none; }
 .about-business-night { opacity: var(--about-night-opacity); }
 .about-business-veil { position: absolute; inset: 0; background: var(--about-veil); transition: background 1.8s ease; }
 .about-time-band { --about-time-width: 244px; --about-time-height: 128px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; max-width: 1152px; margin: 20px auto -16px; padding: 0 24px; }
