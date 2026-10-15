@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Add uploaded looping hero videos to About's background comparison and make headline “On” green; verify playback and selection.
+- [x] Add uploaded looping hero videos to About's background comparison and make headline “On” green; verify playback and selection.
 
 - [x] Compact About's four-market clocks and horizon, verify time-driven marker motion, and add uploaded and newly generated day/night pairs to comparison.
 
