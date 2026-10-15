@@ -116,7 +116,7 @@ function AboutPage() {
     <div data-period={period} style={appearance} className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
       <CommodityTicker tone="dark" />
       <section className="about-painted-hero relative isolate">
-        <BusinessBackdrop selection={backgrounds} blend={blend} />
+        <BusinessBackdrop selection={backgrounds} />
         <header className="mx-auto max-w-6xl px-5 pt-3 lg:px-8">
           <div className="about-nav flex items-center justify-between gap-3 rounded-2xl px-3 py-2">
           <Link to="/landing" className="flex items-center gap-2.5"><span className="globe-orb size-5" aria-hidden /><span className="about-wordmark">Perpetuity</span></Link>
