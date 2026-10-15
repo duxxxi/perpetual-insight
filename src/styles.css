@@ -805,11 +805,15 @@
   --about-session: var(--chat-on);
   --about-on-glow: color-mix(in oklab, var(--chat-on) 35%, transparent);
   position: relative;
-  margin: 0 0 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin: 0 0 20px;
 }
-.dashboard-wordmark { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-family: var(--font-mono); font-size: 10px; font-weight: 500; color: var(--muted-foreground); }
-.workspace-clock-header { display: flex; justify-content: flex-end; align-items: center; }
-.workspace-markets { width: 260px; min-width: 0; }
+.dashboard-wordmark { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.34em; text-indent: 0.34em; color: var(--muted-foreground); }
+.workspace-clock-header { display: flex; justify-content: center; align-items: center; }
+.workspace-markets { width: 320px; min-width: 0; }
 .dashboard-time-band .about-exchanges { width: 100%; height: auto; flex: none; background: none; border: 0; border-radius: 0; box-shadow: none; backdrop-filter: none; padding: 0; }
 .dashboard-time-band .about-exchange-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
 .dashboard-time-band .about-exchange { display: flex; flex-direction: column; align-items: center; width: auto; min-width: 0; gap: 1px; text-align: center; }
@@ -825,8 +829,8 @@
 .dashboard-time-band .about-clock-status { font-size: 8px; }
 .dashboard-date-line time { font-variant-numeric: tabular-nums; }
 @media (max-width: 639px) {
-  .dashboard-wordmark { position: static; display: block; width: 100%; transform: none; text-align: center; margin-bottom: 9px; }
-  .workspace-markets { width: 250px; }
+  .dashboard-wordmark { margin-bottom: 3px; }
+  .workspace-markets { width: 262px; }
   .dashboard-time-band .about-exchanges { padding: 0; }
   .dashboard-time-band .about-exchange-row { gap: 2px; }
   .dashboard-time-band .about-clock-face { width: 28px; height: 28px; }
