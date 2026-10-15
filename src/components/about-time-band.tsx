@@ -1,0 +1,47 @@
+import { EXCHANGES, exchangeClock, horizonProgress } from "@/lib/exchange-clock";
+import { dayPeriod } from "@/lib/day-period";
+
+function ClockFace({ hour, minute }: { hour: number; minute: number }) {
+  const end = (angle: number, length: number) => ({ x: 24 + Math.sin(angle) * length, y: 24 - Math.cos(angle) * length });
+  const hourEnd = end(((hour % 12) + minute / 60) * Math.PI / 6, 10);
+  const minuteEnd = end(minute * Math.PI / 30, 15);
+  return <svg viewBox="0 0 48 48" className="about-clock-face" aria-hidden="true">
+    <circle cx="24" cy="24" r="22" className="about-clock-rim" />
+    {Array.from({ length: 12 }, (_, index) => <line key={index} x1="24" y1="5" x2="24" y2={index % 3 === 0 ? 8 : 6.5} transform={`rotate(${index * 30} 24 24)`} className="about-clock-tick" />)}
+    <line x1="24" y1="24" x2={hourEnd.x} y2={hourEnd.y} className="about-clock-hour" />
+    <line x1="24" y1="24" x2={minuteEnd.x} y2={minuteEnd.y} className="about-clock-minute" />
+    <circle cx="24" cy="24" r="1.8" fill="currentColor" />
+  </svg>;
+}
+
+export function AboutTimeBand({ now }: { now: Date | null }) {
+  const period = now ? dayPeriod(now) : "day";
+  const t = now ? horizonProgress(now) : 0.5;
+  const x = 14 + 132 * t;
+  const y = 49 - 37 * Math.sin(Math.PI * t);
+  const localTime = now ? new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(now) : "—:—";
+  return <div className="about-time-band">
+    <div className="about-exchanges" aria-label="Stock exchange clocks">
+      {EXCHANGES.map(exchange => {
+        const clock = now ? exchangeClock(now, exchange) : null;
+        return <div key={exchange.code} className="about-exchange" title={`${exchange.code} · regular weekday schedule, excluding exchange holidays. Hours shown in exchange-local time.`}>
+          <ClockFace hour={clock?.hour ?? 12} minute={clock?.minute ?? 0} />
+          <span className="about-clock-city">{exchange.city}</span>
+          <time className="about-clock-time">{clock?.label ?? "—:—"}</time>
+          <span className="about-clock-status"><span className="about-session-dot" data-open={clock?.open ?? false} />{clock?.status ?? exchange.code}</span>
+        </div>;
+      })}
+    </div>
+    <div className="about-horizon" role="img" aria-label={`Local ${period === "day" ? "sun" : "moon"} horizon, ${localTime}. Day 07:00–19:00; night 19:00–07:00.`} title="Your local time · day 07:00–19:00 · night 19:00–07:00">
+      <div className="about-horizon-label"><span>{period === "day" ? "Daylight" : "Nightfall"}</span><time>{localTime}</time></div>
+      <svg viewBox="0 0 160 64" className="about-horizon-dial" aria-hidden="true">
+        <path d="M14 49 C14 0 146 0 146 49" className="about-horizon-track" />
+        <path d="M4 50 Q80 47 156 50" className="about-horizon-line" />
+        <g transform={`translate(${x} ${y})`} className={period === "day" ? "about-sun" : "about-moon"}>
+          {period === "day" ? <><circle r="5" fill="currentColor" />{Array.from({ length: 8 }, (_, index) => <line key={index} x1="0" y1="-8" x2="0" y2="-10" transform={`rotate(${index * 45})`} stroke="currentColor" strokeWidth="1" strokeLinecap="round" />)}</> : <path d="M0 -7 A7 7 0 0 0 0 7 Z" fill="currentColor" />}
+        </g>
+      </svg>
+      <div className="about-horizon-times"><span>{period === "day" ? "07:00" : "19:00"}</span><span>Local time</span><span>{period === "day" ? "19:00" : "07:00"}</span></div>
+    </div>
+  </div>;
+}
