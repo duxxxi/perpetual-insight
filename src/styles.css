@@ -697,7 +697,7 @@
   font-family: var(--font-serif);
   font-size: 10px;
   font-style: italic;
-  color: color-mix(in oklab, var(--muted-foreground) 26%, var(--foreground));
+  color: color-mix(in oklab, var(--foreground) 86%, var(--muted-foreground));
   opacity: 1;
 }
 .about-entry-tagline {
