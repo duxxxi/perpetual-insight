@@ -606,6 +606,25 @@
 .about-painted { transition: background-color 1.8s ease, color 1.8s ease; }
 .about-painted :where(h1, h2, h3, p, span, a, button) { letter-spacing: 0; }
 .about-trusted-track { animation: ticker-scroll 65s linear infinite; }
+
+/* Painted public pages carry a dark glass ticker band; workspace pages keep the light one. */
+.commodity-ticker--dark {
+  --foreground: oklch(0.96 0.008 250);
+}
+.commodity-ticker--dark .glass-panel-strong {
+  background:
+    linear-gradient(160deg, rgba(214, 230, 255, 0.07) 0%, rgba(214, 230, 255, 0) 45%, rgba(120, 150, 190, 0.05) 100%),
+    color-mix(in oklab, oklch(0.16 0.02 255) 80%, transparent);
+  border-color: rgba(198, 218, 245, 0.16);
+  box-shadow:
+    0 1px 0 0 rgba(214, 230, 255, 0.07),
+    0 18px 52px -26px rgba(3, 6, 12, 0.6),
+    inset 0 1px 0 0 rgba(214, 230, 255, 0.14);
+}
+.commodity-ticker--dark .ai-iridescent {
+  background: linear-gradient(115deg, rgba(125, 180, 255, 0.16), rgba(150, 200, 255, 0.08), rgba(190, 165, 255, 0.12), rgba(125, 180, 255, 0.16));
+  background-size: 300% 300%;
+}
 .about-video-coda {
   --background: oklch(0.17 0.015 255);
   --foreground: oklch(0.98 0.008 250);

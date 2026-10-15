@@ -114,7 +114,7 @@ function AboutPage() {
 
   return (
     <div data-period={period} style={appearance} className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
-      <CommodityTicker />
+      <CommodityTicker tone="dark" />
       <section className="about-painted-hero relative isolate">
         <BusinessBackdrop selection={backgrounds} blend={blend} />
         <header className="mx-auto max-w-6xl px-5 pt-3 lg:px-8">
