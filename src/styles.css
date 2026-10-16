@@ -1020,4 +1020,8 @@
 .workspace-canvas .morning-brief-pill:hover { background: color-mix(in oklab, var(--brief-pink) 17%, var(--glass-surface-strong)); }
 
 /* Soft progressive blur where content scrolls beneath the Ask dock */
+.workspace-canvas { --workspace-bottom-clearance: calc(220px + env(safe-area-inset-bottom, 0px)); }
+/* All workspace layouts, including dashboard and Threads, share trailing room.
+   The final row can scroll fully above both the dock and the blur's upper edge. */
+.workspace-canvas main { padding-bottom: var(--workspace-bottom-clearance); scroll-padding-bottom: var(--workspace-bottom-clearance); }
 .workspace-canvas::after { content: ""; position: fixed; inset: auto 0 44px 0; height: 120px; z-index: 40; pointer-events: none; backdrop-filter: blur(10px); mask-image: linear-gradient(to top, black 30%, transparent); background: linear-gradient(to top, color-mix(in oklab, var(--background) 55%, transparent), transparent); }
