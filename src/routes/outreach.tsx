@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Sparkles,
-  Send,
   Mail,
   Linkedin,
   MessageCircle,
@@ -347,38 +346,6 @@ function OutreachPage() {
             );
           })}
         </ul>
-      </div>
-
-      {/* Composer */}
-      <div className="mt-6 glass-panel-strong rounded-3xl p-5">
-        <div className="flex items-center gap-2">
-          <div className="ai-iridescent size-7 shrink-0 rounded-full ring-1 ring-foreground/5" aria-hidden />
-          <p className="text-[13px] text-foreground/70">
-            Ask Perpetuity to compose: <span className="text-foreground/90">"Warm-up the Klaipeda forwarders before Thursday."</span>
-          </p>
-          <button
-            type="button"
-            onClick={() =>
-              open({
-                title: "Warm-up · Klaipeda forwarders",
-                eyebrow: "Compose with Perpetuity",
-                why: "Six freight forwarders on the Klaipeda lane. You haven't touched four of them since April. A short pre-Thursday note keeps capacity options open.",
-                steps: [
-                  "Perpetuity drafts 6 personalized notes from prior threads",
-                  "You skim, edit one, approve all",
-                  "Replies auto-route into the Ops thread bucket",
-                ],
-                actions: [
-                  { label: "Draft now", primary: true },
-                  { label: "Pick different audience" },
-                ],
-              })
-            }
-            className="ml-auto inline-flex size-8 items-center justify-center rounded-xl bg-accent/15 text-accent ring-1 ring-accent/25 hover:opacity-90"
-          >
-            <Send className="size-3.5" />
-          </button>
-        </div>
       </div>
 
       {panel}
