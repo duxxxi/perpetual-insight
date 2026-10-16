@@ -1,5 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import {
   Home,
   MessagesSquare,
@@ -13,16 +12,10 @@ import {
   Plug,
   Settings,
   Plus,
-  ArrowUp,
-  Sparkles,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { openPerpetuityDock } from "@/components/ask-perpetuity-dock";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 /* ---------- Ambient background wash ---------- */
 export function AmbientBackground() {
@@ -186,108 +179,24 @@ export function AppSidebar({ active }: { active: SidebarKey }) {
   );
 }
 
-/* ---------- Ask Perpetuity (new conversation or task) ---------- */
-import { taskStore } from "@/lib/task-store";
-
+/* ---------- Shared conversation launcher ---------- */
 function AskPerpetuityButton() {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
-  const [mode, setMode] = useState<"chat" | "task">("chat");
-  const navigate = useNavigate();
-
-  const submit = (e?: React.FormEvent) => {
-    e?.preventDefault();
-    if (!value.trim()) return;
-    if (mode === "task") {
-      taskStore.add({ title: value.trim(), tag: "New" });
-    }
-    setOpen(false);
-    setValue("");
-    setTimeout(() => {
-      navigate({ to: mode === "task" ? "/assignments" : "/threads" });
-    }, 60);
-  };
-
   return (
-    <>
-      <button
-        type="button"
-        title="New conversation or task"
-        onClick={openPerpetuityDock}
-        className="group relative mt-1 flex size-8 items-center justify-center rounded-full glass-chip text-foreground/80 transition-all hover:text-foreground hover:shadow-[0_0_22px_-8px_rgba(10,15,25,0.4)]"
-      >
-        <Plus className="size-[16px]" strokeWidth={2} />
-        <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-background/90 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-foreground shadow-lg ring-1 ring-foreground/10 backdrop-blur-md opacity-0 transition-opacity group-hover:opacity-100">
-          New
-        </span>
-      </button>
-
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-2xl gap-0 border-foreground/10 bg-background/85 p-0 backdrop-blur-2xl sm:rounded-2xl">
-          <DialogTitle className="sr-only">Ask Perpetuity</DialogTitle>
-          <div className="relative overflow-hidden rounded-2xl">
-            <div className="ai-iridescent absolute inset-x-0 top-0 h-px opacity-70" aria-hidden />
-            <div className="flex items-center justify-between gap-2 px-4 pt-4">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex size-6 items-center justify-center rounded-full glass-chip text-foreground/75">
-                  <Sparkles className="size-3" strokeWidth={1.75} />
-                </span>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-foreground/50">
-                  Ask Perpetuity
-                </p>
-              </div>
-              <div className="glass-panel flex items-center gap-0.5 rounded-full p-0.5">
-                {(["chat", "task"] as const).map((m) => (
-                  <button
-                    key={m}
-                    type="button"
-                    onClick={() => setMode(m)}
-                    className={`rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] transition-colors ${
-                      mode === m ? "glass-panel-strong text-foreground" : "text-foreground/55 hover:text-foreground"
-                    }`}
-                  >
-                    {m === "chat" ? "Conversation" : "Task"}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <form onSubmit={submit} className="px-4 pb-4 pt-2">
-              <textarea
-                autoFocus
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) submit();
-                }}
-                placeholder={
-                  mode === "task"
-                    ? "Describe the task… (lands in Assignments + Active Work)"
-                    : "Start a conversation, ask anything…"
-                }
-                rows={3}
-                className="w-full resize-none bg-transparent font-sans text-lg font-medium leading-snug tracking-tight text-foreground placeholder:text-foreground/30 focus:outline-none"
-              />
-              <div className="mt-2 flex items-center justify-between border-t border-foreground/5 pt-2">
-                <p className="text-[10px] uppercase tracking-[0.18em] text-foreground/40">
-                  ⌘ + ⏎ · {mode === "task" ? "creates task" : "opens thread"}
-                </p>
-                <button
-                  type="submit"
-                  disabled={!value.trim()}
-                  className="inline-flex h-7 items-center gap-1.5 rounded-full glass-chip px-3 text-[11px] font-medium text-foreground/85 transition-all hover:text-foreground disabled:opacity-40"
-                >
-                  {mode === "task" ? "Create" : "Send"}
-                  <ArrowUp className="size-3" strokeWidth={2} />
-                </button>
-              </div>
-            </form>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
+    <Button
+      variant="ghost"
+      size="icon"
+      title="New conversation or task"
+      aria-label="Open Ask Perpetuity from sidebar"
+      onClick={openPerpetuityDock}
+      className="group relative mt-1 size-8 rounded-full glass-chip text-foreground/80 hover:text-foreground"
+    >
+      <Plus className="size-[16px]" strokeWidth={2} />
+      <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-md bg-background/90 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-foreground shadow-lg ring-1 ring-foreground/10 backdrop-blur-md opacity-0 transition-opacity group-hover:opacity-100">
+        New
+      </span>
+    </Button>
   );
 }
-
 
 /* ---------- Footer ---------- */
 export function AppFooter() {

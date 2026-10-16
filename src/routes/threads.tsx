@@ -5,7 +5,6 @@ import {
   Filter,
   Star,
   Paperclip,
-  ArrowUp,
   Sparkles,
   Reply,
   Archive,
@@ -723,37 +722,7 @@ function ThreadDetail({
         )}
       </div>
 
-      {/* Composer */}
-      <div className="border-t border-foreground/5 p-4">
-        <div className="glass-panel rounded-2xl p-3">
-          <div className="flex items-center gap-2">
-            <div className="ai-iridescent size-6 shrink-0 rounded-full ring-1 ring-foreground/5" aria-hidden />
-            <input
-              type="text"
-              placeholder="Ask Perpetuity to take it further…"
-              className="flex-1 bg-transparent text-sm placeholder:text-foreground/40 focus:outline-none"
-            />
-            <button
-              type="button"
-              onClick={() =>
-                open({
-                  title: `Continue · ${thread.title}`,
-                  eyebrow: "Ask Perpetuity",
-                  why: "Drop a follow-up question or instruction. Perpetuity already has this thread, the linked docs, and the counterparty profile loaded.",
-                  steps: [
-                    "Compose your follow-up",
-                    "Perpetuity drafts a response with sources",
-                    "You approve, edit, or send straight through",
-                  ],
-                })
-              }
-              className="inline-flex size-8 items-center justify-center rounded-xl bg-accent/15 text-accent ring-1 ring-accent/25 transition-transform hover:scale-105"
-            >
-              <ArrowUp className="size-4" />
-            </button>
-          </div>
-        </div>
-      </div>
+
     </div>
   );
 }

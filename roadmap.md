@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Add trailing scroll clearance on all workspace pages and remove duplicate legacy Ask Perpetuity composers; verify bottom content and shared chat.
+
 - [x] Quiet About's dictionary lines to grey, widen the gaps around the tagline, and wrap the intro paragraph to two lines; verify day, night and phone.
 
 - [x] Tighten the spacing between About's dictionary lines and set the tagline in the headword's metallic uppercase face; verify day, night and phone layouts.
