@@ -721,9 +721,7 @@
 .about-painted-coda { overflow: hidden; }
 .about-business-backdrop { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
 .about-business-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; transform: scale(1.035); animation: about-city-drift 32s ease-in-out infinite alternate; transition: opacity 1.8s ease; }
-.about-business-day { opacity: 1; }
 .about-business-video { animation: none; transform: none; }
-.about-business-night { opacity: var(--about-night-opacity); }
 .about-business-veil { position: absolute; inset: 0; background: var(--about-veil); transition: background 1.8s ease; }
 .about-time-band { --about-time-width: 244px; --about-time-height: 128px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; max-width: 1152px; margin: 20px auto -16px; padding: 0 24px; }
 .about-exchanges, .about-horizon { width: var(--about-time-width); height: var(--about-time-height); flex: 0 0 var(--about-time-width); background: var(--about-time-fill); border: 1px solid var(--border); border-top-color: var(--about-time-highlight); box-shadow: var(--about-time-shadow), inset 0 1px 0 var(--about-time-highlight); backdrop-filter: blur(18px) saturate(125%); border-radius: 18px; }
