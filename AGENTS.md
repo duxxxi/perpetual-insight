@@ -9,8 +9,7 @@
 
 - Public company storytelling lives on dedicated routes linked from `/landing`; keep the operational sidebar focused on workspace tools.
 - Scope public About visual tokens to `.about-painted` so its art direction does not alter operational workspace themes.
-- Resolve About's day/night imagery after hydration using viewer-local time, with shared period logic and reduced-motion-aware CSS; this keeps SSR stable and workspace theme settings independent.
-- Feed About's four exchange clocks and horizon from the same second-updating hydrated page clock as its background; use timezone-aware regular-session schedules, not claims of live holiday-aware exchange status, so the marker advances with local time.
-- Drive About's skyline and semantic palette blend from one browser-safe local-time function; use page-scoped native cursor assets for fine pointers with standard cursor fallbacks to avoid tracking lag and preserve interaction cues.
+- Keep About's video and page palette fixed independently of local time and workspace theme; time updates only its exchange clocks and horizon so the public appearance stays stable.
+- Feed About's four exchange clocks and horizon from the same second-updating hydrated page clock; use timezone-aware regular-session schedules, not claims of live holiday-aware exchange status, so the marker advances with local time.
 - Share public landing feature copy and demonstration data through a browser-safe content module; this keeps the original landing and painted presentation aligned without duplicating claims.
-- Keep About background comparison choices in page-session state with independently selectable day/night image or CDN video assets; share media rendering, pause hidden/reduced-motion videos, and preserve the local-time clock and original landing page.
+- Keep About's two video comparison choices in page-session state with one selected video for all times; share media rendering, pause hidden/reduced-motion videos, and preserve the local-time clock and original landing page.
