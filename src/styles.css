@@ -959,7 +959,7 @@
   --glass-surface: oklch(1 0 0 / 0.52);
   --glass-surface-strong: oklch(0.995 0.002 250 / 0.78);
   --glass-hairline: oklch(0.45 0.012 250 / 0.06);
-  --dashboard-canvas: linear-gradient(125deg, oklch(0.965 0.003 250), oklch(0.925 0.005 250) 48%, oklch(0.954 0.003 250) 78%, oklch(0.935 0.004 250));
+  --dashboard-canvas: linear-gradient(180deg, oklch(0.965 0.004 250 / 0.62), oklch(0.93 0.005 250 / 0.56) 45%, oklch(0.95 0.004 250 / 0.6)), url("/__l5e/assets-v1/4deb13ad-d419-4057-83dc-b8cd60d4f691/cement-texture.jpg");
   --sidebar-fill: oklch(0.94 0.022 250 / 0.7);
   --sidebar-rim: oklch(0.8 0.035 250 / 0.36);
   --sidebar-shadow: 0 8px 30px -16px oklch(0.45 0.04 250 / 0.26);
