@@ -41,3 +41,5 @@
 - [x] Drop the dictionary source credit from About's hero and close the gap between the tagline and the intro paragraph; verify spacing and contrast.
 - [x] Try the smooth white plaster wall as the workspace canvas texture; keep the cement texture available to switch back.
 - [x] Add the black concrete texture to the dark workspace background, blended so the grain reads without crushing the graphite tone.
+
+- [x] Prepare a Claude Code production redesign handoff with current visual references, final decisions, prototype boundaries, and acceptance checks.
