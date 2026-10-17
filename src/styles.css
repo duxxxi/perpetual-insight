@@ -824,7 +824,7 @@
 .dark {
   --chat-user: oklch(0.32 0.055 252);
   --chat-user-foreground: oklch(0.96 0.012 250);
-  --chat-fill: oklch(0.3 0.016 252 / 0.4);
+  --chat-fill: oklch(0.33 0.018 252 / 0.74);
   --chat-sheen: linear-gradient(135deg, oklch(0.9 0.015 250 / 0.1), oklch(0.9 0.015 250 / 0.015) 45%, oklch(0.5 0.04 250 / 0.08));
   --greeting-blue: oklch(0.78 0.085 250);
   --chat-rim: oklch(0.91 0.014 250 / 0.18);
@@ -982,20 +982,21 @@
 .dark .workspace-canvas {
   --background: oklch(0.13 0.012 255);
   --card: oklch(0.19 0.015 250 / 0.8);
-  --popover: oklch(0.16 0.015 250 / 0.96);
-  --secondary: oklch(0.25 0.025 245 / 0.74);
-  --muted: oklch(0.22 0.012 250 / 0.7);
+  --popover: oklch(0.26 0.016 250 / 0.97);
+  --secondary: oklch(0.32 0.022 245 / 0.86);
+  --muted: oklch(0.3 0.012 250 / 0.82);
   --border: oklch(0.8 0.016 250 / 0.14);
   --input: oklch(0.8 0.016 250 / 0.18);
-  --glass-surface: oklch(0.19 0.015 250 / 0.52);
-  --glass-surface-strong: oklch(0.21 0.015 250 / 0.78);
+  --glass-surface: oklch(0.33 0.016 250 / 0.76);
+  --glass-surface-strong: oklch(0.36 0.016 250 / 0.9);
   --background: oklch(0.19 0.012 255);
-  --card: oklch(0.25 0.014 252 / 0.78);
-  --glass-surface: oklch(0.26 0.014 252 / 0.52);
-  --glass-surface-strong: oklch(0.28 0.014 252 / 0.76);
+  --card: oklch(0.34 0.014 252 / 0.9);
+  --glass-surface: oklch(0.34 0.016 252 / 0.76);
+  --glass-surface-strong: oklch(0.38 0.016 252 / 0.9);
   --border: oklch(0.85 0.016 250 / 0.16);
+  --muted-foreground: oklch(0.8 0.014 250);
   --dashboard-canvas: radial-gradient(120% 70% at 50% -10%, oklch(0.29 0.014 250 / 0.42), transparent 60%), url("/__l5e/assets-v1/d086b1a0-c7e9-4cc9-8071-0286d937d804/dark-concrete-texture.jpg"), linear-gradient(135deg, oklch(0.145 0.012 250), oklch(0.18 0.014 248) 45%, oklch(0.125 0.012 255));
-  --sidebar-fill: oklch(0.27 0.022 250 / 0.62);
+  --sidebar-fill: oklch(0.32 0.024 250 / 0.84);
   --sidebar-rim: oklch(0.75 0.04 250 / 0.2);
   --clock-fill: oklch(0.3 0.015 250);
   --clock-outline: oklch(0.8 0.02 250 / 0.5);
@@ -1004,6 +1005,19 @@
 .dark .workspace-canvas, .dark .workspace-canvas .min-h-screen { background-blend-mode: normal, screen, normal; }
 .workspace-canvas .paper-ambient { display: none; }
 .workspace-canvas .workspace-sidebar { background: var(--chat-sheen), var(--sidebar-fill); border-color: var(--sidebar-rim); box-shadow: var(--sidebar-shadow), inset 0 1px 0 var(--glass-inset-strong); backdrop-filter: blur(32px) saturate(170%); }
+/* Dark workspace: frosted rather than transparent — denser fill, heavier diffusion */
+.dark .workspace-canvas { --glass-border: rgba(200, 220, 246, 0.18); }
+.dark .workspace-canvas :is(.glass-panel, .glass-panel-strong, .glass-panel-deep, .glass-chip) { backdrop-filter: blur(50px) saturate(195%); }
+.dark .workspace-canvas .workspace-sidebar { backdrop-filter: blur(46px) saturate(200%); }
+.dark .workspace-canvas .perpetuity-dock { backdrop-filter: blur(58px) saturate(205%); }
+.dark .workspace-canvas .perpetuity-chat-sheet { backdrop-filter: blur(44px) saturate(185%); }
+.dark .workspace-canvas .morning-brief-pill { backdrop-filter: blur(32px) saturate(175%); }
+/* Faint labels lose contrast against the lighter frosted fill — lift them in the dark workspace */
+.dark .workspace-canvas :is(.text-foreground\/25, .text-foreground\/30) { color: color-mix(in oklab, var(--color-foreground) 58%, transparent); }
+.dark .workspace-canvas :is(.text-foreground\/35, .text-foreground\/40) { color: color-mix(in oklab, var(--color-foreground) 68%, transparent); }
+.dark .workspace-canvas :is(.text-foreground\/45, .text-foreground\/50) { color: color-mix(in oklab, var(--color-foreground) 75%, transparent); }
+.dark .workspace-canvas :is(.text-foreground\/55, .text-foreground\/60) { color: color-mix(in oklab, var(--color-foreground) 82%, transparent); }
+.dark .workspace-canvas :is(.text-white\/25, .text-white\/30, .text-white\/35, .text-white\/40) { color: color-mix(in oklab, white 68%, transparent); }
 .workspace-canvas [data-tone="attention"] { --pill-tone: var(--pill-attention); }
 .workspace-canvas [data-tone="success"] { --pill-tone: var(--pill-success); }
 .workspace-canvas [data-tone="approval"] { --pill-tone: var(--pill-approval); }
