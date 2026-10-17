@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, BookOpen, CircleGauge, Fingerprint, ShieldCheck, Globe2, Check, ArrowDown } from "lucide-react";
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { dayPeriod, nightBlend } from "@/lib/day-period";
 import aleksandarPortrait from "@/assets/team/placeholder-aleksandar.jpg";
 import elenaPortrait from "@/assets/team/placeholder-elena.jpg";
 import martinPortrait from "@/assets/team/placeholder-martin.jpg";
@@ -89,13 +88,11 @@ const team = [
 function AboutPage() {
   const [active, setActive] = useState(0);
   const [backgrounds, setBackgrounds] = useState<BackgroundSelection>("skyline");
-  const [period, setPeriod] = useState<"day" | "night">("day");
   const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
     const update = () => {
       const date = new Date();
       setNow(date);
-      setPeriod(dayPeriod(date));
     };
     update();
     const timer = window.setInterval(update, 1_000);
@@ -106,14 +103,9 @@ function AboutPage() {
     };
   }, []);
   const selected = operatingModel[active] ?? operatingModel[0];
-  const blend = now ? nightBlend(now) : 0;
-  const appearance = {
-    "--about-night-opacity": blend,
-    "--about-night-weight": blend >= 0.5 ? "100%" : "0%",
-  } as CSSProperties;
 
   return (
-    <div data-period={period} style={appearance} className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
       <CommodityTicker tone="dark" />
       <section className="about-painted-hero relative isolate">
         <BusinessBackdrop selection={backgrounds} />
