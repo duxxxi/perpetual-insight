@@ -9,7 +9,7 @@ import leilaPortrait from "@/assets/team/placeholder-leila.jpg";
 import { PaintedTerminal, PaintedLandingFeatures, PaintedVideoCoda } from "@/components/painted-landing-features";
 import { CommodityTicker } from "@/components/app-shell";
 import { AboutTimeBand } from "@/components/about-time-band";
-import { AboutBackgroundComparison, AboutBackgroundMedia, type BackgroundSelection } from "@/components/about-background-comparison";
+import { AboutBackgroundMedia } from "@/components/about-background-comparison";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -87,7 +87,6 @@ const team = [
 
 function AboutPage() {
   const [active, setActive] = useState(0);
-  const [backgrounds, setBackgrounds] = useState<BackgroundSelection>("skyline");
   const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
     const update = () => {
@@ -108,7 +107,7 @@ function AboutPage() {
     <div className="about-painted min-h-screen overflow-x-hidden bg-background text-foreground">
       <CommodityTicker tone="dark" />
       <section className="about-painted-hero relative isolate">
-        <BusinessBackdrop selection={backgrounds} />
+        <BusinessBackdrop />
         <header className="mx-auto max-w-6xl px-5 pt-3 lg:px-8">
           <div className="about-nav flex items-center justify-between gap-3 rounded-2xl px-3 py-2">
           <Link to="/landing" className="flex items-center gap-2.5"><span className="globe-orb size-5" aria-hidden /><span className="about-wordmark">Perpetuity</span></Link>
@@ -118,7 +117,7 @@ function AboutPage() {
             <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#agents">Intelligence team</a></Button>
             <Button asChild size="sm" variant="ghost" className="rounded-full"><a href="#team">People</a></Button>
           </nav>
-          <div className="flex items-center gap-2"><AboutBackgroundComparison selection={backgrounds} onChange={setBackgrounds} /><Button asChild size="sm" className="h-8 rounded-full px-3 text-[11px]"><Link to="/">Open workspace <ArrowUpRight /></Link></Button></div>
+          <div className="flex items-center gap-2"><Button asChild size="sm" className="h-8 rounded-full px-3 text-[11px]"><Link to="/">Open workspace <ArrowUpRight /></Link></Button></div>
           </div>
         </header>
 
@@ -184,10 +183,10 @@ function AboutPage() {
   );
 }
 
-function BusinessBackdrop({ selection }: { selection: BackgroundSelection }) {
+function BusinessBackdrop() {
   return (
     <div className="about-business-backdrop" aria-hidden="true">
-      <AboutBackgroundMedia version={selection} period="day" active />
+      <AboutBackgroundMedia />
       <div className="about-business-veil" />
     </div>
   );
