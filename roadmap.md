@@ -39,3 +39,4 @@
 - [x] Restore About's landing-page character with business skyline backgrounds, local day/night switching and restrained animation; verify both time states and controls.
 - [x] Restore the full existing landing feature presentation on About with a restrained painted/glass refresh; verify content, controls and day/night layouts.
 - [x] Drop the dictionary source credit from About's hero and close the gap between the tagline and the intro paragraph; verify spacing and contrast.
+- [x] Try the smooth white plaster wall as the workspace canvas texture; keep the cement texture available to switch back.
